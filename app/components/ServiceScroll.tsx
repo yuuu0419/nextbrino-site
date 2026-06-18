@@ -6,37 +6,37 @@ import { useEffect, useRef, useState } from "react";
 const services = [
   {
     num: "01", en: "E-COMMERCE", ja: "EC事業",
-    img: "/images/electronic-commerce-card.jpg",
+    img: "/images/electronic-commerce-card.webp",
     desc: "サービス業向けWEB決済システムの導入・各種ECサイト制作・ウェブサイト全般の制作・在庫管理や売上分析などの運営支援を行います。",
     items: ["WEB決済システム導入", "ECサイト制作", "ウェブサイト制作全般", "在庫管理・売上分析サポート"],
   },
   {
     num: "02", en: "WEB ADVERTISING", ja: "WEB広告事業",
-    img: "/images/web-advertiding-card.jpg",
+    img: "/images/web-advertiding-card.webp",
     desc: "女性向けを中心とした情報発信・コンテンツ運用・WEBメディアの管理・広告枠販売・広告掲載サービスおよびデザイン支援を行います。",
     items: ["女性向けコンテンツ運用", "WEBメディア管理・広告枠販売", "広告掲載サービス", "デザイン支援"],
   },
   {
     num: "03", en: "PLANNING & SALES", ja: "企画・販売事業",
-    img: "/images/planning-sales-card.jpg",
+    img: "/images/planning-sales-card.webp",
     desc: "新ブランドの開発・商品製造・販売サイトの作成と管理・在庫分析の総合支援・新規および既存ブランドのフランチャイズ展開を行います。",
     items: ["新ブランド開発・商品製造", "販売サイト作成・管理", "在庫・分析の総合支援", "フランチャイズ展開"],
   },
   {
     num: "04", en: "TALENT DEVELOPMENT", ja: "タレント育成・戦略",
-    img: "/images/talent-management-card.jpg",
+    img: "/images/talent-management-card.webp",
     desc: "クリエイティブ系タレントのマネジメント・個人事業者への独立サポート・関連事業サービスを提供します。",
     items: ["クリエイティブタレントマネジメント", "個人事業者への独立サポート", "関連事業サービス"],
   },
   {
     num: "05", en: "EDUCATION", ja: "教育・学習支援",
-    img: "/images/education-card.jpg",
+    img: "/images/education-card.webp",
     desc: "小中学生向けの個別指導・独自のPREP法を活用した双方向インタラクティブな学習・アクティブラーニングの確立を目指します。",
     items: ["小中学生向け個別指導", "独自PREP法による双方向学習", "アクティブラーニングの確立"],
   },
   {
     num: "06", en: "HEALTH & WELLNESS", ja: "健康・身体づくり",
-    img: "/images/health-promotion-card.jpg",
+    img: "/images/health-promotion-card.webp",
     desc: "アスリートコーチング・体組成トレーニング（ウェイト・ピラティス）・栄養指導・科学的根拠に基づく安全で効果的な指導を行います。",
     items: ["アスリートパフォーマンスコーチング", "体組成トレーニング（ウェイト・ピラティス）", "栄養指導", "科学的根拠に基づく指導"],
   },

@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: "インターンシップ | NEXT BRIN
 export default function InternshipPage() {
   return (
     <main>
-      <PageHero image="/images/internship-hero.jpg" en="INTERNSHIP" ja="インターンシップ" />
+      <PageHero image="/images/internship-hero.webp" en="INTERNSHIP" ja="インターンシップ" />
       <div className="pc" style={{ maxWidth: 800, textAlign: "center", paddingTop: 100, paddingBottom: 120 }}>
         <div className="in-status">
           <p className="in-status-label">INFORMATION</p>

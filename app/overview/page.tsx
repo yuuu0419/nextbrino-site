@@ -44,7 +44,7 @@ const profile: { label: string; value: string; extra?: React.ReactNode }[] = [
 export default function OverviewPage() {
   return (
     <main>
-      <PageHero image="/images/overview-hero.jpg" en="OVERVIEW" ja="概要・沿革" />
+      <PageHero image="/images/overview-hero.webp" en="OVERVIEW" ja="概要・沿革" />
 
       {/* ── OUR PROFILE ヘッダー ── */}
       <Ticker text="OUR PROFILE NEXT BRINO" overlapBottom={200} />

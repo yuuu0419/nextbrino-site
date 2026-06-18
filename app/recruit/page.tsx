@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: "採用情報 | NEXT BRINO" };
 export default function RecruitPage() {
   return (
     <main>
-      <PageHero image="/images/recruit-hero.jpg" en="RECRUIT" ja="採用情報" />
+      <PageHero image="/images/recruit-hero.webp" en="RECRUIT" ja="採用情報" />
       <div className="pc" style={{ maxWidth: 800, textAlign: "center", paddingTop: 100, paddingBottom: 120 }}>
         <div className="rc-status">
           <p className="rc-status-label">INFORMATION</p>

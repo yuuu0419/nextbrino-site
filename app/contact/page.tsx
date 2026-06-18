@@ -11,7 +11,7 @@ export const metadata: Metadata = { title: "お問い合わせ | NEXT BRINO" };
 export default function ContactPage() {
   return (
     <main>
-      <PageHero image="/images/contact-hero.jpg" en="CONTACT" ja="お問い合わせ" />
+      <PageHero image="/images/contact-hero.webp" en="CONTACT" ja="お問い合わせ" />
       <Ticker text="CONTACT NEXT BRINO" overlapBottom={200} />
 
       <div className="ct-sec-header">
@@ -52,17 +52,17 @@ export default function ContactPage() {
       <div className="ct-banners">
         <FadeIn delay={0} direction="up" className="ct-banner-fadein">
         <Link href="/contact-policy/" className="ct-banner-link">
-          <Image src="/images/contact-policy-banner.jpg" alt="お問合せ対応基本方針" width={1800} height={826} sizes="100vw" className="ct-banner-img" />
+          <Image src="/images/contact-policy-banner.webp" alt="お問合せ対応基本方針" width={1800} height={826} sizes="100vw" className="ct-banner-img" />
         </Link>
         </FadeIn>
         <FadeIn delay={150} direction="up" className="ct-banner-fadein">
         <Link href="/privacy-policy/" className="ct-banner-link">
-          <Image src="/images/privacy-policy-banner.jpg" alt="個人情報保護方針" width={1800} height={826} sizes="100vw" className="ct-banner-img" />
+          <Image src="/images/privacy-policy-banner.webp" alt="個人情報保護方針" width={1800} height={826} sizes="100vw" className="ct-banner-img" />
         </Link>
         </FadeIn>
         <FadeIn delay={300} direction="up" className="ct-banner-fadein">
         <Link href="/anti-social-forces-policy/" className="ct-banner-link">
-          <Image src="/images/antisocial-policy-banner.jpg" alt="反社会的勢力に対する基本方針" width={1800} height={826} sizes="100vw" className="ct-banner-img" />
+          <Image src="/images/antisocial-policy-banner.webp" alt="反社会的勢力に対する基本方針" width={1800} height={826} sizes="100vw" className="ct-banner-img" />
         </Link>
         </FadeIn>
       </div>

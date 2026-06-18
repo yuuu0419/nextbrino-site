@@ -55,7 +55,7 @@ export default function MessageSections() {
           <div className="ms-body" style={slideIn(s1.visible, "left", 60)}>
             <div style={fadeUp(s1.visible, 160)}>
               <Image
-                src="/images/top-message-title-2.png"
+                src="/images/top-message-title-2.webp"
                 alt="私たちが創造する世界"
                 width={5400}
                 height={1300}
@@ -111,7 +111,7 @@ export default function MessageSections() {
           <div className="ms-photo-wrap ms-photo-wrap--right" style={slideIn(s1.visible, "right", 120)}>
             <div className="ms-photo-inner ms-photo-inner--reverse">
               <Image
-                src="/images/message-creative.jpg"
+                src="/images/message-creative.webp"
                 alt="私たちが創造する世界"
                 fill
                 sizes="(max-width: 768px) 90vw, 45vw"
@@ -131,7 +131,7 @@ export default function MessageSections() {
           <div className="ms-photo-wrap ms-photo-wrap--left" style={slideIn(s2.visible, "left", 60)}>
             <div className="ms-photo-inner">
               <Image
-                src="/images/message-profile.jpg"
+                src="/images/message-profile.webp"
                 alt="繊細に想像し、大胆に創造する"
                 fill
                 sizes="(max-width: 768px) 90vw, 42vw"
@@ -146,7 +146,7 @@ export default function MessageSections() {
           <div className="ms-body ms-body--navy ms-body--shifted" style={slideIn(s2.visible, "right", 100)}>
             <div style={fadeUp(s2.visible, 200)}>
               <Image
-                src="/images/top-message-title-4.png"
+                src="/images/top-message-title-4.webp"
                 alt="繊細に想像し、大胆に創造する。"
                 width={5400}
                 height={1300}

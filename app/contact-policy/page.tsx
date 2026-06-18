@@ -14,7 +14,7 @@ const sections = [
 export default function ContactPolicyPage() {
   return (
     <main>
-      <PageHero image="/images/contact-policy-hero.jpg" en="CONTACT POLICY" ja="お問合せ対応基本方針" />
+      <PageHero image="/images/contact-policy-hero.webp" en="CONTACT POLICY" ja="お問合せ対応基本方針" />
       <div className="pc">
         <p className="cp-intro">当社サービスに関するお問合せをご検討のお客様へ、対応方針についてご案内いたします。お手続き前にご一読いただけますと幸いです。</p>
         <div className="cp-notice">

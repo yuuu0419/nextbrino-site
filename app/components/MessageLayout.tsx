@@ -58,7 +58,7 @@ export default function MessageLayout() {
           <div className="msg-photo-card" style={slideLeft}>
             <div className="msg-photo-frame" style={photoTilt}>
               <Image
-                src="/images/kuroki-yuta.jpg"
+                src="/images/kuroki-yuta.webp"
                 alt="代表取締役社長 黒木 雄太"
                 fill
                 sizes="(max-width: 768px) 80vw, 36vw"
@@ -70,7 +70,7 @@ export default function MessageLayout() {
             <div className="msg-role-photo-overlay">
               <span className="msg-role-photo-label">最高経営責任者 / CEO</span>
               <Image
-                src="/images/ceo-sign.png"
+                src="/images/ceo-sign.webp"
                 alt="署名"
                 width={5400}
                 height={2354}
@@ -85,7 +85,7 @@ export default function MessageLayout() {
 
             <div style={fadeUp(200)}>
               <Image
-                src="/images/top-message-title.png"
+                src="/images/top-message-title.webp"
                 alt="大切な人のために創る"
                 width={5400}
                 height={1300}
@@ -126,7 +126,7 @@ export default function MessageLayout() {
               <div className="msg-role-row">
                 <span className="msg-navy-label">最高経営責任者 / CEO</span>
                 <Image
-                  src="/images/ceo-sign.png"
+                  src="/images/ceo-sign.webp"
                   alt="署名"
                   width={5400}
                   height={2354}

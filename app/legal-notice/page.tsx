@@ -21,7 +21,7 @@ const rows = [
 export default function LegalNoticePage() {
   return (
     <main>
-      <PageHero image="/images/legal-notice-hero.jpg" en="LEGAL NOTICE" ja="特定商取引法に基づく表記" />
+      <PageHero image="/images/legal-notice-hero.webp" en="LEGAL NOTICE" ja="特定商取引法に基づく表記" />
       <div className="pc">
         <p className="ln-intro">特定商取引法に基づき、以下の事項を表記します。</p>
         <table className="ln-table"><tbody>

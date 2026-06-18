@@ -60,7 +60,7 @@ export default function IntroAnimation({ onComplete }: { onComplete?: () => void
       {/* FV画像（ブラー） — フェード後もサイトと地続きになる */}
       <div style={{
         position: 'absolute', inset: -24,
-        backgroundImage: "url('/images/top-hero-01.jpg')",
+        backgroundImage: "url('/images/top-hero-01.webp')",
         backgroundSize: 'cover', backgroundPosition: 'center',
         filter: 'blur(7px) brightness(0.38)',
       }} />
@@ -112,7 +112,7 @@ export default function IntroAnimation({ onComplete }: { onComplete?: () => void
           transition: 'transform 1.4s cubic-bezier(0.25,0.46,0.45,0.94), opacity 1.4s cubic-bezier(0.25,0.46,0.45,0.94), filter 1.4s cubic-bezier(0.25,0.46,0.45,0.94)',
         }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/header-logo.png" alt="NEXT BRINO" style={{ width:240, height:'auto', display:'block', filter:'brightness(0) invert(1)' }} />
+          <img src="/images/header-logo.webp" alt="NEXT BRINO" style={{ width:240, height:'auto', display:'block', filter:'brightness(0) invert(1)' }} />
         </div>
 
         {/* 下ライン */}

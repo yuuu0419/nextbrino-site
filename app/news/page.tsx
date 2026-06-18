@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: "お知らせ | NEXT BRINO" };
 export default function NewsPage() {
   return (
     <main>
-      <PageHero image="/images/news-hero.jpg" en="NEWS" ja="お知らせ" />
+      <PageHero image="/images/news-hero.webp" en="NEWS" ja="お知らせ" />
 
       <Ticker text="NEWS  ·  お知らせ  ·  NEXT BRINO  ·  INFORMATION  ·  " overlapBottom={200} />
 

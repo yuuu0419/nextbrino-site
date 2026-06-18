@@ -530,7 +530,7 @@ export default function Header() {
             }}
           >
             <Image
-              src="/images/header-logo.png"
+              src="/images/header-logo.webp"
               alt="NEXT BRINO"
               width={240}
               height={72}
@@ -590,10 +590,10 @@ export default function Header() {
           {/* バナーエリア */}
           <div style={{ width: "80%", display: "flex", flexDirection: "column", gap: 16, marginTop: 16, marginBottom: 20 }}>
             <Link href="/contact/" onClick={() => closeMenu()} style={{ display: "block", borderRadius: 10, overflow: "hidden" }}>
-              <Image src="/images/contact.jpg" alt="お問い合わせ" width={1500} height={500} style={{ width: "100%", height: "auto", display: "block" }} />
+              <Image src="/images/contact.webp" alt="お問い合わせ" width={1500} height={500} style={{ width: "100%", height: "auto", display: "block" }} />
             </Link>
             <a href="https://n-bright.jp" target="_blank" rel="noopener noreferrer" style={{ display: "block", borderRadius: 10, overflow: "hidden" }}>
-              <Image src="/images/n-bright.jpg" alt="N-BRIGHT" width={1406} height={469} style={{ width: "100%", height: "auto", display: "block" }} />
+              <Image src="/images/n-bright.webp" alt="N-BRIGHT" width={1406} height={469} style={{ width: "100%", height: "auto", display: "block" }} />
             </a>
           </div>
 
@@ -632,7 +632,7 @@ export default function Header() {
         {/* ロゴ */}
         <Link href="/" style={{ display: "flex", flexShrink: 0, transform: isMobile ? "translate(2px, 7px)" : "none" }} onClick={() => closeMenu()}>
           <Image
-            src="/images/header-logo.png"
+            src="/images/header-logo.webp"
             alt="NEXT BRINO"
             width={240}
             height={72}

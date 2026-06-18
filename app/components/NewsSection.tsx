@@ -216,7 +216,7 @@ export default function NewsSection() {
                 filter: "grayscale(1)",
               }}>
                 <Image
-                  src="/images/contact-box-logo.png"
+                  src="/images/contact-box-logo.webp"
                   alt=""
                   fill
                   style={{ objectFit: "cover", objectPosition: "top center" }}

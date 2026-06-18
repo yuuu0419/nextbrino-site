@@ -5,12 +5,12 @@ import ServiceRows from "../components/ServiceRows";
 export const metadata: Metadata = { title: "事業内容 | NEXT BRINO" };
 
 const services = [
-  { num:"01", en:"IT SOLUTION",        ja:"ITソリューション事業",  img:"/images/electronic-commerce-card.jpg", desc:"業務効率化や課題解決など事業成長を支援するため、\nWeb制作・EC構築・アプリ開発・システム開発など、\n幅広いデジタルソリューションを提供しています。", items:["WEBサイト制作と運用保守","アプリ開発・システム開発","WEB決済システムの導入","販売管理等のトータルサポート"] },
-  { num:"02", en:"WEB ADVERTISING",    ja:"WEB広告事業",          img:"/images/web-advertiding-card.jpg",      desc:"美容・健康などの情報配信コンテンツの運営や、\nその他各種WEBメディアの運営管理、\n広告提供に付随するトータルサポートを提供しています。", descSp:"美容・健康などの情報配信コンテンツの運営や、\nその他各種WEBメディアの運営管理、\n広告に付随するトータルサポートを提供しています。", items:["各種情報配信コンテンツ運営","各種WEBメディア運営","広告出稿・メディア広告掲載","広告に付随するデザインサポート"] },
-  { num:"03", en:"PLANNING SALES",     ja:"企画販売事業",          img:"/images/planning-sales-card.jpg",       desc:"新規ブランド企画や商品製造、販売サイトの制作と運用保守、\n在庫分析などのトータルサポートの提供や、\nブランドフランチャイズを展開しています。", descSp:"ブランド企画や製造、販売サイトの制作と運用保守、\n在庫分析などのトータルサポートの提供や、\nブランドフランチャイズを展開しています。", items:["新規ブランド企画・商品製造","販売サイト制作・運用保守","在庫分析などのトータルサポート","新規・既存ブランドのFC展開"] },
-  { num:"04", en:"IP MANAGEMENT",      ja:"IPマネジメント事業",    img:"/images/talent-management-card.jpg",     desc:"IPの創出・育成・価値向上を目的として、\nマーケティングやブランディングのマネジメント、\n権利管理等を通じた持続的な事業成長を支援します。",         items:["クリエイティブタレントマネジメント","ブランディング・マーケティング","IP保護インフラの開発・運用保守","独立支援や関連事業サービスの提供"] },
-  { num:"05", en:"EDUCATION",          ja:"教育学習支援事業",      img:"/images/education-card.jpg",            desc:"主に小中学生を対象に、独自のPREP法を活用した、\n完全双方向のアクティブラーニングを目指します。",                                  items:["PREP法（独自開発）による指導","完全双方向型の学習","アクティブラーニングの確立"] },
-  { num:"06", en:"HEALTH PROMOTION",   ja:"健康増進事業",          img:"/images/health-promotion-card.jpg",     desc:"科学的根拠に基づいた、健康寿命の延伸を目的とした指導や、\nアスリートを対象とした指導など幅広いサポートを提供しています。", descSp:"健康寿命の延伸を目的とした指導や、\nアスリートを対象としたコーチングなど\n幅広いサポートを提供しています。",  items:["体組成トレーニング（ウェイトやピラティス等）","アスリートコーチング","栄養に関する指導","科学的根拠に基づいたトータル指導"] },
+  { num:"01", en:"IT SOLUTION",        ja:"ITソリューション事業",  img:"/images/electronic-commerce-card.webp", desc:"業務効率化や課題解決など事業成長を支援するため、\nWeb制作・EC構築・アプリ開発・システム開発など、\n幅広いデジタルソリューションを提供しています。", items:["WEBサイト制作と運用保守","アプリ開発・システム開発","WEB決済システムの導入","販売管理等のトータルサポート"] },
+  { num:"02", en:"WEB ADVERTISING",    ja:"WEB広告事業",          img:"/images/web-advertiding-card.webp",      desc:"美容・健康などの情報配信コンテンツの運営や、\nその他各種WEBメディアの運営管理、\n広告提供に付随するトータルサポートを提供しています。", descSp:"美容・健康などの情報配信コンテンツの運営や、\nその他各種WEBメディアの運営管理、\n広告に付随するトータルサポートを提供しています。", items:["各種情報配信コンテンツ運営","各種WEBメディア運営","広告出稿・メディア広告掲載","広告に付随するデザインサポート"] },
+  { num:"03", en:"PLANNING SALES",     ja:"企画販売事業",          img:"/images/planning-sales-card.webp",       desc:"新規ブランド企画や商品製造、販売サイトの制作と運用保守、\n在庫分析などのトータルサポートの提供や、\nブランドフランチャイズを展開しています。", descSp:"ブランド企画や製造、販売サイトの制作と運用保守、\n在庫分析などのトータルサポートの提供や、\nブランドフランチャイズを展開しています。", items:["新規ブランド企画・商品製造","販売サイト制作・運用保守","在庫分析などのトータルサポート","新規・既存ブランドのFC展開"] },
+  { num:"04", en:"IP MANAGEMENT",      ja:"IPマネジメント事業",    img:"/images/talent-management-card.webp",     desc:"IPの創出・育成・価値向上を目的として、\nマーケティングやブランディングのマネジメント、\n権利管理等を通じた持続的な事業成長を支援します。",         items:["クリエイティブタレントマネジメント","ブランディング・マーケティング","IP保護インフラの開発・運用保守","独立支援や関連事業サービスの提供"] },
+  { num:"05", en:"EDUCATION",          ja:"教育学習支援事業",      img:"/images/education-card.webp",            desc:"主に小中学生を対象に、独自のPREP法を活用した、\n完全双方向のアクティブラーニングを目指します。",                                  items:["PREP法（独自開発）による指導","完全双方向型の学習","アクティブラーニングの確立"] },
+  { num:"06", en:"HEALTH PROMOTION",   ja:"健康増進事業",          img:"/images/health-promotion-card.webp",     desc:"科学的根拠に基づいた、健康寿命の延伸を目的とした指導や、\nアスリートを対象とした指導など幅広いサポートを提供しています。", descSp:"健康寿命の延伸を目的とした指導や、\nアスリートを対象としたコーチングなど\n幅広いサポートを提供しています。",  items:["体組成トレーニング（ウェイトやピラティス等）","アスリートコーチング","栄養に関する指導","科学的根拠に基づいたトータル指導"] },
 ];
 
 export default function ServicePage() {
@@ -98,7 +98,7 @@ export default function ServicePage() {
               <div className="sv-contact-bg-logo">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/images/contact-box-logo.png"
+                  src="/images/contact-box-logo.webp"
                   alt=""
                   style={{ objectFit: "cover", objectPosition: "top center", width: "100%", height: "100%", position: "absolute", inset: 0 }}
                 />
@@ -128,7 +128,7 @@ export default function ServicePage() {
           width: 100%;
           height: 100vh;
           min-height: 560px;
-          background: url('/images/service-hero.jpg') center center / cover no-repeat;
+          background: url('/images/service-hero.webp') center center / cover no-repeat;
           display: flex;
           align-items: center;
         }

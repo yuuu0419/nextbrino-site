@@ -3,17 +3,17 @@ import Link from "next/link";
 
 const BANNERS = [
   {
-    src: "/images/contact-policy.jpg",
+    src: "/images/contact-policy.webp",
     alt: "お問合せ対応基本方針",
     href: "/contact-policy/",
   },
   {
-    src: "/images/privacy-policy.jpg",
+    src: "/images/privacy-policy.webp",
     alt: "個人情報保護方針",
     href: "/privacy-policy/",
   },
   {
-    src: "/images/antisocial-policy.jpg",
+    src: "/images/antisocial-policy.webp",
     alt: "反社会的勢力に対する基本方針",
     href: "/anti-social-forces-policy/",
   },

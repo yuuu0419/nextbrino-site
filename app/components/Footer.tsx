@@ -95,7 +95,7 @@ export default function Footer() {
                 <div className="ft-logo-circle" aria-hidden />
                 <Link href="/" className="ft-logo">
                   <Image
-                    src="/images/footer-logo.png"
+                    src="/images/footer-logo.webp"
                     alt="NEXT BRINO"
                     width={172}
                     height={52}

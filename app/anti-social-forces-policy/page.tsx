@@ -16,7 +16,7 @@ const policies = [
 export default function AntisocialPolicyPage() {
   return (
     <main>
-      <PageHero image="/images/anti-social-forces-policy-hero.jpg" en={<>ANTISOCIAL<br />POLICY</>} ja="反社会的勢力に対する基本方針" />
+      <PageHero image="/images/anti-social-forces-policy-hero.webp" en={<>ANTISOCIAL<br />POLICY</>} ja="反社会的勢力に対する基本方針" />
       <div className="pc">
         <p className="ap-intro">NEXT BRINOは、健全かつ適正な事業活動を行うため、反社会的勢力との一切の関係を遮断し、不当要求に対しては毅然とした姿勢で対応します。</p>
         <div className="ap-list">

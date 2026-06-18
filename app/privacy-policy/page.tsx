@@ -18,7 +18,7 @@ const articles = [
 export default function PrivacyPolicyPage() {
   return (
     <main>
-      <PageHero image="/images/privacy-policy-hero.jpg" en="PRIVACY POLICY" ja="個人情報保護方針" />
+      <PageHero image="/images/privacy-policy-hero.webp" en="PRIVACY POLICY" ja="個人情報保護方針" />
       <div className="pc">
         <p className="pp-intro">NEXT BRINOは、当社のサービスにおけるユーザーの個人情報の取扱いについて、以下のとおりプライバシーポリシーを定めます。</p>
         <div className="pp-articles">

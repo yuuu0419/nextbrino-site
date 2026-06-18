@@ -10,7 +10,7 @@ export const metadata: Metadata = { title: "代表挨拶 | NEXT BRINO" };
 export default function MessagePage() {
   return (
     <main>
-      <PageHero image="/images/message-kuroki-yuta-hero.jpg" en="TOP MESSAGE" ja={"繊細に想像し、\n大胆に創造する。"} />
+      <PageHero image="/images/message-kuroki-yuta-hero.webp" en="TOP MESSAGE" ja={"繊細に想像し、\n大胆に創造する。"} />
 
       <Ticker text="TOP MESSAGE KUROKI YUTA" overlapBottom={200} />
 
@@ -21,7 +21,7 @@ export default function MessagePage() {
         <div className="msg-header-role msg-header-role--mobile-only">
           <span className="msg-header-role-label">最高経営責任者 / CEO</span>
           <Image
-            src="/images/ceo-sign.png"
+            src="/images/ceo-sign.webp"
             alt="署名"
             width={5400}
             height={2354}

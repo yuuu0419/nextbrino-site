@@ -8,7 +8,7 @@ import Ticker from "./components/Ticker";
 import IntroAnimation from "./components/IntroAnimation";
 import SplitTitle from "./components/SplitTitle";
 
-const SLIDES = ["/images/top-hero-01.jpg", "/images/top-hero-02.jpg", "/images/top-hero-03.jpg"];
+const SLIDES = ["/images/top-hero-01.webp", "/images/top-hero-02.webp", "/images/top-hero-03.webp"];
 
 const lerp = (a: number, b: number, t: number) =>
   a + (b - a) * Math.min(Math.max(t, 0), 1);
@@ -516,7 +516,7 @@ export default function Home() {
                 opacity: msgVisible ? 1 : 0,
                 transition: "transform 2s cubic-bezier(0.22,1,0.36,1) 0ms, opacity 1.6s ease 0ms",
               }}>
-                <Image src="/images/kuroki-yuta.jpg" alt="代表取締役 黒木雄太" fill sizes="(max-width: 768px) 100vw, 420px" style={{ objectFit: "cover", borderRadius: "8px" }} />
+                <Image src="/images/kuroki-yuta.webp" alt="代表取締役 黒木雄太" fill sizes="(max-width: 768px) 100vw, 420px" style={{ objectFit: "cover", borderRadius: "8px" }} />
                 <div style={{ position: "absolute", bottom: -16, right: -16, width: "70%", height: "70%", border: "1px solid rgba(21,38,59,0.15)", pointerEvents: "none", zIndex: -1 }} />
               </div>
               <div ref={msgTextRef} style={{
@@ -604,7 +604,7 @@ export default function Home() {
                 <div style={{ display: "block", marginBottom: 24 }}>
                   <div style={{ display: "flex", width: "100%", alignItems: "flex-end", justifyContent: isMobile ? "center" : "space-between", gap: 16, marginBottom: 8 }}>
                     <p style={{ fontSize: isMobile ? "0.7rem" : "0.82rem", letterSpacing: "0.18em", color: "#9d8c56", margin: 0, marginBottom: 8, marginLeft: isMobile ? 0 : 10, fontWeight: 500, lineHeight: 1.7, whiteSpace: "nowrap" }}>NEXT BRINO 最高経営責任者</p>
-                    <Image src="/images/ceo-sign.png" alt="署名" width={isMobile ? 135 : 190} height={isMobile ? 59 : 83} style={{ objectFit: "contain", objectPosition: "right bottom", marginRight: isMobile ? 0 : 80, marginBottom: isMobile ? 0 : -4, filter: "brightness(0) saturate(100%) invert(13%) sepia(27%) saturate(1093%) hue-rotate(181deg) brightness(89%)" }} />
+                    <Image src="/images/ceo-sign.webp" alt="署名" width={isMobile ? 135 : 190} height={isMobile ? 59 : 83} style={{ objectFit: "contain", objectPosition: "right bottom", marginRight: isMobile ? 0 : 80, marginBottom: isMobile ? 0 : -4, filter: "brightness(0) saturate(100%) invert(13%) sepia(27%) saturate(1093%) hue-rotate(181deg) brightness(89%)" }} />
                   </div>
                   {/* ベースライン（常時表示・薄金） + スライドするゴールドハイライト */}
                   <div style={{ position: "relative", width: "100%", height: 1, overflow: "hidden" }}>
@@ -618,7 +618,7 @@ export default function Home() {
                     <div className="shimmer-border" style={{ background: "transparent", borderTop: "1px solid rgba(157,140,86,0.35)", borderLeft: "1px solid rgba(157,140,86,0.35)", borderBottom: "1px solid rgba(21,38,59,0.35)", borderRight: "1px solid rgba(21,38,59,0.35)", padding: "20px 8px 24px", marginBottom: 28 }}>
                       <div style={{ textAlign: "center" }}>
                         <Image
-                          src="/images/top-message-title.png"
+                          src="/images/top-message-title.webp"
                           alt="大切な人のために創る"
                           width={5400}
                           height={1300}
@@ -638,7 +638,7 @@ export default function Home() {
                     <div className="shimmer-border" style={{ background: "transparent", borderTop: "1px solid rgba(157,140,86,0.35)", borderLeft: "1px solid rgba(157,140,86,0.35)", borderBottom: "1px solid rgba(21,38,59,0.35)", borderRight: "1px solid rgba(21,38,59,0.35)", padding: "24px 28px 32px", marginBottom: 32 }}>
                       <div>
                         <Image
-                          src="/images/top-message-title.png"
+                          src="/images/top-message-title.webp"
                           alt="大切な人のために創る"
                           width={5400}
                           height={1300}
@@ -1058,7 +1058,7 @@ export default function Home() {
                   filter: "grayscale(1)",
                 }}>
                   <Image
-                    src="/images/contact-box-logo.png"
+                    src="/images/contact-box-logo.webp"
                     alt=""
                     fill
                     style={{ objectFit: "cover", objectPosition: "top center" }}

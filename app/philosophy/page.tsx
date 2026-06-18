@@ -11,7 +11,7 @@ export const metadata: Metadata = { title: "理念・行動指針 | NEXT BRINO" 
 export default function PhilosophyPage() {
   return (
     <main>
-      <PageHero image="/images/philosophy-hero.jpg" en="PHILOSOPHY" ja="経営理念・ビジョン・行動指針" />
+      <PageHero image="/images/philosophy-hero.webp" en="PHILOSOPHY" ja="経営理念・ビジョン・行動指針" />
 
       <Ticker text="PHILOSOPHY NEXT BRINO" overlapBottom={200} />
 
@@ -32,7 +32,7 @@ export default function PhilosophyPage() {
             <h2 className="ph-title ph-reveal ph-reveal--d1">TECH &amp; <br className="mission-title-br" />LIFE DESIGN</h2>
             <p className="ph-lead ph-reveal ph-reveal--d1">確かな技術で日常をデザインする。</p>
             <div className="ph-img-box ph-mission-img-box ph-reveal ph-reveal--d2">
-              <Image src="/images/mission.png" alt="Mission" fill style={{ objectFit: "contain", objectPosition: "bottom left" }} className="ph-mission-img" />
+              <Image src="/images/mission.webp" alt="Mission" fill style={{ objectFit: "contain", objectPosition: "bottom left" }} className="ph-mission-img" />
             </div>
           </div>
           <div className="ph-col-right">
@@ -62,7 +62,7 @@ export default function PhilosophyPage() {
             <h2 className="ph-title ph-title--dark ph-reveal ph-reveal--d1">BRIGHTNESS <br className="vision-title-br" />&amp; INNOVATION</h2>
             <p className="ph-lead ph-lead--dark ph-reveal ph-reveal--d1">人生に輝きと革新的なアイデアを提供する。</p>
             <div className="ph-img-box ph-reveal ph-reveal--d2">
-              <Image src="/images/vision.png" alt="Vision" fill style={{ objectFit: "contain", objectPosition: "bottom left" }} />
+              <Image src="/images/vision.webp" alt="Vision" fill style={{ objectFit: "contain", objectPosition: "bottom left" }} />
             </div>
           </div>
           <div className="ph-col-right">
@@ -94,7 +94,7 @@ export default function PhilosophyPage() {
           </div>
           <div className="ph-col-right ph-col-right--value">
             <div className="ph-img-box ph-img-box--value ph-reveal ph-reveal--d2">
-              <Image src="/images/value.png" alt="Value" fill style={{ objectFit: "contain", objectPosition: "center right" }} />
+              <Image src="/images/value.webp" alt="Value" fill style={{ objectFit: "contain", objectPosition: "center right" }} />
             </div>
           </div>
         </div>
