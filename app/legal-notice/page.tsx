@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PageHero from "../components/PageHero";
 export const metadata: Metadata = { title: "特定商取引法に基づく表記 | NEXT BRINO" };
 
 const rows = [
@@ -20,12 +21,7 @@ const rows = [
 export default function LegalNoticePage() {
   return (
     <main>
-      <div className="ph"><div className="ph-inner">
-        <p className="ph-label">NEXT BRINO</p>
-        <h1 className="ph-en">LEGAL NOTICE</h1>
-        <div className="ph-line" />
-        <p className="ph-ja">特定商取引法に基づく表記</p>
-      </div></div>
+      <PageHero image="/images/legal-notice-hero.jpg" en="LEGAL NOTICE" ja="特定商取引法に基づく表記" />
       <div className="pc">
         <p className="ln-intro">特定商取引法に基づき、以下の事項を表記します。</p>
         <table className="ln-table"><tbody>

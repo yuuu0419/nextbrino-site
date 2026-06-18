@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
+import PageHero from "../components/PageHero";
 import Link from "next/link";
 export const metadata: Metadata = { title: "インターンシップ | NEXT BRINO" };
 
 export default function InternshipPage() {
   return (
     <main>
-      <div className="ph"><div className="ph-inner">
-        <p className="ph-label">NEXT BRINO</p>
-        <h1 className="ph-en">INTERNSHIP</h1>
-        <div className="ph-line" />
-        <p className="ph-ja">インターンシップ</p>
-      </div></div>
+      <PageHero image="/images/internship-hero.jpg" en="INTERNSHIP" ja="インターンシップ" />
       <div className="pc" style={{ maxWidth: 800, textAlign: "center", paddingTop: 100, paddingBottom: 120 }}>
         <div className="in-status">
           <p className="in-status-label">INFORMATION</p>

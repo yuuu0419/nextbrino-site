@@ -25,421 +25,355 @@ const POLICY_LINKS = [
 export default function Footer() {
   return (
     <footer className="ft">
-
-      {/* ── 背景 ── */}
-      <div className="ft-bg-grid" aria-hidden />
-      <div className="ft-bg-glow" aria-hidden />
-
-      {/* ── ゴールドライン（スキャンアニメ付き） ── */}
-      <div className="ft-line" aria-hidden>
-        <span className="ft-line-scan" aria-hidden />
+      {/* ── アーチボーダー ── */}
+      <div className="ft-wave" aria-hidden>
+        <svg viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M0,90 Q720,0 1440,90 L1440,90 L0,90 Z"
+            fill="#0f1f33"
+          />
+          <path
+            d="M0,90 Q720,0 1440,90"
+            fill="none"
+            stroke="url(#archGold)"
+            strokeWidth="1"
+          />
+          <defs>
+            <linearGradient id="archGold" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="rgba(196,171,110,0)" />
+              <stop offset="25%" stopColor="rgba(196,171,110,0.5)" />
+              <stop offset="50%" stopColor="rgba(196,171,110,0.9)" />
+              <stop offset="75%" stopColor="rgba(196,171,110,0.5)" />
+              <stop offset="100%" stopColor="rgba(196,171,110,0)" />
+            </linearGradient>
+          </defs>
+        </svg>
       </div>
 
-      {/* ════════════ MAIN ════════════ */}
       <div className="ft-wrap">
 
-        {/* ── ブランドブロック ── */}
-        <div className="ft-brand">
-          <Link href="/" className="ft-logo">
-            <Image
-              src="/images/footer-logo.png"
-              alt="NEXT BRINO"
-              width={172}
-              height={52}
-              style={{ width: "100%", maxWidth: 172, height: "auto" }}
-            />
-          </Link>
+        {/* ── ナビ ── */}
+        <nav aria-label="フッターナビゲーション" className="ft-nav-wrap">
+          <p className="ft-nav-title">NAVIGATION</p>
+          <ul className="ft-nav">
+            {NAV_LINKS.map((link, i) => (
+              <li key={link.href} className="ft-nav-item">
+                <Link href={link.href} className="ft-nav-link">
+                  <span className="ft-nav-num">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="ft-nav-line" aria-hidden />
+                  <span className="ft-nav-label">{link.label}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
-          <p className="ft-tagline">確かな技術で日常をデザインする</p>
+        {/* ── ポリシー＋ブランド（PCで2カラム）── */}
+        <div className="ft-bottom">
 
-          {/* ステータスバッジ（テック感演出） */}
-          <div className="ft-status">
-            <span className="ft-status-pulse" aria-hidden />
-            <span className="ft-status-text">NEXT BRINO</span>
-          </div>
-        </div>
-
-        {/* ── ナビブロック ── */}
-        <div className="ft-nav-block">
-
-          {/* ヘッダー行 */}
-          <div className="ft-nav-meta">
-            <span className="ft-nav-eyebrow">SITE MAP</span>
-            <span className="ft-nav-rule" aria-hidden />
-            <span className="ft-nav-total">09 PAGES</span>
-          </div>
-
-          {/* ナビグリッド */}
-          <nav aria-label="フッターナビゲーション">
-            <ul className="ft-nav-grid">
-              {NAV_LINKS.map((link, i) => (
-                <li key={link.href} className="ft-nav-cell">
-                  <Link href={link.href} className="ft-nav-link">
-                    <span className="ft-nav-num">{String(i + 1).padStart(2, "0")}</span>
-                    <span className="ft-nav-text">{link.label}</span>
-                    <span className="ft-nav-arrow" aria-hidden>↗</span>
+          {/* 左：ポリシー */}
+          <nav aria-label="ポリシーリンク" className="ft-policy-wrap">
+            <p className="ft-policy-title">POLICY</p>
+            <ul className="ft-policy">
+              {POLICY_LINKS.map((link, i) => (
+                <li key={link.href} className="ft-policy-item">
+                  <Link href={link.href} className="ft-policy-link">
+                    <span className="ft-policy-num">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="ft-policy-line" aria-hidden />
+                    <span>{link.label}</span>
                   </Link>
                 </li>
               ))}
             </ul>
           </nav>
-        </div>
-      </div>
 
-      {/* ════════════ BOTTOM BAR ════════════ */}
-      <div className="ft-bar-wrap">
-        <div className="ft-bar">
-
-          {/* ポリシーリンク */}
-          <div className="ft-policy-block">
-            <div className="ft-policy-head">
-              <span className="ft-policy-eyebrow">POLICY</span>
-              <span className="ft-policy-rule" aria-hidden />
+          {/* 右：ロゴ＋コピーライト */}
+          <div className="ft-brand-col">
+            <div className="ft-divider" aria-hidden />
+            <div className="ft-brand">
+              <div className="ft-logo-wrap">
+                <div className="ft-logo-circle" aria-hidden />
+                <Link href="/" className="ft-logo">
+                  <Image
+                    src="/images/footer-logo.png"
+                    alt="NEXT BRINO"
+                    width={172}
+                    height={52}
+                    style={{ width: "100%", maxWidth: 172, height: "auto" }}
+                  />
+                </Link>
+              </div>
+              <div className="ft-logo-line" aria-hidden />
             </div>
-            <nav aria-label="ポリシーリンク">
-              <ul className="ft-policy">
-                {POLICY_LINKS.map((link, i) => (
-                  <li key={link.href} className="ft-policy-item">
-                    {i > 0 && <span className="ft-policy-sep" aria-hidden>/</span>}
-                    <Link href={link.href} className="ft-policy-link">{link.label}</Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
+            <div className="ft-copy">
+              <p className="ft-copy-cr">©︎ 2026 NEXT BRINO｜ネクストブライノ</p>
+              <p className="ft-copy-note">当サイトに掲載されている全ての著作物において、無断で使用することを禁じます。</p>
+              <div className="ft-logo-line ft-copy-line" aria-hidden />
+            </div>
           </div>
 
-          {/* コピーライト */}
-          <div className="ft-copy">
-            <p className="ft-copy-cr">©︎ 2026 NEXT BRINO｜ネクストブライノ</p>
-            <p className="ft-copy-note">当サイトに掲載されている全ての著作物において、無断で使用することを禁じます。</p>
-          </div>
         </div>
+
       </div>
 
-      {/* ════════════ STYLES ════════════ */}
       <style>{`
 
-        /* ────────────────────────────────
-           ベース
-        ──────────────────────────────── */
+        /* ─── ベース ─── */
         .ft {
-          background: #111f33;
+          background: #0f1f33;
           color: #fff;
           position: relative;
-          overflow: hidden;
           z-index: 30;
           font-family: var(--font-main);
         }
 
-        /* ────────────────────────────────
-           背景デコ
-        ──────────────────────────────── */
-        .ft-bg-grid {
-          position: absolute; inset: 0; pointer-events: none;
-          background-image:
-            linear-gradient(rgba(157,140,86,.024) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(157,140,86,.024) 1px, transparent 1px);
-          background-size: 48px 48px;
+
+        /* ─── スキャロップボーダー ─── */
+        .ft-wave {
+          position: absolute;
+          top: -89px; left: 0; right: 0;
+          height: 90px;
+          pointer-events: none;
+          z-index: 1;
         }
-        .ft-bg-glow {
-          position: absolute; pointer-events: none;
-          width: 600px; height: 600px;
-          top: -200px; left: -120px;
-          background: radial-gradient(circle, rgba(15,55,110,.22) 0%, transparent 65%);
+        .ft-wave svg { width: 100%; height: 90px; display: block; }
+
+/* ─── ノイズテクスチャ ─── */
+        .ft::before {
+          content: ''; position: absolute; inset: 0;
+          background-image: radial-gradient(rgba(255,255,255,.03) 1px, transparent 1px);
+          background-size: 20px 20px;
+          pointer-events: none;
         }
 
-        /* ────────────────────────────────
-           上部ゴールドライン + スキャン
-        ──────────────────────────────── */
-        .ft-line {
-          height: 1px; position: relative; overflow: hidden;
-          background: linear-gradient(90deg,
-            transparent 0%,
-            rgba(157,140,86,.25) 10%,
-            #c4ab6e 35%, #e8c97a 50%, #c4ab6e 65%,
-            rgba(157,140,86,.25) 90%, transparent 100%);
-        }
-        .ft-line::before {
-          content: ''; position: absolute; inset: -3px 8%;
-          background: inherit; filter: blur(7px); opacity: .5;
-        }
-        @keyframes ft-scan {
-          0%   { transform: translateX(-120%) skewX(-12deg); opacity: 0; }
-          10%  { opacity: 1; }
-          90%  { opacity: 1; }
-          100% { transform: translateX(520%) skewX(-12deg); opacity: 0; }
-        }
-        .ft-line-scan {
-          position: absolute; top: -1px; left: 0;
-          width: 18%; height: 3px;
-          background: linear-gradient(90deg, transparent, rgba(232,201,122,.55), transparent);
-          animation: ft-scan 3.8s cubic-bezier(.4,0,.6,1) infinite;
-        }
-
-        /* ────────────────────────────────
-           メインラッパー（PC: 2カラム）
-        ──────────────────────────────── */
+        /* ─── 中央揃えラッパー ─── */
         .ft-wrap {
-          width: 88%; max-width: 1200px; margin: 0 auto;
-          padding: 56px 0 52px;
-          display: grid;
-          grid-template-columns: 210px 1fr;
-          gap: 0 60px;
-          align-items: start;
-          position: relative;
+          width: 88%; max-width: 860px; margin: 0 auto;
+          padding: 28px 0 52px;
+          display: flex; flex-direction: column;
+          align-items: center;
+          position: relative; z-index: 2;
         }
 
-        /* ────────────────────────────────
-           ブランドエリア
-        ──────────────────────────────── */
+        /* ─── ロゴラッパー ─── */
+        .ft-logo-wrap {
+          position: relative;
+          display: inline-flex;
+          justify-content: center;
+          align-items: center;
+          margin-bottom: 4px;
+        }
+        .ft-logo-circle {
+          position: absolute;
+          width: 380px; height: 380px;
+          border-radius: 50%;
+          background: radial-gradient(circle,
+            rgba(255,255,255,.04) 0%,
+            rgba(255,255,255,.015) 45%,
+            transparent 70%);
+          pointer-events: none;
+        }
+
+        /* ─── ロゴ ─── */
         .ft-logo {
-          display: block; margin-bottom: 18px;
+          display: inline-block;
+          position: relative;
+          margin-bottom: 0;
           transition: opacity .2s;
         }
         .ft-logo:hover { opacity: .72; }
 
+        /* ゴールドアンダーライン */
+        .ft-logo-line {
+          width: 40px; height: 1px; margin: -6px auto 44px;
+          background: linear-gradient(90deg, transparent, #c4ab6e, transparent);
+        }
+
+        /* ─── タグライン ─── */
         .ft-tagline {
-          font-size: .68rem; line-height: 2;
-          color: rgba(255,255,255,.36);
-          letter-spacing: .09em;
-          margin: 0 0 24px;
+          font-size: .72rem; letter-spacing: .14em;
+          color: rgba(255,255,255,.32);
+          margin: 0 0 52px; line-height: 1;
         }
 
-        /* ステータスバッジ */
-        .ft-status {
-          display: inline-flex; align-items: center; gap: 8px;
-        }
-        @keyframes ft-pulse {
-          0%, 100% { box-shadow: 0 0 0 0 rgba(157,140,86,.5); }
-          60%       { box-shadow: 0 0 0 5px rgba(157,140,86,0); }
-        }
-        .ft-status-pulse {
-          width: 6px; height: 6px; border-radius: 50%;
-          background: #9d8c56; flex-shrink: 0;
-          animation: ft-pulse 2.8s ease infinite;
-        }
-        .ft-status-text {
-          font-size: .52rem; letter-spacing: .28em;
-          color: rgba(157,140,86,.65);
-          font-family: var(--font-barlow-condensed), sans-serif;
-        }
+        /* ─── ナビグリッド ─── */
+        .ft-nav-wrap { width: 100%; margin-bottom: 8px; }
 
-        /* ────────────────────────────────
-           ナビブロック
-        ──────────────────────────────── */
-        .ft-nav-block { width: 100%; }
-
-        /* ヘッダー行 */
-        .ft-nav-meta {
-          display: flex; align-items: center; gap: 12px;
-          padding-bottom: 12px; margin-bottom: 0;
-          border-bottom: 1px solid rgba(255,255,255,.08);
+        @media (min-width: 641px) {
+          .ft-nav-wrap { margin-bottom: 56px; }
         }
-        .ft-nav-eyebrow {
-          font-size: .50rem; letter-spacing: .28em;
-          color: rgba(157,140,86,.6);
-          font-family: var(--font-barlow-condensed), sans-serif;
-          white-space: nowrap; flex-shrink: 0;
+        .ft-nav-title {
+          font-size: .60rem; letter-spacing: .25em;
+          color: rgba(196,171,110,.65);
+          font-family: 'Courier New', monospace;
+          margin: 0 0 20px; padding: 8px 0;
+          text-align: left; width: 100%;
+          border-top: 1px solid rgba(196,171,110,.25);
+          border-bottom: 1px solid rgba(196,171,110,.25);
         }
-        .ft-nav-rule {
-          flex: 1; height: 1px;
-          background: linear-gradient(90deg, rgba(255,255,255,.06), transparent);
-        }
-        .ft-nav-total {
-          font-size: .48rem; letter-spacing: .18em;
-          color: rgba(255,255,255,.14);
-          font-family: var(--font-barlow-condensed), sans-serif;
-          white-space: nowrap; flex-shrink: 0;
-        }
-
-        /* ────────────────────────────────
-           ナビグリッド本体（3列）
-        ──────────────────────────────── */
-        .ft-nav-grid {
+        .ft-nav {
           list-style: none; padding: 0; margin: 0;
           display: grid;
           grid-template-columns: repeat(3, 1fr);
         }
-
-        /* 各セル */
-        .ft-nav-cell {
-          border-bottom: 1px solid rgba(255,255,255,.05);
+        .ft-nav-item {
+          border-bottom: 1px solid rgba(255,255,255,.06);
         }
-
-        /* リンク行: [番号] [テキスト] [矢印] */
         .ft-nav-link {
-          display: grid;
-          grid-template-columns: 26px 1fr 14px;
-          align-items: center;
-          gap: 0 8px;
-          padding: 14px 8px 14px 0;
+          display: flex; align-items: center; gap: 8px;
+          padding: 16px 8px 16px 0;
+          color: rgba(255,255,255,.48);
           text-decoration: none;
-          color: rgba(255,255,255,.52);
-          position: relative; overflow: hidden;
+          font-size: .78rem; letter-spacing: .05em;
           transition: color .22s;
         }
-        /* ホバー時の背景フィル */
-        .ft-nav-link::before {
-          content: ''; position: absolute; inset: 0;
-          background: linear-gradient(90deg, rgba(157,140,86,.06), transparent);
-          transform: translateX(-102%);
-          transition: transform .32s cubic-bezier(.4,0,.2,1);
-        }
-        .ft-nav-link:hover::before { transform: translateX(0); }
-        .ft-nav-link:hover { color: rgba(255,255,255,.9); }
+        .ft-nav-link:hover { color: rgba(255,255,255,.92); }
 
         /* 番号 */
         .ft-nav-num {
-          font-size: .48rem; letter-spacing: .10em;
-          color: rgba(157,140,86,.38);
-          font-family: 'Courier New', Courier, monospace;
-          position: relative; transition: color .22s;
+          font-size: .65rem; letter-spacing: .08em;
+          color: rgba(196,171,110,.38);
+          font-family: 'Courier New', monospace;
+          flex-shrink: 0;
+          transition: color .22s;
           line-height: 1;
         }
-        .ft-nav-link:hover .ft-nav-num {
-          color: rgba(157,140,86,.85);
+        .ft-nav-link:hover .ft-nav-num { color: rgba(196,171,110,.9); }
+
+        /* 横線 */
+        .ft-nav-line {
+          display: inline-block;
+          width: 16px; height: 1px; flex-shrink: 0;
+          background: rgba(196,171,110,.22);
+          transition: width .22s, background .22s;
+        }
+        .ft-nav-link:hover .ft-nav-line {
+          width: 22px;
+          background: rgba(196,171,110,.65);
         }
 
-        /* テキスト */
-        .ft-nav-text {
-          font-size: .79rem; letter-spacing: .05em;
-          line-height: 1; position: relative;
+        /* ラベル */
+        .ft-nav-label { line-height: 1; }
+
+        /* ─── 区切り線 ─── */
+        .ft-divider {
+          width: 100%; height: 1px; margin-bottom: 28px;
+          background: linear-gradient(90deg,
+            transparent,
+            rgba(196,171,110,.15) 20%,
+            rgba(196,171,110,.25) 50%,
+            rgba(196,171,110,.15) 80%,
+            transparent);
         }
 
-        /* 矢印（ホバー時のみ表示） */
-        .ft-nav-arrow {
-          font-size: .56rem;
-          color: rgba(157,140,86,0);
-          text-align: right;
-          transition: color .22s, transform .22s;
-          position: relative;
+        /* ─── ポリシー＋ブランド 2カラムコンテナ ─── */
+        .ft-bottom {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
         }
-        .ft-nav-link:hover .ft-nav-arrow {
-          color: rgba(157,140,86,.7);
-          transform: translate(2px,-2px);
-        }
-
-        /* ────────────────────────────────
-           ボトムバー
-        ──────────────────────────────── */
-        .ft-bar-wrap { border-top: 1px solid rgba(255,255,255,.06); }
-        .ft-bar {
-          width: 88%; max-width: 1200px; margin: 0 auto;
-          padding: 18px 0;
-          display: flex; align-items: center;
-          justify-content: space-between;
-          gap: 12px 24px; flex-wrap: wrap;
+        .ft-brand-col {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
         }
 
-        /* ポリシーブロック */
-        .ft-policy-block { display: flex; flex-direction: column; gap: 8px; }
-        .ft-policy-head {
-          display: flex; align-items: center; gap: 10px;
+        /* ─── ポリシー ─── */
+        .ft-policy-wrap { width: 100%; margin-bottom: 28px; }
+        .ft-policy-title {
+          font-size: .60rem; letter-spacing: .25em;
+          color: rgba(196,171,110,.65);
+          font-family: 'Courier New', monospace;
+          margin: 0 0 20px; padding: 8px 0;
+          text-align: left; width: 100%;
+          border-top: 1px solid rgba(196,171,110,.25);
+          border-bottom: 1px solid rgba(196,171,110,.25);
         }
-        .ft-policy-eyebrow {
-          font-size: .48rem; letter-spacing: .28em;
-          color: rgba(157,140,86,.5);
-          font-family: var(--font-barlow-condensed), sans-serif;
-          white-space: nowrap; flex-shrink: 0;
-        }
-        .ft-policy-rule {
-          flex: 1; height: 1px; max-width: 60px;
-          background: linear-gradient(90deg, rgba(255,255,255,.06), transparent);
-        }
-
-        /* ポリシー */
         .ft-policy {
           list-style: none; padding: 0; margin: 0;
-          display: flex; flex-wrap: wrap;
-          align-items: center; gap: 2px 0;
         }
-        .ft-policy-item { display: flex; align-items: center; }
-        .ft-policy-sep {
-          margin: 0 9px;
-          color: rgba(255,255,255,.12);
-          font-size: .58rem;
-        }
+        .ft-policy-item { display: flex; align-items: center; border-bottom: 1px solid rgba(255,255,255,.06); }
         .ft-policy-link {
-          color: rgba(255,255,255,.25);
+          display: flex; align-items: center; gap: 8px;
+          padding: 12px 8px 12px 0;
+          color: rgba(255,255,255,.38);
           text-decoration: none;
-          font-size: .60rem; letter-spacing: .04em;
+          font-size: .74rem; letter-spacing: .04em;
           transition: color .2s;
+          width: 100%;
         }
-        .ft-policy-link:hover { color: rgba(255,255,255,.6); }
+        .ft-policy-link:hover { color: rgba(255,255,255,.75); }
+        .ft-policy-num {
+          font-size: .60rem; letter-spacing: .08em;
+          color: rgba(196,171,110,.35);
+          font-family: 'Courier New', monospace;
+          flex-shrink: 0; transition: color .2s;
+        }
+        .ft-policy-link:hover .ft-policy-num { color: rgba(196,171,110,.8); }
+        .ft-policy-line {
+          display: inline-block;
+          width: 14px; height: 1px; flex-shrink: 0;
+          background: rgba(196,171,110,.20);
+          transition: width .22s, background .22s;
+        }
+        .ft-policy-link:hover .ft-policy-line { width: 20px; background: rgba(196,171,110,.55); }
 
-        /* コピーライト */
-        .ft-copy { text-align: right; }
+        /* ─── PC：ポリシー＋ブランド 2カラム ─── */
+        @media (min-width: 641px) {
+          .ft-bottom {
+            flex-direction: row;
+            align-items: stretch;
+          }
+          .ft-policy-wrap {
+            width: 50%;
+            flex-shrink: 0;
+            padding-right: 48px;
+            margin-bottom: 0;
+          }
+          .ft-brand-col {
+            width: 50%;
+            flex-shrink: 0;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+          }
+          .ft-brand-col .ft-brand { margin-bottom: 1px; margin-left: 64px; }
+          .ft-brand-col .ft-copy { margin-left: 64px; }
+          .ft-copy-cr { margin-bottom: 44px !important; transform: translateY(-12px); }
+          .ft-brand-col .ft-copy-line { position: absolute; bottom: 3px; left: 50%; transform: translateX(-50%); width: 100%; margin-top: 0 !important; }
+          .ft-brand-col .ft-copy-note { transform: translateY(-38px); }
+          .ft-brand-col .ft-divider {
+            width: 100%;
+            margin-bottom: 36px;
+            margin-top: -2px;
+          }
+        }
+
+        /* ─── コピーライト ─── */
+        .ft-copy { text-align: center; }
+        .ft-copy-line {
+          width: 100% !important;
+          height: 1px !important;
+          background: rgba(255,255,255,.06) !important;
+          margin-top: 12px !important;
+          margin-bottom: 0 !important;
+        }
         .ft-copy-cr {
-          font-size: .62rem; color: rgba(255,255,255,.25);
-          letter-spacing: .06em; margin: 0 0 2px;
+          font-size: .60rem; color: rgba(255,255,255,.22);
+          letter-spacing: .07em; margin: 0 0 12px;
         }
         .ft-copy-note {
-          font-size: .54rem; color: rgba(255,255,255,.13);
+          font-size: .52rem; color: rgba(255,255,255,.12);
           letter-spacing: .03em; margin: 0;
         }
 
-        /* ════════════════════════════════
-           タブレット（〜 1024px）
-        ════════════════════════════════ */
-        @media (max-width: 1024px) {
-          .ft-wrap {
-            grid-template-columns: 190px 1fr;
-            gap: 0 44px;
-            padding: 52px 0 48px;
-          }
-          .ft-nav-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        /* ════════════════════════════════
-           スマホ（〜 640px）
-        ════════════════════════════════ */
+        /* ─── スマホ（〜 640px）─── */
         @media (max-width: 640px) {
-
-          /* メイン縦積み */
-          .ft-wrap {
-            grid-template-columns: 1fr;
-            gap: 36px 0;
-            padding: 44px 0 36px;
-          }
-
-          /* ブランド: 左揃え */
-          .ft-logo { margin-bottom: 14px; }
-          .ft-tagline { font-size: .66rem; margin-bottom: 18px; }
-
-          /* ナビ: 2列 */
-          .ft-nav-grid { grid-template-columns: repeat(2, 1fr); }
-          .ft-nav-link {
-            grid-template-columns: 22px 1fr;  /* 矢印列を省く */
-            padding: 12px 4px 12px 0;
-          }
-          .ft-nav-text  { font-size: .75rem; }
-          .ft-nav-num   { font-size: .46rem; }
-          .ft-nav-arrow { display: none; }
-
-          /* ボトム: 縦積み */
-          .ft-bar {
-            flex-direction: column;
-            align-items: flex-start;
-            padding: 16px 0 20px;
-            gap: 14px;
-          }
-          .ft-policy-block { gap: 6px; }
-          .ft-policy-rule  { display: none; }
-
-          /* ポリシー: 2列グリッド */
-          .ft-policy {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px 12px;
-          }
-          .ft-policy-item { display: block; }
-          .ft-policy-sep  { display: none; }
-          .ft-policy-link { font-size: .59rem; }
-
-          /* コピーライト: 左揃え */
-          .ft-copy { text-align: left; }
-          .ft-copy-cr   { font-size: .60rem; }
-          .ft-copy-note { font-size: .52rem; }
+          .ft-wrap { padding: 28px 0 44px; }
+          .ft-tagline { margin-bottom: 40px; }
+          .ft-nav { grid-template-columns: repeat(2, 1fr); margin-bottom: 32px; }
+          .ft-nav-link { font-size: .74rem; padding: 14px 4px 14px 0; }
+          .ft-policy { gap: 8px 0; margin-bottom: 14px; }
         }
       `}</style>
     </footer>

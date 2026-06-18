@@ -129,7 +129,7 @@ export default function IntroAnimation({ onComplete }: { onComplete?: () => void
           transition: 'opacity 0.9s ease 1.0s, transform 0.9s ease 1.0s',
           textAlign: 'center', maxWidth: '88vw',
         }}>
-          確かな技術で日常をデザインする
+          繊細に想像し、大胆に創造する
         </p>
 
         {/* NOW LOADING */}

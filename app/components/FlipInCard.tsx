@@ -1,0 +1,54 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+
+interface Props {
+  index?: number;
+  children: React.ReactNode;
+  style?: React.CSSProperties;
+  className?: string;
+  onMouseEnter?: React.MouseEventHandler<HTMLDivElement>;
+  onMouseLeave?: React.MouseEventHandler<HTMLDivElement>;
+}
+
+export default function FlipInCard({ index = 0, children, style, className, onMouseEnter, onMouseLeave }: Props) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.15 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  const delay = index * 150;
+
+  return (
+    <div
+      ref={ref}
+      className={className}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      style={{
+        ...style,
+        transform: visible ? "translateX(0)" : "translateX(-60px)",
+        opacity: visible ? 1 : 0,
+        transition: visible
+          ? `transform 0.75s cubic-bezier(0.22,1,0.36,1) ${delay}ms, opacity 0.6s ease ${delay}ms`
+          : "none",
+      }}
+    >
+      {children}
+    </div>
+  );
+}

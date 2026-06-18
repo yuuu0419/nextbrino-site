@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PageHero from "../components/PageHero";
 export const metadata: Metadata = { title: "お問合せ対応基本方針 | NEXT BRINO" };
 
 const sections = [
@@ -13,12 +14,7 @@ const sections = [
 export default function ContactPolicyPage() {
   return (
     <main>
-      <div className="ph"><div className="ph-inner">
-        <p className="ph-label">NEXT BRINO</p>
-        <h1 className="ph-en">CONTACT POLICY</h1>
-        <div className="ph-line" />
-        <p className="ph-ja">お問合せ対応基本方針</p>
-      </div></div>
+      <PageHero image="/images/contact-policy-hero.jpg" en="CONTACT POLICY" ja="お問合せ対応基本方針" />
       <div className="pc">
         <p className="cp-intro">当社サービスに関するお問合せをご検討のお客様へ、対応方針についてご案内いたします。お手続き前にご一読いただけますと幸いです。</p>
         <div className="cp-notice">

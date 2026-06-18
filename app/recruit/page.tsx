@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
+import PageHero from "../components/PageHero";
 import Link from "next/link";
 export const metadata: Metadata = { title: "採用情報 | NEXT BRINO" };
 
 export default function RecruitPage() {
   return (
     <main>
-      <div className="ph"><div className="ph-inner">
-        <p className="ph-label">NEXT BRINO</p>
-        <h1 className="ph-en">RECRUIT</h1>
-        <div className="ph-line" />
-        <p className="ph-ja">採用情報</p>
-      </div></div>
+      <PageHero image="/images/recruit-hero.jpg" en="RECRUIT" ja="採用情報" />
       <div className="pc" style={{ maxWidth: 800, textAlign: "center", paddingTop: 100, paddingBottom: 120 }}>
         <div className="rc-status">
           <p className="rc-status-label">INFORMATION</p>

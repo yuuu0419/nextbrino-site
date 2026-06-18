@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PageHero from "../components/PageHero";
 export const metadata: Metadata = { title: "反社会的勢力に対する基本方針 | NEXT BRINO" };
 
 const policies = [
@@ -15,12 +16,7 @@ const policies = [
 export default function AntisocialPolicyPage() {
   return (
     <main>
-      <div className="ph"><div className="ph-inner">
-        <p className="ph-label">NEXT BRINO</p>
-        <h1 className="ph-en">ANTI-SOCIAL FORCES POLICY</h1>
-        <div className="ph-line" />
-        <p className="ph-ja">反社会的勢力に対する基本方針</p>
-      </div></div>
+      <PageHero image="/images/anti-social-forces-policy-hero.jpg" en={<>ANTISOCIAL<br />POLICY</>} ja="反社会的勢力に対する基本方針" />
       <div className="pc">
         <p className="ap-intro">NEXT BRINOは、健全かつ適正な事業活動を行うため、反社会的勢力との一切の関係を遮断し、不当要求に対しては毅然とした姿勢で対応します。</p>
         <div className="ap-list">

@@ -1,124 +1,500 @@
 import type { Metadata } from "next";
+import PageHero from "../components/PageHero";
+import Ticker from "../components/Ticker";
+import SplitTitle from "../components/SplitTitle";
+import FadeIn from "../components/FadeIn";
 import Link from "next/link";
+import Image from "next/image";
 export const metadata: Metadata = { title: "お問い合わせ | NEXT BRINO" };
 
 export default function ContactPage() {
   return (
     <main>
-      <div className="ph"><div className="ph-inner">
-        <p className="ph-label">NEXT BRINO</p>
-        <h1 className="ph-en">CONTACT</h1>
-        <div className="ph-line" />
-        <p className="ph-ja">お問い合わせ</p>
-      </div></div>
-      <div className="pc" style={{ maxWidth: 800 }}>
-        <p className="ct-intro">下記フォームに必要事項をご入力いただき、以下の3つの方針にご同意のうえ「送信する」ボタンをクリックしてください。</p>
-        <div className="ct-policies">
-          <p className="ct-policies-label">同意が必要な方針</p>
-          <ul className="ct-policies-list">
-            <li><Link href="/privacy-policy/" className="ct-pl">個人情報保護方針</Link></li>
-            <li><Link href="/contact-policy/" className="ct-pl">お問合せ対応基本方針</Link></li>
-            <li><Link href="/anti-social-forces-policy/" className="ct-pl">反社会的勢力に対する基本方針</Link></li>
-          </ul>
-        </div>
-        <form className="ct-form" action="https://nextbrino.com/contact/" method="GET" target="_blank">
-          <div className="ct-field-group">
-            <div className="ct-field">
-              <label className="ct-label">お問い合わせ種別 <span className="ct-req">必須</span></label>
-              <select className="ct-input">
-                <option value="">選択してください</option>
-                <option>サービスに関するご相談</option>
-                <option>採用・インターンシップについて</option>
-                <option>取材・メディア関連</option>
-                <option>その他</option>
-              </select>
-            </div>
-            <div className="ct-field">
-              <label className="ct-label">会社名・団体名</label>
-              <input type="text" className="ct-input" placeholder="株式会社〇〇" />
-            </div>
-            <div className="ct-field">
-              <label className="ct-label">部署名</label>
-              <input type="text" className="ct-input" placeholder="〇〇部" />
-            </div>
-            <div className="ct-field">
-              <label className="ct-label">氏名 <span className="ct-req">必須</span></label>
-              <input type="text" className="ct-input" placeholder="山田 太郎" />
-            </div>
-            <div className="ct-field">
-              <label className="ct-label">メールアドレス <span className="ct-req">必須</span></label>
-              <input type="email" className="ct-input" placeholder="example@email.com" />
-            </div>
-            <div className="ct-field">
-              <label className="ct-label">電話番号 <span className="ct-req">必須</span></label>
-              <input type="tel" className="ct-input" placeholder="090-0000-0000" />
-            </div>
-            <div className="ct-field">
-              <label className="ct-label">LINE ID</label>
-              <input type="text" className="ct-input" placeholder="@lineid" />
-            </div>
-            <div className="ct-field ct-field-half">
-              <label className="ct-label">郵便番号</label>
-              <input type="text" className="ct-input" placeholder="000-0000" />
-            </div>
-            <div className="ct-field">
-              <label className="ct-label">住所</label>
-              <input type="text" className="ct-input" placeholder="東京都〇〇区..." />
-            </div>
-            <div className="ct-field">
-              <label className="ct-label">ホームページURL</label>
-              <input type="url" className="ct-input" placeholder="https://" />
-            </div>
-            <div className="ct-field">
-              <label className="ct-label">お問い合わせ内容 <span className="ct-req">必須</span></label>
-              <textarea className="ct-input ct-textarea" placeholder="お問い合わせ内容をご記入ください"></textarea>
-            </div>
-            <div className="ct-field">
-              <label className="ct-label">ご予算</label>
-              <input type="text" className="ct-input" placeholder="例：〇〇万円程度" />
-            </div>
+      <PageHero image="/images/contact-hero.jpg" en="CONTACT" ja="お問い合わせ" />
+      <Ticker text="CONTACT NEXT BRINO" overlapBottom={200} />
+
+      <div className="ct-sec-header">
+        <FadeIn delay={0}><p className="section-label">お問い合わせ</p></FadeIn>
+        <FadeIn delay={180}><SplitTitle text="CONTACT" className="section-title-en" tag="h1" /></FadeIn>
+        <FadeIn delay={350}><div className="section-divider" /></FadeIn>
+      </div>
+
+      <div className="ct-bg-wrap" data-header-dark>
+        <div className="ct-bg-dots" />
+      <div className="ct-body">
+        <FadeIn delay={100}>
+        <p className="ct-intro">
+          <span className="ct-intro-pc">下記フォームに必要事項をご入力いただき、以下3つの方針にご同意のうえ、送信してください。</span>
+          <span className="ct-intro-sp">下記フォームに必要事項をご入力いただき、<br />以下3つの方針にご同意のうえ、<br />送信してください。</span>
+        </p>
+        </FadeIn>
+        <FadeIn delay={280}>
+        <div className="ct-policy-notice">
+          <p className="ct-policy-notice-title">【 同意必須項目 】</p>
+          <p className="ct-policy-items-pc">
+            <Link href="/privacy-policy/" className="ct-policy-link">個人情報保護方針</Link>、<Link href="/contact-policy/" className="ct-policy-link">お問合せ対応基本方針</Link>、<Link href="/anti-social-forces-policy/" className="ct-policy-link">反社会的勢力に対する基本方針</Link>
+          </p>
+          <div className="ct-policy-items-sp">
+            <p className="ct-policy-notice-item"><Link href="/privacy-policy/" className="ct-policy-link">個人情報保護方針</Link></p>
+            <p className="ct-policy-notice-item"><Link href="/contact-policy/" className="ct-policy-link">お問合せ対応基本方針</Link></p>
+            <p className="ct-policy-notice-item"><Link href="/anti-social-forces-policy/" className="ct-policy-link">反社会的勢力に対する基本方針</Link></p>
           </div>
-          <div className="ct-agree">
-            <label className="ct-agree-label">
+        </div>
+        </FadeIn>
+
+        <FadeIn delay={100} direction="up">
+        <form className="ct-form" action="https://nextbrino.com/contact/" method="GET" target="_blank">
+          <div className="ct-table">
+
+            <div className="ct-row">
+              <div className="ct-label-cell">
+                お問い合わせ種別 <span className="ct-req">必須</span>
+              </div>
+              <div className="ct-input-cell">
+                <div className="ct-select-wrap">
+                  <select className="ct-input">
+                    <option value="">選択してください</option>
+                    <option>サービスについて</option>
+                    <option>見積もり依頼</option>
+                    <option>ご質問・ご相談</option>
+                    <option>取材・広報</option>
+                    <option>サポートについて</option>
+                    <option>パートナーシップ・協業について</option>
+                    <option>その他</option>
+                  </select>
+                  <span className="ct-select-arrow">▼</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="ct-row">
+              <div className="ct-label-cell">会社名・団体名 <span className="ct-opt">任意</span></div>
+              <div className="ct-input-cell">
+                <input type="text" className="ct-input" placeholder="例 ) 株式会社〇〇〇〇" />
+                <p className="ct-hint">個人事業主：屋号をお持ちの方はご入力ください</p>
+              </div>
+            </div>
+
+            <div className="ct-row">
+              <div className="ct-label-cell">部署名 <span className="ct-opt">任意</span></div>
+              <div className="ct-input-cell">
+                <input type="text" className="ct-input" placeholder="例 ) 営業部" />
+              </div>
+            </div>
+
+            <div className="ct-row">
+              <div className="ct-label-cell">
+                氏名 <span className="ct-req">必須</span>
+              </div>
+              <div className="ct-input-cell">
+                <input type="text" className="ct-input" placeholder="例 ) 山田 太郎" />
+              </div>
+            </div>
+
+            <div className="ct-row">
+              <div className="ct-label-cell">
+                メールアドレス <span className="ct-req">必須</span>
+              </div>
+              <div className="ct-input-cell">
+                <input type="email" className="ct-input" placeholder="例 ) taro@example.com" />
+                <p className="ct-hint">基本的にはメールにてご返信いたします。</p>
+              </div>
+            </div>
+
+            <div className="ct-row">
+              <div className="ct-label-cell">
+                電話番号 <span className="ct-req">必須</span>
+              </div>
+              <div className="ct-input-cell">
+                <input type="tel" className="ct-input" placeholder="例 ) 00-0000-0000 ( 携帯可 )" />
+                <p className="ct-hint ct-hint-nowrap">お電話にてご連絡させていただく場合がございます。</p>
+              </div>
+            </div>
+
+            <div className="ct-row">
+              <div className="ct-label-cell">LINE ID <span className="ct-opt">任意</span></div>
+              <div className="ct-input-cell">
+                <input type="text" className="ct-input" placeholder="例 ) nextbrino" />
+                <p className="ct-hint ct-hint-nowrap">LINEにてご連絡させていただく場合がございます。</p>
+              </div>
+            </div>
+
+            <div className="ct-row">
+              <div className="ct-label-cell">郵便番号 <span className="ct-opt">任意</span></div>
+              <div className="ct-input-cell">
+                <input type="text" className="ct-input ct-input-half" placeholder="例 ) 106-0032" />
+              </div>
+            </div>
+
+            <div className="ct-row">
+              <div className="ct-label-cell">住所 <span className="ct-opt">任意</span></div>
+              <div className="ct-input-cell">
+                <input type="text" className="ct-input" placeholder="例 ) 東京都港区六本木○-○-○" />
+              </div>
+            </div>
+
+            <div className="ct-row">
+              <div className="ct-label-cell">ホームページURL <span className="ct-opt">任意</span></div>
+              <div className="ct-input-cell">
+                <input type="url" className="ct-input" placeholder="例 ) https://www.example.com" />
+              </div>
+            </div>
+
+            <div className="ct-row">
+              <div className="ct-label-cell">
+                お問い合わせ内容 <span className="ct-req">必須</span>
+              </div>
+              <div className="ct-input-cell">
+                <textarea className="ct-input ct-textarea" placeholder="お問い合わせ内容をご入力ください。"></textarea>
+              </div>
+            </div>
+
+            <div className="ct-row">
+              <div className="ct-label-cell">ご予算 <span className="ct-opt">任意</span></div>
+              <div className="ct-input-cell">
+                <div className="ct-budget-wrap">
+                  <input type="text" className="ct-input ct-budget-input" placeholder="" />
+                  <span className="ct-budget-unit">万円</span>
+                </div>
+                <p className="ct-hint ct-hint-nowrap">ご入力いただけますと、より具体的なご提案が可能です。</p>
+              </div>
+            </div>
+
+          </div>
+
+          <div className="ct-agree-section">
+            <label className="ct-agree-row">
               <input type="checkbox" className="ct-checkbox" />
-              <span>上記3つの方針すべてに同意します</span>
+              <span><Link href="/privacy-policy/" className="ct-policy-link">個人情報保護方針</Link>について同意する</span>
+            </label>
+            <label className="ct-agree-row">
+              <input type="checkbox" className="ct-checkbox" />
+              <span><Link href="/contact-policy/" className="ct-policy-link">お問合せ対応基本方針</Link>に同意する</span>
+            </label>
+            <label className="ct-agree-row">
+              <input type="checkbox" className="ct-checkbox" />
+              <span><Link href="/anti-social-forces-policy/" className="ct-policy-link">反社会的勢力に対する基本方針</Link>に同意する</span>
             </label>
           </div>
+
           <div className="ct-submit-wrap">
             <button type="submit" className="ct-submit">送信する</button>
           </div>
         </form>
+        </FadeIn>
       </div>
-      <style>{`
-        
-        .ph { background: #15263b; padding: 120px 0 64px; }
-        .ph-inner { width: 88%; max-width: 1100px; margin: 0 auto; }
-        .ph-label { font-family: var(--font-barlow-condensed), sans-serif; font-size: 11px; letter-spacing: .28em; color: #9d8c56; text-transform: uppercase; margin: 0 0 12px; }
-        .ph-en { font-family: var(--font-barlow-condensed), sans-serif; font-size: clamp(52px,8vw,110px); font-weight: 800; letter-spacing: .08em; line-height: 1; color: transparent; -webkit-text-stroke: 1.5px rgba(255,255,255,.35); margin: 0 0 20px; }
-        .ph-line { width: 100%; height: 1px; background: rgba(255,255,255,.1); margin: 0 0 20px; }
-        .ph-ja { font-size: clamp(18px,2.5vw,26px); font-weight: 300; letter-spacing: .1em; color: rgba(255,255,255,.72); margin: 0; }
-        .pc { width: 88%; max-width: 1100px; margin: 0 auto; padding: 72px 0 100px; }
+      </div>
 
-        .ct-intro { font-size: .93rem; line-height: 2; color: #555; margin: 0 0 28px; }
-        .ct-policies { margin: 0 0 44px; padding: 20px 24px; background: rgba(21,38,59,.03); border: 1px solid rgba(21,38,59,.08); }
-        .ct-policies-label { font-size: .75rem; letter-spacing: .18em; color: #9d8c56; margin: 0 0 10px; text-transform: uppercase; }
-        .ct-policies-list { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px 20px; }
-        .ct-pl { color: #15263b; font-size: .88rem; text-decoration: underline; text-underline-offset: 3px; }
-        .ct-pl:hover { color: #9d8c56; }
-        .ct-form { display: flex; flex-direction: column; gap: 0; }
-        .ct-field-group { display: flex; flex-direction: column; gap: 24px; margin: 0 0 32px; }
-        .ct-field { display: flex; flex-direction: column; gap: 8px; }
-        .ct-label { font-size: .85rem; font-weight: 700; color: #15263b; letter-spacing: .04em; display: flex; align-items: center; gap: 8px; }
-        .ct-req { font-size: .72rem; background: #15263b; color: #fff; padding: 2px 7px; letter-spacing: .08em; }
-        .ct-input { width: 100%; padding: 12px 16px; border: 1px solid rgba(21,38,59,.2); font-size: .9rem; font-family: var(--font-main); color: #333; outline: none; transition: border-color .2s; background: #fff; }
-        .ct-input:focus { border-color: #9d8c56; }
-        .ct-textarea { min-height: 160px; resize: vertical; }
-        .ct-agree { margin: 0 0 32px; }
-        .ct-agree-label { display: flex; align-items: center; gap: 10px; font-size: .9rem; color: #444; cursor: pointer; }
+      <div className="ct-banners">
+        <FadeIn delay={0} direction="up" className="ct-banner-fadein">
+        <Link href="/contact-policy/" className="ct-banner-link">
+          <Image src="/images/contact-policy-banner.jpg" alt="お問合せ対応基本方針" width={1800} height={826} sizes="100vw" className="ct-banner-img" />
+        </Link>
+        </FadeIn>
+        <FadeIn delay={150} direction="up" className="ct-banner-fadein">
+        <Link href="/privacy-policy/" className="ct-banner-link">
+          <Image src="/images/privacy-policy-banner.jpg" alt="個人情報保護方針" width={1800} height={826} sizes="100vw" className="ct-banner-img" />
+        </Link>
+        </FadeIn>
+        <FadeIn delay={300} direction="up" className="ct-banner-fadein">
+        <Link href="/anti-social-forces-policy/" className="ct-banner-link">
+          <Image src="/images/antisocial-policy-banner.jpg" alt="反社会的勢力に対する基本方針" width={1800} height={826} sizes="100vw" className="ct-banner-img" />
+        </Link>
+        </FadeIn>
+      </div>
+
+      <style>{`
+        /* セクションヘッダー（代表挨拶ページと同じ構造） */
+        .ct-sec-header {
+          width: 88%;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 10px 0 24px;
+          position: relative;
+          z-index: 20;
+        }
+
+        /* 白 × ネイビードット背景ラップ */
+        .ct-bg-wrap {
+          position: relative;
+          background: #ffffff;
+          overflow: hidden;
+          padding: clamp(40px, 5vw, 80px) 0 clamp(20px, 2vw, 32px);
+        }
+        .ct-bg-dots {
+          position: absolute;
+          inset: 0;
+          background-image: radial-gradient(rgba(21,38,59,0.18) 1.5px, transparent 1.5px);
+          background-size: 28px 28px;
+          pointer-events: none;
+        }
+
+        /* フォーム本体 — ガラス調ボックス */
+        .ct-body {
+          position: relative;
+          z-index: 1;
+          width: 88%;
+          max-width: 1100px;
+          margin: 0 auto;
+          background: rgba(21,38,59,0.07);
+          backdrop-filter: blur(6px);
+          -webkit-backdrop-filter: blur(6px);
+          border: 1px solid rgba(21,38,59,0.18);
+          border-radius: 8px;
+          padding: 48px 56px 64px;
+          box-shadow: 0 4px 40px rgba(21,38,59,0.06);
+        }
+        .ct-intro { font-size: .93rem; line-height: 2; color: rgba(21,38,59,0.75); margin: 0 0 20px; text-align: center; }
+        .ct-intro-pc { display: inline; }
+        .ct-intro-sp { display: none; }
+
+        .ct-policy-notice {
+          margin: 0 0 40px;
+          padding: 16px 20px;
+          border: 1px solid rgba(21,38,59,0.2);
+          background: rgba(21,38,59,0.06);
+          border-radius: 4px;
+          text-align: center;
+        }
+        .ct-policy-notice-title {
+          font-size: .85rem;
+          font-weight: 700;
+          color: rgba(21,38,59,0.8);
+          letter-spacing: .06em;
+          margin: 0 0 8px;
+        }
+        .ct-policy-notice-item {
+          font-size: .85rem;
+          color: rgba(21,38,59,0.65);
+          margin: 4px 0 0;
+          line-height: 1.8;
+        }
+        .ct-policy-items-pc { font-size: .85rem; color: rgba(21,38,59,0.65); margin: 4px 0 0; line-height: 1.8; }
+        .ct-policy-items-sp { display: none; }
+
+        .ct-opt {
+          font-size: .72rem;
+          background: rgba(21,38,59,0.12);
+          color: rgba(21,38,59,0.7);
+          padding: 2px 8px;
+          border-radius: 2px;
+          letter-spacing: .06em;
+          font-weight: 700;
+          flex-shrink: 0;
+        }
+
+        .ct-budget-wrap { display: flex; align-items: center; gap: 10px; }
+        .ct-budget-input { max-width: 180px; }
+        .ct-budget-unit { font-size: .9rem; color: rgba(21,38,59,0.8); white-space: nowrap; }
+
+        .ct-form { display: flex; flex-direction: column; }
+
+        .ct-table { width: 100%; border-top: 1px solid rgba(21,38,59,0.15); }
+
+        .ct-row {
+          display: flex;
+          align-items: flex-start;
+          border-bottom: 1px solid rgba(21,38,59,0.15);
+          padding: 24px 0;
+        }
+
+        .ct-label-cell {
+          width: 260px;
+          min-width: 260px;
+          font-size: .9rem;
+          font-weight: 600;
+          color: rgba(21,38,59,0.9);
+          letter-spacing: .03em;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          flex-wrap: wrap;
+          padding-right: 24px;
+          padding-top: 10px;
+        }
+
+        .ct-req {
+          font-size: .72rem;
+          background: #1565c0;
+          color: #fff;
+          padding: 2px 8px;
+          border-radius: 2px;
+          letter-spacing: .06em;
+          font-weight: 700;
+          flex-shrink: 0;
+        }
+
+        .ct-input-cell {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 0;
+        }
+
+        .ct-select-wrap { position: relative; display: block; width: 100%; }
+        .ct-select-wrap select { appearance: none; -webkit-appearance: none; }
+        .ct-select-arrow {
+          position: absolute;
+          right: 14px;
+          top: 50%;
+          transform: translateY(-50%);
+          pointer-events: none;
+          font-size: .7rem;
+          color: rgba(21,38,59,0.5);
+        }
+
+        .ct-input {
+          width: 100%;
+          padding: 11px 14px;
+          border: 1px solid rgba(21,38,59,0.2);
+          border-radius: 4px;
+          font-size: .9rem;
+          font-family: var(--font-main);
+          color: #15263b;
+          background: rgba(255,255,255,0.55);
+          outline: none;
+          box-sizing: border-box;
+          transition: border-color .2s, background .2s;
+        }
+        .ct-input::placeholder { color: rgba(21,38,59,0.35); }
+        .ct-input:focus { border-color: rgba(21,38,59,0.5); background: rgba(255,255,255,0.8); }
+        .ct-textarea { min-height: 180px; resize: vertical; }
+        .ct-input-half { max-width: 220px; }
+
+        .ct-hint {
+          margin: 6px 0 0;
+          font-size: .8rem;
+          color: rgba(21,38,59,0.45);
+          letter-spacing: .02em;
+          white-space: nowrap;
+        }
+
+        .ct-postal-mark { margin: 0 0 4px; font-size: .9rem; color: rgba(21,38,59,0.8); }
+
+        .ct-radios { display: flex; flex-direction: column; gap: 10px; padding-top: 10px; }
+        .ct-radio-label { display: flex; align-items: center; gap: 8px; font-size: .9rem; color: rgba(21,38,59,0.85); cursor: pointer; }
+        .ct-radio-label input[type="radio"] { accent-color: #15263b; width: 16px; height: 16px; }
+
+        .ct-file-wrap { display: flex; align-items: center; gap: 12px; }
+        .ct-file-btn {
+          display: inline-flex;
+          align-items: center;
+          padding: 8px 18px;
+          border: 1px solid rgba(21,38,59,0.25);
+          border-radius: 4px;
+          font-size: .85rem;
+          color: rgba(21,38,59,0.85);
+          background: rgba(255,255,255,0.4);
+          cursor: pointer;
+          white-space: nowrap;
+          transition: background .2s;
+        }
+        .ct-file-btn:hover { background: rgba(255,255,255,0.65); }
+        .ct-file-name { font-size: .85rem; color: rgba(21,38,59,0.45); }
+
+        .ct-agree-section {
+          margin: 32px 0 40px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 14px;
+        }
+        .ct-agree-row {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          font-size: .9rem;
+          color: rgba(21,38,59,0.8);
+          cursor: pointer;
+        }
         .ct-checkbox { width: 18px; height: 18px; accent-color: #15263b; flex-shrink: 0; }
-        .ct-submit-wrap { text-align: center; }
-        .ct-submit { padding: 16px 64px; background: #15263b; color: #fff; border: none; font-size: .9rem; letter-spacing: .18em; font-family: var(--font-main); cursor: pointer; transition: background .25s; }
-        .ct-submit:hover { background: #9d8c56; }
+        .ct-policy-link { color: #15263b; font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+        .ct-policy-link:hover { opacity: .65; }
+
+        .ct-submit-wrap { text-align: center; margin-bottom: 8px; }
+        .ct-submit {
+          display: inline-block;
+          width: 100%;
+          max-width: 600px;
+          padding: 18px 0;
+          background: rgba(21,38,59,0.85);
+          color: #fff;
+          border: 1px solid rgba(21,38,59,0.9);
+          font-size: .95rem;
+          letter-spacing: .2em;
+          font-family: var(--font-main);
+          font-weight: 700;
+          cursor: pointer;
+          border-radius: 4px;
+          transition: background .25s, border-color .25s;
+        }
+        .ct-submit:hover { background: #15263b; border-color: #15263b; }
+
+        @media (min-width: 641px) {
+          .ct-table {
+            border-top: 1px solid rgba(21,38,59,0.15);
+          }
+          .ct-row {
+            border-bottom: 1px solid rgba(21,38,59,0.15);
+          }
+        }
+
+        /* バナーセクション */
+        .ct-banner-fadein { flex: 1; overflow: hidden; }
+        .ct-banner-fadein .ct-banner-link { border-radius: 0; }
+        .ct-banners {
+          display: flex;
+          flex-direction: row;
+          gap: 0;
+          margin-top: 16px;
+          margin-bottom: 96px;
+          overflow: hidden;
+        }
+        .ct-banner-link {
+          display: block;
+          flex: 1;
+          overflow: hidden;
+          border-radius: 0;
+        }
+        .ct-banner-img {
+          width: 100% !important;
+          height: auto !important;
+          display: block;
+        }
+
+        @media (max-width: 640px) {
+          .ct-banners {
+            flex-direction: column;
+            gap: 12px;
+            padding: 0 28px;
+            margin-top: 16px;
+            margin-bottom: 80px;
+            border-radius: 0;
+            overflow: visible;
+          }
+          .ct-banner-link {
+            border-radius: 10px !important;
+            overflow: hidden;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.28);
+          }
+        }
+
+        @media (max-width: 640px) {
+          .ct-sec-header { padding-top: 90px; padding-bottom: 20px; }
+          .ct-bg-wrap { padding: 32px 0 24px; }
+          .ct-body { padding: 32px 24px 48px; border-radius: 6px; }
+          .ct-row { flex-direction: column; gap: 12px; }
+          .ct-label-cell { width: 100%; min-width: unset; padding-top: 0; padding-right: 0; }
+          .ct-input-cell { width: 100%; }
+          .ct-input-half { max-width: 100%; }
+          .ct-submit { max-width: 80%; padding: 12px 0; font-size: .82rem; }
+          .ct-intro-pc { display: none; }
+          .ct-intro-sp { display: inline; }
+          .ct-policy-items-pc { display: none; }
+          .ct-policy-items-sp { display: block; }
+          .ct-hint { white-space: normal; }
+          .ct-hint-nowrap { white-space: nowrap; font-size: .66rem; overflow: visible; }
+        }
       `}</style>
     </main>
   );

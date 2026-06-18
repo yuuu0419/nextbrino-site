@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PageHero from "../components/PageHero";
 export const metadata: Metadata = { title: "個人情報保護方針 | NEXT BRINO" };
 
 const articles = [
@@ -17,12 +18,7 @@ const articles = [
 export default function PrivacyPolicyPage() {
   return (
     <main>
-      <div className="ph"><div className="ph-inner">
-        <p className="ph-label">NEXT BRINO</p>
-        <h1 className="ph-en">PRIVACY POLICY</h1>
-        <div className="ph-line" />
-        <p className="ph-ja">個人情報保護方針</p>
-      </div></div>
+      <PageHero image="/images/privacy-policy-hero.jpg" en="PRIVACY POLICY" ja="個人情報保護方針" />
       <div className="pc">
         <p className="pp-intro">NEXT BRINOは、当社のサービスにおけるユーザーの個人情報の取扱いについて、以下のとおりプライバシーポリシーを定めます。</p>
         <div className="pp-articles">

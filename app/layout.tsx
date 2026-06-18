@@ -25,6 +25,7 @@ const cormorantGaramond = Cormorant_Garamond({
   display: "swap",
 });
 
+
 export const metadata: Metadata = {
   title: "NEXT BRINO | IT技術を駆使して日常をデザインする",
   description:
@@ -41,7 +42,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col overflow-x-hidden">
         <Header />
         {children}
-        <Footer />
+<Footer />
       </body>
     </html>
   );

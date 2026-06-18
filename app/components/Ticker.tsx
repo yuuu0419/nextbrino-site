@@ -2,10 +2,10 @@
 
 interface TickerProps {
   text: string;
+  overlapBottom?: number;
 }
 
-export default function Ticker({ text }: TickerProps) {
-  // text + 半角スペース1個 を20回繰り返してhalfを作り、{half}{half}で-50%アニメーションのシームレスループ
+export default function Ticker({ text, overlapBottom = 0 }: TickerProps) {
   const item = text + " ";
   const half = Array(20).fill(item).join("");
 
@@ -13,24 +13,26 @@ export default function Ticker({ text }: TickerProps) {
     <div
       className="ticker-wrap"
       style={{
-        padding: "14px 0",
-        background: "rgba(255,255,255,0.04)",
-        borderTop: "1px solid rgba(21,38,59,0.03)",
-        borderBottom: "1px solid rgba(21,38,59,0.03)",
+        padding: "0",
+        background: "transparent",
+        border: "none",
+        position: "relative",
+        zIndex: 0,
+        marginBottom: overlapBottom ? -overlapBottom : 0,
       }}
     >
       <div className="ticker-track">
         <span
           style={{
-            fontFamily: "var(--font-barlow-condensed), 'Barlow Condensed', sans-serif",
-            fontSize: "clamp(80px, 11vw, 160px)",
+            fontFamily: "var(--font-noto-sans-jp), sans-serif",
+            fontSize: "clamp(160px, 24vw, 380px)",
             fontWeight: 700,
-            letterSpacing: "0.08em",
+            letterSpacing: "0.06em",
             textTransform: "uppercase",
             lineHeight: 1,
             whiteSpace: "nowrap",
             display: "block",
-            background: "linear-gradient(180deg, rgba(21,38,59,0.03) 0%, rgba(21,38,59,0.14) 38%, rgba(21,38,59,0.14) 62%, rgba(21,38,59,0.03) 100%)",
+            background: "linear-gradient(180deg, rgba(21,38,59,0.22) 0%, rgba(21,38,59,0.08) 60%, rgba(21,38,59,0.0) 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
