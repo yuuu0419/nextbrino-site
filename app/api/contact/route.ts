@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
 
     // 管理者へ通知メール
     await resend.emails.send({
-      from: "NEXT BRINO <noreply@nextbrino.com>",
+      from: "NEXT BRINO <onboarding@resend.dev>",
       to: "kuroki-yuta@nextbrino.com",
       subject: `【お問い合わせ】${category} - ${name}様`,
       html: `
@@ -67,7 +67,7 @@ export async function POST(req: NextRequest) {
 
     // 自動返信メール
     await resend.emails.send({
-      from: "NEXT BRINO <noreply@nextbrino.com>",
+      from: "NEXT BRINO <onboarding@resend.dev>",
       to: email,
       subject: "【NEXT BRINO】お問い合わせを受け付けました",
       html: `
