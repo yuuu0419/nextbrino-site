@@ -32,11 +32,10 @@ export async function POST(req: NextRequest) {
         カテゴリー: { rich_text: [{ text: { content: category || "" } }] },
         "会社名・団体名": { rich_text: [{ text: { content: company || "" } }] },
         部署名: { rich_text: [{ text: { content: department || "" } }] },
-        メールアドレス: { email: email || null },
-        電話番号: { phone_number: phone || null },
+        メールアドレス: { rich_text: [{ text: { content: email || "" } }] },
+        電話番号: { rich_text: [{ text: { content: phone || "" } }] },
         "LINE ID": { rich_text: [{ text: { content: lineId || "" } }] },
         問合せ内容: { rich_text: [{ text: { content: message || "" } }] },
-        "予算（万円）": { rich_text: [{ text: { content: budget || "" } }] },
         受信日時: { date: { start: new Date().toISOString() } },
       },
     });
