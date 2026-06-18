@@ -2,11 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { Client } from "@notionhq/client";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-const notion = new Client({ auth: process.env.NOTION_API_KEY });
-const NOTION_DATABASE_ID = process.env.NOTION_DATABASE_ID!;
-
 export async function POST(req: NextRequest) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  const notion = new Client({ auth: process.env.NOTION_API_KEY });
+  const NOTION_DATABASE_ID = process.env.NOTION_DATABASE_ID!;
   try {
     const body = await req.json();
     const {
