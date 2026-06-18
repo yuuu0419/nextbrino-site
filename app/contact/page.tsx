@@ -5,6 +5,7 @@ import SplitTitle from "../components/SplitTitle";
 import FadeIn from "../components/FadeIn";
 import Link from "next/link";
 import Image from "next/image";
+import ContactForm from "./ContactForm";
 export const metadata: Metadata = { title: "お問い合わせ | NEXT BRINO" };
 
 export default function ContactPage() {
@@ -43,144 +44,7 @@ export default function ContactPage() {
         </FadeIn>
 
         <FadeIn delay={100} direction="up">
-        <form className="ct-form" action="https://nextbrino.com/contact/" method="GET" target="_blank">
-          <div className="ct-table">
-
-            <div className="ct-row">
-              <div className="ct-label-cell">
-                お問い合わせ種別 <span className="ct-req">必須</span>
-              </div>
-              <div className="ct-input-cell">
-                <div className="ct-select-wrap">
-                  <select className="ct-input">
-                    <option value="">選択してください</option>
-                    <option>サービスについて</option>
-                    <option>見積もり依頼</option>
-                    <option>ご質問・ご相談</option>
-                    <option>取材・広報</option>
-                    <option>サポートについて</option>
-                    <option>パートナーシップ・協業について</option>
-                    <option>その他</option>
-                  </select>
-                  <span className="ct-select-arrow">▼</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="ct-row">
-              <div className="ct-label-cell">会社名・団体名 <span className="ct-opt">任意</span></div>
-              <div className="ct-input-cell">
-                <input type="text" className="ct-input" placeholder="例 ) 株式会社〇〇〇〇" />
-                <p className="ct-hint">個人事業主：屋号をお持ちの方はご入力ください</p>
-              </div>
-            </div>
-
-            <div className="ct-row">
-              <div className="ct-label-cell">部署名 <span className="ct-opt">任意</span></div>
-              <div className="ct-input-cell">
-                <input type="text" className="ct-input" placeholder="例 ) 営業部" />
-              </div>
-            </div>
-
-            <div className="ct-row">
-              <div className="ct-label-cell">
-                氏名 <span className="ct-req">必須</span>
-              </div>
-              <div className="ct-input-cell">
-                <input type="text" className="ct-input" placeholder="例 ) 山田 太郎" />
-              </div>
-            </div>
-
-            <div className="ct-row">
-              <div className="ct-label-cell">
-                メールアドレス <span className="ct-req">必須</span>
-              </div>
-              <div className="ct-input-cell">
-                <input type="email" className="ct-input" placeholder="例 ) taro@example.com" />
-                <p className="ct-hint">基本的にはメールにてご返信いたします。</p>
-              </div>
-            </div>
-
-            <div className="ct-row">
-              <div className="ct-label-cell">
-                電話番号 <span className="ct-req">必須</span>
-              </div>
-              <div className="ct-input-cell">
-                <input type="tel" className="ct-input" placeholder="例 ) 00-0000-0000 ( 携帯可 )" />
-                <p className="ct-hint ct-hint-nowrap">お電話にてご連絡させていただく場合がございます。</p>
-              </div>
-            </div>
-
-            <div className="ct-row">
-              <div className="ct-label-cell">LINE ID <span className="ct-opt">任意</span></div>
-              <div className="ct-input-cell">
-                <input type="text" className="ct-input" placeholder="例 ) nextbrino" />
-                <p className="ct-hint ct-hint-nowrap">LINEにてご連絡させていただく場合がございます。</p>
-              </div>
-            </div>
-
-            <div className="ct-row">
-              <div className="ct-label-cell">郵便番号 <span className="ct-opt">任意</span></div>
-              <div className="ct-input-cell">
-                <input type="text" className="ct-input ct-input-half" placeholder="例 ) 106-0032" />
-              </div>
-            </div>
-
-            <div className="ct-row">
-              <div className="ct-label-cell">住所 <span className="ct-opt">任意</span></div>
-              <div className="ct-input-cell">
-                <input type="text" className="ct-input" placeholder="例 ) 東京都港区六本木○-○-○" />
-              </div>
-            </div>
-
-            <div className="ct-row">
-              <div className="ct-label-cell">ホームページURL <span className="ct-opt">任意</span></div>
-              <div className="ct-input-cell">
-                <input type="url" className="ct-input" placeholder="例 ) https://www.example.com" />
-              </div>
-            </div>
-
-            <div className="ct-row">
-              <div className="ct-label-cell">
-                お問い合わせ内容 <span className="ct-req">必須</span>
-              </div>
-              <div className="ct-input-cell">
-                <textarea className="ct-input ct-textarea" placeholder="お問い合わせ内容をご入力ください。"></textarea>
-              </div>
-            </div>
-
-            <div className="ct-row">
-              <div className="ct-label-cell">ご予算 <span className="ct-opt">任意</span></div>
-              <div className="ct-input-cell">
-                <div className="ct-budget-wrap">
-                  <input type="text" className="ct-input ct-budget-input" placeholder="" />
-                  <span className="ct-budget-unit">万円</span>
-                </div>
-                <p className="ct-hint ct-hint-nowrap">ご入力いただけますと、より具体的なご提案が可能です。</p>
-              </div>
-            </div>
-
-          </div>
-
-          <div className="ct-agree-section">
-            <label className="ct-agree-row">
-              <input type="checkbox" className="ct-checkbox" />
-              <span><Link href="/privacy-policy/" className="ct-policy-link">個人情報保護方針</Link>について同意する</span>
-            </label>
-            <label className="ct-agree-row">
-              <input type="checkbox" className="ct-checkbox" />
-              <span><Link href="/contact-policy/" className="ct-policy-link">お問合せ対応基本方針</Link>に同意する</span>
-            </label>
-            <label className="ct-agree-row">
-              <input type="checkbox" className="ct-checkbox" />
-              <span><Link href="/anti-social-forces-policy/" className="ct-policy-link">反社会的勢力に対する基本方針</Link>に同意する</span>
-            </label>
-          </div>
-
-          <div className="ct-submit-wrap">
-            <button type="submit" className="ct-submit">送信する</button>
-          </div>
-        </form>
+        <ContactForm />
         </FadeIn>
       </div>
       </div>
