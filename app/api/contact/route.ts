@@ -36,6 +36,7 @@ export async function POST(req: NextRequest) {
         電話番号: { rich_text: [{ text: { content: phone || "" } }] },
         "LINE ID": { rich_text: [{ text: { content: lineId || "" } }] },
         問合せ内容: { rich_text: [{ text: { content: message || "" } }] },
+        "予算 ( 万円 )": { rich_text: [{ text: { content: budget || "" } }] },
         受信日時: { date: { start: new Date().toISOString() } },
       },
     });
