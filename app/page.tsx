@@ -179,7 +179,7 @@ export default function Home() {
   const subOpacity = lerp(1, 0, Math.min(progress * 1.8, 1));
 
   /* PHILOSOPHYに差し掛かったらスクロールと同期して上に流れる（i-ne.co.jp と同じ動き） */
-  const fadeStart   = isMobile ? vh * 1.0 : vh * 1.8;       // 「経営理念」が画面下端に見え始める地点
+  const fadeStart   = isMobile ? vh * 1.2 : vh * 1.8;       // 「経営理念」が画面下端に見え始める地点
   const extraScroll = Math.max(0, scrollY - fadeStart);
   const scrollUpPct = (extraScroll / vh) * 100;             // 上に流れる量（vh%換算）
   const textTopFinal = textTop - scrollUpPct;               // 上に押し出していく
@@ -305,10 +305,11 @@ export default function Home() {
           opacity: textOpacity,
           ...(isMobile
             ? {
-                top: `${lerp(45, 65, progress) - scrollUpPct}%`,
+                top: `${lerp(45, 65, progress)}%`,
                 left: "5%",
                 right: "5%",
-                transform: "translateY(-50%)",
+                transform: `translateY(calc(-50% - ${scrollUpPct}vh))`,
+                willChange: "transform",
               }
             : {
                 top: `${textTopFinal}%`,
