@@ -51,17 +51,21 @@ export default function Home() {
 
 
   useEffect(() => {
-    const onScroll = () => {
+    let rafId: number;
+    let lastY = -1;
+    const tick = () => {
       const y = window.scrollY;
-      setScrollY(y);
-      // ページ最下部判定（残り200px以内）
-      const docH = document.documentElement.scrollHeight;
-      const winH = window.innerHeight;
-      setAtBottom(y + winH >= docH - 200);
+      if (y !== lastY) {
+        lastY = y;
+        setScrollY(y);
+        const docH = document.documentElement.scrollHeight;
+        const winH = window.innerHeight;
+        setAtBottom(y + winH >= docH - 200);
+      }
+      rafId = requestAnimationFrame(tick);
     };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    rafId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafId);
   }, []);
 
 
@@ -296,105 +300,71 @@ export default function Home() {
         </div>
       )}
 
-      {/* ── FV テキスト（desktop: fixed） */}
-      {!isMobile && (
-        <div
+      {/* ── FV テキスト（fixed）── デスクトップ: スクロールで上移動 / モバイル: RAF+transition で滑らか */}
+      <div
+        style={{
+          position: "fixed",
+          zIndex: 11,
+          pointerEvents: "none",
+          opacity: textOpacity,
+          ...(isMobile
+            ? {
+                top: `${lerp(45, 65, progress)}%`,
+                left: "5%",
+                right: "5%",
+                transform: `translateY(calc(-50% - ${scrollUpPct}vh))`,
+                willChange: "transform",
+                transition: scrollUpPct > 0 ? "transform 0.12s linear" : "none",
+              }
+            : {
+                top: `${textTopFinal}%`,
+                left: `${textLeft}%`,
+                maxWidth: `${textMaxWidth}vw`,
+                transform: `translateY(${textTranslateY}%)`,
+              }),
+        }}
+      >
+        <p
           style={{
-            position: "fixed",
-            zIndex: 11,
-            pointerEvents: "none",
-            opacity: textOpacity,
-            top: `${textTopFinal}%`,
-            left: `${textLeft}%`,
-            maxWidth: `${textMaxWidth}vw`,
-            transform: `translateY(${textTranslateY}%)`,
+            fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif",
+            fontSize: isMobile ? `${lerp(8, 10, progress)}vw` : `${textFontSizeVw}vw`,
+            fontWeight: 700,
+            lineHeight: isMobile ? 1.55 : 1.35,
+            letterSpacing: "0.01em",
+            color: textColor,
+            textShadow: `0 2px 32px rgba(0,0,0,${textShadow})`,
+            margin: 0,
+            transition: "none",
           }}
         >
-          <p
-            style={{
-              fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif",
-              fontSize: `${textFontSizeVw}vw`,
-              fontWeight: 700,
-              lineHeight: 1.35,
-              letterSpacing: "0.01em",
-              color: textColor,
-              textShadow: `0 2px 32px rgba(0,0,0,${textShadow})`,
-              margin: 0,
-              transition: "none",
-            }}
-          >
-            We imagine carefully<br />
-            and create boldly<br />
-            to design everyday life<br />
-            through technology
-          </p>
-          <p
-            style={{
-              fontSize: `${lerp(1.45, 1.25, progress)}vw`,
-              fontWeight: 700,
-              letterSpacing: "0.10em",
-              lineHeight: 2.5,
-              color: textColor,
-              textShadow: `0 2px 32px rgba(0,0,0,${textShadow})`,
-              margin: "2.4em 0 0",
-              fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif",
-            }}
-          >
-            IT技術を駆使して日常をデザインするために、<br />繊細に想像し、大胆に創造する。
-          </p>
-        </div>
-      )}
+          We imagine carefully<br />
+          and create boldly<br />
+          to design everyday life<br />
+          through technology
+        </p>
+        <p
+          style={{
+            fontSize: isMobile ? `${lerp(3.8, 4.5, progress)}vw` : `${lerp(1.45, 1.25, progress)}vw`,
+            fontWeight: 700,
+            letterSpacing: "0.10em",
+            lineHeight: isMobile ? 2.3 : 2.5,
+            color: textColor,
+            textShadow: `0 2px 32px rgba(0,0,0,${textShadow})`,
+            margin: isMobile ? "2.4em 0 3em" : "2.4em 0 0",
+            fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif",
+          }}
+        >
+          {isMobile ? (
+            <>IT技術を駆使して<br />日常をデザインするために<br />繊細に想像し、大胆に創造する。</>
+          ) : (
+            <>IT技術を駆使して日常をデザインするために、<br />繊細に想像し、大胆に創造する。</>
+          )}
+        </p>
+      </div>
 
       {/* ── FV スクロールコンテナー (270vh) ── スクロール長確保のみ */}
       <div style={{ height: isMobile ? "192vh" : "270vh", position: "relative", zIndex: 10 }}>
         <div style={{ position: "sticky", top: 0, height: "100vh", background: "transparent" }} />
-
-        {/* モバイルのみ: position:sticky でジャークなし。FV container 終端で自然にスクロールアウト */}
-        {isMobile && (
-          <div
-            style={{
-              position: "sticky",
-              top: "42vh",
-              zIndex: 11,
-              pointerEvents: "none",
-              padding: "0 5%",
-              marginTop: "-60vh",
-            }}
-          >
-            <p
-              style={{
-                fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif",
-                fontSize: `${lerp(8, 10, progress)}vw`,
-                fontWeight: 700,
-                lineHeight: 1.55,
-                letterSpacing: "0.01em",
-                color: textColor,
-                textShadow: `0 2px 32px rgba(0,0,0,${textShadow})`,
-                margin: 0,
-                transition: "none",
-              }}
-            >
-              We imagine carefully<br />
-              and create boldly<br />
-              to design everyday life<br />
-              through technology
-            </p>
-            <p
-              style={{
-                fontSize: `${lerp(3.8, 4.5, progress)}vw`,
-                fontWeight: 700,
-                letterSpacing: "0.10em",
-                lineHeight: 2.3,
-                color: textColor,
-                textShadow: `0 2px 32px rgba(0,0,0,${textShadow})`,
-                margin: "2.4em 0 3em",
-                fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif",
-              }}
-            >
-              IT技術を駆使して<br />日常をデザインするために<br />繊細に想像し、大胆に創造する。
-            </p>
-          </div>
-        )}
       </div>
 
       {/* ── コンテンツ（全て透過。NEWS も透明） ── */}
