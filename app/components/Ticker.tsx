@@ -19,6 +19,7 @@ export default function Ticker({ text, overlapBottom = 0 }: TickerProps) {
         position: "relative",
         zIndex: 0,
         marginBottom: overlapBottom ? -overlapBottom : 0,
+        pointerEvents: "none",
       }}
     >
       <div className="ticker-track">

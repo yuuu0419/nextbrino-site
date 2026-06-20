@@ -257,7 +257,7 @@ export default function Header() {
           clip-path: circle(0% at calc(100% - 42px) 30px);
           pointer-events: none;
           animation: none;
-          overflow-y: auto;
+          overflow: hidden;
           -webkit-overflow-scrolling: touch;
           padding: 140px 0 32px;
         }
@@ -274,6 +274,8 @@ export default function Header() {
           pointer-events: none;
         }
         .hd-overlay.open {
+          overflow-y: auto;
+          overflow-x: hidden;
           pointer-events: auto;
           animation: hd-circle-in 1.0s cubic-bezier(0.4,0,0.2,1) forwards;
         }
@@ -534,7 +536,7 @@ export default function Header() {
               alt="NEXT BRINO"
               width={240}
               height={72}
-              style={{ width: 185, height: "auto", filter: "brightness(0) invert(1)" }}
+              style={{ width: 150, height: "auto", filter: "brightness(0) invert(1)" }}
             />
           </Link>
 
@@ -636,7 +638,7 @@ export default function Header() {
             alt="NEXT BRINO"
             width={240}
             height={72}
-            style={{ width: isMobile ? 185 : 220, height: "auto" }}
+            style={{ width: isMobile ? 150 : 220, height: "auto" }}
             priority
           />
         </Link>

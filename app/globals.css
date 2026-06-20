@@ -22,8 +22,7 @@ body {
   background: #fff;
   color: var(--foreground);
   font-family: var(--font-main);
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
 }
 
 /* ===================== Ken Burns ===================== */

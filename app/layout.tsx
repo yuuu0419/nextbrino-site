@@ -39,7 +39,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja" className={`${notoSansJP.variable} ${barlowCondensed.variable} ${cormorantGaramond.variable}`}>
-      <body className="min-h-full flex flex-col overflow-x-hidden">
+      <body className="min-h-full flex flex-col">
         <Header />
         {children}
 <Footer />

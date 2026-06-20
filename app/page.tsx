@@ -225,6 +225,7 @@ export default function Home() {
           inset: 0,
           zIndex: 1,
           overflow: "hidden",
+          pointerEvents: "none",
         }}
       >
         {SLIDES.map((src, i) => (
@@ -365,7 +366,7 @@ export default function Home() {
 
         {/* PHILOSOPHY */}
         <Ticker text="PHILOSOPHY NEXT BRINO" overlapBottom={isMobile ? 280 : 330} />
-        <section style={{ padding: isMobile ? "160px 0 50px" : "140px 0 60px", position: "relative", zIndex: 20 }}>
+        <section style={{ padding: isMobile ? "160px 0 50px" : "140px 0 60px", position: "relative", zIndex: 23 }}>
           <div style={{ width: "92%", maxWidth: 1200, margin: "0 auto" }}>
             <div style={{ marginBottom: 60 }}>
               <p className="section-label">経営理念</p>
@@ -501,7 +502,7 @@ export default function Home() {
         {/* MESSAGE */}
         <Ticker text="TOP MESSAGE KUROKI YUTA" overlapBottom={isMobile ? 280 : 330} />
 
-        <section style={{ padding: isMobile ? "160px 0 60px" : "140px 0 60px", position: "relative", zIndex: 20 }}>
+        <section style={{ padding: isMobile ? "160px 0 60px" : "140px 0 60px", position: "relative", zIndex: 22 }}>
           <div style={{ width: "90%", maxWidth: 1100, margin: "0 auto" }}>
             <div style={{ marginBottom: 60, position: "relative", zIndex: 1 }}>
               <p className="section-label">代表挨拶</p>
@@ -802,7 +803,7 @@ export default function Home() {
         `}</style>
         <Ticker text="SERVICE NEXT BRINO" overlapBottom={isMobile ? 280 : 330} />
 
-        <section style={{ padding: isMobile ? "160px 0 60px" : "140px 0 60px", position: "relative", zIndex: 20 }}>
+        <section style={{ padding: isMobile ? "160px 0 60px" : "140px 0 60px", position: "relative", zIndex: 21 }}>
           <div style={{ width: "90%", maxWidth: 1100, margin: "0 auto" }}>
             <div style={{ marginBottom: 48, position: "relative", zIndex: 1 }}>
               <p className="section-label">事業内容</p>
