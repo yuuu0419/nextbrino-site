@@ -51,21 +51,17 @@ export default function Home() {
 
 
   useEffect(() => {
-    let rafId: number;
-    let lastY = -1;
-    const tick = () => {
+    const onScroll = () => {
       const y = window.scrollY;
-      if (y !== lastY) {
-        lastY = y;
-        setScrollY(y);
-        const docH = document.documentElement.scrollHeight;
-        const winH = window.innerHeight;
-        setAtBottom(y + winH >= docH - 200);
-      }
-      rafId = requestAnimationFrame(tick);
+      setScrollY(y);
+      // ページ最下部判定（残り200px以内）
+      const docH = document.documentElement.scrollHeight;
+      const winH = window.innerHeight;
+      setAtBottom(y + winH >= docH - 200);
     };
-    rafId = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(rafId);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
 
@@ -183,7 +179,7 @@ export default function Home() {
   const subOpacity = lerp(1, 0, Math.min(progress * 1.8, 1));
 
   /* PHILOSOPHYに差し掛かったらスクロールと同期して上に流れる（i-ne.co.jp と同じ動き） */
-  const fadeStart   = isMobile ? vh * 1.2 : vh * 1.8;       // 「経営理念」が画面下端に見え始める地点
+  const fadeStart   = isMobile ? vh * 1.0 : vh * 1.8;       // 「経営理念」が画面下端に見え始める地点
   const extraScroll = Math.max(0, scrollY - fadeStart);
   const scrollUpPct = (extraScroll / vh) * 100;             // 上に流れる量（vh%換算）
   const textTopFinal = textTop - scrollUpPct;               // 上に押し出していく
@@ -300,7 +296,7 @@ export default function Home() {
         </div>
       )}
 
-      {/* ── FV テキスト（fixed）── デスクトップ: スクロールで上移動 / モバイル: RAF+transition で滑らか */}
+      {/* ── FV テキスト（fixed）── スクロールで逃げずに残り、PHILOSOPHYへ接続 */}
       <div
         style={{
           position: "fixed",
@@ -309,12 +305,10 @@ export default function Home() {
           opacity: textOpacity,
           ...(isMobile
             ? {
-                top: `${lerp(45, 65, progress)}%`,
+                top: `${lerp(45, 65, progress) - scrollUpPct}%`,
                 left: "5%",
                 right: "5%",
-                transform: `translateY(calc(-50% - ${scrollUpPct}vh))`,
-                willChange: "transform",
-                transition: scrollUpPct > 0 ? "transform 0.12s linear" : "none",
+                transform: "translateY(-50%)",
               }
             : {
                 top: `${textTopFinal}%`,
