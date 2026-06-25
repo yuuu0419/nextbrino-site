@@ -3,6 +3,9 @@ import { Noto_Sans_JP, Barlow_Condensed, Cormorant_Garamond } from "next/font/go
 import "./globals.css";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import Script from "next/script";
+
+const GA_ID = "G-BR75W4WJWC";
 
 const notoSansJP = Noto_Sans_JP({
   variable: "--font-noto-sans-jp",
@@ -64,9 +67,16 @@ export default function RootLayout({
   return (
     <html lang="ja" className={`${notoSansJP.variable} ${barlowCondensed.variable} ${cormorantGaramond.variable}`}>
       <body className="min-h-full flex flex-col">
+        <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
+        <Script id="ga-init" strategy="afterInteractive">{`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${GA_ID}');
+        `}</Script>
         <Header />
         {children}
-<Footer />
+        <Footer />
       </body>
     </html>
   );
