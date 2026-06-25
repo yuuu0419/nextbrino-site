@@ -6,7 +6,25 @@ import FadeIn from "../components/FadeIn";
 import Image from "next/image";
 import Ticker from "../components/Ticker";
 import SplitTitle from "../components/SplitTitle";
-export const metadata: Metadata = { title: "お問合せ対応基本方針｜NEXT BRINO", description: "NEXT BRINOのお問合せ対応基本方針をご確認いただけます。お問合せの受付・返信・対応方針について定めています。" };
+export const metadata: Metadata = {
+  title: "お問合せ対応基本方針｜NEXT BRINO",
+  description: "NEXT BRINOのお問合せ対応基本方針をご確認いただけます。お問合せの受付・返信・対応方針について定めています。",
+  openGraph: {
+    title: "お問合せ対応基本方針｜NEXT BRINO",
+    description: "NEXT BRINOのお問合せ対応基本方針をご確認いただけます。お問合せの受付・返信・対応方針について定めています。",
+    url: "https://nextbrino.com/contact-policy",
+    siteName: "NEXT BRINO",
+    images: [{ url: "https://nextbrino.com/images/contact-policy-ogp.jpg", width: 1200, height: 630, alt: "お問合せ対応基本方針｜NEXT BRINO" }],
+    locale: "ja_JP",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "お問合せ対応基本方針｜NEXT BRINO",
+    description: "NEXT BRINOのお問合せ対応基本方針をご確認いただけます。お問合せの受付・返信・対応方針について定めています。",
+    images: ["https://nextbrino.com/images/contact-policy-ogp.jpg"],
+  },
+};
 
 export default function ContactPolicyPage() {
   return (

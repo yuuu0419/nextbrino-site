@@ -6,7 +6,25 @@ import PageHero from "../components/PageHero";
 import FadeIn from "../components/FadeIn";
 import Ticker from "../components/Ticker";
 import SplitTitle from "../components/SplitTitle";
-export const metadata: Metadata = { title: "反社会的勢力に対する基本方針｜NEXT BRINO", description: "NEXT BRINOの反社会的勢力に対する基本方針をご確認いただけます。" };
+export const metadata: Metadata = {
+  title: "反社会的勢力に対する基本方針｜NEXT BRINO",
+  description: "NEXT BRINOの反社会的勢力に対する基本方針をご確認いただけます。",
+  openGraph: {
+    title: "反社会的勢力に対する基本方針｜NEXT BRINO",
+    description: "NEXT BRINOの反社会的勢力に対する基本方針をご確認いただけます。",
+    url: "https://nextbrino.com/anti-social-forces-policy",
+    siteName: "NEXT BRINO",
+    images: [{ url: "https://nextbrino.com/images/antisocial-policy-ogp.jpg", width: 1200, height: 630, alt: "反社会的勢力に対する基本方針｜NEXT BRINO" }],
+    locale: "ja_JP",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "反社会的勢力に対する基本方針｜NEXT BRINO",
+    description: "NEXT BRINOの反社会的勢力に対する基本方針をご確認いただけます。",
+    images: ["https://nextbrino.com/images/antisocial-policy-ogp.jpg"],
+  },
+};
 
 const policies = [
   {

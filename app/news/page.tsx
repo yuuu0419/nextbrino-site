@@ -7,7 +7,25 @@ import PageHero from "../components/PageHero";
 import Ticker from "../components/Ticker";
 import SplitTitle from "../components/SplitTitle";
 import NewsListSection from "../components/NewsListSection";
-export const metadata: Metadata = { title: "お知らせ｜NEXT BRINO", description: "NEXT BRINOからの最新のお知らせ・ニュースをご覧いただけます。グループの情報も掲載しております。" };
+export const metadata: Metadata = {
+  title: "お知らせ｜NEXT BRINO",
+  description: "NEXT BRINOからの最新のお知らせ・ニュースをご覧いただけます。グループの情報も掲載しております。",
+  openGraph: {
+    title: "お知らせ｜NEXT BRINO",
+    description: "NEXT BRINOからの最新のお知らせ・ニュースをご覧いただけます。グループの情報も掲載しております。",
+    url: "https://nextbrino.com/news",
+    siteName: "NEXT BRINO",
+    images: [{ url: "https://nextbrino.com/images/news-ogp.jpg", width: 1200, height: 630, alt: "お知らせ｜NEXT BRINO" }],
+    locale: "ja_JP",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "お知らせ｜NEXT BRINO",
+    description: "NEXT BRINOからの最新のお知らせ・ニュースをご覧いただけます。グループの情報も掲載しております。",
+    images: ["https://nextbrino.com/images/news-ogp.jpg"],
+  },
+};
 
 export default function NewsPage() {
   return (

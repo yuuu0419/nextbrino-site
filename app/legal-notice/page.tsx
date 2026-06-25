@@ -6,7 +6,25 @@ import PageHero from "../components/PageHero";
 import FadeIn from "../components/FadeIn";
 import Ticker from "../components/Ticker";
 import SplitTitle from "../components/SplitTitle";
-export const metadata: Metadata = { title: "特定商取引法に基づく表記｜NEXT BRINO", description: "NEXT BRINOの特定商取引法に基づく表記ページです。" };
+export const metadata: Metadata = {
+  title: "特定商取引法に基づく表記｜NEXT BRINO",
+  description: "NEXT BRINOの特定商取引法に基づく表記ページです。",
+  openGraph: {
+    title: "特定商取引法に基づく表記｜NEXT BRINO",
+    description: "NEXT BRINOの特定商取引法に基づく表記ページです。",
+    url: "https://nextbrino.com/legal-notice",
+    siteName: "NEXT BRINO",
+    images: [{ url: "https://nextbrino.com/images/legal-notice-ogp.jpg", width: 1200, height: 630, alt: "特定商取引法に基づく表記｜NEXT BRINO" }],
+    locale: "ja_JP",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "特定商取引法に基づく表記｜NEXT BRINO",
+    description: "NEXT BRINOの特定商取引法に基づく表記ページです。",
+    images: ["https://nextbrino.com/images/legal-notice-ogp.jpg"],
+  },
+};
 
 const rows = [
   { label: "事業者名・代表者名", value: "NEXT BRINO　黒木 雄太" },

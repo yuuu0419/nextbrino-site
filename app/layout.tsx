@@ -41,21 +41,21 @@ export const metadata: Metadata = {
     siteName: "NEXT BRINO",
     images: [
       {
-        url: "https://nextbrino.com/images/site-logo.png",
-        width: 1563,
-        height: 1563,
-        alt: "NEXT BRINO",
+        url: "https://nextbrino.com/images/home-ogp.jpg",
+        width: 1200,
+        height: 630,
+        alt: "NEXT BRINO | IT技術を駆使して日常をデザインする",
       },
     ],
     locale: "ja_JP",
     type: "website",
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "NEXT BRINO | IT技術を駆使して日常をデザインする",
     description:
       "NEXT BRINOの公式サイトです。ITシステム開発・Web制作を中心に6つの事業を提供しております。",
-    images: ["https://nextbrino.com/images/site-logo.png"],
+    images: ["https://nextbrino.com/images/home-ogp.jpg"],
   },
 };
 

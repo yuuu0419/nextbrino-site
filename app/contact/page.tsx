@@ -7,7 +7,25 @@ import FadeIn from "../components/FadeIn";
 import Link from "next/link";
 import Image from "next/image";
 import ContactForm from "./ContactForm";
-export const metadata: Metadata = { title: "お問い合わせ｜NEXT BRINO", description: "NEXT BRINOへのお問い合わせはこちらから。24時間受付しております。ご返答の目安は2〜5営業日です。" };
+export const metadata: Metadata = {
+  title: "お問い合わせ｜NEXT BRINO",
+  description: "NEXT BRINOへのお問い合わせはこちらから。24時間受付しております。ご返答の目安は2〜5営業日です。",
+  openGraph: {
+    title: "お問い合わせ｜NEXT BRINO",
+    description: "NEXT BRINOへのお問い合わせはこちらから。24時間受付しております。ご返答の目安は2〜5営業日です。",
+    url: "https://nextbrino.com/contact",
+    siteName: "NEXT BRINO",
+    images: [{ url: "https://nextbrino.com/images/contact-ogp.jpg", width: 1200, height: 630, alt: "お問い合わせ｜NEXT BRINO" }],
+    locale: "ja_JP",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "お問い合わせ｜NEXT BRINO",
+    description: "NEXT BRINOへのお問い合わせはこちらから。24時間受付しております。ご返答の目安は2〜5営業日です。",
+    images: ["https://nextbrino.com/images/contact-ogp.jpg"],
+  },
+};
 
 export default function ContactPage() {
   return (

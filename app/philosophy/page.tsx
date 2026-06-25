@@ -9,7 +9,25 @@ import PhilosophyReveal from "./PhilosophyReveal";
 import Ticker from "../components/Ticker";
 import SplitTitle from "../components/SplitTitle";
 
-export const metadata: Metadata = { title: "理念・行動指針｜NEXT BRINO", description: "NEXT BRINOの経営理念・ミッション・ビジョン・バリューをご紹介します。「繊細に想像し、大胆に創造する」を軸に、より良い未来を目指します。" };
+export const metadata: Metadata = {
+  title: "理念・行動指針｜NEXT BRINO",
+  description: "NEXT BRINOの経営理念・ミッション・ビジョン・バリューをご紹介します。「繊細に想像し、大胆に創造する」を軸に、より良い未来を目指します。",
+  openGraph: {
+    title: "理念・行動指針｜NEXT BRINO",
+    description: "NEXT BRINOの経営理念・ミッション・ビジョン・バリューをご紹介します。「繊細に想像し、大胆に創造する」を軸に、より良い未来を目指します。",
+    url: "https://nextbrino.com/philosophy",
+    siteName: "NEXT BRINO",
+    images: [{ url: "https://nextbrino.com/images/philosophy-ogp.jpg", width: 1200, height: 630, alt: "理念・行動指針｜NEXT BRINO" }],
+    locale: "ja_JP",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "理念・行動指針｜NEXT BRINO",
+    description: "NEXT BRINOの経営理念・ミッション・ビジョン・バリューをご紹介します。「繊細に想像し、大胆に創造する」を軸に、より良い未来を目指します。",
+    images: ["https://nextbrino.com/images/philosophy-ogp.jpg"],
+  },
+};
 
 export default function PhilosophyPage() {
   return (

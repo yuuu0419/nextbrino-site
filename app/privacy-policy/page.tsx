@@ -6,7 +6,25 @@ import SplitTitle from "../components/SplitTitle";
 import FadeIn from "../components/FadeIn";
 import Link from "next/link";
 import Image from "next/image";
-export const metadata: Metadata = { title: "個人情報保護方針｜NEXT BRINO", description: "NEXT BRINOの個人情報保護方針をご確認いただけます。お客様の個人情報を適切に管理・保護いたします。" };
+export const metadata: Metadata = {
+  title: "個人情報保護方針｜NEXT BRINO",
+  description: "NEXT BRINOの個人情報保護方針をご確認いただけます。お客様の個人情報を適切に管理・保護いたします。",
+  openGraph: {
+    title: "個人情報保護方針｜NEXT BRINO",
+    description: "NEXT BRINOの個人情報保護方針をご確認いただけます。お客様の個人情報を適切に管理・保護いたします。",
+    url: "https://nextbrino.com/privacy-policy",
+    siteName: "NEXT BRINO",
+    images: [{ url: "https://nextbrino.com/images/privacy-policy-ogp.jpg", width: 1200, height: 630, alt: "個人情報保護方針｜NEXT BRINO" }],
+    locale: "ja_JP",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "個人情報保護方針｜NEXT BRINO",
+    description: "NEXT BRINOの個人情報保護方針をご確認いただけます。お客様の個人情報を適切に管理・保護いたします。",
+    images: ["https://nextbrino.com/images/privacy-policy-ogp.jpg"],
+  },
+};
 
 const articles = [
   { title: "第1条（個人情報）", body: "「個人情報」とは、個人情報保護法にいう「個人情報」を指すものとし，生存する個人に関する情報であって、\n当該情報に含まれる氏名，生年月日，住所，連絡先その他の記述等により特定の個人を識別できる情報及び 容貌、指紋，\n声紋にかかるデータ、及び健康保険証の保険者番号などの当該情報単体から特定の個人を識別できる情報（個人識別情報）を指します。" },

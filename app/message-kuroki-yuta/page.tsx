@@ -8,7 +8,25 @@ import SplitTitle from "../components/SplitTitle";
 import MessageLayout from "../components/MessageLayout";
 import MessageSections from "../components/MessageSections";
 import FadeIn from "../components/FadeIn";
-export const metadata: Metadata = { title: "代表挨拶-黒木 雄太｜NEXT BRINO", description: "NEXT BRINO 代表・黒木雄太からのメッセージ。IT技術と誠実さを土台に、日常に新しい可能性をひらく想いをお伝えします。" };
+export const metadata: Metadata = {
+  title: "代表挨拶-黒木 雄太｜NEXT BRINO",
+  description: "NEXT BRINO 代表・黒木雄太からのメッセージ。IT技術と誠実さを土台に、日常に新しい可能性をひらく想いをお伝えします。",
+  openGraph: {
+    title: "代表挨拶-黒木 雄太｜NEXT BRINO",
+    description: "NEXT BRINO 代表・黒木雄太からのメッセージ。IT技術と誠実さを土台に、日常に新しい可能性をひらく想いをお伝えします。",
+    url: "https://nextbrino.com/message-kuroki-yuta",
+    siteName: "NEXT BRINO",
+    images: [{ url: "https://nextbrino.com/images/top-message-ogp.jpg", width: 1200, height: 630, alt: "代表挨拶-黒木 雄太｜NEXT BRINO" }],
+    locale: "ja_JP",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "代表挨拶-黒木 雄太｜NEXT BRINO",
+    description: "NEXT BRINO 代表・黒木雄太からのメッセージ。IT技術と誠実さを土台に、日常に新しい可能性をひらく想いをお伝えします。",
+    images: ["https://nextbrino.com/images/top-message-ogp.jpg"],
+  },
+};
 
 export default function MessagePage() {
   return (

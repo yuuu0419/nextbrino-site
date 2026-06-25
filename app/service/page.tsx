@@ -6,7 +6,25 @@ import Ticker from "../components/Ticker";
 import SplitTitle from "../components/SplitTitle";
 import ServiceRows from "../components/ServiceRows";
 import FadeIn from "../components/FadeIn";
-export const metadata: Metadata = { title: "事業内容｜NEXT BRINO", description: "NEXT BRINOが手がける6つの事業をご紹介します。最先端の技術を積極的に取り入れ、お客様に新たな価値を提供します。" };
+export const metadata: Metadata = {
+  title: "事業内容｜NEXT BRINO",
+  description: "NEXT BRINOが手がける6つの事業をご紹介します。最先端の技術を積極的に取り入れ、お客様に新たな価値を提供します。",
+  openGraph: {
+    title: "事業内容｜NEXT BRINO",
+    description: "NEXT BRINOが手がける6つの事業をご紹介します。最先端の技術を積極的に取り入れ、お客様に新たな価値を提供します。",
+    url: "https://nextbrino.com/service",
+    siteName: "NEXT BRINO",
+    images: [{ url: "https://nextbrino.com/images/business-ogp.jpg", width: 1200, height: 630, alt: "事業内容｜NEXT BRINO" }],
+    locale: "ja_JP",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "事業内容｜NEXT BRINO",
+    description: "NEXT BRINOが手がける6つの事業をご紹介します。最先端の技術を積極的に取り入れ、お客様に新たな価値を提供します。",
+    images: ["https://nextbrino.com/images/business-ogp.jpg"],
+  },
+};
 
 const services = [
   { num:"01", en:"IT SOLUTION",        ja:"ITソリューション事業",  img:"/images/electronic-commerce-card.webp", desc:"業務効率化や課題解決など事業成長を支援するため、\nWeb制作・EC構築・アプリ開発・システム開発など、\n幅広いデジタルソリューションを提供しています。", items:["WEBサイト制作と運用保守","アプリ開発・システム開発","WEB決済システムの導入","販売管理等のトータルサポート"] },

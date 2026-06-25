@@ -8,7 +8,25 @@ import Ticker from "../components/Ticker";
 import SplitTitle from "../components/SplitTitle";
 import FadeIn from "../components/FadeIn";
 import HistoryTimeline from "./HistoryTimeline";
-export const metadata: Metadata = { title: "概要・沿革｜NEXT BRINO", description: "NEXT BRINOの概要・沿革をご紹介します。これまでの歩みをお伝えします。" };
+export const metadata: Metadata = {
+  title: "概要・沿革｜NEXT BRINO",
+  description: "NEXT BRINOの概要・沿革をご紹介します。これまでの歩みをお伝えします。",
+  openGraph: {
+    title: "概要・沿革｜NEXT BRINO",
+    description: "NEXT BRINOの概要・沿革をご紹介します。これまでの歩みをお伝えします。",
+    url: "https://nextbrino.com/overview",
+    siteName: "NEXT BRINO",
+    images: [{ url: "https://nextbrino.com/images/overview-opg.jpg", width: 1200, height: 630, alt: "概要・沿革｜NEXT BRINO" }],
+    locale: "ja_JP",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "概要・沿革｜NEXT BRINO",
+    description: "NEXT BRINOの概要・沿革をご紹介します。これまでの歩みをお伝えします。",
+    images: ["https://nextbrino.com/images/overview-opg.jpg"],
+  },
+};
 
 const profile: { label: string; value: string; extra?: React.ReactNode }[] = [
   { label: "商号", value: "ネクストブライノ（ 英語表記：NEXT BRINO ）" },

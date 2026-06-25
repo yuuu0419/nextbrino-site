@@ -6,7 +6,25 @@ import SplitTitle from "../components/SplitTitle";
 import FadeIn from "../components/FadeIn";
 import Image from "next/image";
 import Link from "next/link";
-export const metadata: Metadata = { title: "採用情報｜NEXT BRINO", description: "NEXT BRINOの採用情報ページです。" };
+export const metadata: Metadata = {
+  title: "採用情報｜NEXT BRINO",
+  description: "NEXT BRINOの採用情報ページです。",
+  openGraph: {
+    title: "採用情報｜NEXT BRINO",
+    description: "NEXT BRINOの採用情報ページです。",
+    url: "https://nextbrino.com/recruit",
+    siteName: "NEXT BRINO",
+    images: [{ url: "https://nextbrino.com/images/recruit-ogp.jpg", width: 1200, height: 630, alt: "採用情報｜NEXT BRINO" }],
+    locale: "ja_JP",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "採用情報｜NEXT BRINO",
+    description: "NEXT BRINOの採用情報ページです。",
+    images: ["https://nextbrino.com/images/recruit-ogp.jpg"],
+  },
+};
 
 export default function RecruitPage() {
   return (

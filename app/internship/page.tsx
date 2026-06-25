@@ -6,7 +6,25 @@ import SplitTitle from "../components/SplitTitle";
 import FadeIn from "../components/FadeIn";
 import Image from "next/image";
 import Link from "next/link";
-export const metadata: Metadata = { title: "インターンシップ｜NEXT BRINO", description: "NEXT BRINOのインターンシップ情報ページです。" };
+export const metadata: Metadata = {
+  title: "インターンシップ｜NEXT BRINO",
+  description: "NEXT BRINOのインターンシップ情報ページです。",
+  openGraph: {
+    title: "インターンシップ｜NEXT BRINO",
+    description: "NEXT BRINOのインターンシップ情報ページです。",
+    url: "https://nextbrino.com/internship",
+    siteName: "NEXT BRINO",
+    images: [{ url: "https://nextbrino.com/images/internship-ogp.jpg", width: 1200, height: 630, alt: "インターンシップ｜NEXT BRINO" }],
+    locale: "ja_JP",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "インターンシップ｜NEXT BRINO",
+    description: "NEXT BRINOのインターンシップ情報ページです。",
+    images: ["https://nextbrino.com/images/internship-ogp.jpg"],
+  },
+};
 
 export default function InternshipPage() {
   return (
