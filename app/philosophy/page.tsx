@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
+import ScrollLineIndicator from "../components/ScrollLineIndicator";
+import Link from "next/link";
 import Image from "next/image";
+import FadeIn from "../components/FadeIn";
 import PageHero from "../components/PageHero";
 import ValueAccordion from "./ValueAccordion";
 import PhilosophyReveal from "./PhilosophyReveal";
 import Ticker from "../components/Ticker";
 import SplitTitle from "../components/SplitTitle";
 
-export const metadata: Metadata = { title: "理念・行動指針 | NEXT BRINO" };
+export const metadata: Metadata = { title: "理念・行動指針｜NEXT BRINO", description: "NEXT BRINOの経営理念・ミッション・ビジョン・バリューをご紹介します。「繊細に想像し、大胆に創造する」を軸に、より良い未来を目指します。" };
 
 export default function PhilosophyPage() {
   return (
@@ -134,7 +137,7 @@ export default function PhilosophyPage() {
           overflow: hidden;
         }
         .ph-sec:first-of-type { margin-top: 28px; }
-        .ph-sec:last-of-type  { margin-bottom: 80px; }
+        .ph-sec:last-of-type  { margin-bottom: 24px; }
 
         .ph-mission { background: #15263b; }
         .ph-vision  { background: #f5f0e6; }
@@ -378,7 +381,62 @@ export default function PhilosophyPage() {
             text-align: center;
           }
         }
+
+        .ph-banner-fadein { flex: 1; overflow: hidden; }
+        .ph-banners {
+          display: flex;
+          flex-direction: row;
+          gap: 0;
+          margin-top: 16px;
+          margin-bottom: 96px;
+          overflow: hidden;
+        }
+        .ph-banner-link {
+          display: block;
+          flex: 1;
+          overflow: hidden;
+          border-radius: 0;
+        }
+        .ph-banner-img {
+          width: 100% !important;
+          height: auto !important;
+          display: block;
+        }
+        @media (max-width: 640px) {
+          .ph-banners {
+            flex-direction: column;
+            gap: 12px;
+            padding: 0 28px;
+            margin-top: 16px;
+            margin-bottom: 80px;
+            overflow: visible;
+          }
+          .ph-banner-link {
+            border-radius: 10px !important;
+            overflow: hidden;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.28);
+          }
+        }
       `}</style>
+
+      <div className="ph-banners">
+        <FadeIn delay={0} direction="up" className="ph-banner-fadein">
+          <Link href="/message-kuroki-yuta/" className="ph-banner-link">
+            <Image src="/images/top-message-banner.jpg" alt="代表挨拶" width={1800} height={826} sizes="100vw" className="ph-banner-img" />
+          </Link>
+        </FadeIn>
+        <FadeIn delay={150} direction="up" className="ph-banner-fadein">
+          <Link href="/service/" className="ph-banner-link">
+            <Image src="/images/business-banner.jpg" alt="事業内容" width={1800} height={826} sizes="100vw" className="ph-banner-img" />
+          </Link>
+        </FadeIn>
+        <FadeIn delay={300} direction="up" className="ph-banner-fadein">
+          <Link href="/contact/" className="ph-banner-link">
+            <Image src="/images/contact-banner.jpg" alt="お問い合わせ" width={1800} height={826} sizes="100vw" className="ph-banner-img" />
+          </Link>
+        </FadeIn>
+      </div>
+      <ScrollLineIndicator />
     </main>
   );
 }

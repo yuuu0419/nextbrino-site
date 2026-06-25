@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
+import ScrollLineIndicator from "../components/ScrollLineIndicator";
+import Link from "next/link";
 import Image from "next/image";
 import PageHero from "../components/PageHero";
 import Ticker from "../components/Ticker";
 import SplitTitle from "../components/SplitTitle";
 import MessageLayout from "../components/MessageLayout";
 import MessageSections from "../components/MessageSections";
-export const metadata: Metadata = { title: "代表挨拶 | NEXT BRINO" };
+import FadeIn from "../components/FadeIn";
+export const metadata: Metadata = { title: "代表挨拶-黒木 雄太｜NEXT BRINO", description: "NEXT BRINO 代表・黒木雄太からのメッセージ。IT技術と誠実さを土台に、日常に新しい可能性をひらく想いをお伝えします。" };
 
 export default function MessagePage() {
   return (
@@ -92,11 +95,68 @@ export default function MessagePage() {
           pointer-events: none;
         }
 
+        .ms-section--navy:last-of-type { padding-bottom: 24px !important; }
+
         @media (max-width: 640px) {
           .msg-bg-wrap { background: transparent; padding: 0; }
           .msg-bg-dots { display: none; }
         }
+
+        .msg-banner-fadein { flex: 1; overflow: hidden; }
+        .msg-banners {
+          display: flex;
+          flex-direction: row;
+          gap: 0;
+          margin-top: 16px;
+          margin-bottom: 96px;
+          overflow: hidden;
+        }
+        .msg-banner-link {
+          display: block;
+          flex: 1;
+          overflow: hidden;
+          border-radius: 0;
+        }
+        .msg-banner-img {
+          width: 100% !important;
+          height: auto !important;
+          display: block;
+        }
+        @media (max-width: 640px) {
+          .msg-banners {
+            flex-direction: column;
+            gap: 12px;
+            padding: 0 28px;
+            margin-top: 16px;
+            margin-bottom: 80px;
+            overflow: visible;
+          }
+          .msg-banner-link {
+            border-radius: 10px !important;
+            overflow: hidden;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.28);
+          }
+        }
       `}</style>
+
+      <div className="msg-banners">
+        <FadeIn delay={0} direction="up" className="msg-banner-fadein">
+          <Link href="/" className="msg-banner-link">
+            <Image src="/images/home-banner.jpg" alt="HOME" width={1800} height={826} sizes="100vw" className="msg-banner-img" />
+          </Link>
+        </FadeIn>
+        <FadeIn delay={150} direction="up" className="msg-banner-fadein">
+          <Link href="/philosophy/" className="msg-banner-link">
+            <Image src="/images/philosophy-banner.jpg" alt="理念・行動指針" width={1800} height={826} sizes="100vw" className="msg-banner-img" />
+          </Link>
+        </FadeIn>
+        <FadeIn delay={300} direction="up" className="msg-banner-fadein">
+          <Link href="/contact/" className="msg-banner-link">
+            <Image src="/images/contact-banner.jpg" alt="お問い合わせ" width={1800} height={826} sizes="100vw" className="msg-banner-img" />
+          </Link>
+        </FadeIn>
+      </div>
+      <ScrollLineIndicator />
     </main>
   );
 }

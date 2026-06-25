@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
+import ScrollLineIndicator from "../components/ScrollLineIndicator";
+import Link from "next/link";
+import Image from "next/image";
 import Ticker from "../components/Ticker";
 import SplitTitle from "../components/SplitTitle";
 import ServiceRows from "../components/ServiceRows";
-export const metadata: Metadata = { title: "事業内容 | NEXT BRINO" };
+import FadeIn from "../components/FadeIn";
+export const metadata: Metadata = { title: "事業内容｜NEXT BRINO", description: "NEXT BRINOが手がける6つの事業をご紹介します。最先端の技術を積極的に取り入れ、お客様に新たな価値を提供します。" };
 
 const services = [
   { num:"01", en:"IT SOLUTION",        ja:"ITソリューション事業",  img:"/images/electronic-commerce-card.webp", desc:"業務効率化や課題解決など事業成長を支援するため、\nWeb制作・EC構築・アプリ開発・システム開発など、\n幅広いデジタルソリューションを提供しています。", items:["WEBサイト制作と運用保守","アプリ開発・システム開発","WEB決済システムの導入","販売管理等のトータルサポート"] },
@@ -359,7 +363,7 @@ export default function ServicePage() {
           padding: 14px 60px;
         }
 
-        .sv-bottom-space { height: 100px; }
+        .sv-bottom-space { height: 0; }
 
         /* CONTACT section */
         .sv-contact-section {
@@ -367,7 +371,7 @@ export default function ServicePage() {
           background: transparent;
           position: relative;
           z-index: 20;
-          padding: 140px 40px 200px;
+          padding: 140px 40px 40px;
         }
         .sv-contact-header {
           width: 90%;
@@ -580,7 +584,7 @@ export default function ServicePage() {
           .sv-contact-url { margin-bottom: 0; }
           .sv-contact-status { flex-direction: row; align-items: center; gap: 12px; margin-top: 20px; }
           .sv-contact-info { padding-top: 24px; }
-          .sv-contact-section { padding: 220px 20px 140px; }
+          .sv-contact-section { padding: 220px 20px 40px; }
           .sv-contact-card { display: block; }
           .sv-contact-left { padding: 28px 24px 24px; }
           .sv-contact-title { font-size: clamp(28px, 8vw, 38px); }
@@ -668,7 +672,7 @@ export default function ServicePage() {
           .sv-row-num { font-size: 140px; }
           .sv-row-btn-wrap { display: flex; justify-content: center; width: 100%; }
           .sv-row-btn-wrap .btn-view-more { padding: 14px 56px; }
-          .sv-bottom-space { height: 60px; }
+          .sv-bottom-space { height: 0; }
           .sv-section-sub { white-space: normal; }
           .sv-br { display: inline; }
           .sv-section-header { padding-top: 90px; }
@@ -677,7 +681,62 @@ export default function ServicePage() {
           .sv-row-desc--pc { display: none; }
           .sv-row-desc--sp { display: block; }
         }
+
+        .sv-banner-fadein { flex: 1; overflow: hidden; }
+        .sv-banners {
+          display: flex;
+          flex-direction: row;
+          gap: 0;
+          margin-top: 16px;
+          margin-bottom: 96px;
+          overflow: hidden;
+        }
+        .sv-banner-link {
+          display: block;
+          flex: 1;
+          overflow: hidden;
+          border-radius: 0;
+        }
+        .sv-banner-img {
+          width: 100% !important;
+          height: auto !important;
+          display: block;
+        }
+        @media (max-width: 640px) {
+          .sv-banners {
+            flex-direction: column;
+            gap: 12px;
+            padding: 0 28px;
+            margin-top: 16px;
+            margin-bottom: 80px;
+            overflow: visible;
+          }
+          .sv-banner-link {
+            border-radius: 10px !important;
+            overflow: hidden;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.28);
+          }
+        }
       `}</style>
+
+      <div className="sv-banners">
+        <FadeIn delay={0} direction="up" className="sv-banner-fadein">
+          <Link href="/philosophy/" className="sv-banner-link">
+            <Image src="/images/philosophy-banner.jpg" alt="理念・行動指針" width={1800} height={826} sizes="100vw" className="sv-banner-img" />
+          </Link>
+        </FadeIn>
+        <FadeIn delay={150} direction="up" className="sv-banner-fadein">
+          <Link href="/overview/" className="sv-banner-link">
+            <Image src="/images/overview-banner.jpg" alt="概要・沿革" width={1800} height={826} sizes="100vw" className="sv-banner-img" />
+          </Link>
+        </FadeIn>
+        <FadeIn delay={300} direction="up" className="sv-banner-fadein">
+          <Link href="/message-kuroki-yuta/" className="sv-banner-link">
+            <Image src="/images/top-message-banner.jpg" alt="代表挨拶" width={1800} height={826} sizes="100vw" className="sv-banner-img" />
+          </Link>
+        </FadeIn>
+      </div>
+      <ScrollLineIndicator />
     </main>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import CherryBlossoms from "./components/CherryBlossoms";
 import NewsSection from "./components/NewsSection";
 import Ticker from "./components/Ticker";
@@ -49,20 +49,64 @@ export default function Home() {
   const [svcMoreVisible, setSvcMoreVisible]   = useState(false);
   const svcMoreRef                            = useRef<HTMLDivElement>(null);
 
+  const scrollYRef   = useRef(0);
+  const fvTextDivRef = useRef<HTMLDivElement>(null);
+  const fvMainPRef   = useRef<HTMLParagraphElement>(null);
+  const fvSubPRef    = useRef<HTMLParagraphElement>(null);
+
+  const applyMobileFv = useCallback((y: number) => {
+    if (typeof window === "undefined" || window.innerWidth >= 768) return;
+    const viewH  = window.innerHeight;
+    const prog   = ease(Math.min(y / (viewH * 1.2), 1));
+    const scroll = Math.max(0, y - viewH) / viewH * 100;
+    const col    = lerpColor(prog);
+    const shadow = lerp(0.55, 0, prog);
+    fvTextDivRef.current?.style.setProperty(
+      "transform", `translateY(calc(${lerp(45, 65, prog) - scroll}vh - 50%))`
+    );
+    if (fvMainPRef.current) {
+      fvMainPRef.current.style.color      = col;
+      fvMainPRef.current.style.textShadow = `0 2px 32px rgba(0,0,0,${shadow})`;
+      fvMainPRef.current.style.fontSize   = `${lerp(8, 10, prog)}vw`;
+    }
+    if (fvSubPRef.current) {
+      fvSubPRef.current.style.color      = col;
+      fvSubPRef.current.style.textShadow = `0 2px 32px rgba(0,0,0,${shadow})`;
+      fvSubPRef.current.style.fontSize   = `${lerp(3.8, 4.5, prog)}vw`;
+    }
+  }, []);
+
+  useLayoutEffect(() => {
+    scrollYRef.current = window.scrollY;
+    applyMobileFv(scrollYRef.current);
+  }, [isMobile, applyMobileFv]);
 
   useEffect(() => {
-    const onScroll = () => {
-      const y = window.scrollY;
+    let rafId: number | null = null;
+
+    const applyFrame = () => {
+      rafId = null;
+      const y = scrollYRef.current;
+      applyMobileFv(y);
       setScrollY(y);
-      // ページ最下部判定（残り200px以内）
       const docH = document.documentElement.scrollHeight;
       const winH = window.innerHeight;
       setAtBottom(y + winH >= docH - 200);
     };
-    onScroll();
+
+    const onScroll = () => {
+      scrollYRef.current = window.scrollY;
+      if (rafId === null) {
+        rafId = requestAnimationFrame(applyFrame);
+      }
+    };
+
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (rafId !== null) cancelAnimationFrame(rafId);
+    };
+  }, [applyMobileFv]);
 
 
   useEffect(() => {
@@ -271,7 +315,7 @@ export default function Home() {
 
 
       {/* ── マウス スクロールインジケーター（画面固定・最下部で非表示） ── */}
-      {!isMobile && (
+      {(
         <div
           style={{
             position: "fixed",
@@ -298,6 +342,7 @@ export default function Home() {
 
       {/* ── FV テキスト（fixed）── スクロールで逃げずに残り、PHILOSOPHYへ接続 */}
       <div
+        ref={fvTextDivRef}
         style={{
           position: "fixed",
           zIndex: 11,
@@ -305,10 +350,10 @@ export default function Home() {
           opacity: textOpacity,
           ...(isMobile
             ? {
-                top: `${lerp(45, 65, progress) - scrollUpPct}%`,
+                top: "0",
                 left: "5%",
                 right: "5%",
-                transform: "translateY(-50%)",
+                willChange: "transform",
               }
             : {
                 top: `${textTopFinal}%`,
@@ -319,16 +364,19 @@ export default function Home() {
         }}
       >
         <p
+          ref={fvMainPRef}
           style={{
             fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif",
-            fontSize: isMobile ? `${lerp(8, 10, progress)}vw` : `${textFontSizeVw}vw`,
             fontWeight: 700,
             lineHeight: isMobile ? 1.55 : 1.35,
             letterSpacing: "0.01em",
-            color: textColor,
-            textShadow: `0 2px 32px rgba(0,0,0,${textShadow})`,
             margin: 0,
             transition: "none",
+            ...(!isMobile ? {
+              fontSize: `${textFontSizeVw}vw`,
+              color: textColor,
+              textShadow: `0 2px 32px rgba(0,0,0,${textShadow})`,
+            } : {}),
           }}
         >
           We imagine carefully<br />
@@ -337,15 +385,18 @@ export default function Home() {
           through technology
         </p>
         <p
+          ref={fvSubPRef}
           style={{
-            fontSize: isMobile ? `${lerp(3.8, 4.5, progress)}vw` : `${lerp(1.45, 1.25, progress)}vw`,
             fontWeight: 700,
             letterSpacing: "0.10em",
             lineHeight: isMobile ? 2.3 : 2.5,
-            color: textColor,
-            textShadow: `0 2px 32px rgba(0,0,0,${textShadow})`,
             margin: isMobile ? "2.4em 0 3em" : "2.4em 0 0",
             fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif",
+            ...(!isMobile ? {
+              fontSize: `${lerp(1.45, 1.25, progress)}vw`,
+              color: textColor,
+              textShadow: `0 2px 32px rgba(0,0,0,${textShadow})`,
+            } : {}),
           }}
         >
           {isMobile ? (
@@ -517,7 +568,7 @@ export default function Home() {
                 opacity: msgVisible ? 1 : 0,
                 transition: "transform 2s cubic-bezier(0.22,1,0.36,1) 0ms, opacity 1.6s ease 0ms",
               }}>
-                <Image src="/images/kuroki-yuta.webp" alt="代表取締役 黒木雄太" fill sizes="(max-width: 768px) 100vw, 420px" style={{ objectFit: "cover", borderRadius: "8px" }} />
+                <Image src="/images/kuroki-yuta.jpg" alt="代表取締役 黒木雄太" fill sizes="(max-width: 768px) 100vw, 420px" style={{ objectFit: "cover", borderRadius: "8px" }} />
                 <div style={{ position: "absolute", bottom: -16, right: -16, width: "70%", height: "70%", border: "1px solid rgba(21,38,59,0.15)", pointerEvents: "none", zIndex: -1 }} />
               </div>
               <div ref={msgTextRef} style={{

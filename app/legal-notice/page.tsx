@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
+import ScrollLineIndicator from "../components/ScrollLineIndicator";
+import Link from "next/link";
+import Image from "next/image";
 import PageHero from "../components/PageHero";
-export const metadata: Metadata = { title: "特定商取引法に基づく表記 | NEXT BRINO" };
+import FadeIn from "../components/FadeIn";
+import Ticker from "../components/Ticker";
+import SplitTitle from "../components/SplitTitle";
+export const metadata: Metadata = { title: "特定商取引法に基づく表記｜NEXT BRINO", description: "NEXT BRINOの特定商取引法に基づく表記ページです。" };
 
 const rows = [
   { label: "事業者名・代表者名", value: "NEXT BRINO　黒木 雄太" },
@@ -22,6 +28,15 @@ export default function LegalNoticePage() {
   return (
     <main>
       <PageHero image="/images/legal-notice-hero.webp" en="LEGAL NOTICE" ja="特定商取引法に基づく表記" />
+
+      <Ticker text="LEGAL NOTICE NEXT BRINO" overlapBottom={200} />
+
+      <div className="ln-section-header">
+        <p className="section-label">特定商取引法に基づく表記</p>
+        <SplitTitle text="LEGAL NOTICE" className="section-title-en" tag="h1" />
+        <div className="section-divider" />
+      </div>
+
       <div className="pc">
         <p className="ln-intro">特定商取引法に基づき、以下の事項を表記します。</p>
         <table className="ln-table"><tbody>
@@ -54,7 +69,38 @@ export default function LegalNoticePage() {
           font-size: clamp(18px,2.5vw,26px); font-weight: 300;
           letter-spacing: .1em; color: rgba(255,255,255,.72); margin: 0;
         }
-        .pc { width: 88%; max-width: 900px; margin: 0 auto; padding: 72px 0 100px; }
+        .ln-section-header {
+          width: 88%;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 10px 0 24px;
+          position: relative;
+          z-index: 20;
+        }
+        .section-label {
+          font-size: .7rem;
+          letter-spacing: .32em;
+          color: #9d8c56;
+          margin: 0 0 12px;
+        }
+        .section-title-en {
+          font-size: clamp(44px, 6vw, 80px);
+          font-weight: 900;
+          color: #15263b;
+          letter-spacing: .08em;
+          line-height: 1;
+          margin: 0 0 20px;
+        }
+        .section-divider {
+          width: 56px !important;
+          height: 2px !important;
+          background: linear-gradient(90deg, #9d8c56, rgba(157,140,86,.15)) !important;
+        }
+        @media (max-width: 640px) {
+          .ln-section-header { padding-top: 90px; }
+          .ln-section-header .section-title-en { font-size: clamp(32px, 9vw, 44px); }
+        }
+        .pc { width: 88%; max-width: 900px; margin: 0 auto; padding: 24px 0 0; }
 
         .ln-intro { font-size: .9rem; line-height: 2; color: #555; margin: 0 0 36px; }
         .ln-table { width: 100%; border-collapse: collapse; }
@@ -65,7 +111,62 @@ export default function LegalNoticePage() {
           .ln-th { border-top: 1px solid rgba(21,38,59,.1); padding: 16px 0 4px; white-space: normal; }
           .ln-td { border-top: none; padding: 0 0 16px; }
         }
+
+        .ln-banner-fadein { flex: 1; overflow: hidden; }
+        .ln-banners {
+          display: flex;
+          flex-direction: row;
+          gap: 0;
+          margin-top: 16px;
+          margin-bottom: 96px;
+          overflow: hidden;
+        }
+        .ln-banner-link {
+          display: block;
+          flex: 1;
+          overflow: hidden;
+          border-radius: 0;
+        }
+        .ln-banner-img {
+          width: 100% !important;
+          height: auto !important;
+          display: block;
+        }
+        @media (max-width: 640px) {
+          .ln-banners {
+            flex-direction: column;
+            gap: 12px;
+            padding: 0 28px;
+            margin-top: 16px;
+            margin-bottom: 80px;
+            overflow: visible;
+          }
+          .ln-banner-link {
+            border-radius: 10px !important;
+            overflow: hidden;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.28);
+          }
+        }
       `}</style>
+
+      <div className="ln-banners">
+        <FadeIn delay={0} direction="up" className="ln-banner-fadein">
+          <Link href="/privacy-policy/" className="ln-banner-link">
+            <Image src="/images/privacy-policy-banner.jpg" alt="個人情報保護方針" width={1800} height={826} sizes="100vw" className="ln-banner-img" />
+          </Link>
+        </FadeIn>
+        <FadeIn delay={150} direction="up" className="ln-banner-fadein">
+          <Link href="/contact-policy/" className="ln-banner-link">
+            <Image src="/images/contact-policy-banner.jpg" alt="お問合せ対応基本方針" width={1800} height={826} sizes="100vw" className="ln-banner-img" />
+          </Link>
+        </FadeIn>
+        <FadeIn delay={300} direction="up" className="ln-banner-fadein">
+          <Link href="/anti-social-forces-policy/" className="ln-banner-link">
+            <Image src="/images/antisocial-policy-banner.jpg" alt="反社会的勢力に対する基本方針" width={1800} height={826} sizes="100vw" className="ln-banner-img" />
+          </Link>
+        </FadeIn>
+      </div>
+      <ScrollLineIndicator />
     </main>
   );
 }

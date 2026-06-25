@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import ScrollLineIndicator from "../components/ScrollLineIndicator";
 import PageHero from "../components/PageHero";
 import Ticker from "../components/Ticker";
 import SplitTitle from "../components/SplitTitle";
@@ -6,7 +7,7 @@ import FadeIn from "../components/FadeIn";
 import Link from "next/link";
 import Image from "next/image";
 import ContactForm from "./ContactForm";
-export const metadata: Metadata = { title: "お問い合わせ | NEXT BRINO" };
+export const metadata: Metadata = { title: "お問い合わせ｜NEXT BRINO", description: "NEXT BRINOへのお問い合わせはこちらから。24時間受付しております。ご返答の目安は2〜5営業日です。" };
 
 export default function ContactPage() {
   return (
@@ -360,6 +361,7 @@ export default function ContactPage() {
           .ct-hint-nowrap { white-space: nowrap; font-size: .66rem; overflow: visible; }
         }
       `}</style>
+      <ScrollLineIndicator />
     </main>
   );
 }

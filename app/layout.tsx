@@ -29,7 +29,7 @@ const cormorantGaramond = Cormorant_Garamond({
 export const metadata: Metadata = {
   title: "NEXT BRINO | IT技術を駆使して日常をデザインする",
   description:
-    "確かな技術で日常をデザインする。NEXT BRINOは、IT技術を通じて人々の日常をより豊かにするテクノロジー企業です。",
+    "NEXT BRINOの公式サイトです。ITシステム開発・Web制作を中心に6つの事業を提供しております。",
 };
 
 export default function RootLayout({

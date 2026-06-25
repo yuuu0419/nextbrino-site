@@ -58,7 +58,7 @@ export default function MessageLayout() {
           <div className="msg-photo-card" style={slideLeft}>
             <div className="msg-photo-frame" style={photoTilt}>
               <Image
-                src="/images/kuroki-yuta.webp"
+                src="/images/kuroki-yuta.jpg"
                 alt="代表取締役社長 黒木 雄太"
                 fill
                 sizes="(max-width: 768px) 80vw, 36vw"

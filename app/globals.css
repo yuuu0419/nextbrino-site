@@ -19,6 +19,7 @@ html {
 body {
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
   background: #fff;
   color: var(--foreground);
   font-family: var(--font-main);
@@ -113,6 +114,62 @@ body {
 @keyframes mouse-scroll {
   0%   { opacity: 1; transform: translateX(-50%) translateY(0); }
   100% { opacity: 0; transform: translateX(-50%) translateY(18px); }
+}
+
+/* ===================== Scroll Line Indicator ===================== */
+.scroll-line-indicator {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.scroll-line-text {
+  display: inline-block;
+  color: #9d8c56;
+  font-size: 11px;
+  font-family: var(--font-barlow-condensed), "Barlow Condensed", sans-serif;
+  letter-spacing: 0.22em;
+  writing-mode: vertical-lr;
+  text-transform: uppercase;
+  padding-bottom: 10px;
+  line-height: 1;
+}
+
+.scroll-line-track {
+  position: relative;
+  width: 1px;
+  height: 100px;
+  background: #9d8c56;
+}
+
+.scroll-line-dot {
+  position: absolute;
+  bottom: 0;
+  left: -4px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #9d8c56;
+  animation: scroll-dot-move 2.4s ease-in-out infinite, scroll-dot-fade 2.4s ease-out infinite;
+}
+
+@keyframes scroll-dot-move {
+  0%   { bottom: 95px; }
+  100% { bottom: 0px; }
+}
+
+@keyframes scroll-dot-fade {
+  0%   { opacity: 0; }
+  20%  { opacity: 1; }
+  80%  { opacity: 0.9; }
+  100% { opacity: 0; }
 }
 
 /* ===================== Cherry Blossoms ===================== */

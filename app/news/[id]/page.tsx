@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import ScrollLineIndicator from "../../components/ScrollLineIndicator";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 
@@ -180,6 +181,7 @@ export default function NewsDetailPage() {
           .nd-main { padding: 100px 0 60px; }
         }
       `}</style>
+      <ScrollLineIndicator />
     </main>
   );
 }

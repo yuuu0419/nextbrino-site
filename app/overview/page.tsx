@@ -1,11 +1,14 @@
 import React from "react";
+import ScrollLineIndicator from "../components/ScrollLineIndicator";
 import type { Metadata } from "next";
+import Link from "next/link";
+import Image from "next/image";
 import PageHero from "../components/PageHero";
 import Ticker from "../components/Ticker";
 import SplitTitle from "../components/SplitTitle";
 import FadeIn from "../components/FadeIn";
 import HistoryTimeline from "./HistoryTimeline";
-export const metadata: Metadata = { title: "概要・沿革 | NEXT BRINO" };
+export const metadata: Metadata = { title: "概要・沿革｜NEXT BRINO", description: "NEXT BRINOの概要・沿革をご紹介します。これまでの歩みをお伝えします。" };
 
 const profile: { label: string; value: string; extra?: React.ReactNode }[] = [
   { label: "商号", value: "ネクストブライノ（ 英語表記：NEXT BRINO ）" },
@@ -150,7 +153,7 @@ export default function OverviewPage() {
           overflow: hidden;
         }
         .ov-navy-wrap--history {
-          margin-bottom: 100px;
+          margin-bottom: 24px;
         }
         .ov-navy-dots {
           position: absolute;
@@ -312,7 +315,62 @@ export default function OverviewPage() {
           }
           .ov-tl-row { grid-template-columns: 72px 1fr; gap: 0 12px; }
         }
+
+        .ov-banner-fadein { flex: 1; overflow: hidden; }
+        .ov-banners {
+          display: flex;
+          flex-direction: row;
+          gap: 0;
+          margin-top: 16px;
+          margin-bottom: 96px;
+          overflow: hidden;
+        }
+        .ov-banner-link {
+          display: block;
+          flex: 1;
+          overflow: hidden;
+          border-radius: 0;
+        }
+        .ov-banner-img {
+          width: 100% !important;
+          height: auto !important;
+          display: block;
+        }
+        @media (max-width: 640px) {
+          .ov-banners {
+            flex-direction: column;
+            gap: 12px;
+            padding: 0 28px;
+            margin-top: 16px;
+            margin-bottom: 80px;
+            overflow: visible;
+          }
+          .ov-banner-link {
+            border-radius: 10px !important;
+            overflow: hidden;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.28);
+          }
+        }
       `}</style>
+
+      <div className="ov-banners">
+        <FadeIn delay={0} direction="up" className="ov-banner-fadein">
+          <Link href="/service/" className="ov-banner-link">
+            <Image src="/images/business-banner.jpg" alt="事業内容" width={1800} height={826} sizes="100vw" className="ov-banner-img" />
+          </Link>
+        </FadeIn>
+        <FadeIn delay={150} direction="up" className="ov-banner-fadein">
+          <Link href="/message-kuroki-yuta/" className="ov-banner-link">
+            <Image src="/images/top-message-banner.jpg" alt="代表挨拶" width={1800} height={826} sizes="100vw" className="ov-banner-img" />
+          </Link>
+        </FadeIn>
+        <FadeIn delay={300} direction="up" className="ov-banner-fadein">
+          <Link href="/philosophy/" className="ov-banner-link">
+            <Image src="/images/philosophy-banner.jpg" alt="理念・行動指針" width={1800} height={826} sizes="100vw" className="ov-banner-img" />
+          </Link>
+        </FadeIn>
+      </div>
+      <ScrollLineIndicator />
     </main>
   );
 }
