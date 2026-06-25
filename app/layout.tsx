@@ -30,6 +30,30 @@ export const metadata: Metadata = {
   title: "NEXT BRINO | IT技術を駆使して日常をデザインする",
   description:
     "NEXT BRINOの公式サイトです。ITシステム開発・Web制作を中心に6つの事業を提供しております。",
+  openGraph: {
+    title: "NEXT BRINO | IT技術を駆使して日常をデザインする",
+    description:
+      "NEXT BRINOの公式サイトです。ITシステム開発・Web制作を中心に6つの事業を提供しております。",
+    url: "https://nextbrino.com",
+    siteName: "NEXT BRINO",
+    images: [
+      {
+        url: "https://nextbrino.com/images/home-banner.jpg",
+        width: 1800,
+        height: 826,
+        alt: "NEXT BRINO",
+      },
+    ],
+    locale: "ja_JP",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "NEXT BRINO | IT技術を駆使して日常をデザインする",
+    description:
+      "NEXT BRINOの公式サイトです。ITシステム開発・Web制作を中心に6つの事業を提供しております。",
+    images: ["https://nextbrino.com/images/home-banner.jpg"],
+  },
 };
 
 export default function RootLayout({
