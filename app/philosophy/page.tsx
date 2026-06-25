@@ -422,17 +422,17 @@ export default function PhilosophyPage() {
       <div className="ph-banners">
         <FadeIn delay={0} direction="up" className="ph-banner-fadein">
           <Link href="/message-kuroki-yuta/" className="ph-banner-link">
-            <Image src="/images/top-message-banner.jpg" alt="代表挨拶" width={1800} height={826} sizes="100vw" className="ph-banner-img" />
+            <Image src="/images/top-message-banner.webp" alt="代表挨拶" width={1800} height={826} sizes="100vw" className="ph-banner-img" />
           </Link>
         </FadeIn>
         <FadeIn delay={150} direction="up" className="ph-banner-fadein">
           <Link href="/service/" className="ph-banner-link">
-            <Image src="/images/business-banner.jpg" alt="事業内容" width={1800} height={826} sizes="100vw" className="ph-banner-img" />
+            <Image src="/images/business-banner.webp" alt="事業内容" width={1800} height={826} sizes="100vw" className="ph-banner-img" />
           </Link>
         </FadeIn>
         <FadeIn delay={300} direction="up" className="ph-banner-fadein">
           <Link href="/contact/" className="ph-banner-link">
-            <Image src="/images/contact-banner.jpg" alt="お問い合わせ" width={1800} height={826} sizes="100vw" className="ph-banner-img" />
+            <Image src="/images/contact-banner.webp" alt="お問い合わせ" width={1800} height={826} sizes="100vw" className="ph-banner-img" />
           </Link>
         </FadeIn>
       </div>

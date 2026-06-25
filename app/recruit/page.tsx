@@ -52,32 +52,32 @@ export default function RecruitPage() {
       <div className="rc-banners">
         <FadeIn delay={0} direction="up" className="rc-banner-fadein">
           <Link href="/" className="rc-banner-link">
-            <Image src="/images/home-banner.jpg" alt="HOME" width={1800} height={826} sizes="100vw" className="rc-banner-img" />
+            <Image src="/images/home-banner.webp" alt="HOME" width={1800} height={826} sizes="100vw" className="rc-banner-img" />
           </Link>
         </FadeIn>
         <FadeIn delay={100} direction="up" className="rc-banner-fadein">
           <Link href="/message-kuroki-yuta/" className="rc-banner-link">
-            <Image src="/images/top-message-banner.jpg" alt="代表メッセージ" width={1800} height={826} sizes="100vw" className="rc-banner-img" />
+            <Image src="/images/top-message-banner.webp" alt="代表メッセージ" width={1800} height={826} sizes="100vw" className="rc-banner-img" />
           </Link>
         </FadeIn>
         <FadeIn delay={150} direction="up" className="rc-banner-fadein">
           <Link href="/philosophy/" className="rc-banner-link">
-            <Image src="/images/philosophy-banner.jpg" alt="企業理念" width={1800} height={826} sizes="100vw" className="rc-banner-img" />
+            <Image src="/images/philosophy-banner.webp" alt="企業理念" width={1800} height={826} sizes="100vw" className="rc-banner-img" />
           </Link>
         </FadeIn>
         <FadeIn delay={200} direction="up" className="rc-banner-fadein">
           <Link href="/service/" className="rc-banner-link">
-            <Image src="/images/business-banner.jpg" alt="事業内容" width={1800} height={826} sizes="100vw" className="rc-banner-img" />
+            <Image src="/images/business-banner.webp" alt="事業内容" width={1800} height={826} sizes="100vw" className="rc-banner-img" />
           </Link>
         </FadeIn>
         <FadeIn delay={250} direction="up" className="rc-banner-fadein">
           <Link href="/overview/" className="rc-banner-link">
-            <Image src="/images/overview-banner.jpg" alt="会社概要" width={1800} height={826} sizes="100vw" className="rc-banner-img" />
+            <Image src="/images/overview-banner.webp" alt="会社概要" width={1800} height={826} sizes="100vw" className="rc-banner-img" />
           </Link>
         </FadeIn>
         <FadeIn delay={300} direction="up" className="rc-banner-fadein">
           <Link href="/contact/" className="rc-banner-link">
-            <Image src="/images/contact-banner.jpg" alt="お問い合わせ" width={1800} height={826} sizes="100vw" className="rc-banner-img" />
+            <Image src="/images/contact-banner.webp" alt="お問い合わせ" width={1800} height={826} sizes="100vw" className="rc-banner-img" />
           </Link>
         </FadeIn>
       </div>

@@ -722,17 +722,17 @@ export default function ServicePage() {
       <div className="sv-banners">
         <FadeIn delay={0} direction="up" className="sv-banner-fadein">
           <Link href="/philosophy/" className="sv-banner-link">
-            <Image src="/images/philosophy-banner.jpg" alt="理念・行動指針" width={1800} height={826} sizes="100vw" className="sv-banner-img" />
+            <Image src="/images/philosophy-banner.webp" alt="理念・行動指針" width={1800} height={826} sizes="100vw" className="sv-banner-img" />
           </Link>
         </FadeIn>
         <FadeIn delay={150} direction="up" className="sv-banner-fadein">
           <Link href="/overview/" className="sv-banner-link">
-            <Image src="/images/overview-banner.jpg" alt="概要・沿革" width={1800} height={826} sizes="100vw" className="sv-banner-img" />
+            <Image src="/images/overview-banner.webp" alt="概要・沿革" width={1800} height={826} sizes="100vw" className="sv-banner-img" />
           </Link>
         </FadeIn>
         <FadeIn delay={300} direction="up" className="sv-banner-fadein">
           <Link href="/message-kuroki-yuta/" className="sv-banner-link">
-            <Image src="/images/top-message-banner.jpg" alt="代表挨拶" width={1800} height={826} sizes="100vw" className="sv-banner-img" />
+            <Image src="/images/top-message-banner.webp" alt="代表挨拶" width={1800} height={826} sizes="100vw" className="sv-banner-img" />
           </Link>
         </FadeIn>
       </div>

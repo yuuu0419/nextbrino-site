@@ -568,7 +568,7 @@ export default function Home() {
                 opacity: msgVisible ? 1 : 0,
                 transition: "transform 2s cubic-bezier(0.22,1,0.36,1) 0ms, opacity 1.6s ease 0ms",
               }}>
-                <Image src="/images/kuroki-yuta.jpg" alt="代表取締役 黒木雄太" fill sizes="(max-width: 768px) 100vw, 420px" style={{ objectFit: "cover", borderRadius: "8px" }} />
+                <Image src="/images/kuroki-yuta.webp" alt="代表取締役 黒木雄太" fill sizes="(max-width: 768px) 100vw, 420px" style={{ objectFit: "cover", borderRadius: "8px" }} />
                 <div style={{ position: "absolute", bottom: -16, right: -16, width: "70%", height: "70%", border: "1px solid rgba(21,38,59,0.15)", pointerEvents: "none", zIndex: -1 }} />
               </div>
               <div ref={msgTextRef} style={{

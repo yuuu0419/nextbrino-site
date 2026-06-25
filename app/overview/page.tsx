@@ -356,17 +356,17 @@ export default function OverviewPage() {
       <div className="ov-banners">
         <FadeIn delay={0} direction="up" className="ov-banner-fadein">
           <Link href="/service/" className="ov-banner-link">
-            <Image src="/images/business-banner.jpg" alt="事業内容" width={1800} height={826} sizes="100vw" className="ov-banner-img" />
+            <Image src="/images/business-banner.webp" alt="事業内容" width={1800} height={826} sizes="100vw" className="ov-banner-img" />
           </Link>
         </FadeIn>
         <FadeIn delay={150} direction="up" className="ov-banner-fadein">
           <Link href="/message-kuroki-yuta/" className="ov-banner-link">
-            <Image src="/images/top-message-banner.jpg" alt="代表挨拶" width={1800} height={826} sizes="100vw" className="ov-banner-img" />
+            <Image src="/images/top-message-banner.webp" alt="代表挨拶" width={1800} height={826} sizes="100vw" className="ov-banner-img" />
           </Link>
         </FadeIn>
         <FadeIn delay={300} direction="up" className="ov-banner-fadein">
           <Link href="/philosophy/" className="ov-banner-link">
-            <Image src="/images/philosophy-banner.jpg" alt="理念・行動指針" width={1800} height={826} sizes="100vw" className="ov-banner-img" />
+            <Image src="/images/philosophy-banner.webp" alt="理念・行動指針" width={1800} height={826} sizes="100vw" className="ov-banner-img" />
           </Link>
         </FadeIn>
       </div>

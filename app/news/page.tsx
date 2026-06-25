@@ -89,17 +89,17 @@ export default function NewsPage() {
       <div className="nw-banners">
         <FadeIn delay={0} direction="up" className="nw-banner-fadein">
           <Link href="/" className="nw-banner-link">
-            <Image src="/images/home-banner.jpg" alt="HOME" width={1800} height={826} sizes="100vw" className="nw-banner-img" />
+            <Image src="/images/home-banner.webp" alt="HOME" width={1800} height={826} sizes="100vw" className="nw-banner-img" />
           </Link>
         </FadeIn>
         <FadeIn delay={150} direction="up" className="nw-banner-fadein">
           <Link href="/service/" className="nw-banner-link">
-            <Image src="/images/business-banner.jpg" alt="事業内容" width={1800} height={826} sizes="100vw" className="nw-banner-img" />
+            <Image src="/images/business-banner.webp" alt="事業内容" width={1800} height={826} sizes="100vw" className="nw-banner-img" />
           </Link>
         </FadeIn>
         <FadeIn delay={300} direction="up" className="nw-banner-fadein">
           <Link href="/contact/" className="nw-banner-link">
-            <Image src="/images/contact-banner.jpg" alt="お問い合わせ" width={1800} height={826} sizes="100vw" className="nw-banner-img" />
+            <Image src="/images/contact-banner.webp" alt="お問い合わせ" width={1800} height={826} sizes="100vw" className="nw-banner-img" />
           </Link>
         </FadeIn>
       </div>

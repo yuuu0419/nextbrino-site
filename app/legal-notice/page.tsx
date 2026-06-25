@@ -152,17 +152,17 @@ export default function LegalNoticePage() {
       <div className="ln-banners">
         <FadeIn delay={0} direction="up" className="ln-banner-fadein">
           <Link href="/privacy-policy/" className="ln-banner-link">
-            <Image src="/images/privacy-policy-banner.jpg" alt="個人情報保護方針" width={1800} height={826} sizes="100vw" className="ln-banner-img" />
+            <Image src="/images/privacy-policy-banner.webp" alt="個人情報保護方針" width={1800} height={826} sizes="100vw" className="ln-banner-img" />
           </Link>
         </FadeIn>
         <FadeIn delay={150} direction="up" className="ln-banner-fadein">
           <Link href="/contact-policy/" className="ln-banner-link">
-            <Image src="/images/contact-policy-banner.jpg" alt="お問合せ対応基本方針" width={1800} height={826} sizes="100vw" className="ln-banner-img" />
+            <Image src="/images/contact-policy-banner.webp" alt="お問合せ対応基本方針" width={1800} height={826} sizes="100vw" className="ln-banner-img" />
           </Link>
         </FadeIn>
         <FadeIn delay={300} direction="up" className="ln-banner-fadein">
           <Link href="/anti-social-forces-policy/" className="ln-banner-link">
-            <Image src="/images/antisocial-policy-banner.jpg" alt="反社会的勢力に対する基本方針" width={1800} height={826} sizes="100vw" className="ln-banner-img" />
+            <Image src="/images/antisocial-policy-banner.webp" alt="反社会的勢力に対する基本方針" width={1800} height={826} sizes="100vw" className="ln-banner-img" />
           </Link>
         </FadeIn>
       </div>
