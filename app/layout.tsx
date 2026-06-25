@@ -38,9 +38,9 @@ export const metadata: Metadata = {
     siteName: "NEXT BRINO",
     images: [
       {
-        url: "https://nextbrino.com/images/home-banner.jpg",
-        width: 1800,
-        height: 826,
+        url: "https://nextbrino.com/images/site-logo.png",
+        width: 1563,
+        height: 1563,
         alt: "NEXT BRINO",
       },
     ],
@@ -48,11 +48,11 @@ export const metadata: Metadata = {
     type: "website",
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: "NEXT BRINO | IT技術を駆使して日常をデザインする",
     description:
       "NEXT BRINOの公式サイトです。ITシステム開発・Web制作を中心に6つの事業を提供しております。",
-    images: ["https://nextbrino.com/images/home-banner.jpg"],
+    images: ["https://nextbrino.com/images/site-logo.png"],
   },
 };
 
