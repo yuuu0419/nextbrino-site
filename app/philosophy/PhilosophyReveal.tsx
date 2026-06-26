@@ -40,20 +40,15 @@ export default function PhilosophyReveal() {
     );
     document.querySelectorAll(".ph-sec-reveal").forEach((el) => secObs.observe(el));
 
-    // スクロールフォールバック（RAFでスロットル）
-    let rafId: number | null = null;
-    const onScroll = () => {
-      if (rafId !== null) return;
-      rafId = requestAnimationFrame(() => { rafId = null; reveal(); });
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
+    // スクロールフォールバック
+    window.addEventListener("scroll", reveal, { passive: true });
+    // 初回チェックを遅らせてアニメーションが見えるようにする
     setTimeout(reveal, 300);
 
     return () => {
       obs.disconnect();
       secObs.disconnect();
-      window.removeEventListener("scroll", onScroll);
-      if (rafId !== null) cancelAnimationFrame(rafId);
+      window.removeEventListener("scroll", reveal);
     };
   }, []);
   return null;
