@@ -43,7 +43,7 @@ export default function SplitTitle({ text, className, tag: Tag = "h2", delay = 0
             transform: visible ? "translateY(0)" : "translateY(-1.2em)",
             opacity: visible ? 1 : 0,
             transition: visible
-              ? `transform 1.2s cubic-bezier(0.22,1,0.36,1) ${delay + i * 90}ms, opacity 0.9s ease ${delay + i * 90}ms`
+              ? `transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94) ${delay + i * 45}ms, opacity 0.6s ease ${delay + i * 45}ms`
               : "none",
             whiteSpace: char === " " ? "pre" : "normal",
           }}

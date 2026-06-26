@@ -41,10 +41,10 @@ export default function FlipInCard({ index = 0, children, style, className, onMo
       onMouseLeave={onMouseLeave}
       style={{
         ...style,
-        transform: visible ? "translateX(0)" : "translateX(-60px)",
+        transform: visible ? "translateX(0)" : "translateX(-36px)",
         opacity: visible ? 1 : 0,
         transition: visible
-          ? `transform 0.75s cubic-bezier(0.22,1,0.36,1) ${delay}ms, opacity 0.6s ease ${delay}ms`
+          ? `transform 0.65s cubic-bezier(0.25,0.46,0.45,0.94) ${delay}ms, opacity 0.55s ease ${delay}ms`
           : "none",
       }}
     >

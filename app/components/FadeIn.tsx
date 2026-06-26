@@ -17,7 +17,7 @@ export default function FadeIn({
   style,
   direction = "up",
   delay = 0,
-  distance = 32,
+  distance = 20,
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -50,7 +50,7 @@ export default function FadeIn({
         opacity: visible ? 1 : 0,
         transform: visible ? "translate(0)" : translate,
         transition: visible
-          ? `opacity 0.9s ease ${delay}ms, transform 1.1s cubic-bezier(0.22,1,0.36,1) ${delay}ms`
+          ? `opacity 0.6s ease ${delay}ms, transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94) ${delay}ms`
           : "none",
       }}
     >
