@@ -49,11 +49,15 @@ export default function Home() {
   const [svcMoreVisible, setSvcMoreVisible]   = useState(false);
   const svcMoreRef                            = useRef<HTMLDivElement>(null);
 
-  const scrollYRef    = useRef(0);
-  const isMobileRef   = useRef(false);
-  const fvTextDivRef  = useRef<HTMLDivElement>(null);
-  const fvMainPRef    = useRef<HTMLParagraphElement>(null);
-  const fvSubPRef     = useRef<HTMLParagraphElement>(null);
+  const scrollYRef          = useRef(0);
+  const isMobileRef         = useRef(false);
+  const slideshowActiveRef  = useRef(true);
+  const fvTextDivRef        = useRef<HTMLDivElement>(null);
+  const fvMainPRef          = useRef<HTMLParagraphElement>(null);
+  const fvSubPRef           = useRef<HTMLParagraphElement>(null);
+  const darkOverlayRef      = useRef<HTMLDivElement>(null);
+  const whiteOverlayRef     = useRef<HTMLDivElement>(null);
+  const scrollIndicatorRef  = useRef<HTMLDivElement>(null);
 
   const applyMobileFv = useCallback((y: number) => {
     if (typeof window === "undefined" || window.innerWidth >= 768) return;
@@ -75,6 +79,17 @@ export default function Home() {
       fvSubPRef.current.style.textShadow = `0 2px 32px rgba(0,0,0,${shadow})`;
       fvSubPRef.current.style.fontSize   = `${lerp(3.8, 4.5, prog)}vw`;
     }
+    if (darkOverlayRef.current) {
+      darkOverlayRef.current.style.background = `rgba(0,0,0,${lerp(0.30, 0, prog)})`;
+    }
+    if (whiteOverlayRef.current) {
+      whiteOverlayRef.current.style.opacity = String(lerp(0, 0.92, prog));
+    }
+    if (scrollIndicatorRef.current) {
+      const docH = document.documentElement.scrollHeight;
+      const isBottom = y + viewH >= docH - 200;
+      scrollIndicatorRef.current.style.opacity = isBottom ? "0" : "1";
+    }
   }, []);
 
   useLayoutEffect(() => {
@@ -88,11 +103,29 @@ export default function Home() {
     const applyFrame = () => {
       rafId = null;
       const y = scrollYRef.current;
-      applyMobileFv(y);
-      setScrollY(y);
-      const docH = document.documentElement.scrollHeight;
-      const winH = window.innerHeight;
-      setAtBottom(y + winH >= docH - 200);
+
+      if (isMobileRef.current) {
+        // モバイル: DOM直接操作のみ。setStateを呼ばず再レンダリングを完全排除
+        applyMobileFv(y);
+        // スライドショー切り替えのみ閾値でstate更新
+        if (y > 80 && slideshowActiveRef.current) {
+          slideshowActiveRef.current = false;
+          setSlideshowActive(false);
+        } else if (y <= 80 && !slideshowActiveRef.current) {
+          slideshowActiveRef.current = true;
+          setSlide(0);
+          slideRef.current = 0;
+          setTick(0);
+          setSlideshowActive(true);
+        }
+      } else {
+        // PC: 従来通りReact stateで管理
+        applyMobileFv(y);
+        setScrollY(y);
+        const docH = document.documentElement.scrollHeight;
+        const winH = window.innerHeight;
+        setAtBottom(y + winH >= docH - 200);
+      }
     };
 
     const onScroll = () => {
@@ -288,6 +321,7 @@ export default function Home() {
 
       {/* 暗オーバーレイ */}
       <div
+        ref={darkOverlayRef}
         style={{
           position: "fixed",
           inset: 0,
@@ -299,6 +333,7 @@ export default function Home() {
 
       {/* 白オーバーレイ（画像を漂白） */}
       <div
+        ref={whiteOverlayRef}
         style={{
           position: "fixed",
           inset: 0,
@@ -313,6 +348,7 @@ export default function Home() {
       {/* ── マウス スクロールインジケーター（画面固定・最下部で非表示） ── */}
       {(
         <div
+          ref={scrollIndicatorRef}
           style={{
             position: "fixed",
             bottom: 28,

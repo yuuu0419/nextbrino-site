@@ -621,10 +621,10 @@ export default function Header() {
           zIndex: 1000,
           padding: isMobile ? "8px 5%" : "8px 5%",
           background: scrolled
-            ? "rgba(255,255,255,0.03)"
+            ? (isMobile ? "rgba(255,255,255,0.92)" : "rgba(255,255,255,0.03)")
             : "transparent",
-          backdropFilter: scrolled ? "blur(12px) saturate(150%)" : "none",
-          WebkitBackdropFilter: scrolled ? "blur(12px) saturate(150%)" : "none",
+          backdropFilter: (scrolled && !isMobile) ? "blur(12px) saturate(150%)" : "none",
+          WebkitBackdropFilter: (scrolled && !isMobile) ? "blur(12px) saturate(150%)" : "none",
           borderBottom: scrolled
             ? "1px solid rgba(255,255,255,0.07)"
             : "1px solid transparent",
