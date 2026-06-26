@@ -182,6 +182,16 @@ export default function Header() {
         .hd-burger.open::before {
           opacity: 0;
         }
+        /* モバイル: 画面に常駐する backdrop-filter(blur) はスクロール毎の
+           背景サンプリングで重いため無効化し、半透明背景のみにする */
+        @media (max-width: 767px) {
+          .hd-burger::before,
+          .hd-close-btn::before {
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            background: rgba(60,70,90,0.18);
+          }
+        }
         .hd-burger-label {
           font-size: 0.77rem;
           letter-spacing: 0.25em;
