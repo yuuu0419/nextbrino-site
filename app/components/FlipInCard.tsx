@@ -25,7 +25,7 @@ export default function FlipInCard({ index = 0, children, style, className, onMo
           obs.disconnect();
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.05, rootMargin: "0px 0px 40px 0px" }
     );
     obs.observe(el);
     return () => obs.disconnect();

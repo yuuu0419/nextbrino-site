@@ -29,7 +29,7 @@ export default function FadeIn({
       ([entry]) => {
         if (entry.isIntersecting) { setVisible(true); obs.disconnect(); }
       },
-      { threshold: 0.12, rootMargin: "0px 0px -12% 0px" }
+      { threshold: 0.05, rootMargin: "0px 0px 40px 0px" }
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -50,7 +50,7 @@ export default function FadeIn({
         opacity: visible ? 1 : 0,
         transform: visible ? "translate(0)" : translate,
         transition: visible
-          ? `opacity 0.6s ease ${delay}ms, transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94) ${delay}ms`
+          ? `opacity 0.5s ease ${delay}ms, transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94) ${delay}ms`
           : "none",
       }}
     >

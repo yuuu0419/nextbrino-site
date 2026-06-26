@@ -23,7 +23,7 @@ export default function NewsSection() {
     const mobile = window.innerWidth < 768;
     const obs = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
-      mobile ? { threshold: 0.75 } : { threshold: 0.55 }
+      { threshold: 0.05, rootMargin: "0px 0px 40px 0px" }
     );
     obs.observe(el);
     return () => obs.disconnect();

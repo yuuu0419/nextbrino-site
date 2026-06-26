@@ -24,8 +24,8 @@ export default function SplitTitle({ text, className, tag: Tag = "h2", delay = 0
         }
       },
       window.innerWidth < 768
-        ? { threshold: 0.25 }
-        : { threshold: 0, rootMargin: "0px 0px -40px 0px" }
+        ? { threshold: 0.05, rootMargin: "0px 0px 40px 0px" }
+        : { threshold: 0, rootMargin: "0px 0px 40px 0px" }
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -43,7 +43,7 @@ export default function SplitTitle({ text, className, tag: Tag = "h2", delay = 0
             transform: visible ? "translateY(0)" : "translateY(-1.2em)",
             opacity: visible ? 1 : 0,
             transition: visible
-              ? `transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94) ${delay + i * 45}ms, opacity 0.6s ease ${delay + i * 45}ms`
+              ? `transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94) ${delay + i * 30}ms, opacity 0.5s ease ${delay + i * 30}ms`
               : "none",
             whiteSpace: char === " " ? "pre" : "normal",
           }}

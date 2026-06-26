@@ -26,7 +26,7 @@ function ServiceRow({ s, i }: { s: Service; i: number }) {
           obs.disconnect();
         }
       },
-      { threshold: 0.18, rootMargin: "0px 0px -120px 0px" }
+      { threshold: 0.05, rootMargin: "0px 0px 40px 0px" }
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -38,19 +38,19 @@ function ServiceRow({ s, i }: { s: Service; i: number }) {
   const imgX  = isRtl ? "60px"  : "-60px";
   const bodyX = isRtl ? "-60px" : "60px";
 
-  const slideIn = (translateX: string, delay: number, duration = 1.1) => ({
+  const slideIn = (translateX: string, delay: number, duration = 0.6) => ({
     opacity: visible ? 1 : 0,
     transform: visible ? "translateX(0)" : `translateX(${translateX})`,
     transition: visible
-      ? `opacity 0.9s ease ${delay}ms, transform ${duration}s ${ease} ${delay}ms`
+      ? `opacity 0.5s ease ${delay}ms, transform ${duration}s ${ease} ${delay}ms`
       : "none",
   });
 
   const fadeUp = (delay: number) => ({
     opacity: visible ? 1 : 0,
-    transform: visible ? "translateY(0)" : "translateY(20px)",
+    transform: visible ? "translateY(0)" : "translateY(16px)",
     transition: visible
-      ? `opacity 0.75s ease ${delay}ms, transform 0.85s ${ease} ${delay}ms`
+      ? `opacity 0.5s ease ${delay}ms, transform 0.55s ${ease} ${delay}ms`
       : "none",
   });
 

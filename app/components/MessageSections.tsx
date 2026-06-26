@@ -11,7 +11,7 @@ function useVisible(threshold = 0.12) {
     if (!el) return;
     const obs = new IntersectionObserver(
       ([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect(); } },
-      { threshold, rootMargin: "0px 0px -60px 0px" }
+      { threshold, rootMargin: "0px 0px 40px 0px" }
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -24,20 +24,20 @@ const ease = "cubic-bezier(0.22,1,0.36,1)";
 function fadeUp(visible: boolean, delay: number) {
   return {
     opacity: visible ? 1 : 0,
-    transform: visible ? "translateY(0)" : "translateY(32px)",
+    transform: visible ? "translateY(0)" : "translateY(18px)",
     transition: visible
-      ? `opacity 0.8s ease ${delay}ms, transform 1s ${ease} ${delay}ms`
+      ? `opacity 0.5s ease ${delay}ms, transform 0.55s ${ease} ${delay}ms`
       : "none",
   };
 }
 
 function slideIn(visible: boolean, dir: "left" | "right", delay: number) {
-  const tx = dir === "left" ? "-60px" : "60px";
+  const tx = dir === "left" ? "-36px" : "36px";
   return {
     opacity: visible ? 1 : 0,
     transform: visible ? "translateX(0)" : `translateX(${tx})`,
     transition: visible
-      ? `opacity 0.9s ease ${delay}ms, transform 1.1s ${ease} ${delay}ms`
+      ? `opacity 0.5s ease ${delay}ms, transform 0.6s ${ease} ${delay}ms`
       : "none",
   };
 }

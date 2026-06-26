@@ -6,7 +6,7 @@ export default function PhilosophyReveal() {
     const reveal = () => {
       document.querySelectorAll(".ph-reveal:not(.ph-reveal--visible)").forEach((el) => {
         const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight * 0.9) {
+        if (rect.top < window.innerHeight * 1.05) {
           el.classList.add("ph-reveal--visible");
         }
       });
@@ -22,7 +22,7 @@ export default function PhilosophyReveal() {
           }
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -12% 0px" }
+      { threshold: 0.05, rootMargin: "0px 0px 40px 0px" }
     );
     document.querySelectorAll(".ph-reveal").forEach((el) => obs.observe(el));
 
@@ -36,7 +36,7 @@ export default function PhilosophyReveal() {
           }
         });
       },
-      { threshold: 0.08, rootMargin: "0px 0px -8% 0px" }
+      { threshold: 0.05, rootMargin: "0px 0px 40px 0px" }
     );
     document.querySelectorAll(".ph-sec-reveal").forEach((el) => secObs.observe(el));
 
