@@ -54,7 +54,7 @@ const articlesSP = [
 
 export default function PrivacyPolicyPage() {
   return (
-    <main style={{ overflowX: "hidden" }}>
+    <main style={{ overflowX: "clip" }}>
       <PageHero image="/images/privacy-policy-hero.webp" en="PRIVACY POLICY" ja="個人情報保護方針" />
 
       <Ticker text="PRIVACY POLICY NEXT BRINO" overlapBottom={200} />
