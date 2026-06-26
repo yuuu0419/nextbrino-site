@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     siteName: "NEXT BRINO",
     images: [
       {
-        url: "https://nextbrino.com/images/top-ogp.jpg",
+        url: "https://nextbrino.com/images/toppage-ogp.jpg",
         width: 1200,
         height: 630,
         alt: "NEXT BRINO | IT技術を駆使して日常をデザインする",
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     title: "NEXT BRINO | IT技術を駆使して日常をデザインする",
     description:
       "NEXT BRINOの公式サイトです。ITシステム開発・Web制作を中心に6つの事業を提供しております。",
-    images: ["https://nextbrino.com/images/top-ogp.jpg"],
+    images: ["https://nextbrino.com/images/toppage-ogp.jpg"],
   },
 };
 
