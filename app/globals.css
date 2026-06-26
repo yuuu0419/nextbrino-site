@@ -26,6 +26,29 @@ body {
   touch-action: pan-y;
 }
 
+@media (max-width: 767px) {
+  body {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: none;
+  }
+
+  /* モバイルでのアニメーション要素を GPU レイヤーに昇格 */
+  .fv-slide,
+  .ticker-track {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  /* モバイルでホバーエフェクト関連のtransitionを無効化してペイント負荷削減 */
+  .svc-brand-card,
+  .svc-grad-card,
+  .svc-bento-card,
+  .svc-tl-card,
+  .nb-news-item a {
+    transition: none !important;
+  }
+}
+
 /* ===================== Ken Burns ===================== */
 @keyframes kenburns-odd {
   0%   { opacity: 0; transform: scale(1);    }

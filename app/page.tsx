@@ -49,10 +49,11 @@ export default function Home() {
   const [svcMoreVisible, setSvcMoreVisible]   = useState(false);
   const svcMoreRef                            = useRef<HTMLDivElement>(null);
 
-  const scrollYRef   = useRef(0);
-  const fvTextDivRef = useRef<HTMLDivElement>(null);
-  const fvMainPRef   = useRef<HTMLParagraphElement>(null);
-  const fvSubPRef    = useRef<HTMLParagraphElement>(null);
+  const scrollYRef    = useRef(0);
+  const isMobileRef   = useRef(false);
+  const fvTextDivRef  = useRef<HTMLDivElement>(null);
+  const fvMainPRef    = useRef<HTMLParagraphElement>(null);
+  const fvSubPRef     = useRef<HTMLParagraphElement>(null);
 
   const applyMobileFv = useCallback((y: number) => {
     if (typeof window === "undefined" || window.innerWidth >= 768) return;
@@ -111,7 +112,9 @@ export default function Home() {
 
   useEffect(() => {
     const check = () => {
-      setIsMobile(window.innerWidth < 768);
+      const mobile = window.innerWidth < 768;
+      isMobileRef.current = mobile;
+      setIsMobile(mobile);
       setVh(window.innerHeight);
     };
     check();

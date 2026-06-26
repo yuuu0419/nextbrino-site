@@ -46,16 +46,21 @@ export default function Header() {
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    let rafId: number | null = null;
     const checkScroll = () => {
-      setScrolled(window.scrollY > 40);
-      const headerBottom = 80;
-      const darkSections = document.querySelectorAll("[data-header-dark]");
-      let isDark = false;
-      darkSections.forEach((el) => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top <= headerBottom && rect.bottom > 0) isDark = true;
+      if (rafId !== null) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        setScrolled(window.scrollY > 40);
+        const headerBottom = 80;
+        const darkSections = document.querySelectorAll("[data-header-dark]");
+        let isDark = false;
+        darkSections.forEach((el) => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= headerBottom && rect.bottom > 0) isDark = true;
+        });
+        setOnDark(isDark);
       });
-      setOnDark(isDark);
     };
     checkMobile();
     checkScroll();
@@ -64,6 +69,7 @@ export default function Header() {
     return () => {
       window.removeEventListener("resize", checkMobile);
       window.removeEventListener("scroll", checkScroll);
+      if (rafId !== null) cancelAnimationFrame(rafId);
     };
   }, []);
 

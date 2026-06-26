@@ -5,13 +5,21 @@ export default function ScrollLineIndicator() {
   const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
+    let rafId: number | null = null;
     const onScroll = () => {
-      const scrolled = window.scrollY;
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      setHidden(maxScroll > 0 && scrolled >= maxScroll - 40);
+      if (rafId !== null) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        const scrolled = window.scrollY;
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        setHidden(maxScroll > 0 && scrolled >= maxScroll - 40);
+      });
     };
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (rafId !== null) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   return (

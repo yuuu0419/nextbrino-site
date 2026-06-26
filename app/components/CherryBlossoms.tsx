@@ -13,19 +13,24 @@ interface Petal {
 
 export default function CherryBlossoms() {
   const [petals, setPetals] = useState<Petal[]>([]);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    if (window.innerWidth < 768) { setMounted(true); return; }
     const list: Petal[] = Array.from({ length: 8 }, (_, i) => ({
       id: i,
       left: Math.random() * 100,
       size: 8 + Math.random() * 8,
       fallDuration: 15 + Math.random() * 12,
       swayDuration: 4 + Math.random() * 5,
-      delay: -(Math.random() * 24), // ネガティブ delay → ランダムな周期の途中から開始
+      delay: -(Math.random() * 24),
       hue: Math.random() * 22 - 11,
     }));
     setPetals(list);
+    setMounted(true);
   }, []);
+
+  if (!mounted || petals.length === 0) return null;
 
   return (
     <div
