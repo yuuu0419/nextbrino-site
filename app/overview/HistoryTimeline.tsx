@@ -69,7 +69,7 @@ function YearBlock({ entry, index }: { entry: HistoryYear; index: number }) {
     if (!el) return;
     const obs = new IntersectionObserver(
       ([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect(); } },
-      { threshold: 0.1, rootMargin: "0px 0px -8% 0px" }
+      { threshold: 0.05, rootMargin: "0px 0px 40px 0px" }
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -80,13 +80,13 @@ function YearBlock({ entry, index }: { entry: HistoryYear; index: number }) {
   const yearStyle = {
     opacity: visible ? 0.55 : 0,
     transform: visible ? "translateX(0)" : `translateX(${isRight ? "-40px" : "40px"})`,
-    transition: visible ? `opacity 1.2s ease 100ms, transform 1.2s ${ease} 100ms` : "none",
+    transition: visible ? `opacity 0.5s ease 60ms, transform 0.55s ${ease} 60ms` : "none",
   };
 
   const cardStyle = {
     opacity: visible ? 1 : 0,
     transform: visible ? "translateX(0)" : `translateX(${isRight ? "40px" : "-40px"})`,
-    transition: visible ? `opacity 0.9s ease 200ms, transform 1.1s ${ease} 200ms` : "none",
+    transition: visible ? `opacity 0.5s ease 100ms, transform 0.55s ${ease} 100ms` : "none",
   };
 
   const dotStyle = {
