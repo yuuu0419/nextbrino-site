@@ -49,11 +49,15 @@ export default function Home() {
   const [svcMoreVisible, setSvcMoreVisible]   = useState(false);
   const svcMoreRef                            = useRef<HTMLDivElement>(null);
 
-  const scrollYRef    = useRef(0);
-  const isMobileRef   = useRef(false);
-  const fvTextDivRef  = useRef<HTMLDivElement>(null);
-  const fvMainPRef    = useRef<HTMLParagraphElement>(null);
-  const fvSubPRef     = useRef<HTMLParagraphElement>(null);
+  const scrollYRef         = useRef(0);
+  const isMobileRef        = useRef(false);
+  const slideshowActiveRef = useRef(true);
+  const fvTextDivRef       = useRef<HTMLDivElement>(null);
+  const fvMainPRef         = useRef<HTMLParagraphElement>(null);
+  const fvSubPRef          = useRef<HTMLParagraphElement>(null);
+  const darkOverlayRef     = useRef<HTMLDivElement>(null);
+  const whiteOverlayRef    = useRef<HTMLDivElement>(null);
+  const scrollIndicatorRef = useRef<HTMLDivElement>(null);
 
   const applyMobileFv = useCallback((y: number) => {
     if (typeof window === "undefined" || window.innerWidth >= 768) return;
@@ -75,6 +79,18 @@ export default function Home() {
       fvSubPRef.current.style.textShadow = `0 2px 32px rgba(0,0,0,${shadow})`;
       fvSubPRef.current.style.fontSize   = `${lerp(3.8, 4.5, prog)}vw`;
     }
+    // 暗→白オーバーレイ（background の alpha を直接書き換え。opacity ではない点に注意）
+    if (darkOverlayRef.current) {
+      darkOverlayRef.current.style.background = `rgba(0,0,0,${lerp(0.30, 0, prog)})`;
+    }
+    if (whiteOverlayRef.current) {
+      whiteOverlayRef.current.style.background = `rgba(255,255,255,${lerp(0, 0.92, prog)})`;
+    }
+    // スクロールインジケーター（最下部で非表示）
+    if (scrollIndicatorRef.current) {
+      const docH = document.documentElement.scrollHeight;
+      scrollIndicatorRef.current.style.opacity = (y + viewH >= docH - 200) ? "0" : "1";
+    }
   }, []);
 
   useLayoutEffect(() => {
@@ -88,11 +104,29 @@ export default function Home() {
     const applyFrame = () => {
       rafId = null;
       const y = scrollYRef.current;
-      applyMobileFv(y);
-      setScrollY(y);
-      const docH = document.documentElement.scrollHeight;
-      const winH = window.innerHeight;
-      setAtBottom(y + winH >= docH - 200);
+
+      if (isMobileRef.current) {
+        // モバイル: setScrollY を呼ばず、DOM 直接操作のみ（毎フレームの全体再レンダリングを排除）
+        applyMobileFv(y);
+        // スライドショー切替は 80px 閾値の通過時だけ state 更新
+        if (y > 80 && slideshowActiveRef.current) {
+          slideshowActiveRef.current = false;
+          setSlideshowActive(false);
+        } else if (y <= 80 && !slideshowActiveRef.current) {
+          slideshowActiveRef.current = true;
+          setSlide(0);
+          slideRef.current = 0;
+          setTick(0);
+          setSlideshowActive(true);
+        }
+      } else {
+        // PC: 従来通り React state で管理
+        applyMobileFv(y);
+        setScrollY(y);
+        const docH = document.documentElement.scrollHeight;
+        const winH = window.innerHeight;
+        setAtBottom(y + winH >= docH - 200);
+      }
     };
 
     const onScroll = () => {
@@ -124,7 +158,9 @@ export default function Home() {
 
   /* スクロール開始時にスライドショー停止 → その時点の画像を背景に固定 */
   /* スクロールトップ復帰時にスライドショー再開 */
+  /* ※モバイルは scrollY を更新しないため applyFrame 内で直接制御する */
   useEffect(() => {
+    if (isMobileRef.current) return;
     if (scrollY > 80 && slideshowActive) {
       setSlideshowActive(false);
       // slide / slideRef はそのまま維持（スクロール時点の画像を背景に残す）
@@ -286,24 +322,26 @@ export default function Home() {
         <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.22)", zIndex: 2, pointerEvents: "none" }} />
       </div>
 
-      {/* 暗オーバーレイ */}
+      {/* 暗オーバーレイ（モバイルは applyMobileFv が DOM 直接制御するため static 初期値） */}
       <div
+        ref={darkOverlayRef}
         style={{
           position: "fixed",
           inset: 0,
           zIndex: 2,
-          background: `rgba(0,0,0,${darkOverlay})`,
+          background: isMobile ? "rgba(0,0,0,0.30)" : `rgba(0,0,0,${darkOverlay})`,
           pointerEvents: "none",
         }}
       />
 
-      {/* 白オーバーレイ（画像を漂白） */}
+      {/* 白オーバーレイ（画像を漂白｜モバイルは DOM 直接制御） */}
       <div
+        ref={whiteOverlayRef}
         style={{
           position: "fixed",
           inset: 0,
           zIndex: 3,
-          background: `rgba(255,255,255,${whiteOverlay})`,
+          background: isMobile ? "rgba(255,255,255,0)" : `rgba(255,255,255,${whiteOverlay})`,
           pointerEvents: "none",
         }}
       />
@@ -313,6 +351,7 @@ export default function Home() {
       {/* ── マウス スクロールインジケーター（画面固定・最下部で非表示） ── */}
       {(
         <div
+          ref={scrollIndicatorRef}
           style={{
             position: "fixed",
             bottom: 28,
