@@ -146,10 +146,7 @@ export default function Home() {
   }, [slideshowActive]);
 
   useEffect(() => {
-    const mobile = window.innerWidth < 768;
-    const opts = mobile
-      ? { threshold: 0.25 }
-      : { threshold: 0, rootMargin: "0px 0px -40px 0px" };
+    const opts = { threshold: 0.05, rootMargin: "0px 0px 40px 0px" };
 
     const makeObs = (ref: React.RefObject<HTMLDivElement | null>, setter: (v: boolean) => void) => {
       const el = ref.current;
@@ -168,16 +165,12 @@ export default function Home() {
     const c2 = makeObs(svcGridRef, setSvcVisible);
     const c2b = makeObs(svcMoreRef, setSvcMoreVisible);
 
-    // テキストボックスは遅め（モバイル: 60%、PC: 30%）で発火
-    const textOpts = mobile
-      ? { threshold: 0.6 }
-      : { threshold: 0.3 };
     const msgTextEl = msgTextRef.current;
     let c3: (() => void) | undefined;
     if (msgTextEl) {
       const obs = new IntersectionObserver(
         ([entry]) => { if (entry.isIntersecting) { setMsgTextVisible(true); obs.disconnect(); } },
-        textOpts
+        opts
       );
       obs.observe(msgTextEl);
       c3 = () => obs.disconnect();
@@ -187,7 +180,7 @@ export default function Home() {
     if (contactEl) {
       const obs = new IntersectionObserver(
         ([entry]) => { if (entry.isIntersecting) { setContactVisible(true); obs.disconnect(); } },
-        mobile ? { threshold: 0.75 } : { threshold: 0.55 }
+        opts
       );
       obs.observe(contactEl);
       c4 = () => obs.disconnect();
@@ -437,7 +430,7 @@ export default function Home() {
                     boxShadow: "inset 0 1px 0 rgba(255,255,255,0.7), 10px 0 8px rgba(21,38,59,0.12), 0 10px 8px rgba(21,38,59,0.15)",
                     transform: philoVisible ? "translateX(0)" : "translateX(-60px)",
                     opacity: philoVisible ? 1 : 0,
-                    transition: `transform 1.4s cubic-bezier(0.22,1,0.36,1) ${i * 280}ms, opacity 1.1s ease ${i * 280}ms, box-shadow 0.35s`,
+                    transition: `transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94) ${i * 80}ms, opacity 0.5s ease ${i * 80}ms, box-shadow 0.35s`,
                     overflow: "hidden",
                   }}
                   onMouseEnter={(e) => {
@@ -544,7 +537,7 @@ export default function Home() {
               ))}
             </div>
 
-            <div ref={philoMoreRef} style={{ display: "flex", justifyContent: "center", opacity: philoMoreVisible ? 1 : 0, transition: `opacity 1.8s ease ${isMobile ? "200ms" : "600ms"}` }}>
+            <div ref={philoMoreRef} style={{ display: "flex", justifyContent: "center", opacity: philoMoreVisible ? 1 : 0, transition: `opacity 0.5s ease ${isMobile ? "80ms" : "160ms"}` }}>
               <a href="/philosophy/" className="btn-view-more">VIEW MORE <span className="btn-arrow"></span></a>
             </div>
           </div>
@@ -564,16 +557,16 @@ export default function Home() {
             <div ref={msgGridRef} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "60px 80px", alignItems: "center" }}>
               <div style={{
                 position: "relative", aspectRatio: "4/5", maxWidth: 420,
-                transform: msgVisible ? "translateX(0)" : "translateX(-60px)",
+                transform: msgVisible ? "translateX(0)" : "translateX(-32px)",
                 opacity: msgVisible ? 1 : 0,
-                transition: "transform 2s cubic-bezier(0.22,1,0.36,1) 0ms, opacity 1.6s ease 0ms",
+                transition: "transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94) 0ms, opacity 0.5s ease 0ms",
               }}>
                 <Image src="/images/kuroki-yuta.webp" alt="代表取締役 黒木雄太" fill sizes="(max-width: 768px) 100vw, 420px" style={{ objectFit: "cover", borderRadius: "8px" }} />
                 <div style={{ position: "absolute", bottom: -16, right: -16, width: "70%", height: "70%", border: "1px solid rgba(21,38,59,0.15)", pointerEvents: "none", zIndex: -1 }} />
               </div>
               <div ref={msgTextRef} style={{
                 opacity: msgTextVisible ? 1 : 0,
-                transition: "opacity 2.2s ease 0ms",
+                transition: "opacity 0.55s ease 0ms",
               }}>
                 {/* ラベル＋署名サイン */}
                 <style>{`
@@ -681,7 +674,7 @@ export default function Home() {
                       <div style={{ width: "60%", margin: "4px auto 16px", height: 1, background: "linear-gradient(90deg, transparent 0%, rgba(157,140,86,0.5) 30%, rgba(157,140,86,0.5) 70%, transparent 100%)" }} />
                       <p style={{ fontSize: "0.88rem", lineHeight: 2, color: "#444", letterSpacing: "0.03em", margin: 0, whiteSpace: "pre-line", textAlign: "center" }}>{`人は誰かを想う時、最も強く優しくなれる。\n家族や恋人、友人、働く仲間、お客様。\n誰かのためにより良くしたいと願う気持ちは、\nいつの時代も人を前へ進ませ、\n社会を少しずつ良くしてきました。\n私たちが目指すのは、便利さや効率の先にある、\n一人ひとりの豊かで誇れる暮らしです。\nその原点を見失うことなく、理念である\n「繊細に想像し、大胆に創造する」を追求します。`}</p>
                     </div>
-                    <div style={{ display: "flex", justifyContent: "center", opacity: msgTextVisible ? 1 : 0, transition: `opacity 1.8s ease ${isMobile ? "200ms" : "600ms"}` }}>
+                    <div style={{ display: "flex", justifyContent: "center", opacity: msgTextVisible ? 1 : 0, transition: `opacity 0.5s ease ${isMobile ? "80ms" : "160ms"}` }}>
                       <a href="/message-kuroki-yuta/" className="btn-view-more">VIEW MORE <span className="btn-arrow"></span></a>
                     </div>
                   </>
@@ -701,7 +694,7 @@ export default function Home() {
                       <div style={{ width: "80%", margin: "4px 0 20px", height: 1, background: "linear-gradient(90deg, rgba(157,140,86,0.5) 0%, rgba(157,140,86,0.5) 60%, transparent 100%)" }} />
                       <p style={{ fontSize: "0.9rem", lineHeight: 2, color: "#444", letterSpacing: "0.04em", margin: 0, whiteSpace: "pre-line" }}>{`人は誰かを想う時、最も強く優しくなれる。\n家族や恋人、友人、働く仲間、お客様。\n誰かのためにより良くしたいと願う気持ちは、\n`}<span style={{ whiteSpace: "nowrap" }}>いつの時代も人を前へ進ませ、社会を少しずつ良くしてきました。</span>{`\n私たちが目指すのは、単なる便利さや効率の先にある、\n一人ひとりの豊かで誇れる暮らしです。\nその原点を見失うことなく、理念である\n「繊細に想像し、大胆に創造する」を体現し続けます。`}</p>
                     </div>
-                    <div style={{ display: "flex", justifyContent: "flex-end", opacity: msgTextVisible ? 1 : 0, transition: `opacity 1.8s ease ${isMobile ? "200ms" : "600ms"}` }}>
+                    <div style={{ display: "flex", justifyContent: "flex-end", opacity: msgTextVisible ? 1 : 0, transition: `opacity 0.5s ease ${isMobile ? "80ms" : "160ms"}` }}>
                       <a href="/message-kuroki-yuta/" className="btn-view-more">VIEW MORE <span className="btn-arrow"></span></a>
                     </div>
                   </>
@@ -874,7 +867,7 @@ export default function Home() {
                 style={{
                   transform: svcVisible ? "translateX(0)" : "translateX(-60px)",
                   opacity: svcVisible ? 1 : 0,
-                  transition: `transform 1.4s cubic-bezier(0.22,1,0.36,1) ${i * 280}ms, opacity 1.1s ease ${i * 280}ms`,
+                  transition: `transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94) ${i * 80}ms, opacity 0.5s ease ${i * 80}ms`,
                 }}
               >
                 <div className="svc-hover-bg" />
@@ -908,7 +901,7 @@ export default function Home() {
             ))}
           </div>
 
-          <div ref={svcMoreRef} style={{ width: "90%", maxWidth: 1100, margin: "0 auto", display: "flex", justifyContent: "center", opacity: svcMoreVisible ? 1 : 0, transition: `opacity 1.8s ease ${isMobile ? "200ms" : "600ms"}` }}>
+          <div ref={svcMoreRef} style={{ width: "90%", maxWidth: 1100, margin: "0 auto", display: "flex", justifyContent: "center", opacity: svcMoreVisible ? 1 : 0, transition: `opacity 0.5s ease ${isMobile ? "80ms" : "160ms"}` }}>
             <a href="/service/" className="btn-view-more">VIEW MORE <span className="btn-arrow"></span></a>
           </div>
         </section>
@@ -936,9 +929,9 @@ export default function Home() {
           {/* HUDブラケット付きラッパー */}
           <div ref={contactBoxRef} style={{
             position: "relative", width: "90%", maxWidth: 1100, margin: "0 auto",
-            transform: contactVisible ? "scale(1)" : "scale(0.97)",
+            transform: contactVisible ? "scale(1)" : "scale(0.98)",
             opacity: contactVisible ? 1 : 0,
-            transition: "transform 1.4s cubic-bezier(0.22,1,0.36,1), opacity 1.1s ease",
+            transition: "transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.5s ease",
           }}>
 
             {/* HUD四隅ブラケット */}
