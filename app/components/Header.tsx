@@ -632,7 +632,7 @@ export default function Header() {
         }}
       >
         {/* ロゴ */}
-        <Link href="/" style={{ display: "flex", flexShrink: 0, transform: isMobile ? "translate(2px, 7px)" : "none" }} onClick={() => closeMenu()}>
+        <Link href="/" style={{ display: "flex", flexShrink: 0, transform: isMobile ? "translate(2px, 7px)" : "none" }} onClick={(e) => { closeMenu(); if (window.location.pathname === "/") { e.preventDefault(); window.scrollTo({ top: 0 }); window.location.reload(); } }}>
           <Image
             src="/images/header-logo.webp"
             alt="NEXT BRINO"
