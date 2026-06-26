@@ -35,8 +35,8 @@ function ServiceRow({ s, i }: { s: Service; i: number }) {
   const isRtl = i % 2 !== 0;
   const ease = "cubic-bezier(0.22,1,0.36,1)";
 
-  const imgX  = isRtl ? "60px"  : "-60px";
-  const bodyX = isRtl ? "-60px" : "60px";
+  const imgX  = isRtl ? "32px"  : "-32px";
+  const bodyX = isRtl ? "-32px" : "32px";
 
   const slideIn = (translateX: string, delay: number, duration = 0.6) => ({
     opacity: visible ? 1 : 0,
@@ -73,15 +73,15 @@ function ServiceRow({ s, i }: { s: Service; i: number }) {
       </div>
 
       {/* テキストエリア：ltrは右から、rtlは左からスライドイン */}
-      <div className="sv-row-body" style={slideIn(bodyX, 100, 1.15)}>
+      <div className="sv-row-body" style={slideIn(bodyX, 60)}>
         <span className="sv-row-num">{s.num}</span>
 
-        <p className="sv-row-en"   style={fadeUp(260)}>{s.en}</p>
-        <h2 className="sv-row-ja" style={fadeUp(320)}>{s.ja}</h2>
-        <div className="sv-row-line"  style={fadeUp(380)} />
+        <p className="sv-row-en"   style={fadeUp(80)}>{s.en}</p>
+        <h2 className="sv-row-ja" style={fadeUp(110)}>{s.ja}</h2>
+        <div className="sv-row-line"  style={fadeUp(140)} />
 
         {/* PC desc */}
-        <p className={`sv-row-desc${s.descSp ? " sv-row-desc--pc" : ""}`} style={fadeUp(440)}>
+        <p className={`sv-row-desc${s.descSp ? " sv-row-desc--pc" : ""}`} style={fadeUp(170)}>
           {s.desc.split("\n").map((line, j, arr) => (
             <span key={j}>{line}{j < arr.length - 1 && <br />}</span>
           ))}
@@ -89,7 +89,7 @@ function ServiceRow({ s, i }: { s: Service; i: number }) {
 
         {/* SP desc */}
         {s.descSp && (
-          <p className="sv-row-desc sv-row-desc--sp" style={fadeUp(440)}>
+          <p className="sv-row-desc sv-row-desc--sp" style={fadeUp(170)}>
             {s.descSp.split("\n").map((line, j, arr) => (
               <span key={j}>{line}{j < arr.length - 1 && <br />}</span>
             ))}
@@ -98,7 +98,7 @@ function ServiceRow({ s, i }: { s: Service; i: number }) {
 
         <ul className="sv-row-items">
           {s.items.map((item, idx) => (
-            <li key={item} style={fadeUp(520 + idx * 80)}>
+            <li key={item} style={fadeUp(200 + idx * 40)}>
               <span className="sv-item-num">{String(idx + 1).padStart(2, "0")}</span>
               <span className="sv-item-text">{item}</span>
             </li>
