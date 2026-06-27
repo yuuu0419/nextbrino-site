@@ -315,7 +315,7 @@ export default function HomeClient() {
               fill
               sizes="100vw"
               style={{ objectFit: "cover" }}
-              priority
+              priority={i === 0}
             />
           </div>
         ))}
