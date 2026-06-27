@@ -40,6 +40,14 @@ export default function ServicePage() {
   return (
     <main>
       <div className="hero">
+        <Image
+          src="/images/service-hero.webp"
+          alt=""
+          fill
+          style={{ objectFit: "cover", objectPosition: "center" }}
+          priority
+          unoptimized
+        />
         <div className="hero-overlay" />
         <div className="hero-content">
           <p className="hero-en">BUSINESS</p>
@@ -151,7 +159,7 @@ export default function ServicePage() {
           width: 100%;
           height: 100vh;
           min-height: 560px;
-          background: url('/images/service-hero.webp') center center / cover no-repeat;
+          background: #15263b;
           display: flex;
           align-items: center;
         }

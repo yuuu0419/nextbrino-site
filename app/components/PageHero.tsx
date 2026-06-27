@@ -33,6 +33,7 @@ export default function PageHero({ image, en, ja, footer }: Props) {
           width: 100%;
           height: 100vh;
           min-height: 560px;
+          background: #15263b;
           display: flex;
           align-items: center;
           padding-top: 4vh;
