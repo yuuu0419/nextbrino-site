@@ -1,12 +1,9 @@
-"use client";
-
-import { useEffect, useState } from "react";
+import Image from "next/image";
 
 interface Post {
   id: number;
   notionId: string;
-  title: { rendered: string };
-  link: string;
+  title: string;
   date: string;
   thumbnail: string | null;
 }
@@ -22,49 +19,78 @@ function formatDate(dateStr: string) {
   );
 }
 
-export default function NewsListSection() {
-  const [posts, setPosts] = useState<Post[] | null>(null);
-  const [error, setError] = useState(false);
+async function fetchPosts(): Promise<Post[]> {
+  try {
+    const res = await fetch(
+      `https://api.notion.com/v1/databases/${process.env.NOTION_DATABASE_ID}/query`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${process.env.NOTION_TOKEN}`,
+          "Notion-Version": "2022-06-28",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          filter: { property: "公開", checkbox: { equals: true } },
+          sorts: [{ property: "日付", direction: "descending" }],
+        }),
+        next: { revalidate: 3600 },
+      }
+    );
+    if (!res.ok) return [];
+    const data = await res.json();
 
-  useEffect(() => {
-    fetch("/api/news")
-      .then((r) => r.json())
-      .then((data: Post[]) => setPosts(data))
-      .catch(() => setError(true));
-  }, []);
+    return (data.results ?? []).map((page: any, i: number) => {
+      const props = page.properties;
+      const titleProp = props["名前"] ?? props["タイトル"] ?? props["title"];
+      const title = titleProp?.title?.map((t: any) => t.plain_text).join("") ?? "（タイトルなし）";
+      const date = props["日付"]?.date?.start ?? page.created_time;
+      const thumbProp = props["サムネイル"];
+      const thumbFile = thumbProp?.files?.[0];
+      const thumbnail =
+        thumbFile?.type === "file" ? thumbFile.file.url
+        : thumbFile?.type === "external" ? thumbFile.external.url
+        : null;
 
-  const count = posts ? String(posts.length).padStart(2, "0") + " TOPICS" : "LOADING";
+      return { id: i, notionId: page.id.replace(/-/g, ""), title, date, thumbnail };
+    });
+  } catch {
+    return [];
+  }
+}
+
+export default async function NewsListSection() {
+  const posts = await fetchPosts();
+  const count = String(posts.length).padStart(2, "0") + " TOPICS";
 
   return (
     <section className="nb-wrap">
       <div className="nb-dots" />
 
       <div className="nb-inner">
-        {/* TOPICSカウンター */}
         <div className="nb-head">
           <div className="nb-head-meta">
             <span className="nb-head-count">{count}</span>
           </div>
         </div>
 
-        {/* カードグリッド */}
         <div>
-          {error ? (
-            <p className="nb-empty">お知らせを取得できませんでした。</p>
-          ) : posts === null ? (
-            <p className="nb-loading">L O A D I N G ...</p>
-          ) : posts.length === 0 ? (
+          {posts.length === 0 ? (
             <p className="nb-empty">現在お知らせはありません。</p>
           ) : (
             <ul className="nb-grid">
               {posts.map((post, i) => (
-                <li key={post.id} className="nb-card" style={{ animationDelay: `${(i + 1) * 0.08}s` }}>
+                <li key={post.notionId} className="nb-card" style={{ animationDelay: `${(i + 1) * 0.08}s` }}>
                   <a href={`/news/${post.notionId}`}>
-                    {/* サムネイル */}
                     <div className="nb-card-thumb">
                       {post.thumbnail ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img src={post.thumbnail} alt="" />
+                        <Image
+                          src={post.thumbnail}
+                          alt={post.title}
+                          fill
+                          sizes="(max-width: 600px) 120px, (max-width: 1024px) 50vw, 33vw"
+                          style={{ objectFit: "cover" }}
+                        />
                       ) : (
                         <div className="nb-card-thumb-placeholder">
                           <span>NO IMAGE</span>
@@ -73,10 +99,9 @@ export default function NewsListSection() {
                       <div className="nb-card-thumb-overlay" />
                     </div>
 
-                    {/* テキスト */}
                     <div className="nb-card-body">
                       <p className="nb-card-date">{formatDate(post.date)}</p>
-                      <p className="nb-card-title" dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
+                      <p className="nb-card-title">{post.title}</p>
                       <span className="nb-card-arrow">READ MORE →</span>
                     </div>
                   </a>
@@ -115,7 +140,6 @@ export default function NewsListSection() {
           z-index: 1;
         }
 
-        /* TOPICSカウンター */
         .nb-head { margin-bottom: 40px; }
         .nb-head-meta {
           display: flex;
@@ -145,7 +169,6 @@ export default function NewsListSection() {
           margin-left: 14px;
         }
 
-        /* カードグリッド */
         .nb-grid {
           list-style: none;
           padding: 0;
@@ -180,7 +203,6 @@ export default function NewsListSection() {
           transform: translateY(-4px);
         }
 
-        /* サムネイル */
         .nb-card-thumb {
           position: relative;
           width: 100%;
@@ -216,7 +238,6 @@ export default function NewsListSection() {
           pointer-events: none;
         }
 
-        /* テキストエリア */
         .nb-card-body {
           display: flex;
           flex-direction: column;
@@ -260,7 +281,7 @@ export default function NewsListSection() {
           transform: translateX(4px);
         }
 
-        .nb-loading, .nb-empty {
+        .nb-empty {
           text-align: center;
           color: rgba(255,255,255,.22);
           padding: 80px 0;
@@ -268,17 +289,14 @@ export default function NewsListSection() {
           letter-spacing: .18em;
         }
 
-        /* タブレット */
         @media (max-width: 1024px) {
           .nb-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
         }
 
-        /* スマホ */
         @media (max-width: 600px) {
           .nb-wrap { padding: 40px 0 100px; }
           .nb-grid { grid-template-columns: 1fr; gap: 0; }
 
-          /* カードを横並びリストに切り替え */
           .nb-card a {
             flex-direction: row;
             align-items: center;
@@ -291,7 +309,6 @@ export default function NewsListSection() {
           .nb-card:first-child a { border-top: 1px solid rgba(255,255,255,.07); }
           .nb-card a:hover { transform: none; background: rgba(255,255,255,.04); }
 
-          /* サムネイル：右側に固定サイズ */
           .nb-card-thumb {
             width: 120px;
             min-width: 120px;
@@ -303,7 +320,6 @@ export default function NewsListSection() {
             order: 2;
           }
 
-          /* テキスト */
           .nb-card-body {
             flex: 1;
             padding: 14px 0;
