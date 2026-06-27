@@ -11,12 +11,13 @@ import HistoryTimeline from "./HistoryTimeline";
 export const metadata: Metadata = {
   title: "概要・沿革｜NEXT BRINO",
   description: "NEXT BRINOの概要・沿革をご紹介します。これまでの歩みをお伝えします。",
+  alternates: { canonical: "https://nextbrino.com/overview" },
   openGraph: {
     title: "概要・沿革｜NEXT BRINO",
     description: "NEXT BRINOの概要・沿革をご紹介します。これまでの歩みをお伝えします。",
     url: "https://nextbrino.com/overview",
     siteName: "NEXT BRINO",
-    images: [{ url: "https://nextbrino.com/images/overview-opg.jpg", width: 1200, height: 630, alt: "概要・沿革｜NEXT BRINO" }],
+    images: [{ url: "https://nextbrino.com/images/overview-ogp.jpg", width: 1200, height: 630, alt: "概要・沿革｜NEXT BRINO" }],
     locale: "ja_JP",
     type: "website",
   },
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "概要・沿革｜NEXT BRINO",
     description: "NEXT BRINOの概要・沿革をご紹介します。これまでの歩みをお伝えします。",
-    images: ["https://nextbrino.com/images/overview-opg.jpg"],
+    images: ["https://nextbrino.com/images/overview-ogp.jpg"],
   },
 };
 

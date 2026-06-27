@@ -9,6 +9,7 @@ import SplitTitle from "../components/SplitTitle";
 export const metadata: Metadata = {
   title: "特定商取引法に基づく表記｜NEXT BRINO",
   description: "NEXT BRINOの特定商取引法に基づく表記ページです。",
+  alternates: { canonical: "https://nextbrino.com/legal-notice" },
   openGraph: {
     title: "特定商取引法に基づく表記｜NEXT BRINO",
     description: "NEXT BRINOの特定商取引法に基づく表記ページです。",

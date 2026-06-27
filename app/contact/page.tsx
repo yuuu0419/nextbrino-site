@@ -10,6 +10,7 @@ import ContactForm from "./ContactForm";
 export const metadata: Metadata = {
   title: "お問い合わせ｜NEXT BRINO",
   description: "NEXT BRINOへのお問い合わせはこちらから。24時間受付しております。ご返答の目安は2〜5営業日です。",
+  alternates: { canonical: "https://nextbrino.com/contact" },
   openGraph: {
     title: "お問い合わせ｜NEXT BRINO",
     description: "NEXT BRINOへのお問い合わせはこちらから。24時間受付しております。ご返答の目安は2〜5営業日です。",

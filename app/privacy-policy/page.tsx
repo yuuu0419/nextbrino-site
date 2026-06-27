@@ -9,6 +9,7 @@ import Image from "next/image";
 export const metadata: Metadata = {
   title: "個人情報保護方針｜NEXT BRINO",
   description: "NEXT BRINOの個人情報保護方針をご確認いただけます。お客様の個人情報を適切に管理・保護いたします。",
+  alternates: { canonical: "https://nextbrino.com/privacy-policy" },
   openGraph: {
     title: "個人情報保護方針｜NEXT BRINO",
     description: "NEXT BRINOの個人情報保護方針をご確認いただけます。お客様の個人情報を適切に管理・保護いたします。",

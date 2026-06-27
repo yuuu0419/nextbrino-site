@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 
 const BASE_URL = "https://nextbrino.com";
 
-async function getNewsIds(): Promise<string[]> {
+async function getNewsPages(): Promise<{ id: string; lastModified: Date }[]> {
   try {
     const res = await fetch(
       `https://api.notion.com/v1/databases/${process.env.NOTION_DATABASE_ID}/query`,
@@ -21,36 +21,40 @@ async function getNewsIds(): Promise<string[]> {
     );
     if (!res.ok) return [];
     const data = await res.json();
-    return (data.results ?? []).map((page: any) =>
-      page.id.replace(/-/g, "")
-    );
+    return (data.results ?? []).map((page: any) => ({
+      id: page.id.replace(/-/g, ""),
+      lastModified: new Date(page.last_edited_time ?? page.created_time),
+    }));
   } catch {
     return [];
   }
 }
 
+const NOW = new Date();
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPages: MetadataRoute.Sitemap = [
-    { url: BASE_URL, changeFrequency: "monthly", priority: 1.0 },
-    { url: `${BASE_URL}/service`, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${BASE_URL}/philosophy`, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${BASE_URL}/overview`, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${BASE_URL}/news`, changeFrequency: "weekly", priority: 0.7 },
-    { url: `${BASE_URL}/recruit`, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${BASE_URL}/internship`, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${BASE_URL}/contact`, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${BASE_URL}/message-kuroki-yuta`, changeFrequency: "monthly", priority: 0.5 },
-    { url: `${BASE_URL}/privacy-policy`, changeFrequency: "yearly", priority: 0.3 },
-    { url: `${BASE_URL}/legal-notice`, changeFrequency: "yearly", priority: 0.3 },
-    { url: `${BASE_URL}/anti-social-forces-policy`, changeFrequency: "yearly", priority: 0.3 },
-    { url: `${BASE_URL}/contact-policy`, changeFrequency: "yearly", priority: 0.3 },
+    { url: BASE_URL, changeFrequency: "monthly", priority: 1.0, lastModified: NOW },
+    { url: `${BASE_URL}/service`, changeFrequency: "monthly", priority: 0.8, lastModified: NOW },
+    { url: `${BASE_URL}/philosophy`, changeFrequency: "monthly", priority: 0.8, lastModified: NOW },
+    { url: `${BASE_URL}/overview`, changeFrequency: "monthly", priority: 0.8, lastModified: NOW },
+    { url: `${BASE_URL}/news`, changeFrequency: "weekly", priority: 0.7, lastModified: NOW },
+    { url: `${BASE_URL}/recruit`, changeFrequency: "monthly", priority: 0.7, lastModified: NOW },
+    { url: `${BASE_URL}/internship`, changeFrequency: "monthly", priority: 0.6, lastModified: NOW },
+    { url: `${BASE_URL}/contact`, changeFrequency: "monthly", priority: 0.6, lastModified: NOW },
+    { url: `${BASE_URL}/message-kuroki-yuta`, changeFrequency: "monthly", priority: 0.5, lastModified: NOW },
+    { url: `${BASE_URL}/privacy-policy`, changeFrequency: "yearly", priority: 0.3, lastModified: NOW },
+    { url: `${BASE_URL}/legal-notice`, changeFrequency: "yearly", priority: 0.3, lastModified: NOW },
+    { url: `${BASE_URL}/anti-social-forces-policy`, changeFrequency: "yearly", priority: 0.3, lastModified: NOW },
+    { url: `${BASE_URL}/contact-policy`, changeFrequency: "yearly", priority: 0.3, lastModified: NOW },
   ];
 
-  const newsIds = await getNewsIds();
-  const newsPages: MetadataRoute.Sitemap = newsIds.map((id) => ({
+  const newsPages_data = await getNewsPages();
+  const newsPages: MetadataRoute.Sitemap = newsPages_data.map(({ id, lastModified }) => ({
     url: `${BASE_URL}/news/${id}`,
     changeFrequency: "yearly",
     priority: 0.5,
+    lastModified,
   }));
 
   return [...staticPages, ...newsPages];

@@ -9,6 +9,7 @@ import FadeIn from "../components/FadeIn";
 export const metadata: Metadata = {
   title: "事業内容｜NEXT BRINO",
   description: "NEXT BRINOが手がける6つの事業をご紹介します。最先端の技術を積極的に取り入れ、お客様に新たな価値を提供します。",
+  alternates: { canonical: "https://nextbrino.com/service" },
   openGraph: {
     title: "事業内容｜NEXT BRINO",
     description: "NEXT BRINOが手がける6つの事業をご紹介します。最先端の技術を積極的に取り入れ、お客様に新たな価値を提供します。",

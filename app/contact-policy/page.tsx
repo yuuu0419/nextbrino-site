@@ -9,6 +9,7 @@ import SplitTitle from "../components/SplitTitle";
 export const metadata: Metadata = {
   title: "お問合せ対応基本方針｜NEXT BRINO",
   description: "NEXT BRINOのお問合せ対応基本方針をご確認いただけます。お問合せの受付・返信・対応方針について定めています。",
+  alternates: { canonical: "https://nextbrino.com/contact-policy" },
   openGraph: {
     title: "お問合せ対応基本方針｜NEXT BRINO",
     description: "NEXT BRINOのお問合せ対応基本方針をご確認いただけます。お問合せの受付・返信・対応方針について定めています。",

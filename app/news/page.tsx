@@ -10,6 +10,7 @@ import NewsListSection from "../components/NewsListSection";
 export const metadata: Metadata = {
   title: "お知らせ｜NEXT BRINO",
   description: "NEXT BRINOからの最新のお知らせ・ニュースをご覧いただけます。グループの情報も掲載しております。",
+  alternates: { canonical: "https://nextbrino.com/news" },
   openGraph: {
     title: "お知らせ｜NEXT BRINO",
     description: "NEXT BRINOからの最新のお知らせ・ニュースをご覧いただけます。グループの情報も掲載しております。",

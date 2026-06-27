@@ -9,6 +9,7 @@ import SplitTitle from "../components/SplitTitle";
 export const metadata: Metadata = {
   title: "反社会的勢力に対する基本方針｜NEXT BRINO",
   description: "NEXT BRINOの反社会的勢力に対する基本方針をご確認いただけます。",
+  alternates: { canonical: "https://nextbrino.com/anti-social-forces-policy" },
   openGraph: {
     title: "反社会的勢力に対する基本方針｜NEXT BRINO",
     description: "NEXT BRINOの反社会的勢力に対する基本方針をご確認いただけます。",

@@ -11,6 +11,7 @@ import FadeIn from "../components/FadeIn";
 export const metadata: Metadata = {
   title: "代表挨拶-黒木 雄太｜NEXT BRINO",
   description: "NEXT BRINO 代表・黒木雄太からのメッセージ。IT技術と誠実さを土台に、日常に新しい可能性をひらく想いをお伝えします。",
+  alternates: { canonical: "https://nextbrino.com/message-kuroki-yuta" },
   openGraph: {
     title: "代表挨拶-黒木 雄太｜NEXT BRINO",
     description: "NEXT BRINO 代表・黒木雄太からのメッセージ。IT技術と誠実さを土台に、日常に新しい可能性をひらく想いをお伝えします。",

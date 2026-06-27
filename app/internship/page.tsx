@@ -9,6 +9,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "インターンシップ｜NEXT BRINO",
   description: "NEXT BRINOのインターンシップ情報ページです。",
+  alternates: { canonical: "https://nextbrino.com/internship" },
   openGraph: {
     title: "インターンシップ｜NEXT BRINO",
     description: "NEXT BRINOのインターンシップ情報ページです。",
