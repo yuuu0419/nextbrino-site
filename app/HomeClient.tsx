@@ -319,10 +319,10 @@ export default function HomeClient() {
               src={src}
               alt={alt}
               fill
-              sizes="100vw"
+              sizes="(max-width: 767px) 100vw, 100vw"
               style={{ objectFit: "cover" }}
               priority={i === 0}
-              unoptimized
+              quality={80}
             />
           </div>
         ))}
@@ -714,8 +714,8 @@ export default function HomeClient() {
                         <Image
                           src="/images/top-message-title.webp"
                           alt="大切な人のために創る"
-                          width={5400}
-                          height={1300}
+                          width={1920}
+                          height={462}
                           style={{ width: "80%", height: "auto", display: "inline-block", marginBottom: -4, filter: "brightness(0) saturate(100%) invert(13%) sepia(27%) saturate(1093%) hue-rotate(181deg) brightness(89%)" }}
                           sizes="80vw"
                         />
@@ -734,8 +734,8 @@ export default function HomeClient() {
                         <Image
                           src="/images/top-message-title.webp"
                           alt="大切な人のために創る"
-                          width={5400}
-                          height={1300}
+                          width={1920}
+                          height={462}
                           style={{ width: "clamp(200px, 26vw, 320px)", height: "auto", display: "block", marginBottom: -4, filter: "brightness(0) saturate(100%) invert(13%) sepia(27%) saturate(1093%) hue-rotate(181deg) brightness(89%)" }}
                           sizes="430px"
                         />
