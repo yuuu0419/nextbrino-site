@@ -418,17 +418,6 @@ body {
   animation: intro-particle ease-in-out infinite;
 }
 
-@keyframes intro-dot-blink {
-  0%, 100% { opacity: 0.12; }
-  50%       { opacity: 0.5; }
-}
-.intro-dot {
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 9px;
-  color: rgba(255,255,255,0.28);
-  animation: intro-dot-blink 1.2s ease infinite;
-}
-
 /* ===================== Contact CTA ===================== */
 @keyframes contact-blink-dot {
   0%, 100% { opacity: 1; }
