@@ -112,20 +112,6 @@ body {
   will-change: transform;
 }
 
-/* モバイル: ticker の常時アニメーション + mask-image + background-clip:text の
-   組み合わせが毎フレームのメインスレッド再描画を誘発しスクロールを固まらせるため、
-   アニメーションと mask を無効化し静的な装飾テキストにする（描画は初回1回のみ） */
-@media (max-width: 767px) {
-  .ticker-track {
-    animation: none;
-    transform: translateX(-12%);
-    will-change: auto;
-  }
-  .ticker-wrap {
-    -webkit-mask-image: none;
-    mask-image: none;
-  }
-}
 
 /* ===================== Mouse Scroll Indicator ===================== */
 .mouse-icon {

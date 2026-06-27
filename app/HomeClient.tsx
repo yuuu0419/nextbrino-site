@@ -2,13 +2,10 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
-import dynamic from "next/dynamic";
 import NewsSection from "./components/NewsSection";
 import Ticker from "./components/Ticker";
 import SplitTitle from "./components/SplitTitle";
 
-const CherryBlossoms  = dynamic(() => import("./components/CherryBlossoms"),  { ssr: false });
-const IntroAnimation  = dynamic(() => import("./components/IntroAnimation"),  { ssr: false });
 
 const SLIDES = [
   { src: "/images/top-hero-01.webp", alt: "NEXT BRINO — IT技術を駆使して日常をデザインする" },
@@ -297,9 +294,6 @@ export default function HomeClient() {
 
   return (
     <div style={{ fontFamily: "var(--font-main)", background: "#fff" }}>
-      <IntroAnimation />
-      <CherryBlossoms />
-
       {/* ── 固定 FV 画像 ── */}
       <div
         style={{
