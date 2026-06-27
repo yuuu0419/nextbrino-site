@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Image from "next/image";
 
 type Props = {
   image: string;
@@ -11,6 +12,14 @@ export default function PageHero({ image, en, ja, footer }: Props) {
   return (
     <>
       <div className="ph2" data-header-dark>
+        <Image
+          src={image}
+          alt=""
+          fill
+          style={{ objectFit: "cover", objectPosition: "center" }}
+          priority
+          unoptimized
+        />
         <div className="ph2-overlay" />
         <div className="ph2-content">
           <p className="ph2-en">{en}</p>
@@ -24,7 +33,6 @@ export default function PageHero({ image, en, ja, footer }: Props) {
           width: 100%;
           height: 100vh;
           min-height: 560px;
-          background: url('${image}') center center / cover no-repeat;
           display: flex;
           align-items: center;
           padding-top: 4vh;
