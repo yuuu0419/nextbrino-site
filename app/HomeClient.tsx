@@ -322,6 +322,7 @@ export default function HomeClient() {
               sizes="100vw"
               style={{ objectFit: "cover" }}
               priority={i === 0}
+              unoptimized
             />
           </div>
         ))}

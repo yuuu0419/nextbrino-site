@@ -35,5 +35,18 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  return <HomeClient />;
+  return (
+    <>
+      {/* スマホで最初のhero画像をSSR段階からプリロード */}
+      <link
+        rel="preload"
+        as="image"
+        href="/images/top-hero-01.webp"
+        type="image/webp"
+        // @ts-expect-error fetchpriority is valid but not yet in React types
+        fetchpriority="high"
+      />
+      <HomeClient />
+    </>
+  );
 }
