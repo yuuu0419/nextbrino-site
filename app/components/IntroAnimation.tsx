@@ -14,16 +14,19 @@ const PARTICLES = [
 
 export default function IntroAnimation({ onComplete }: { onComplete?: () => void }) {
   const [phase, setPhase] = useState(0);
+  const [mobile, setMobile] = useState(false);
 
   useEffect(() => {
+    const isMobile = window.innerWidth < 768;
+    setMobile(isMobile);
     document.body.style.overflow = 'hidden';
-    const t1 = setTimeout(() => setPhase(1), 80);
-    const t2 = setTimeout(() => setPhase(2), 2900);
+    const t1 = setTimeout(() => setPhase(1), 50);
+    const t2 = setTimeout(() => setPhase(2), isMobile ? 600  : 2900);
     const t3 = setTimeout(() => {
       setPhase(3);
       document.body.style.overflow = '';
       onComplete?.();
-    }, 3800);
+    }, isMobile ? 1000 : 3800);
     return () => {
       clearTimeout(t1); clearTimeout(t2); clearTimeout(t3);
       document.body.style.overflow = '';
@@ -53,7 +56,7 @@ export default function IntroAnimation({ onComplete }: { onComplete?: () => void
       position: 'fixed', inset: 0, zIndex: 9999,
       display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
       opacity: exiting ? 0 : 1,
-      transition: exiting ? 'opacity 1s ease' : 'none',
+      transition: exiting ? `opacity ${mobile ? '0.4s' : '1s'} ease` : 'none',
       overflow: 'hidden',
     }}>
 
@@ -109,7 +112,9 @@ export default function IntroAnimation({ onComplete }: { onComplete?: () => void
           opacity: visible ? 1 : 0,
           filter: visible ? 'drop-shadow(0 0 18px rgba(157,140,86,0.24))' : 'drop-shadow(0 0 44px rgba(157,140,86,0.58))',
           willChange: 'transform, opacity, filter',
-          transition: 'transform 1.4s cubic-bezier(0.25,0.46,0.45,0.94), opacity 1.4s cubic-bezier(0.25,0.46,0.45,0.94), filter 1.4s cubic-bezier(0.25,0.46,0.45,0.94)',
+          transition: mobile
+            ? 'transform 0.35s ease, opacity 0.35s ease, filter 0.35s ease'
+            : 'transform 1.4s cubic-bezier(0.25,0.46,0.45,0.94), opacity 1.4s cubic-bezier(0.25,0.46,0.45,0.94), filter 1.4s cubic-bezier(0.25,0.46,0.45,0.94)',
         }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/images/header-logo.webp" alt="NEXT BRINO" style={{ width:240, height:'auto', display:'block', filter:'brightness(0) invert(1)' }} />
@@ -126,7 +131,7 @@ export default function IntroAnimation({ onComplete }: { onComplete?: () => void
           color: 'rgba(157,140,86,0.72)',
           opacity: visible ? 1 : 0,
           transform: visible ? 'translateY(0)' : 'translateY(8px)',
-          transition: 'opacity 0.9s ease 1.0s, transform 0.9s ease 1.0s',
+          transition: mobile ? 'opacity 0.3s ease 0.1s, transform 0.3s ease 0.1s' : 'opacity 0.9s ease 1.0s, transform 0.9s ease 1.0s',
           textAlign: 'center', maxWidth: '88vw',
         }}>
           繊細に想像し、大胆に創造する
@@ -135,7 +140,7 @@ export default function IntroAnimation({ onComplete }: { onComplete?: () => void
         {/* NOW LOADING */}
         <div style={{
           marginTop: 44, display:'flex', alignItems:'center', gap:1,
-          opacity: visible ? 1 : 0, transition: 'opacity 0.7s ease 1.4s',
+          opacity: visible ? 1 : 0, transition: mobile ? 'opacity 0.3s ease 0.1s' : 'opacity 0.7s ease 1.4s',
         }}>
           <span style={{ fontFamily:"'Courier New',Courier,monospace", fontSize:9, letterSpacing:'0.30em', color:'rgba(255,255,255,0.28)' }}>
             NOW LOADING
