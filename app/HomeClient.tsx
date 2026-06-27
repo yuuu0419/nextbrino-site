@@ -8,7 +8,11 @@ import Ticker from "./components/Ticker";
 import IntroAnimation from "./components/IntroAnimation";
 import SplitTitle from "./components/SplitTitle";
 
-const SLIDES = ["/images/top-hero-01.webp", "/images/top-hero-02.webp", "/images/top-hero-03.webp"];
+const SLIDES = [
+  { src: "/images/top-hero-01.webp", alt: "NEXT BRINO — IT技術を駆使して日常をデザインする" },
+  { src: "/images/top-hero-02.webp", alt: "NEXT BRINO — ITソリューション・Web制作・システム開発" },
+  { src: "/images/top-hero-03.webp", alt: "NEXT BRINO — 繊細に想像し、大胆に創造する" },
+];
 
 const lerp = (a: number, b: number, t: number) =>
   a + (b - a) * Math.min(Math.max(t, 0), 1);
@@ -304,14 +308,14 @@ export default function HomeClient() {
           pointerEvents: "none",
         }}
       >
-        {SLIDES.map((src, i) => (
+        {SLIDES.map(({ src, alt }, i) => (
           <div
             key={src}
             className={`fv-slide${i === slide ? (tick % 2 === 0 ? " active-odd" : " active-even") : ""}`}
           >
             <Image
               src={src}
-              alt={`FV ${i + 1}`}
+              alt={alt}
               fill
               sizes="100vw"
               style={{ objectFit: "cover" }}

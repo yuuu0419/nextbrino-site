@@ -94,8 +94,28 @@ export default async function NewsDetailPage({
 
   if (!data) notFound();
 
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    headline: data.title,
+    datePublished: data.date,
+    dateModified: data.date,
+    author: { "@type": "Organization", name: "NEXT BRINO" },
+    publisher: {
+      "@type": "Organization",
+      name: "NEXT BRINO",
+      logo: { "@type": "ImageObject", url: "https://nextbrino.com/images/header-logo.png" },
+    },
+    url: `https://nextbrino.com/news/${id}`,
+    mainEntityOfPage: { "@type": "WebPage", "@id": `https://nextbrino.com/news/${id}` },
+  };
+
   return (
     <main className="nd-main">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <div className="nd-back-wrap">
         <Link href="/news" className="nd-back">← お知らせ一覧に戻る</Link>
       </div>
