@@ -8,6 +8,11 @@ type Props = {
   footer?: ReactNode;
 };
 
+// navy(#15263b)単色のSVGをblurDataURLとして使用し、画像ロード前の黒フラッシュを防ぐ
+const NAVY_BLUR_URL = `data:image/svg+xml;base64,${Buffer.from(
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"><rect width="1" height="1" fill="#15263b"/></svg>'
+).toString("base64")}`;
+
 export default function PageHero({ image, en, ja, footer }: Props) {
   return (
     <>
@@ -19,6 +24,8 @@ export default function PageHero({ image, en, ja, footer }: Props) {
           style={{ objectFit: "cover", objectPosition: "center" }}
           priority
           unoptimized
+          placeholder="blur"
+          blurDataURL={NAVY_BLUR_URL}
         />
         <div className="ph2-overlay" />
         <div className="ph2-content">
@@ -41,11 +48,12 @@ export default function PageHero({ image, en, ja, footer }: Props) {
         .ph2-overlay {
           position: absolute;
           inset: 0;
+          z-index: 1;
           background: rgba(0,0,0,.52);
         }
         .ph2-content {
           position: relative;
-          z-index: 1;
+          z-index: 2;
           width: 88%;
           max-width: 1100px;
           margin: 0 auto 0 6%;
@@ -73,7 +81,7 @@ export default function PageHero({ image, en, ja, footer }: Props) {
           position: absolute;
           bottom: 48px;
           right: 6%;
-          z-index: 1;
+          z-index: 2;
           display: flex;
           flex-direction: column;
           align-items: flex-end;

@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import ScrollLineIndicator from "../components/ScrollLineIndicator";
 import Link from "next/link";
 import Image from "next/image";
+
+const NAVY_BLUR_URL = `data:image/svg+xml;base64,${Buffer.from(
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"><rect width="1" height="1" fill="#15263b"/></svg>'
+).toString("base64")}`;
 import Ticker from "../components/Ticker";
 import SplitTitle from "../components/SplitTitle";
 import ServiceRows from "../components/ServiceRows";
@@ -47,6 +51,8 @@ export default function ServicePage() {
           style={{ objectFit: "cover", objectPosition: "center" }}
           priority
           unoptimized
+          placeholder="blur"
+          blurDataURL={NAVY_BLUR_URL}
         />
         <div className="hero-overlay" />
         <div className="hero-content">
@@ -166,11 +172,12 @@ export default function ServicePage() {
         .hero-overlay {
           position: absolute;
           inset: 0;
+          z-index: 1;
           background: rgba(0,0,0,.52);
         }
         .hero-content {
           position: relative;
-          z-index: 1;
+          z-index: 2;
           width: 88%;
           max-width: 1100px;
           margin: 0 auto 0 6%;
