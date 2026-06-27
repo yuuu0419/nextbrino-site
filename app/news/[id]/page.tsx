@@ -1,27 +1,63 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import ScrollLineIndicator from "../../components/ScrollLineIndicator";
-import { useParams } from "next/navigation";
 import Link from "next/link";
+import ScrollLineIndicator from "../../components/ScrollLineIndicator";
+import { notFound } from "next/navigation";
+
+const NOTION_TOKEN = process.env.NOTION_TOKEN!;
+
+async function fetchBlocks(blockId: string): Promise<any[]> {
+  const res = await fetch(
+    `https://api.notion.com/v1/blocks/${blockId}/children?page_size=100`,
+    {
+      headers: {
+        Authorization: `Bearer ${NOTION_TOKEN}`,
+        "Notion-Version": "2022-06-28",
+      },
+      next: { revalidate: 3600 },
+    }
+  );
+  if (!res.ok) return [];
+  const data = await res.json();
+  return data.results ?? [];
+}
+
+async function fetchPage(id: string): Promise<{ title: string; date: string; blocks: any[] } | null> {
+  const pageRes = await fetch(`https://api.notion.com/v1/pages/${id}`, {
+    headers: {
+      Authorization: `Bearer ${NOTION_TOKEN}`,
+      "Notion-Version": "2022-06-28",
+    },
+    next: { revalidate: 3600 },
+  });
+  if (!pageRes.ok) return null;
+  const page = await pageRes.json();
+
+  const props = page.properties;
+  const titleProp = props["名前"] ?? props["タイトル"] ?? props["title"];
+  const title = titleProp?.title?.map((t: any) => t.plain_text).join("") ?? "";
+  const date = props["日付"]?.date?.start ?? page.created_time;
+  const blocks = await fetchBlocks(id);
+
+  return { title, date, blocks };
+}
 
 function formatDate(dateStr: string) {
   const d = new Date(dateStr);
   return d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + d.getDate() + "日";
 }
 
-function renderBlock(block: any, i: number): React.ReactNode {
-  const getText = (richText: any[]) =>
-    richText?.map((t: any, j: number) => {
-      let text: React.ReactNode = t.plain_text;
-      if (t.annotations?.bold) text = <strong key={j}>{text}</strong>;
-      if (t.annotations?.italic) text = <em key={j}>{text}</em>;
-      if (t.annotations?.underline) text = <u key={j}>{text}</u>;
-      if (t.annotations?.strikethrough) text = <s key={j}>{text}</s>;
-      if (t.href) text = <a key={j} href={t.href} target="_blank" rel="noopener noreferrer" className="nd-link">{text}</a>;
-      return <span key={j}>{text}</span>;
-    }) ?? null;
+function getText(richText: any[]) {
+  return richText?.map((t: any, j: number) => {
+    let text: React.ReactNode = t.plain_text;
+    if (t.annotations?.bold) text = <strong key={j}>{text}</strong>;
+    if (t.annotations?.italic) text = <em key={j}>{text}</em>;
+    if (t.annotations?.underline) text = <u key={j}>{text}</u>;
+    if (t.annotations?.strikethrough) text = <s key={j}>{text}</s>;
+    if (t.href) text = <a key={j} href={t.href} target="_blank" rel="noopener noreferrer" className="nd-link">{text}</a>;
+    return <span key={j}>{text}</span>;
+  }) ?? null;
+}
 
+function renderBlock(block: any, i: number): React.ReactNode {
   switch (block.type) {
     case "paragraph":
       return <p key={i} className="nd-p">{getText(block.paragraph.rich_text)}</p>;
@@ -48,20 +84,15 @@ function renderBlock(block: any, i: number): React.ReactNode {
   }
 }
 
-export default function NewsDetailPage() {
-  const { id } = useParams<{ id: string }>();
-  const [data, setData] = useState<{ title: string; date: string; blocks: any[] } | null>(null);
-  const [error, setError] = useState(false);
+export default async function NewsDetailPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const data = await fetchPage(id);
 
-  useEffect(() => {
-    fetch(`/api/notion-page/${id}`)
-      .then((r) => r.json())
-      .then((d) => {
-        if (d.error) setError(true);
-        else setData(d);
-      })
-      .catch(() => setError(true));
-  }, [id]);
+  if (!data) notFound();
 
   return (
     <main className="nd-main">
@@ -69,22 +100,16 @@ export default function NewsDetailPage() {
         <Link href="/news" className="nd-back">← お知らせ一覧に戻る</Link>
       </div>
 
-      {error ? (
-        <p className="nd-error">記事を取得できませんでした。</p>
-      ) : !data ? (
-        <p className="nd-loading">L O A D I N G ...</p>
-      ) : (
-        <article className="nd-article">
-          <header className="nd-header">
-            <p className="nd-date">{formatDate(data.date)}</p>
-            <h1 className="nd-title">{data.title}</h1>
-            <div className="nd-divider" />
-          </header>
-          <div className="nd-body">
-            {data.blocks.map((block, i) => renderBlock(block, i))}
-          </div>
-        </article>
-      )}
+      <article className="nd-article">
+        <header className="nd-header">
+          <p className="nd-date">{formatDate(data.date)}</p>
+          <h1 className="nd-title">{data.title}</h1>
+          <div className="nd-divider" />
+        </header>
+        <div className="nd-body">
+          {data.blocks.map((block, i) => renderBlock(block, i))}
+        </div>
+      </article>
 
       <style>{`
         .nd-main {
@@ -106,14 +131,6 @@ export default function NewsDetailPage() {
           transition: opacity .2s;
         }
         .nd-back:hover { opacity: .7; }
-
-        .nd-loading, .nd-error {
-          text-align: center;
-          color: #999;
-          padding: 80px 0;
-          letter-spacing: .18em;
-          font-size: .85rem;
-        }
 
         .nd-header { margin-bottom: 48px; }
         .nd-date {
