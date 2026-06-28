@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
       .join("");
 
     await resend.emails.send({
-      from: "NEXT BRINO <onboarding@resend.dev>",
+      from: "NEXT BRINO <noreply@nextbrino.com>",
       to: "kuroki-yuta@nextbrino.com",
       subject: "NEXT BRINO｜問合せ",
       html: `
@@ -87,7 +87,7 @@ export async function POST(req: NextRequest) {
       .join("");
 
     await resend.emails.send({
-      from: "NEXT BRINO <onboarding@resend.dev>",
+      from: "NEXT BRINO <noreply@nextbrino.com>",
       to: email,
       subject: "お問い合わせを受け付けました。",
       html: `
