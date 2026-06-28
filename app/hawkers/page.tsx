@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import PdfViewer from "./PdfViewer";
+import PdfViewerWrapper from "./PdfViewerWrapper";
 
 export const metadata: Metadata = {
   title: "株式会社Hawker's様 限定のご案内｜NEXT BRINO",
@@ -49,7 +49,7 @@ export default function HawkersPage() {
 
         {/* スマホ: react-pdf で全ページ表示 */}
         <div className="md:hidden w-full border border-white/10 rounded overflow-hidden bg-white mb-6">
-          <PdfViewer file="/hawkers.pdf" />
+          <PdfViewerWrapper file="/hawkers.pdf" />
         </div>
 
         <div className="flex justify-center">
