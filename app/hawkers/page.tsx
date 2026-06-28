@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PdfViewer from "./PdfViewer";
 
 export const metadata: Metadata = {
   title: "株式会社Hawker's様 限定のご案内｜NEXT BRINO",
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function SalesPage() {
+export default function HawkersPage() {
   return (
     <main className="min-h-screen bg-[#0a0f1e] text-white flex flex-col items-center py-16 px-4">
       <div className="w-full max-w-5xl">
@@ -36,13 +37,19 @@ export default function SalesPage() {
         </h1>
         <p className="text-sm text-gray-400 mb-10 tracking-wider">限定のご案内</p>
 
-        <div className="w-full border border-white/10 rounded overflow-hidden bg-white/5 mb-6">
+        {/* PC: iframe */}
+        <div className="hidden md:block w-full border border-white/10 rounded overflow-hidden bg-white/5 mb-6">
           <iframe
             src="/hawkers.pdf"
             className="w-full"
             style={{ height: "80vh", minHeight: 600 }}
             title="NEXT BRINO 営業資料"
           />
+        </div>
+
+        {/* スマホ: react-pdf で全ページ表示 */}
+        <div className="md:hidden w-full border border-white/10 rounded overflow-hidden bg-white mb-6">
+          <PdfViewer file="/hawkers.pdf" />
         </div>
 
         <div className="flex justify-center">
