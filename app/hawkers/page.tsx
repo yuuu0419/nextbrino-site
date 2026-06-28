@@ -1,10 +1,26 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Hawkers｜NEXT BRINO",
+  title: "株式会社Hawker's様 限定のご案内｜NEXT BRINO",
+  description: "NEXT BRINOより、株式会社Hawker's様 限定のご案内です。",
   robots: {
     index: false,
     follow: false,
+  },
+  openGraph: {
+    title: "株式会社Hawker's様 限定のご案内｜NEXT BRINO",
+    description: "NEXT BRINOより、株式会社Hawker's様 限定のご案内です。",
+    url: "https://nextbrino.com/hawkers",
+    siteName: "NEXT BRINO",
+    images: [{ url: "https://nextbrino.com/images/hawkers-ogp.jpg", width: 1200, height: 630, alt: "株式会社Hawker's様 限定のご案内｜NEXT BRINO" }],
+    locale: "ja_JP",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "株式会社Hawker's様 限定のご案内｜NEXT BRINO",
+    description: "NEXT BRINOより、株式会社Hawker's様 限定のご案内です。",
+    images: ["https://nextbrino.com/images/hawkers-ogp.jpg"],
   },
 };
 
@@ -16,9 +32,9 @@ export default function SalesPage() {
           className="text-3xl md:text-4xl font-light tracking-widest mb-2"
           style={{ fontFamily: "var(--font-barlow-condensed)" }}
         >
-          SALES DOCUMENT
+          株式会社Hawker&apos;s様
         </h1>
-        <p className="text-sm text-gray-400 mb-10 tracking-wider">営業資料</p>
+        <p className="text-sm text-gray-400 mb-10 tracking-wider">限定のご案内</p>
 
         <div className="w-full border border-white/10 rounded overflow-hidden bg-white/5 mb-6">
           <iframe
