@@ -43,7 +43,7 @@ export default function ContactPolicyPage() {
       <div className="cp-bg-wrap">
         <div className="cp-bg-dots" />
       <div className="pc">
-        <p className="cp-intro">当社サービスに関するお問合せをご検討のお客様へ、対応方針についてご案内いたします。<br />お手続き前にご一読いただけますと幸いです。</p>
+        <p className="cp-intro">お問合せをご検討のお客様へ、対応方針についてご案内いたします。<br />お手続き前にご一読いただけますと幸いです。</p>
         <div className="cp-notice">
           <div className="cp-notice-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" aria-hidden="true">
@@ -127,8 +127,8 @@ export default function ContactPolicyPage() {
           <div className="cp-section">
             <div className="cp-head"><span className="cp-num">05</span><h2 className="cp-title">個人情報の取り扱い</h2></div>
             <div className="cp-body-wrap">
-              <p className="cp-body">お問合せの際にご提供いただいた個人情報は、<br className="sp-br" />お問合せへの対応および当社からのご連絡の目的にのみ<br className="sp-br" />使用いたします。</p>
-              <p className="cp-body">法令に定める場合を除き、<br className="sp-br" />第三者への提供・開示は行いません。<br className="sp-br" />詳細は当社の<Link href="/privacy-policy" className="cp-link">プライバシーポリシー</Link>をご参照ください。</p>
+              <p className="cp-body">お問合せの際にご提供いただいた個人情報は、<br className="sp-br" />お問合せへの対応およびご連絡の目的にのみ<br className="sp-br" />使用いたします。</p>
+              <p className="cp-body">法令に定める場合を除き、<br className="sp-br" />第三者への提供・開示は行いません。<br className="sp-br" />詳細は<Link href="/privacy-policy" className="cp-link">プライバシーポリシー</Link>をご参照ください。</p>
             </div>
           </div>
 

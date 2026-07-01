@@ -745,6 +745,8 @@ body {
   .svc-brand-desc { display: block; }
   .svc-hover-bg { display: none; }
   .svc-brand-top-dots { display: none; }
+  .svc-brand-card:hover .svc-brand-title { color: #15263b; }
+  .svc-brand-card:hover .svc-brand-desc { color: rgba(21,38,59,0.5); }
 }
 
 /* ── グラデーションボーダーカード ── */
