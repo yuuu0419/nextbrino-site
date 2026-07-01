@@ -62,9 +62,15 @@ const historyData: HistoryYear[] = [
 function YearBlock({ entry, index }: { entry: HistoryYear; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const isRight = index % 2 === 0; // year奇数→左、カード右
 
   useEffect(() => {
+    if (window.innerWidth < 768) {
+      setIsMobile(true);
+      setVisible(true);
+      return;
+    }
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
@@ -80,19 +86,19 @@ function YearBlock({ entry, index }: { entry: HistoryYear; index: number }) {
   const yearStyle = {
     opacity: visible ? 0.55 : 0,
     transform: visible ? "translateX(0)" : `translateX(${isRight ? "-40px" : "40px"})`,
-    transition: visible ? `opacity 0.5s ease 60ms, transform 0.55s ${ease} 60ms` : "none",
+    transition: isMobile ? "none" : visible ? `opacity 0.5s ease 60ms, transform 0.55s ${ease} 60ms` : "none",
   };
 
   const cardStyle = {
     opacity: visible ? 1 : 0,
     transform: visible ? "translateX(0)" : `translateX(${isRight ? "40px" : "-40px"})`,
-    transition: visible ? `opacity 0.5s ease 100ms, transform 0.55s ${ease} 100ms` : "none",
+    transition: isMobile ? "none" : visible ? `opacity 0.5s ease 100ms, transform 0.55s ${ease} 100ms` : "none",
   };
 
   const dotStyle = {
     opacity: visible ? 1 : 0,
     transform: visible ? "scale(1)" : "scale(0)",
-    transition: visible ? `opacity 0.5s ease 150ms, transform 0.5s ${ease} 150ms` : "none",
+    transition: isMobile ? "none" : visible ? `opacity 0.5s ease 150ms, transform 0.5s ${ease} 150ms` : "none",
   };
 
   return (

@@ -18,9 +18,12 @@ export default function NewsSection() {
   }, []);
 
   useEffect(() => {
+    if (window.innerWidth < 768) {
+      setVisible(true);
+      return;
+    }
     const el = boxRef.current;
     if (!el) return;
-    const mobile = window.innerWidth < 768;
     const obs = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
       { threshold: 0.05, rootMargin: "0px 0px 40px 0px" }
@@ -51,7 +54,7 @@ export default function NewsSection() {
         position: "relative", width: "90%", maxWidth: 1100, margin: "0 auto",
         transform: visible ? "scale(1)" : "scale(0.97)",
         opacity: visible ? 1 : 0,
-        transition: "transform 1.4s cubic-bezier(0.22,1,0.36,1), opacity 1.1s ease",
+        transition: isMobile ? "none" : "transform 1.4s cubic-bezier(0.22,1,0.36,1), opacity 1.1s ease",
       }}>
 
         {/* HUD四隅ブラケット */}

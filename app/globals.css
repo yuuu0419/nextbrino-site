@@ -53,6 +53,30 @@ body {
   .nb-news-item a {
     transition: none !important;
   }
+
+  /* フェードイン／スライドイン／文字遅延アニメーションを無効化（軽量化）
+     ※ 流れる英語(ticker)・タイトルの降下(SplitTitle)・線を光が走る演出
+     （shimmer/scan-line/gold-slide/sep-shine）・ハンバーガーメニューは対象外 */
+  .ph-reveal,
+  .ph-sec-reveal,
+  .ph-sec-reveal--visible,
+  .nb-news-item,
+  .svc-tl-item,
+  .va-group {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+  .svc-timeline-line {
+    animation: none !important;
+    height: 100% !important;
+  }
+  .svc-tl-node {
+    opacity: 1 !important;
+    transform: translateX(-50%) scale(1) !important;
+    animation: svc-gold-pulse 3s ease-in-out infinite !important;
+  }
 }
 
 /* ===================== Ken Burns ===================== */

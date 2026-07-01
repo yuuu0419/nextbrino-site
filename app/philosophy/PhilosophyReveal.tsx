@@ -3,6 +3,13 @@ import { useEffect } from "react";
 
 export default function PhilosophyReveal() {
   useEffect(() => {
+    if (window.innerWidth < 768) {
+      document.querySelectorAll(".ph-reveal, .ph-sec-reveal").forEach((el) => {
+        el.classList.add("ph-reveal--visible", "ph-sec-reveal--visible");
+      });
+      return;
+    }
+
     const reveal = () => {
       document.querySelectorAll(".ph-reveal:not(.ph-reveal--visible)").forEach((el) => {
         const rect = el.getBoundingClientRect();

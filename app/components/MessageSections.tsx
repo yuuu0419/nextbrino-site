@@ -6,7 +6,13 @@ import Image from "next/image";
 function useVisible(threshold = 0.12) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
+    if (window.innerWidth < 768) {
+      setIsMobile(true);
+      setVisible(true);
+      return;
+    }
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
@@ -16,27 +22,31 @@ function useVisible(threshold = 0.12) {
     obs.observe(el);
     return () => obs.disconnect();
   }, [threshold]);
-  return { ref, visible };
+  return { ref, visible, isMobile };
 }
 
 const ease = "cubic-bezier(0.22,1,0.36,1)";
 
-function fadeUp(visible: boolean, delay: number) {
+function fadeUp(visible: boolean, delay: number, isMobile = false) {
   return {
     opacity: visible ? 1 : 0,
     transform: visible ? "translateY(0)" : "translateY(18px)",
-    transition: visible
+    transition: isMobile
+      ? "none"
+      : visible
       ? `opacity 0.5s ease ${delay}ms, transform 0.55s ${ease} ${delay}ms`
       : "none",
   };
 }
 
-function slideIn(visible: boolean, dir: "left" | "right", delay: number) {
+function slideIn(visible: boolean, dir: "left" | "right", delay: number, isMobile = false) {
   const tx = dir === "left" ? "-36px" : "36px";
   return {
     opacity: visible ? 1 : 0,
     transform: visible ? "translateX(0)" : `translateX(${tx})`,
-    transition: visible
+    transition: isMobile
+      ? "none"
+      : visible
       ? `opacity 0.5s ease ${delay}ms, transform 0.6s ${ease} ${delay}ms`
       : "none",
   };
@@ -52,8 +62,8 @@ export default function MessageSections() {
       <section ref={s1.ref} className="ms-section ms-section--light">
         <div className="ms-inner ms-inner--text-left">
           {/* テキスト */}
-          <div className="ms-body" style={slideIn(s1.visible, "left", 60)}>
-            <div style={fadeUp(s1.visible, 160)}>
+          <div className="ms-body" style={slideIn(s1.visible, "left", 60, s1.isMobile)}>
+            <div style={fadeUp(s1.visible, 160, s1.isMobile)}>
               <Image
                 src="/images/top-message-title-2.webp"
                 alt="私たちが創造する世界"
@@ -63,11 +73,11 @@ export default function MessageSections() {
                 sizes="(max-width: 768px) 80vw, 38vw"
               />
             </div>
-            <div className="ms-anim-line" style={fadeUp(s1.visible, 220)}>
+            <div className="ms-anim-line" style={fadeUp(s1.visible, 220, s1.isMobile)}>
               <div className="ms-anim-line-base" />
               <div className="ms-anim-line-slide" />
             </div>
-            <div className="ms-text-block" style={fadeUp(s1.visible, 280)}>
+            <div className="ms-text-block" style={fadeUp(s1.visible, 280, s1.isMobile)}>
               <p>
                 現代は、技術の進化により、あらゆるものが速く、<br className="pc-br" /><br className="sp-br" />
                 便利になり、情報は瞬時に届くようになりました。<br className="pc-br" /><br className="sp-br" />
@@ -108,7 +118,7 @@ export default function MessageSections() {
           </div>
 
           {/* 写真 */}
-          <div className="ms-photo-wrap ms-photo-wrap--right" style={slideIn(s1.visible, "right", 120)}>
+          <div className="ms-photo-wrap ms-photo-wrap--right" style={slideIn(s1.visible, "right", 120, s1.isMobile)}>
             <div className="ms-photo-inner ms-photo-inner--reverse">
               <Image
                 src="/images/message-creative.webp"
@@ -128,7 +138,7 @@ export default function MessageSections() {
       <section ref={s2.ref} className="ms-section ms-section--navy" data-header-dark>
         <div className="ms-inner ms-inner--photo-left ms-inner--shift-right">
           {/* 写真 */}
-          <div className="ms-photo-wrap ms-photo-wrap--left" style={slideIn(s2.visible, "left", 60)}>
+          <div className="ms-photo-wrap ms-photo-wrap--left" style={slideIn(s2.visible, "left", 60, s2.isMobile)}>
             <div className="ms-photo-inner">
               <Image
                 src="/images/message-profile.webp"
@@ -143,8 +153,8 @@ export default function MessageSections() {
           </div>
 
           {/* テキスト */}
-          <div className="ms-body ms-body--navy ms-body--shifted" style={slideIn(s2.visible, "right", 100)}>
-            <div style={fadeUp(s2.visible, 200)}>
+          <div className="ms-body ms-body--navy ms-body--shifted" style={slideIn(s2.visible, "right", 100, s2.isMobile)}>
+            <div style={fadeUp(s2.visible, 200, s2.isMobile)}>
               <Image
                 src="/images/top-message-title-4.webp"
                 alt="繊細に想像し、大胆に創造する。"
@@ -154,11 +164,11 @@ export default function MessageSections() {
                 sizes="(max-width: 768px) 80vw, 38vw"
               />
             </div>
-            <div className="ms-anim-line ms-anim-line--tight" style={fadeUp(s2.visible, 260)}>
+            <div className="ms-anim-line ms-anim-line--tight" style={fadeUp(s2.visible, 260, s2.isMobile)}>
               <div className="ms-anim-line-base" />
               <div className="ms-anim-line-slide" />
             </div>
-            <div className="ms-text-block ms-text-block--white" style={fadeUp(s2.visible, 320)}>
+            <div className="ms-text-block ms-text-block--white" style={fadeUp(s2.visible, 320, s2.isMobile)}>
               <p>
                 「繊細に想像し、大胆に創造する」<br className="pc-br" />
                 <span className="sp-para-break" />
@@ -188,7 +198,7 @@ export default function MessageSections() {
             </div>
 
             {/* プロフィール */}
-            <div className="ms-profile ms-profile--glass" style={fadeUp(s2.visible, 420)}>
+            <div className="ms-profile ms-profile--glass" style={fadeUp(s2.visible, 420, s2.isMobile)}>
               <p className="ms-profile-label">― 代表プロフィール ―</p>
               <div className="ms-text-block ms-text-block--white ms-text-block--profile">
                 {/* PC用 */}

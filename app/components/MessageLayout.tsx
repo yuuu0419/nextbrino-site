@@ -6,9 +6,15 @@ import Image from "next/image";
 export default function MessageLayout() {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const ease = "cubic-bezier(0.22,1,0.36,1)";
 
   useEffect(() => {
+    if (window.innerWidth < 768) {
+      setIsMobile(true);
+      setVisible(true);
+      return;
+    }
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
@@ -24,7 +30,7 @@ export default function MessageLayout() {
   const slideLeft = {
     opacity: visible ? 1 : 0,
     transform: visible ? "translateX(0)" : "translateX(-28px)",
-    transition: visible ? `opacity 0.5s ease 40ms, transform 0.55s ${ease} 40ms` : "none",
+    transition: isMobile ? "none" : visible ? `opacity 0.5s ease 40ms, transform 0.55s ${ease} 40ms` : "none",
   };
 
   const photoTilt = {
@@ -34,7 +40,7 @@ export default function MessageLayout() {
   const fadeUp = (delay: number) => ({
     opacity: visible ? 1 : 0,
     transform: visible ? "translateY(0)" : "translateY(14px)",
-    transition: visible ? `opacity 0.5s ease ${delay}ms, transform 0.55s ${ease} ${delay}ms` : "none",
+    transition: isMobile ? "none" : visible ? `opacity 0.5s ease ${delay}ms, transform 0.55s ${ease} ${delay}ms` : "none",
   });
 
   return (

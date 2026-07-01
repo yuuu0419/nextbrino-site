@@ -15,8 +15,14 @@ interface Service {
 function ServiceRow({ s, i }: { s: Service; i: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    if (window.innerWidth < 768) {
+      setIsMobile(true);
+      setVisible(true);
+      return;
+    }
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
@@ -41,7 +47,9 @@ function ServiceRow({ s, i }: { s: Service; i: number }) {
   const slideIn = (translateX: string, delay: number, duration = 0.6) => ({
     opacity: visible ? 1 : 0,
     transform: visible ? "translateX(0)" : `translateX(${translateX})`,
-    transition: visible
+    transition: isMobile
+      ? "none"
+      : visible
       ? `opacity 0.5s ease ${delay}ms, transform ${duration}s ${ease} ${delay}ms`
       : "none",
   });
@@ -49,7 +57,9 @@ function ServiceRow({ s, i }: { s: Service; i: number }) {
   const fadeUp = (delay: number) => ({
     opacity: visible ? 1 : 0,
     transform: visible ? "translateY(0)" : "translateY(16px)",
-    transition: visible
+    transition: isMobile
+      ? "none"
+      : visible
       ? `opacity 0.5s ease ${delay}ms, transform 0.55s ${ease} ${delay}ms`
       : "none",
   });

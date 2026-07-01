@@ -21,8 +21,14 @@ export default function FadeIn({
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    if (window.innerWidth < 768) {
+      setIsMobile(true);
+      setVisible(true);
+      return;
+    }
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
@@ -49,7 +55,9 @@ export default function FadeIn({
         ...style,
         opacity: visible ? 1 : 0,
         transform: visible ? "translate(0)" : translate,
-        transition: visible
+        transition: isMobile
+          ? "none"
+          : visible
           ? `opacity 0.5s ease ${delay}ms, transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94) ${delay}ms`
           : "none",
       }}
