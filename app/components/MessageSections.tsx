@@ -214,7 +214,7 @@ export default function MessageSections() {
                 </p>
                 {/* スマホ用 */}
                 <p className="ms-profile-sp">
-                  2001年生まれ。学生時代は長くサッカーに打ち込み、<br />
+                  2001年生まれ。学生時代はサッカーに打ち込み、<br />
                   専門分野では主に健康・医療、情報、法律を学ぶ。
                 </p>
                 <p className="ms-profile-sp">
