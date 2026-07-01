@@ -43,7 +43,7 @@ export default function ContactPolicyPage() {
       <div className="cp-bg-wrap">
         <div className="cp-bg-dots" />
       <div className="pc">
-        <p className="cp-intro">お問合せをご検討のお客様へ、対応方針についてご案内いたします。<br />お手続き前にご一読いただけますと幸いです。</p>
+        <p className="cp-intro">お問合せをご検討のお客様へ、<br className="sp-br" />対応方針についてご案内いたします。<br className="sp-br" />お手続き前にご一読いただけますと幸いです。</p>
         <div className="cp-notice">
           <div className="cp-notice-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" aria-hidden="true">

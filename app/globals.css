@@ -662,7 +662,7 @@ body {
 /* 説明文 */
 .svc-brand-desc {
   font-size: 0.72rem;
-  color: rgba(21,38,59,0.5);
+  color: rgba(21,38,59,0.62);
   line-height: 2.1;
   margin: 0;
   flex: 1;
