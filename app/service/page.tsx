@@ -126,7 +126,7 @@ export default function ServicePage() {
               {/* 対応情報 */}
               <div className="sv-contact-info">
                 <p className="sv-contact-info-line">対応時間：平日10:00〜17:00（土日祝を除く）</p>
-                <p className="sv-contact-info-line">ご返答の目安：2〜5営業日程度（内容によって異なります）</p>
+                <p className="sv-contact-info-line">返信目安：2〜5営業日程度（内容によって異なります）</p>
               </div>
             </div>
 

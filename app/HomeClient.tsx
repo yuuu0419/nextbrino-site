@@ -1128,7 +1128,7 @@ export default function HomeClient() {
                     color: "rgba(255,255,255,0.35)",
                     fontFamily: "var(--font-noto-sans-jp),sans-serif",
                     margin: 0,
-                  }}>ご返答の目安：2〜5営業日程度（内容によって異なります）</p>
+                  }}>返信目安：2〜5営業日程度（内容によって異なります）</p>
                 </div>
               </div>
 
