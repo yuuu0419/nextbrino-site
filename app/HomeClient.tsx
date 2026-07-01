@@ -187,6 +187,14 @@ export default function HomeClient() {
     return () => clearInterval(t);
   }, [slideshowActive]);
 
+  /* 2枚目・3枚目のスライド画像は初期表示から少し遅らせてマウントし、
+     初回表示に必要な帯域幅（LCP用の1枚目画像・フォント・JS）を優先する */
+  const [loadedSlides, setLoadedSlides] = useState<number[]>([0]);
+  useEffect(() => {
+    const t = setTimeout(() => setLoadedSlides([0, 1, 2]), 2500);
+    return () => clearTimeout(t);
+  }, []);
+
   useEffect(() => {
     if (window.innerWidth < 768) {
       setPhiloVisible(true);
@@ -319,15 +327,17 @@ export default function HomeClient() {
             key={src}
             className={`fv-slide${i === slide ? (tick % 2 === 0 ? " active-odd" : " active-even") : ""}`}
           >
-            <Image
-              src={src}
-              alt={alt}
-              fill
-              sizes="(max-width: 767px) 100vw, 100vw"
-              style={{ objectFit: "cover" }}
-              priority={i === 0}
-              quality={80}
-            />
+            {loadedSlides.includes(i) && (
+              <Image
+                src={src}
+                alt={alt}
+                fill
+                sizes="(max-width: 767px) 100vw, 100vw"
+                style={{ objectFit: "cover" }}
+                priority={i === 0}
+                quality={80}
+              />
+            )}
           </div>
         ))}
         <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.22)", zIndex: 2, pointerEvents: "none" }} />

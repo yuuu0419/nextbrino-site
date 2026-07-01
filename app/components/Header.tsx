@@ -31,7 +31,6 @@ const POLICY_LINKS = [
 ];
 
 export default function Header() {
-  const [isMobile, setIsMobile] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [onDark, setOnDark] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -45,7 +44,6 @@ export default function Header() {
   const toggleMenu = () => menuOpen ? closeMenu() : openMenu();
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
     let rafId: number | null = null;
     const checkScroll = () => {
       if (rafId !== null) return;
@@ -62,12 +60,9 @@ export default function Header() {
         setOnDark(isDark);
       });
     };
-    checkMobile();
     checkScroll();
-    window.addEventListener("resize", checkMobile);
     window.addEventListener("scroll", checkScroll, { passive: true });
     return () => {
-      window.removeEventListener("resize", checkMobile);
       window.removeEventListener("scroll", checkScroll);
       if (rafId !== null) cancelAnimationFrame(rafId);
     };
@@ -123,6 +118,20 @@ export default function Header() {
           background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.18), transparent);
           flex-shrink: 0;
           transition: background 0.3s;
+        }
+
+        /* ── PC/モバイル切り替え（JS判定によるレイアウトシフトを防ぐためCSSのみで制御） ── */
+        .hd-logo-link { transform: none; }
+        .hd-logo-img { width: 220px !important; height: auto !important; }
+        .hd-pc-nav { display: flex; align-items: center; }
+        @media (max-width: 767px) {
+          .hd-logo-link { transform: translate(2px, 7px); }
+          .hd-logo-img { width: 150px !important; }
+          .hd-pc-nav { display: none !important; }
+        }
+        @media (min-width: 768px) {
+          .hd-burger-btn { display: none !important; }
+          .hd-overlay { display: none !important; }
         }
 
         /* ── スクロール後 PC ── */
@@ -529,8 +538,8 @@ export default function Header() {
         }
       `}</style>
 
-      {/* フルスクリーンオーバーレイ（スマホのみ） */}
-      {isMobile && (
+      {/* フルスクリーンオーバーレイ（スマホのみ表示・PCではCSSで非表示） */}
+      {(
         <div className={`hd-overlay${menuOpen && !menuClosing ? " open" : ""}${menuClosing ? " closing" : ""}`}>
 
           {/* オーバーレイ内ロゴ */}
@@ -629,7 +638,7 @@ export default function Header() {
           top: 0, left: 0,
           width: "100%",
           zIndex: 1000,
-          padding: isMobile ? "8px 5%" : "8px 5%",
+          padding: "8px 5%",
           background: scrolled
             ? "rgba(255,255,255,0.03)"
             : "transparent",
@@ -648,37 +657,36 @@ export default function Header() {
         }}
       >
         {/* ロゴ */}
-        <Link href="/" style={{ display: "flex", flexShrink: 0, transform: isMobile ? "translate(2px, 7px)" : "none" }} onClick={(e) => { closeMenu(); if (window.location.pathname === "/") { e.preventDefault(); window.scrollTo({ top: 0 }); window.location.reload(); } }}>
+        <Link href="/" className="hd-logo-link" style={{ display: "flex", flexShrink: 0 }} onClick={(e) => { closeMenu(); if (window.location.pathname === "/") { e.preventDefault(); window.scrollTo({ top: 0 }); window.location.reload(); } }}>
           <Image
             src="/images/header-logo.webp"
             alt="NEXT BRINO"
             width={240}
             height={72}
-            style={{ width: isMobile ? 150 : 220, height: "auto" }}
+            className="hd-logo-img"
+            style={{ height: "auto" }}
             priority
           />
         </Link>
 
-        {/* PC ナビゲーション */}
-        {!isMobile && (
-          <nav style={{ display: "flex", alignItems: "center" }}>
-            {PC_NAV_LINKS.map((link, i) => (
-              <div key={link.href} style={{ display: "flex", alignItems: "center" }}>
-                {i > 0 && <span className="hd-sep" />}
-                <Link href={link.href} className="hd-nav-link">
-                  <span className="hd-nav-num">{String(i + 1).padStart(2, "0")}</span>
-                  <span className="hd-nav-line" aria-hidden />
-                  <span>{link.label}</span>
-                </Link>
-              </div>
-            ))}
-          </nav>
-        )}
+        {/* PC ナビゲーション（モバイルではCSSで非表示） */}
+        <nav className="hd-pc-nav">
+          {PC_NAV_LINKS.map((link, i) => (
+            <div key={link.href} style={{ display: "flex", alignItems: "center" }}>
+              {i > 0 && <span className="hd-sep" />}
+              <Link href={link.href} className="hd-nav-link">
+                <span className="hd-nav-num">{String(i + 1).padStart(2, "0")}</span>
+                <span className="hd-nav-line" aria-hidden />
+                <span>{link.label}</span>
+              </Link>
+            </div>
+          ))}
+        </nav>
 
-        {/* スマホ ハンバーガーボタン */}
-        {isMobile && (
+        {/* スマホ ハンバーガーボタン（PCではCSSで非表示） */}
+        {(
           <button
-            className={`hd-burger${menuOpen && !menuClosing ? " open" : ""}`}
+            className={`hd-burger-btn hd-burger${menuOpen && !menuClosing ? " open" : ""}`}
             onClick={toggleMenu}
             aria-label={menuOpen ? "メニューを閉じる" : "メニューを開く"}
             aria-expanded={menuOpen}
