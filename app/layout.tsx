@@ -57,6 +57,9 @@ export const metadata: Metadata = {
       "NEXT BRINOの公式サイトです。ITシステム開発・Web制作を中心に6つの事業を提供しております。",
     images: ["https://nextbrino.com/images/toppage-ogp.jpg"],
   },
+  icons: {
+    apple: "/images/add-logo.png",
+  },
 };
 
 export default function RootLayout({
