@@ -2,11 +2,28 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { Client } from "@notionhq/client";
 
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
+const RATE_LIMIT_MAX = 3;
+const requestLog = new Map<string, number[]>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const timestamps = (requestLog.get(ip) ?? []).filter((t) => now - t < RATE_LIMIT_WINDOW_MS);
+  timestamps.push(now);
+  requestLog.set(ip, timestamps);
+  return timestamps.length > RATE_LIMIT_MAX;
+}
+
 export async function POST(req: NextRequest) {
   const resend = new Resend(process.env.RESEND_API_KEY);
   const notion = new Client({ auth: process.env.NOTION_API_KEY });
   const NOTION_DATABASE_ID = process.env.NOTION_DATABASE_ID!;
   try {
+    const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+    if (isRateLimited(ip)) {
+      return NextResponse.json({ error: "送信回数の上限に達しました。時間をおいて再度お試しください。" }, { status: 429 });
+    }
+
     const body = await req.json();
     const {
       category,
@@ -21,7 +38,13 @@ export async function POST(req: NextRequest) {
       url,
       message,
       budget,
+      website,
     } = body;
+
+    // Honeypot: ボットが自動入力するため、値が入っていれば静かに成功扱いで破棄
+    if (website) {
+      return NextResponse.json({ success: true });
+    }
 
     // Notionに保存
     await notion.pages.create({

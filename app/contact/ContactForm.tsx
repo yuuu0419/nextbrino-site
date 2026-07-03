@@ -8,6 +8,7 @@ export default function ContactForm() {
     email: "", phone: "", lineId: "", postalCode: "",
     address: "", url: "", message: "", budget: "",
   });
+  const [website, setWebsite] = useState("");
   const [agrees, setAgrees] = useState([false, false, false]);
   const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
 
@@ -27,7 +28,7 @@ export default function ContactForm() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, website }),
       });
       if (!res.ok) throw new Error();
       setStatus("done");
@@ -47,6 +48,18 @@ export default function ContactForm() {
 
   return (
     <form className="ct-form" onSubmit={handleSubmit}>
+      <div className="ct-honeypot" aria-hidden="true">
+        <label htmlFor="website">Website</label>
+        <input
+          type="text"
+          id="website"
+          name="website"
+          tabIndex={-1}
+          autoComplete="off"
+          value={website}
+          onChange={(e) => setWebsite(e.target.value)}
+        />
+      </div>
       <div className="ct-table">
 
         <div className="ct-row">
@@ -179,6 +192,7 @@ export default function ContactForm() {
       </div>
 
       <style>{`
+        .ct-honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
         .ct-complete { text-align: center; padding: 80px 0; }
         .ct-complete-title { font-size: 1.4rem; font-weight: 700; color: #15263b; margin-bottom: 16px; }
         .ct-complete-text { font-size: .95rem; line-height: 2; color: rgba(21,38,59,0.75); }
