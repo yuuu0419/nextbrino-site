@@ -1,6 +1,18 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import Script from "next/script";
+
+const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!;
+
+declare global {
+  interface Window {
+    grecaptcha: {
+      ready: (cb: () => void) => void;
+      execute: (siteKey: string, options: { action: string }) => Promise<string>;
+    };
+  }
+}
 
 export default function ContactForm() {
   const [form, setForm] = useState({
@@ -25,10 +37,18 @@ export default function ContactForm() {
     if (!canSubmit) return;
     setStatus("sending");
     try {
+      const recaptchaToken: string = await new Promise((resolve, reject) => {
+        window.grecaptcha.ready(() => {
+          window.grecaptcha
+            .execute(RECAPTCHA_SITE_KEY, { action: "contact" })
+            .then(resolve, reject);
+        });
+      });
+
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, website }),
+        body: JSON.stringify({ ...form, website, recaptchaToken }),
       });
       if (!res.ok) throw new Error();
       setStatus("done");
@@ -47,6 +67,8 @@ export default function ContactForm() {
   }
 
   return (
+    <>
+    <Script src={`https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`} strategy="afterInteractive" />
     <form className="ct-form" onSubmit={handleSubmit}>
       <div className="ct-honeypot" aria-hidden="true">
         <label htmlFor="website">Website</label>
@@ -200,5 +222,6 @@ export default function ContactForm() {
         .ct-submit:disabled { opacity: 0.45; cursor: not-allowed; }
       `}</style>
     </form>
+    </>
   );
 }

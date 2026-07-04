@@ -14,6 +14,22 @@ function isRateLimited(ip: string): boolean {
   return timestamps.length > RATE_LIMIT_MAX;
 }
 
+const RECAPTCHA_SCORE_THRESHOLD = 0.5;
+
+async function verifyRecaptcha(token: string): Promise<boolean> {
+  if (!token) return false;
+  const res = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({
+      secret: process.env.RECAPTCHA_SECRET_KEY!,
+      response: token,
+    }),
+  });
+  const data = await res.json();
+  return data.success === true && data.action === "contact" && data.score >= RECAPTCHA_SCORE_THRESHOLD;
+}
+
 export async function POST(req: NextRequest) {
   const resend = new Resend(process.env.RESEND_API_KEY);
   const notion = new Client({ auth: process.env.NOTION_API_KEY });
@@ -39,11 +55,17 @@ export async function POST(req: NextRequest) {
       message,
       budget,
       website,
+      recaptchaToken,
     } = body;
 
     // Honeypot: ボットが自動入力するため、値が入っていれば静かに成功扱いで破棄
     if (website) {
       return NextResponse.json({ success: true });
+    }
+
+    const recaptchaOk = await verifyRecaptcha(recaptchaToken);
+    if (!recaptchaOk) {
+      return NextResponse.json({ error: "reCAPTCHA認証に失敗しました。再度お試しください。" }, { status: 400 });
     }
 
     // Notionに保存
