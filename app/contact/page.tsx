@@ -346,7 +346,7 @@ export default function ContactPage() {
           flex-direction: row;
           gap: 0;
           margin-top: 16px;
-          margin-bottom: 96px;
+          margin-bottom: 32px;
           overflow: hidden;
         }
         .ct-banner-link {
@@ -367,7 +367,7 @@ export default function ContactPage() {
             gap: 12px;
             padding: 0 28px;
             margin-top: 16px;
-            margin-bottom: 80px;
+            margin-bottom: 28px;
             border-radius: 0;
             overflow: visible;
           }
