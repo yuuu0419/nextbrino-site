@@ -2,7 +2,7 @@ import Link from "next/link";
 import ScrollLineIndicator from "../../components/ScrollLineIndicator";
 import { notFound } from "next/navigation";
 
-const NOTION_TOKEN = process.env.NOTION_TOKEN!;
+const NOTION_TOKEN = process.env.NOTION_API_KEY!;
 
 async function fetchBlocks(blockId: string): Promise<any[]> {
   const res = await fetch(

@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     deviceSizes: [390, 640, 750, 828, 1080, 1200, 1920],
     minimumCacheTTL: 60 * 60 * 24 * 30,
+    remotePatterns: [
+      { protocol: "https", hostname: "prod-files-secure-apne1.s3.ap-northeast-1.amazonaws.com" },
+    ],
   },
   async redirects() {
     return [
