@@ -79,6 +79,7 @@ export async function POST(req: NextRequest) {
         メールアドレス: { rich_text: [{ text: { content: email || "" } }] },
         電話番号: { rich_text: [{ text: { content: phone || "" } }] },
         "LINE ID": { rich_text: [{ text: { content: lineId || "" } }] },
+        "ホームページURL": { url: url || null },
         問合せ内容: { rich_text: [{ text: { content: message || "" } }] },
         "予算（万円）": { rich_text: [{ text: { content: budget || "" } }] },
         受信日時: { date: { start: new Date().toISOString() } },
