@@ -214,6 +214,7 @@ export default function ContactForm() {
       </div>
 
       <style>{`
+        .grecaptcha-badge { visibility: hidden; }
         .ct-honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
         .ct-complete { text-align: center; padding: 80px 0; }
         .ct-complete-title { font-size: 1.4rem; font-weight: 700; color: #15263b; margin-bottom: 16px; }

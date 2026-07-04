@@ -87,7 +87,22 @@ export default function ContactPage() {
         </FadeIn>
       </div>
 
+      <p className="ct-recaptcha-notice">
+        このサイトはreCAPTCHAによって保護されており、Googleの<a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">プライバシーポリシー</a>と<a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">利用規約</a>が適用されます。
+      </p>
+
       <style>{`
+        .ct-recaptcha-notice {
+          width: 88%;
+          max-width: 1200px;
+          margin: 0 auto 64px;
+          font-size: .72rem;
+          line-height: 1.8;
+          color: rgba(21,38,59,0.45);
+          text-align: center;
+        }
+        .ct-recaptcha-notice a { color: rgba(21,38,59,0.55); text-decoration: underline; text-underline-offset: 2px; }
+        .ct-recaptcha-notice a:hover { opacity: .7; }
         /* セクションヘッダー（代表挨拶ページと同じ構造） */
         .ct-sec-header {
           width: 88%;
