@@ -69,8 +69,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Notionに保存
-    console.log("[DEBUG] NOTION_DATABASE_ID:", NOTION_DATABASE_ID);
-    const notionPage = await notion.pages.create({
+    await notion.pages.create({
       parent: { database_id: NOTION_DATABASE_ID },
       properties: {
         氏名: { title: [{ text: { content: name || "" } }] },
@@ -86,7 +85,6 @@ export async function POST(req: NextRequest) {
         受信日時: { date: { start: new Date().toISOString() } },
       },
     });
-    console.log("[DEBUG] Notion page created:", notionPage.id);
 
     // 管理者へ通知メール
     const adminOptionalFields: { label: string; value: string }[] = [
