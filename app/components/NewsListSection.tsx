@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 interface Post {
   id: number;
@@ -81,7 +82,7 @@ export default async function NewsListSection() {
             <ul className="nb-grid">
               {posts.map((post, i) => (
                 <li key={post.notionId} className="nb-card" style={{ animationDelay: `${(i + 1) * 0.08}s` }}>
-                  <a href={`/news/${post.notionId}`}>
+                  <Link href={`/news/${post.notionId}`}>
                     <div className="nb-card-thumb">
                       {post.thumbnail ? (
                         <Image
@@ -104,7 +105,7 @@ export default async function NewsListSection() {
                       <p className="nb-card-title">{post.title}</p>
                       <span className="nb-card-arrow">READ MORE →</span>
                     </div>
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

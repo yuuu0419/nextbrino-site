@@ -144,10 +144,10 @@ export default function ServicePage() {
                 </p>
                 <p className="sv-contact-note-box">対応枠が満枠の場合は、<br className="sv-contact-note-br" />ご返信できかねる場合がございます。</p>
                 <div className="sv-contact-sep" />
-                <a href="/contact/" className="sv-contact-btn">
+                <Link href="/contact/" className="sv-contact-btn">
                   <span>お問合せはこちら</span>
                   <span className="sv-contact-arrow">→</span>
-                </a>
+                </Link>
               </div>
             </div>
           </div>

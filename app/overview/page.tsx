@@ -40,7 +40,7 @@ const profile: { label: string; value: string; extra?: React.ReactNode }[] = [
   {
     label: "主なサービス",
     value: "WEBサイト制作・運用保守\nアプリ開発・システム開発\nECサイト販売管理サポート\nオウンドメディア運営\n情報配信・販売コンテンツ運営\nブランド企画\n製造販売に付随するトータルサポート\nブランドフランチャイズ\nクリエイティブタレントマネジメント\nIP保護インフラ開発\nPREP学習法による学習支援\n健康増進に関わるサポート　など",
-    extra: <><br />詳細は <a href="/service" className="ov-td-link">事業内容ページ</a> をご覧ください。</>,
+    extra: <><br />詳細は <Link href="/service" className="ov-td-link">事業内容ページ</Link> をご覧ください。</>,
   },
   {
     label: "メールアドレス",
@@ -50,7 +50,7 @@ const profile: { label: string; value: string; extra?: React.ReactNode }[] = [
   {
     label: "問い合わせフォーム",
     value: "",
-    extra: <><a href="/contact" className="ov-td-link">問い合わせフォーム</a><br />その他各サービスページにも設置しております。<br />お問合せ対応基本方針は<a href="/contact-policy" className="ov-td-link">こちら</a></>,
+    extra: <><Link href="/contact" className="ov-td-link">問い合わせフォーム</Link><br />その他各サービスページにも設置しております。<br />お問合せ対応基本方針は<Link href="/contact-policy" className="ov-td-link">こちら</Link></>,
   },
   { label: "受付時間", value: "フォーム・メール：24時間" },
   { label: "対応時間", value: "10:00〜17:00（ 土日祝・休業日を除く ）" },

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 interface Service {
@@ -121,7 +122,7 @@ function ServiceRow({ s, i }: { s: Service; i: number }) {
               VIEW MORE <span className="btn-arrow" />
             </a>
           ) : (
-            <a href="/service" className="btn-view-more sv-btn-full">満枠対応中</a>
+            <Link href="/service" className="btn-view-more sv-btn-full">満枠対応中</Link>
           )}
         </div>
       </div>
