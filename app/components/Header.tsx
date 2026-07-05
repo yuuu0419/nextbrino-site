@@ -229,10 +229,12 @@ export default function Header() {
         .hd-burger-bar:nth-child(1) { width: 37px; }
         .hd-burger-bar:nth-child(2) { width: 24px; align-self: flex-end; }
 
-        /* ホバー */
-        .hd-burger:hover .hd-burger-bar:nth-child(1) { width: 37px; }
-        .hd-burger:hover .hd-burger-bar:nth-child(2) { width: 37px; }
-        .hd-burger:hover .hd-burger-label { color: rgba(196,171,110,0.9); }
+        /* ホバー（タッチ端末は1回目のタップがhover扱いになり反応が遅れるため、マウス操作可能な端末のみに限定） */
+        @media (hover: hover) {
+          .hd-burger:hover .hd-burger-bar:nth-child(1) { width: 37px; }
+          .hd-burger:hover .hd-burger-bar:nth-child(2) { width: 37px; }
+          .hd-burger:hover .hd-burger-label { color: rgba(196,171,110,0.9); }
+        }
 
         /* スクロール後（ガラス帯）: 金色に */
         .hd-scrolled .hd-burger-label {
@@ -358,7 +360,7 @@ export default function Header() {
           transition: color 0.2s;
           white-space: nowrap;
         }
-        .hd-ol-link:hover { color: rgba(255,255,255,1); }
+        @media (hover: hover) { .hd-ol-link:hover { color: rgba(255,255,255,1); } }
         .hd-ol-num {
           font-size: 0.58rem;
           letter-spacing: 0.14em;
@@ -373,9 +375,11 @@ export default function Header() {
           background: rgba(196,171,110,0.35);
           transition: width 0.22s, background 0.2s;
         }
-        .hd-ol-link:hover .hd-ol-line {
-          width: 32px;
-          background: rgba(196,171,110,0.70);
+        @media (hover: hover) {
+          .hd-ol-link:hover .hd-ol-line {
+            width: 32px;
+            background: rgba(196,171,110,0.70);
+          }
         }
         .hd-ol-sep {
           width: 40px;
@@ -408,7 +412,7 @@ export default function Header() {
           transition: color 0.2s;
           white-space: nowrap;
         }
-        .hd-ol-link-policy:hover { color: rgba(255,255,255,0.70); }
+        @media (hover: hover) { .hd-ol-link-policy:hover { color: rgba(255,255,255,0.70); } }
         /* ポリシーリスト */
         .hd-ol-policy-list {
           width: 80%;
@@ -503,12 +507,14 @@ export default function Header() {
           white-space: nowrap;
           transition: color 0.25s;
         }
-        .hd-close-btn:hover .hd-close-gap-seg {
-          background: rgba(255,255,255,1);
-          width: 20px;
-        }
-        .hd-close-btn:hover .hd-close-text-line {
-          color: rgba(255,255,255,1);
+        @media (hover: hover) {
+          .hd-close-btn:hover .hd-close-gap-seg {
+            background: rgba(255,255,255,1);
+            width: 20px;
+          }
+          .hd-close-btn:hover .hd-close-text-line {
+            color: rgba(255,255,255,1);
+          }
         }
 
         /* オーバーレイ下部装飾 */
