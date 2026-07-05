@@ -21,10 +21,9 @@ export default function PageHero({ image, en, ja, footer }: Props) {
           src={image}
           alt=""
           fill
-          sizes="100vw"
-          quality={90}
           style={{ objectFit: "cover", objectPosition: "center" }}
           priority
+          unoptimized
           placeholder="blur"
           blurDataURL={NAVY_BLUR_URL}
         />
