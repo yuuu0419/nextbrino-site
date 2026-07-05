@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
+import { HERO_BLUR } from "../heroBlurData";
 
 type Props = {
   image: string;
@@ -25,7 +26,7 @@ export default function PageHero({ image, en, ja, footer }: Props) {
           priority
           unoptimized
           placeholder="blur"
-          blurDataURL={NAVY_BLUR_URL}
+          blurDataURL={HERO_BLUR[image] ?? NAVY_BLUR_URL}
         />
         <div className="ph2-overlay" />
         <div className="ph2-content">

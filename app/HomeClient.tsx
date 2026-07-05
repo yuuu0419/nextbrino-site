@@ -5,12 +5,7 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react
 import NewsSection from "./components/NewsSection";
 import Ticker from "./components/Ticker";
 import SplitTitle from "./components/SplitTitle";
-
-
-// navy(#15263b)単色のSVGをblurDataURLとして使用し、初回スライド画像ロード前の黒フラッシュを防ぐ
-const NAVY_BLUR_URL = `data:image/svg+xml;base64,${Buffer.from(
-  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"><rect width="1" height="1" fill="#15263b"/></svg>'
-).toString("base64")}`;
+import { HERO_BLUR } from "./heroBlurData";
 
 const SLIDES = [
   { src: "/images/top-hero-01.webp", alt: "NEXT BRINO — IT技術を駆使して日常をデザインする" },
@@ -360,7 +355,6 @@ export default function HomeClient() {
           zIndex: 1,
           overflow: "hidden",
           pointerEvents: "none",
-          background: "#15263b",
         }}
       >
         {SLIDES.map(({ src, alt }, i) => (
@@ -376,8 +370,9 @@ export default function HomeClient() {
                 sizes="(max-width: 767px) 100vw, 100vw"
                 style={{ objectFit: "cover" }}
                 priority={i === 0}
-                unoptimized
-                {...(i === 0 ? { placeholder: "blur" as const, blurDataURL: NAVY_BLUR_URL } : {})}
+                quality={80}
+                placeholder="blur"
+                blurDataURL={HERO_BLUR[src]}
               />
             )}
           </div>

@@ -2,10 +2,7 @@ import type { Metadata } from "next";
 import ScrollLineIndicator from "../components/ScrollLineIndicator";
 import Link from "next/link";
 import Image from "next/image";
-
-const NAVY_BLUR_URL = `data:image/svg+xml;base64,${Buffer.from(
-  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"><rect width="1" height="1" fill="#15263b"/></svg>'
-).toString("base64")}`;
+import { HERO_BLUR } from "../heroBlurData";
 import Ticker from "../components/Ticker";
 import SplitTitle from "../components/SplitTitle";
 import ServiceRows from "../components/ServiceRows";
@@ -52,7 +49,7 @@ export default function ServicePage() {
           priority
           unoptimized
           placeholder="blur"
-          blurDataURL={NAVY_BLUR_URL}
+          blurDataURL={HERO_BLUR["/images/service-hero.webp"]}
         />
         <div className="hero-overlay" />
         <div className="hero-content">
