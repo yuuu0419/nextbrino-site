@@ -360,6 +360,7 @@ export default function HomeClient() {
           zIndex: 1,
           overflow: "hidden",
           pointerEvents: "none",
+          background: "#15263b",
         }}
       >
         {SLIDES.map(({ src, alt }, i) => (
@@ -375,7 +376,7 @@ export default function HomeClient() {
                 sizes="(max-width: 767px) 100vw, 100vw"
                 style={{ objectFit: "cover" }}
                 priority={i === 0}
-                quality={80}
+                unoptimized
                 {...(i === 0 ? { placeholder: "blur" as const, blurDataURL: NAVY_BLUR_URL } : {})}
               />
             )}

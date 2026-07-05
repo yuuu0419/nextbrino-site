@@ -30,6 +30,24 @@ const POLICY_LINKS = [
   { label: "特定商取引法に基づく表記",    href: "/legal-notice/" },
 ];
 
+/* PageHero を使う各ページのヒーロー画像。ページ遷移直後に画像がまだ届いておらず
+   ネイビー背景＋暗オーバーレイだけが見える「黒い画面」を防ぐため、アイドル時間に
+   ブラウザキャッシュへ先読みしておく（現在表示中のページの画像も含めて問題ない） */
+const HERO_IMAGES = [
+  "/images/recruit-hero.webp",
+  "/images/message-kuroki-yuta-hero.webp",
+  "/images/philosophy-hero.webp",
+  "/images/overview-hero.webp",
+  "/images/news-hero.webp",
+  "/images/contact-hero.webp",
+  "/images/internship-hero.webp",
+  "/images/service-hero.webp",
+  "/images/legal-notice-hero.webp",
+  "/images/privacy-policy-hero.webp",
+  "/images/contact-policy-hero.webp",
+  "/images/anti-social-forces-policy-hero.webp",
+];
+
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [onDark, setOnDark] = useState(false);
@@ -95,6 +113,26 @@ export default function Header() {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
+
+  // 他ページのヒーロー画像をアイドル時間に先読みしておき、遷移直後の黒い画面を防ぐ
+  useEffect(() => {
+    const w = window as typeof window & {
+      requestIdleCallback?: (cb: () => void) => number;
+      cancelIdleCallback?: (id: number) => void;
+    };
+    const prefetch = () => {
+      HERO_IMAGES.forEach((src) => {
+        const img = new window.Image();
+        img.src = src;
+      });
+    };
+    if (w.requestIdleCallback) {
+      const id = w.requestIdleCallback(prefetch);
+      return () => w.cancelIdleCallback?.(id);
+    }
+    const t = setTimeout(prefetch, 1500);
+    return () => clearTimeout(t);
+  }, []);
 
 
   return (
