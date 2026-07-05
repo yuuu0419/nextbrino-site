@@ -48,9 +48,9 @@ export default function ServicePage() {
           src="/images/service-hero.webp"
           alt=""
           fill
-          sizes="100vw"
           style={{ objectFit: "cover", objectPosition: "center" }}
           priority
+          unoptimized
           placeholder="blur"
           blurDataURL={NAVY_BLUR_URL}
         />
