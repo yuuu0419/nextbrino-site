@@ -437,6 +437,7 @@ export default function HomeClient() {
       {/* ── FV テキスト（fixed）── スクロールで逃げずに残り、PHILOSOPHYへ接続 */}
       <div
         ref={fvTextDivRef}
+        className="fv-text-wrap"
         style={{
           position: "fixed",
           zIndex: 11,

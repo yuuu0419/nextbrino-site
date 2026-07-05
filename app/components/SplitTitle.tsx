@@ -38,6 +38,7 @@ export default function SplitTitle({ text, className, tag: Tag = "h2", delay = 0
       {text.split("").map((char, i) => (
         <span
           key={i}
+          className="split-title-char"
           style={{
             display: "inline-block",
             transform: visible ? "translateY(0)" : "translateY(-1.2em)",

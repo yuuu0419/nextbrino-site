@@ -51,16 +51,35 @@ body {
   }
 
   /* フェードイン／スライドイン／文字遅延アニメーションを無効化（軽量化）
-     ※ 流れる英語(ticker)・タイトルの降下(SplitTitle)・線を光が走る演出
-     （shimmer/scan-line/gold-slide）・ハンバーガーメニューは対象外 */
+     ※ 流れる英語(ticker)・線を光が走る演出（shimmer/scan-line/gold-slide）・
+     ハンバーガーメニューは対象外 */
   .ph-reveal,
   .ph-sec-reveal,
   .ph-sec-reveal--visible,
-  .va-group {
+  .va-group,
+  .split-title-char {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
     animation: none !important;
+  }
+
+  /* トップページ FV テキストのボックス位置/幅は isMobile の state 反映(useEffect)を
+     待たずに CSS で即確定させる。JS 側は state 未反映の間 PC 用の値
+     （top:50%/left:55%/max-width:44vw）で描画するため、初回表示や再マウント時
+     （戻る操作等）に「右側に小さく表示→正しい位置へスナップ」して見えるのを防ぐ。 */
+  .fv-text-wrap {
+    top: 0 !important;
+    left: 5% !important;
+    right: 5% !important;
+    max-width: none !important;
+  }
+
+  /* 初回スライドはケンバーンズ用アニメーション（0%で opacity:1）の開始を待たず
+     最初から表示する。アニメーション開始が1フレーム遅れると、その間だけ
+     .fv-slide の基本値 opacity:0 が見え、暗いオーバーレイのみの黒い背景に見える。 */
+  .fv-slide.fv-slide-initial {
+    opacity: 1;
   }
 }
 
