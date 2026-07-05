@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import ScrollLineIndicator from "../../components/ScrollLineIndicator";
 import { notFound } from "next/navigation";
 
@@ -126,9 +127,11 @@ export default async function NewsDetailPage({
           <h1 className="nd-title">{data.title}</h1>
           <div className="nd-divider" />
         </header>
-        <div className="nd-body">
-          {data.blocks.map((block, i) => renderBlock(block, i))}
-        </div>
+        <Suspense fallback={null}>
+          <div className="nd-body">
+            {data.blocks.map((block, i) => renderBlock(block, i))}
+          </div>
+        </Suspense>
       </article>
 
       <style>{`
@@ -160,7 +163,7 @@ export default async function NewsDetailPage({
           margin: 0 0 16px;
         }
         .nd-title {
-          font-size: clamp(1.25rem, 2.6vw, 1.75rem);
+          font-size: clamp(1.1rem, 2.2vw, 1.5rem);
           font-weight: 700;
           color: #15263b;
           letter-spacing: .04em;
@@ -175,17 +178,17 @@ export default async function NewsDetailPage({
 
         .nd-body { color: #444; }
         .nd-p {
-          font-size: .88rem;
-          line-height: 1.9;
+          font-size: .8rem;
+          line-height: 1.85;
           margin: 0 0 20px;
           letter-spacing: .04em;
         }
-        .nd-h1 { font-size: 1.4rem; font-weight: 700; color: #15263b; margin: 40px 0 16px; letter-spacing: .04em; }
-        .nd-h2 { font-size: 1.15rem; font-weight: 700; color: #15263b; margin: 36px 0 14px; letter-spacing: .04em; border-left: 3px solid #9d8c56; padding-left: 12px; }
-        .nd-h3 { font-size: 1rem; font-weight: 600; color: #15263b; margin: 28px 0 10px; letter-spacing: .04em; }
+        .nd-h1 { font-size: 1.25rem; font-weight: 700; color: #15263b; margin: 40px 0 16px; letter-spacing: .04em; }
+        .nd-h2 { font-size: 1.05rem; font-weight: 700; color: #15263b; margin: 36px 0 14px; letter-spacing: .04em; border-left: 3px solid #9d8c56; padding-left: 12px; }
+        .nd-h3 { font-size: .92rem; font-weight: 600; color: #15263b; margin: 28px 0 10px; letter-spacing: .04em; }
         .nd-li {
-          font-size: .88rem;
-          line-height: 1.8;
+          font-size: .8rem;
+          line-height: 1.75;
           margin: 4px 0 4px 20px;
           letter-spacing: .04em;
         }
@@ -194,8 +197,8 @@ export default async function NewsDetailPage({
           padding: 8px 20px;
           margin: 20px 0;
           color: #777;
-          font-size: .85rem;
-          line-height: 1.8;
+          font-size: .78rem;
+          line-height: 1.75;
         }
         .nd-hr {
           border: none;
