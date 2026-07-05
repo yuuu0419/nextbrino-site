@@ -1,22 +1,35 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function ScrollLineIndicator() {
   const [hidden, setHidden] = useState(false);
+  const maxScrollRef = useRef(0);
 
   useEffect(() => {
+    const measure = () => {
+      maxScrollRef.current = document.documentElement.scrollHeight - window.innerHeight;
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    window.addEventListener("load", measure);
+    const ro = new ResizeObserver(measure);
+    ro.observe(document.body);
+
     let rafId: number | null = null;
     const onScroll = () => {
       if (rafId !== null) return;
       rafId = requestAnimationFrame(() => {
         rafId = null;
         const scrolled = window.scrollY;
-        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        const maxScroll = maxScrollRef.current;
         setHidden(maxScroll > 0 && scrolled >= maxScroll - 40);
       });
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
+      window.removeEventListener("resize", measure);
+      window.removeEventListener("load", measure);
+      ro.disconnect();
       window.removeEventListener("scroll", onScroll);
       if (rafId !== null) cancelAnimationFrame(rafId);
     };

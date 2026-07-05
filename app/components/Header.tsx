@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const NAV_LINKS = [
   { label: "HOME",           href: "/" },
@@ -43,19 +43,38 @@ export default function Header() {
   };
   const toggleMenu = () => menuOpen ? closeMenu() : openMenu();
 
+  /* [data-header-dark] の位置は getBoundingClientRect を毎スクロールフレーム呼ぶと
+     強制リフローの原因になるため、resize / コンテンツ変化時にのみ絶対位置を計測してキャッシュし、
+     スクロール中は window.scrollY との差分計算だけで判定する */
+  const darkSectionsRef = useRef<{ top: number; bottom: number }[]>([]);
+
   useEffect(() => {
+    const measure = () => {
+      const y = window.scrollY;
+      darkSectionsRef.current = Array.from(
+        document.querySelectorAll("[data-header-dark]")
+      ).map((el) => {
+        const rect = el.getBoundingClientRect();
+        return { top: rect.top + y, bottom: rect.bottom + y };
+      });
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    window.addEventListener("load", measure);
+    const ro = new ResizeObserver(measure);
+    ro.observe(document.body);
+
     let rafId: number | null = null;
     const checkScroll = () => {
       if (rafId !== null) return;
       rafId = requestAnimationFrame(() => {
         rafId = null;
-        setScrolled(window.scrollY > 40);
+        const y = window.scrollY;
+        setScrolled(y > 40);
         const headerBottom = 80;
-        const darkSections = document.querySelectorAll("[data-header-dark]");
         let isDark = false;
-        darkSections.forEach((el) => {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= headerBottom && rect.bottom > 0) isDark = true;
+        darkSectionsRef.current.forEach(({ top, bottom }) => {
+          if (top - y <= headerBottom && bottom - y > 0) isDark = true;
         });
         setOnDark(isDark);
       });
@@ -63,6 +82,9 @@ export default function Header() {
     checkScroll();
     window.addEventListener("scroll", checkScroll, { passive: true });
     return () => {
+      window.removeEventListener("resize", measure);
+      window.removeEventListener("load", measure);
+      ro.disconnect();
       window.removeEventListener("scroll", checkScroll);
       if (rafId !== null) cancelAnimationFrame(rafId);
     };
