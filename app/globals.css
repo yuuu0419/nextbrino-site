@@ -79,6 +79,16 @@ body {
   }
 }
 
+/* 画面外にある間、常時ループしている装飾アニメーション(シマー・スキャンライン等)を
+   一時停止してペイント/コンポジット負荷を抑える。IntersectionObserver側で
+   十分な rootMargin を確保して画面に入る前に再開するため、見た目上の
+   停止/再開は視認されない。 */
+[data-anim-offscreen="true"] *,
+[data-anim-offscreen="true"] *::before,
+[data-anim-offscreen="true"] *::after {
+  animation-play-state: paused !important;
+}
+
 /* ===================== Ken Burns ===================== */
 @keyframes kenburns-odd {
   0%   { opacity: 0; transform: scale(1);    }

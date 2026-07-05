@@ -27,6 +27,21 @@ export default function MessageLayout() {
     return () => obs.disconnect();
   }, []);
 
+  /* 常時ループする gold-slide 装飾アニメーションを画面外にある間だけ一時停止する。
+     rootMarginの余裕分だけ手前で再開するため、見た目上の停止/再開は分からない。 */
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        el.dataset.animOffscreen = entry.isIntersecting ? "false" : "true";
+      },
+      { rootMargin: "400px 0px 400px 0px", threshold: 0 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
   const slideLeft = {
     opacity: visible ? 1 : 0,
     transform: visible ? "translateX(0)" : "translateX(-28px)",

@@ -268,6 +268,27 @@ export default function HomeClient() {
     return () => { c0?.(); c0b?.(); c1?.(); c2?.(); c2b?.(); c3?.(); c4?.(); };
   }, []);
 
+  /* MESSAGE/CONTACTの常時ループ装飾アニメーション(shimmer-border, gold-highlight,
+     contact-blink/scan/shimmer)を画面外にある間だけ一時停止する。
+     rootMarginで余裕を持たせているため、スクロールで画面に入る前に再開しており
+     見た目上の一時停止/再開は分からない。 */
+  useEffect(() => {
+    const targets = [msgTextRef.current, contactBoxRef.current].filter(
+      (el): el is HTMLDivElement => el !== null
+    );
+    if (targets.length === 0) return;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          (entry.target as HTMLElement).dataset.animOffscreen = entry.isIntersecting ? "false" : "true";
+        });
+      },
+      { rootMargin: "400px 0px 400px 0px", threshold: 0 }
+    );
+    targets.forEach((el) => obs.observe(el));
+    return () => obs.disconnect();
+  }, []);
+
   const animEnd  = vh * 1.2;
   const rawProg  = Math.min(scrollY / animEnd, 1);
   const progress = ease(rawProg);

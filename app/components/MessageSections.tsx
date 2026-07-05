@@ -56,6 +56,21 @@ export default function MessageSections() {
   const s1 = useVisible();
   const s2 = useVisible();
 
+  /* Section2にある常時ループの ms-gold-slide 装飾アニメーションを画面外の間だけ
+     一時停止する。rootMarginの余裕分だけ手前で再開するため見た目には影響しない。 */
+  useEffect(() => {
+    const el = s2.ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        el.dataset.animOffscreen = entry.isIntersecting ? "false" : "true";
+      },
+      { rootMargin: "400px 0px 400px 0px", threshold: 0 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [s2.ref]);
+
   return (
     <>
       {/* ─── Section 1: 私たちが創造する世界 ─── */}
