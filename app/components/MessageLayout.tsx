@@ -222,7 +222,7 @@ export default function MessageLayout() {
           font-size: .65rem;
           letter-spacing: .18em;
           color: rgba(157,140,86,0.85);
-          font-weight: 500;
+          font-weight: 700;
         }
         .msg-photo-sign {
           width: clamp(90px, 12vw, 160px);
@@ -269,7 +269,7 @@ export default function MessageLayout() {
           letter-spacing: .28em;
           color: #9d8c56;
           margin: 0;
-          font-weight: 500;
+          font-weight: 700;
           text-transform: uppercase;
         }
 

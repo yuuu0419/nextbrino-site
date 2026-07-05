@@ -70,7 +70,7 @@ export default function PageHero({ image, en, ja, footer }: Props) {
         .ph2-ja {
           font-family: var(--font-noto-sans-jp), sans-serif;
           font-size: clamp(17px, 1.7vw, 25px);
-          font-weight: 500;
+          font-weight: 700;
           letter-spacing: .12em;
           color: rgba(255,255,255,.82);
           margin: 24px 0 0;

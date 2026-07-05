@@ -193,7 +193,7 @@ export default function ServicePage() {
         }
         .hero-ja {
           font-size: clamp(17px, 1.7vw, 25px);
-          font-weight: 500;
+          font-weight: 700;
           letter-spacing: .12em;
           color: rgba(255,255,255,.82);
           margin: 24px 0 0;
@@ -495,7 +495,7 @@ export default function ServicePage() {
         }
         .sv-contact-title {
           font-size: clamp(28px, 3vw, 42px);
-          font-weight: 500;
+          font-weight: 700;
           color: rgba(255,255,255,0.82);
           letter-spacing: .06em;
           line-height: 1;

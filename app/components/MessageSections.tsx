@@ -383,7 +383,7 @@ export default function MessageSections() {
           letter-spacing: .28em;
           color: rgba(157,140,86,0.8);
           margin: 0 0 10px;
-          font-weight: 500;
+          font-weight: 700;
         }
 
         /* ── レスポンシブ ── */

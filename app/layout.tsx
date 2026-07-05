@@ -10,7 +10,7 @@ const GA_ID = "G-BR75W4WJWC";
 const notoSansJP = Noto_Sans_JP({
   variable: "--font-noto-sans-jp",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "700", "900"],
+  weight: ["300", "400", "700", "900"],
   display: "swap",
 });
 

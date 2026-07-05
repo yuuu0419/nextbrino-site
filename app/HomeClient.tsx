@@ -61,6 +61,25 @@ export default function HomeClient() {
   const darkOverlayRef     = useRef<HTMLDivElement>(null);
   const whiteOverlayRef    = useRef<HTMLDivElement>(null);
   const scrollIndicatorRef = useRef<HTMLDivElement>(null);
+  const docHeightRef       = useRef(0);
+
+  /* document.documentElement.scrollHeight の読み取りはレイアウトを強制するため、
+     毎スクロールフレームでは呼ばず resize / コンテンツ変化時にのみ再計測してキャッシュする */
+  useEffect(() => {
+    const measure = () => {
+      docHeightRef.current = document.documentElement.scrollHeight;
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    window.addEventListener("load", measure);
+    const ro = new ResizeObserver(measure);
+    ro.observe(document.body);
+    return () => {
+      window.removeEventListener("resize", measure);
+      window.removeEventListener("load", measure);
+      ro.disconnect();
+    };
+  }, []);
 
   const applyMobileFv = useCallback((y: number) => {
     if (typeof window === "undefined" || window.innerWidth >= 768) return;
@@ -91,7 +110,7 @@ export default function HomeClient() {
     }
     // スクロールインジケーター（最下部で非表示）
     if (scrollIndicatorRef.current) {
-      const docH = document.documentElement.scrollHeight;
+      const docH = docHeightRef.current;
       scrollIndicatorRef.current.style.opacity = (y + viewH >= docH - 200) ? "0" : "1";
     }
   }, []);
@@ -126,7 +145,7 @@ export default function HomeClient() {
         // PC: 従来通り React state で管理
         applyMobileFv(y);
         setScrollY(y);
-        const docH = document.documentElement.scrollHeight;
+        const docH = docHeightRef.current;
         const winH = window.innerHeight;
         setAtBottom(y + winH >= docH - 200);
       }
@@ -711,7 +730,7 @@ export default function HomeClient() {
                 `}</style>
                 <div style={{ display: "block", marginBottom: 24 }}>
                   <div style={{ display: "flex", width: "100%", alignItems: "flex-end", justifyContent: isMobile ? "center" : "space-between", gap: 16, marginBottom: 8 }}>
-                    <p style={{ fontSize: isMobile ? "0.7rem" : "0.82rem", letterSpacing: "0.18em", color: "#9d8c56", margin: 0, marginBottom: 8, marginLeft: isMobile ? 0 : 10, fontWeight: 500, lineHeight: 1.7, whiteSpace: "nowrap" }}>NEXT BRINO 最高経営責任者</p>
+                    <p style={{ fontSize: isMobile ? "0.7rem" : "0.82rem", letterSpacing: "0.18em", color: "#9d8c56", margin: 0, marginBottom: 8, marginLeft: isMobile ? 0 : 10, fontWeight: 700, lineHeight: 1.7, whiteSpace: "nowrap" }}>NEXT BRINO 最高経営責任者</p>
                     <Image src="/images/ceo-sign.webp" alt="署名" width={isMobile ? 135 : 190} height={isMobile ? 59 : 83} style={{ objectFit: "contain", objectPosition: "right bottom", marginRight: isMobile ? 0 : 80, marginBottom: isMobile ? 0 : -4, filter: "brightness(0) saturate(100%) invert(13%) sepia(27%) saturate(1093%) hue-rotate(181deg) brightness(89%)" }} />
                   </div>
                   {/* ベースライン（常時表示・薄金） + スライドするゴールドハイライト */}
@@ -1073,7 +1092,7 @@ export default function HomeClient() {
                   {/* CONTACT 大見出し */}
                   <h2 style={{
                     fontSize: isMobile ? "clamp(28px,8vw,38px)" : "clamp(28px,3vw,42px)",
-                    fontWeight: 500,
+                    fontWeight: 700,
                     color: "rgba(255,255,255,0.82)",
                     letterSpacing: ".06em",
                     lineHeight: 1,

@@ -130,7 +130,7 @@ export default function NewsSection() {
               </p>
               <h2 style={{
                 fontSize: isMobile ? "clamp(28px,8vw,36px)" : "clamp(28px,3vw,44px)",
-                fontWeight: 500,
+                fontWeight: 700,
                 color: "rgba(255,255,255,0.88)",
                 letterSpacing: ".08em",
                 lineHeight: 1,
