@@ -34,7 +34,7 @@ async function fetchPosts(): Promise<Post[]> {
           filter: { property: "公開", checkbox: { equals: true } },
           sorts: [{ property: "日付", direction: "descending" }],
         }),
-        next: { revalidate: 3600 },
+        next: { revalidate: 60 },
       }
     );
     if (!res.ok) return [];
