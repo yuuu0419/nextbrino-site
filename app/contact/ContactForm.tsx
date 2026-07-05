@@ -213,8 +213,26 @@ export default function ContactForm() {
         </button>
       </div>
 
+      {/* バッジ非表示(globals.css)の代替としてGoogle規約で必須の帰属表記 */}
+      <p className="ct-recaptcha-note">
+        このサイトはreCAPTCHAによって保護されており、Googleの
+        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">プライバシーポリシー</a>と
+        <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">利用規約</a>が適用されます。
+      </p>
+
       <style>{`
-        .grecaptcha-badge { visibility: hidden; }
+        .ct-recaptcha-note {
+          text-align: center;
+          font-size: .68rem;
+          color: rgba(21,38,59,0.45);
+          letter-spacing: .02em;
+          line-height: 1.8;
+          margin-top: 14px;
+        }
+        .ct-recaptcha-note a {
+          color: rgba(21,38,59,0.55);
+          text-decoration: underline;
+        }
         .ct-honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
         .ct-complete { text-align: center; padding: 80px 0; }
         .ct-complete-title { font-size: 1.4rem; font-weight: 700; color: #15263b; margin-bottom: 16px; }

@@ -11,6 +11,12 @@
 
 * { box-sizing: border-box; }
 
+/* reCAPTCHA v3 のバッジは document.body 直下に挿入され、/contact から
+   クライアント遷移で離れてもDOMに残り続ける。ContactForm 内のscoped CSSでは
+   フォームのアンマウントと同時に非表示指定が消えて他ページでバッジが露出するため、
+   全ページ共通のここで隠す(代替の帰属表記はフォーム送信ボタン下に表示している) */
+.grecaptcha-badge { visibility: hidden; }
+
 /*
  * 横スクロール抑止には overflow-x: clip を使う。
  * overflow-x: hidden は overflow-y を auto に昇格させ、html/body を
