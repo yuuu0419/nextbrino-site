@@ -192,9 +192,9 @@ export default function ContactForm() {
 
       <div className="ct-agree-section">
         {[
-          { href: "/privacy-policy/", label: "個人情報保護方針" },
-          { href: "/contact-policy/", label: "お問合せ対応基本方針" },
-          { href: "/anti-social-forces-policy/", label: "反社会的勢力に対する基本方針" },
+          { href: "/privacy-policy", label: "個人情報保護方針" },
+          { href: "/contact-policy", label: "お問合せ対応基本方針" },
+          { href: "/anti-social-forces-policy", label: "反社会的勢力に対する基本方針" },
         ].map((item, i) => (
           <label key={i} className="ct-agree-row">
             <input type="checkbox" className="ct-checkbox" checked={agrees[i]} onChange={() => toggleAgree(i)} />

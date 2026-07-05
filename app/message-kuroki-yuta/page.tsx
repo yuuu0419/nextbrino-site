@@ -165,12 +165,12 @@ export default function MessagePage() {
           </Link>
         </FadeIn>
         <FadeIn delay={150} direction="up" className="msg-banner-fadein">
-          <Link href="/philosophy/" className="msg-banner-link">
+          <Link href="/philosophy" className="msg-banner-link">
             <Image src="/images/philosophy-banner.webp" alt="理念・行動指針" width={1800} height={826} sizes="100vw" className="msg-banner-img" />
           </Link>
         </FadeIn>
         <FadeIn delay={300} direction="up" className="msg-banner-fadein">
-          <Link href="/contact/" className="msg-banner-link">
+          <Link href="/contact" className="msg-banner-link">
             <Image src="/images/contact-banner.webp" alt="お問い合わせ" width={1800} height={826} sizes="100vw" className="msg-banner-img" />
           </Link>
         </FadeIn>

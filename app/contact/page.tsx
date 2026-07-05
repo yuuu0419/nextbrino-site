@@ -53,12 +53,12 @@ export default function ContactPage() {
         <div className="ct-policy-notice">
           <p className="ct-policy-notice-title">【 同意必須項目 】</p>
           <p className="ct-policy-items-pc">
-            <Link href="/privacy-policy/" className="ct-policy-link">個人情報保護方針</Link>、<Link href="/contact-policy/" className="ct-policy-link">お問合せ対応基本方針</Link>、<Link href="/anti-social-forces-policy/" className="ct-policy-link">反社会的勢力に対する基本方針</Link>
+            <Link href="/privacy-policy" className="ct-policy-link">個人情報保護方針</Link>、<Link href="/contact-policy" className="ct-policy-link">お問合せ対応基本方針</Link>、<Link href="/anti-social-forces-policy" className="ct-policy-link">反社会的勢力に対する基本方針</Link>
           </p>
           <div className="ct-policy-items-sp">
-            <p className="ct-policy-notice-item"><Link href="/privacy-policy/" className="ct-policy-link">個人情報保護方針</Link></p>
-            <p className="ct-policy-notice-item"><Link href="/contact-policy/" className="ct-policy-link">お問合せ対応基本方針</Link></p>
-            <p className="ct-policy-notice-item"><Link href="/anti-social-forces-policy/" className="ct-policy-link">反社会的勢力に対する基本方針</Link></p>
+            <p className="ct-policy-notice-item"><Link href="/privacy-policy" className="ct-policy-link">個人情報保護方針</Link></p>
+            <p className="ct-policy-notice-item"><Link href="/contact-policy" className="ct-policy-link">お問合せ対応基本方針</Link></p>
+            <p className="ct-policy-notice-item"><Link href="/anti-social-forces-policy" className="ct-policy-link">反社会的勢力に対する基本方針</Link></p>
           </div>
         </div>
         </FadeIn>
@@ -71,17 +71,17 @@ export default function ContactPage() {
 
       <div className="ct-banners">
         <FadeIn delay={0} direction="up" className="ct-banner-fadein">
-        <Link href="/contact-policy/" className="ct-banner-link">
+        <Link href="/contact-policy" className="ct-banner-link">
           <Image src="/images/contact-policy-banner.webp" alt="お問合せ対応基本方針" width={1800} height={826} sizes="100vw" className="ct-banner-img" />
         </Link>
         </FadeIn>
         <FadeIn delay={150} direction="up" className="ct-banner-fadein">
-        <Link href="/privacy-policy/" className="ct-banner-link">
+        <Link href="/privacy-policy" className="ct-banner-link">
           <Image src="/images/privacy-policy-banner.webp" alt="個人情報保護方針" width={1800} height={826} sizes="100vw" className="ct-banner-img" />
         </Link>
         </FadeIn>
         <FadeIn delay={300} direction="up" className="ct-banner-fadein">
-        <Link href="/anti-social-forces-policy/" className="ct-banner-link">
+        <Link href="/anti-social-forces-policy" className="ct-banner-link">
           <Image src="/images/antisocial-policy-banner.webp" alt="反社会的勢力に対する基本方針" width={1800} height={826} sizes="100vw" className="ct-banner-img" />
         </Link>
         </FadeIn>

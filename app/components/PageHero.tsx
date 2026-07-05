@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
-import Image from "next/image";
-import { HERO_BLUR } from "../heroBlurData";
+import HeroImage from "./HeroImage";
 
 type Props = {
   image: string;
@@ -9,25 +8,11 @@ type Props = {
   footer?: ReactNode;
 };
 
-// navy(#15263b)単色のSVGをblurDataURLとして使用し、画像ロード前の黒フラッシュを防ぐ
-const NAVY_BLUR_URL = `data:image/svg+xml;base64,${Buffer.from(
-  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"><rect width="1" height="1" fill="#15263b"/></svg>'
-).toString("base64")}`;
-
 export default function PageHero({ image, en, ja, footer }: Props) {
   return (
     <>
       <div className="ph2" data-header-dark>
-        <Image
-          src={image}
-          alt=""
-          fill
-          style={{ objectFit: "cover", objectPosition: "center" }}
-          priority
-          unoptimized
-          placeholder="blur"
-          blurDataURL={HERO_BLUR[image] ?? NAVY_BLUR_URL}
-        />
+        <HeroImage src={image} />
         <div className="ph2-overlay" />
         <div className="ph2-content">
           <p className="ph2-en">{en}</p>

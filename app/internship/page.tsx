@@ -70,27 +70,27 @@ export default function InternshipPage() {
           </Link>
         </FadeIn>
         <FadeIn delay={100} direction="up" className="in-banner-fadein">
-          <Link href="/message-kuroki-yuta/" className="in-banner-link">
+          <Link href="/message-kuroki-yuta" className="in-banner-link">
             <Image src="/images/top-message-banner.webp" alt="代表メッセージ" width={1800} height={826} sizes="100vw" className="in-banner-img" />
           </Link>
         </FadeIn>
         <FadeIn delay={150} direction="up" className="in-banner-fadein">
-          <Link href="/philosophy/" className="in-banner-link">
+          <Link href="/philosophy" className="in-banner-link">
             <Image src="/images/philosophy-banner.webp" alt="企業理念" width={1800} height={826} sizes="100vw" className="in-banner-img" />
           </Link>
         </FadeIn>
         <FadeIn delay={200} direction="up" className="in-banner-fadein">
-          <Link href="/service/" className="in-banner-link">
+          <Link href="/service" className="in-banner-link">
             <Image src="/images/business-banner.webp" alt="事業内容" width={1800} height={826} sizes="100vw" className="in-banner-img" />
           </Link>
         </FadeIn>
         <FadeIn delay={250} direction="up" className="in-banner-fadein">
-          <Link href="/overview/" className="in-banner-link">
+          <Link href="/overview" className="in-banner-link">
             <Image src="/images/overview-banner.webp" alt="会社概要" width={1800} height={826} sizes="100vw" className="in-banner-img" />
           </Link>
         </FadeIn>
         <FadeIn delay={300} direction="up" className="in-banner-fadein">
-          <Link href="/contact/" className="in-banner-link">
+          <Link href="/contact" className="in-banner-link">
             <Image src="/images/contact-banner.webp" alt="お問い合わせ" width={1800} height={826} sizes="100vw" className="in-banner-img" />
           </Link>
         </FadeIn>

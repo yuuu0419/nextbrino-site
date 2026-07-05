@@ -6,28 +6,28 @@ import { useState, useEffect, useRef } from "react";
 
 const NAV_LINKS = [
   { label: "HOME",           href: "/" },
-  { label: "事業内容",        href: "/service/" },
-  { label: "代表挨拶",        href: "/message-kuroki-yuta/" },
-  { label: "理念・行動指針",   href: "/philosophy/" },
-  { label: "概要・沿革",      href: "/overview/" },
-  { label: "お知らせ",        href: "/news/" },
-  { label: "採用情報",        href: "/recruit/" },
-  { label: "インターンシップ",  href: "/internship/" },
+  { label: "事業内容",        href: "/service" },
+  { label: "代表挨拶",        href: "/message-kuroki-yuta" },
+  { label: "理念・行動指針",   href: "/philosophy" },
+  { label: "概要・沿革",      href: "/overview" },
+  { label: "お知らせ",        href: "/news" },
+  { label: "採用情報",        href: "/recruit" },
+  { label: "インターンシップ",  href: "/internship" },
 ];
 
 const PC_NAV_LINKS = [
-  { label: "事業内容",    href: "/service/" },
-  { label: "代表挨拶",    href: "/message-kuroki-yuta/" },
-  { label: "理念・行動指針", href: "/philosophy/" },
-  { label: "お知らせ",    href: "/news/" },
-  { label: "お問い合わせ", href: "/contact/" },
+  { label: "事業内容",    href: "/service" },
+  { label: "代表挨拶",    href: "/message-kuroki-yuta" },
+  { label: "理念・行動指針", href: "/philosophy" },
+  { label: "お知らせ",    href: "/news" },
+  { label: "お問い合わせ", href: "/contact" },
 ];
 
 const POLICY_LINKS = [
-  { label: "個人情報保護方針",           href: "/privacy-policy/" },
-  { label: "お問合せ対応基本方針",        href: "/contact-policy/" },
-  { label: "反社会的勢力に対する基本方針", href: "/anti-social-forces-policy/" },
-  { label: "特定商取引法に基づく表記",    href: "/legal-notice/" },
+  { label: "個人情報保護方針",           href: "/privacy-policy" },
+  { label: "お問合せ対応基本方針",        href: "/contact-policy" },
+  { label: "反社会的勢力に対する基本方針", href: "/anti-social-forces-policy" },
+  { label: "特定商取引法に基づく表記",    href: "/legal-notice" },
 ];
 
 export default function Header() {
@@ -644,7 +644,7 @@ export default function Header() {
 
           {/* バナーエリア */}
           <div style={{ width: "80%", display: "flex", flexDirection: "column", gap: 16, marginTop: 16, marginBottom: 20 }}>
-            <Link href="/contact/" onClick={() => closeMenu()} style={{ display: "block", borderRadius: 10, overflow: "hidden" }}>
+            <Link href="/contact" onClick={() => closeMenu()} style={{ display: "block", borderRadius: 10, overflow: "hidden" }}>
               <Image src="/images/contact.webp" alt="お問い合わせ" width={1500} height={500} style={{ width: "100%", height: "auto", display: "block" }} />
             </Link>
             <a href="https://n-bright.jp" target="_blank" rel="noopener noreferrer" style={{ display: "block", borderRadius: 10, overflow: "hidden" }}>

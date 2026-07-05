@@ -112,12 +112,12 @@ export default function NewsPage() {
           </Link>
         </FadeIn>
         <FadeIn delay={150} direction="up" className="nw-banner-fadein">
-          <Link href="/service/" className="nw-banner-link">
+          <Link href="/service" className="nw-banner-link">
             <Image src="/images/business-banner.webp" alt="事業内容" width={1800} height={826} sizes="100vw" className="nw-banner-img" />
           </Link>
         </FadeIn>
         <FadeIn delay={300} direction="up" className="nw-banner-fadein">
-          <Link href="/contact/" className="nw-banner-link">
+          <Link href="/contact" className="nw-banner-link">
             <Image src="/images/contact-banner.webp" alt="お問い合わせ" width={1800} height={826} sizes="100vw" className="nw-banner-img" />
           </Link>
         </FadeIn>

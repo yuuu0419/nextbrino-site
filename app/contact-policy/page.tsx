@@ -154,12 +154,12 @@ export default function ContactPolicyPage() {
 
       <div className="cp-banners">
         <FadeIn delay={0} direction="up" className="cp-banner-fadein">
-        <Link href="/privacy-policy/" className="cp-banner-link">
+        <Link href="/privacy-policy" className="cp-banner-link">
           <Image src="/images/privacy-policy-banner.webp" alt="個人情報保護方針" width={1800} height={826} sizes="100vw" className="cp-banner-img" />
         </Link>
         </FadeIn>
         <FadeIn delay={150} direction="up" className="cp-banner-fadein">
-        <Link href="/anti-social-forces-policy/" className="cp-banner-link">
+        <Link href="/anti-social-forces-policy" className="cp-banner-link">
           <Image src="/images/antisocial-policy-banner.webp" alt="反社会的勢力に対する基本方針" width={1800} height={826} sizes="100vw" className="cp-banner-img" />
         </Link>
         </FadeIn>

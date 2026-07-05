@@ -166,8 +166,17 @@ export default function HomeClient() {
 
 
   useEffect(() => {
+    let lastWidth = 0;
     const check = () => {
-      const mobile = window.innerWidth < 768;
+      const w = window.innerWidth;
+      const mobile = w < 768;
+      /* モバイルではスクロール中のURLバー伸縮で「高さのみ」の resize が頻発し、
+         その度に setVh するとツリー全体の再レンダリングでスクロールがかくつく。
+         幅が変わらない resize は無視する(モバイルのFV制御は applyMobileFv が
+         window.innerHeight を毎フレーム直接参照するため挙動に影響なし)。
+         PC は vh を使う計算があるため高さのみの変化でも従来通り更新する。 */
+      if (mobile && w === lastWidth) return;
+      lastWidth = w;
       isMobileRef.current = mobile;
       setIsMobile(mobile);
       setVh(window.innerHeight);
@@ -640,7 +649,7 @@ export default function HomeClient() {
             </div>
 
             <div ref={philoMoreRef} style={{ display: "flex", justifyContent: "center", opacity: philoMoreVisible ? 1 : 0, transition: isMobile ? "none" : "opacity 0.5s ease 160ms" }}>
-              <Link href="/philosophy/" className="btn-view-more">VIEW MORE <span className="btn-arrow"></span></Link>
+              <Link href="/philosophy" className="btn-view-more">VIEW MORE <span className="btn-arrow"></span></Link>
             </div>
           </div>
         </section>
@@ -777,7 +786,7 @@ export default function HomeClient() {
                       <p style={{ fontSize: "0.88rem", lineHeight: 2, color: "#444", letterSpacing: "0.03em", margin: 0, whiteSpace: "pre-line", textAlign: "center" }}>{`人は誰かを想う時、最も強く優しくなれる。\n家族や恋人、友人、働く仲間、お客様。\n誰かのためにより良くしたいと願う気持ちは、\nいつの時代も人を前へ進ませ、\n社会を少しずつ良くしてきました。\n私たちが目指すのは、便利さや効率の先にある、\n一人ひとりの豊かで誇れる暮らしです。\nその原点を見失うことなく、理念である\n「繊細に想像し、大胆に創造する」を追求します。`}</p>
                     </div>
                     <div style={{ display: "flex", justifyContent: "center", opacity: msgTextVisible ? 1 : 0, transition: isMobile ? "none" : "opacity 0.5s ease 160ms" }}>
-                      <Link href="/message-kuroki-yuta/" className="btn-view-more">VIEW MORE <span className="btn-arrow"></span></Link>
+                      <Link href="/message-kuroki-yuta" className="btn-view-more">VIEW MORE <span className="btn-arrow"></span></Link>
                     </div>
                   </>
                 ) : (
@@ -797,7 +806,7 @@ export default function HomeClient() {
                       <p style={{ fontSize: "0.9rem", lineHeight: 2, color: "#444", letterSpacing: "0.04em", margin: 0, whiteSpace: "pre-line" }}>{`人は誰かを想う時、最も強く優しくなれる。\n家族や恋人、友人、働く仲間、お客様。\n誰かのためにより良くしたいと願う気持ちは、\n`}<span style={{ whiteSpace: "nowrap" }}>いつの時代も人を前へ進ませ、社会を少しずつ良くしてきました。</span>{`\n私たちが目指すのは、単なる便利さや効率の先にある、\n一人ひとりの豊かで誇れる暮らしです。\nその原点を見失うことなく、理念である\n「繊細に想像し、大胆に創造する」を体現し続けます。`}</p>
                     </div>
                     <div style={{ display: "flex", justifyContent: "flex-end", opacity: msgTextVisible ? 1 : 0, transition: isMobile ? "none" : "opacity 0.5s ease 160ms" }}>
-                      <Link href="/message-kuroki-yuta/" className="btn-view-more">VIEW MORE <span className="btn-arrow"></span></Link>
+                      <Link href="/message-kuroki-yuta" className="btn-view-more">VIEW MORE <span className="btn-arrow"></span></Link>
                     </div>
                   </>
                 )}
@@ -1002,7 +1011,7 @@ export default function HomeClient() {
           </div>
 
           <div ref={svcMoreRef} style={{ width: "90%", maxWidth: 1100, margin: "0 auto", display: "flex", justifyContent: "center", opacity: svcMoreVisible ? 1 : 0, transition: isMobile ? "none" : "opacity 0.5s ease 160ms" }}>
-            <Link href="/service/" className="btn-view-more">VIEW MORE <span className="btn-arrow"></span></Link>
+            <Link href="/service" className="btn-view-more">VIEW MORE <span className="btn-arrow"></span></Link>
           </div>
         </section>
 
@@ -1229,8 +1238,8 @@ export default function HomeClient() {
                     margin: "0 0 16px",
                   }} />
                   {/* CTAボタン */}
-                  <a
-                    href="/contact/"
+                  <Link
+                    href="/contact"
                     style={{
                       display: "inline-flex",
                       alignItems: "center",
@@ -1253,7 +1262,7 @@ export default function HomeClient() {
                   >
                     <span>お問合せはこちら</span>
                     <span style={{ fontFamily: "'Courier New',monospace", fontSize: "1.1rem" }}>→</span>
-                  </a>
+                  </Link>
                 </div>
               </div>
 

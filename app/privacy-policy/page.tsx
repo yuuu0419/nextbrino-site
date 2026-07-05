@@ -97,12 +97,12 @@ export default function PrivacyPolicyPage() {
       {/* バナーセクション */}
       <div className="pp-banners">
         <FadeIn delay={0} direction="up" className="pp-banner-fadein">
-          <Link href="/contact-policy/" className="pp-banner-link">
+          <Link href="/contact-policy" className="pp-banner-link">
             <Image src="/images/contact-policy-banner.webp" alt="お問合せ対応基本方針" width={1800} height={826} sizes="100vw" className="pp-banner-img" />
           </Link>
         </FadeIn>
         <FadeIn delay={150} direction="up" className="pp-banner-fadein">
-          <Link href="/anti-social-forces-policy/" className="pp-banner-link">
+          <Link href="/anti-social-forces-policy" className="pp-banner-link">
             <Image src="/images/antisocial-policy-banner.webp" alt="反社会的勢力に対する基本方針" width={1800} height={826} sizes="100vw" className="pp-banner-img" />
           </Link>
         </FadeIn>

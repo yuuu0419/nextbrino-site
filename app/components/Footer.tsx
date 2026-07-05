@@ -5,21 +5,21 @@ import Link from "next/link";
 
 const NAV_LINKS = [
   { label: "HOME",           href: "/" },
-  { label: "事業内容",        href: "/service/" },
-  { label: "代表挨拶",        href: "/message-kuroki-yuta/" },
-  { label: "理念・行動指針",   href: "/philosophy/" },
-  { label: "概要・沿革",      href: "/overview/" },
-  { label: "お知らせ",        href: "/news/" },
-  { label: "採用情報",        href: "/recruit/" },
-  { label: "インターンシップ",  href: "/internship/" },
-  { label: "お問い合わせ",     href: "/contact/" },
+  { label: "事業内容",        href: "/service" },
+  { label: "代表挨拶",        href: "/message-kuroki-yuta" },
+  { label: "理念・行動指針",   href: "/philosophy" },
+  { label: "概要・沿革",      href: "/overview" },
+  { label: "お知らせ",        href: "/news" },
+  { label: "採用情報",        href: "/recruit" },
+  { label: "インターンシップ",  href: "/internship" },
+  { label: "お問い合わせ",     href: "/contact" },
 ];
 
 const POLICY_LINKS = [
-  { label: "個人情報保護方針",            href: "/privacy-policy/" },
-  { label: "お問合せ対応基本方針",         href: "/contact-policy/" },
-  { label: "反社会的勢力に対する基本方針",  href: "/anti-social-forces-policy/" },
-  { label: "特定商取引法に基づく表記",     href: "/legal-notice/" },
+  { label: "個人情報保護方針",            href: "/privacy-policy" },
+  { label: "お問合せ対応基本方針",         href: "/contact-policy" },
+  { label: "反社会的勢力に対する基本方針",  href: "/anti-social-forces-policy" },
+  { label: "特定商取引法に基づく表記",     href: "/legal-notice" },
 ];
 
 export default function Footer() {

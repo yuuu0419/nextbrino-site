@@ -7,7 +7,12 @@ interface TickerProps {
 
 export default function Ticker({ text, overlapBottom = 0 }: TickerProps) {
   const item = text + " ";
-  const half = Array(10).fill(item).join("");
+  /* トラックの移動量は translateX(-50%) = 親要素(画面幅)基準の半分なので、
+     複製は「画面幅 + 移動量 ≒ 画面1.5枚分」を覆えれば見た目は同一。
+     1コピーは最小構成でも約2,000px(モバイル160px時)あり、3コピー×2セットで
+     5K級の超横長画面まで安全に覆える。10コピーでは描画領域が
+     33,000〜49,000pxに達し、モバイルのスクロールがかくつく主因だった。 */
+  const half = Array(3).fill(item).join("");
 
   return (
     <div

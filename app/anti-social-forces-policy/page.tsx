@@ -122,12 +122,12 @@ export default function AntisocialPolicyPage() {
 
       <div className="ap-banners">
         <FadeIn delay={0} direction="up" className="ap-banner-fadein">
-          <Link href="/privacy-policy/" className="ap-banner-link">
+          <Link href="/privacy-policy" className="ap-banner-link">
             <Image src="/images/privacy-policy-banner.webp" alt="個人情報保護方針" width={1800} height={826} sizes="100vw" className="ap-banner-img" />
           </Link>
         </FadeIn>
         <FadeIn delay={150} direction="up" className="ap-banner-fadein">
-          <Link href="/contact-policy/" className="ap-banner-link">
+          <Link href="/contact-policy" className="ap-banner-link">
             <Image src="/images/contact-policy-banner.webp" alt="お問合せ対応基本方針" width={1800} height={826} sizes="100vw" className="ap-banner-img" />
           </Link>
         </FadeIn>

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import ScrollLineIndicator from "../components/ScrollLineIndicator";
 import Link from "next/link";
 import Image from "next/image";
-import { HERO_BLUR } from "../heroBlurData";
+import HeroImage from "../components/HeroImage";
 import Ticker from "../components/Ticker";
 import SplitTitle from "../components/SplitTitle";
 import ServiceRows from "../components/ServiceRows";
@@ -41,16 +41,7 @@ export default function ServicePage() {
   return (
     <main>
       <div className="hero">
-        <Image
-          src="/images/service-hero.webp"
-          alt=""
-          fill
-          style={{ objectFit: "cover", objectPosition: "center" }}
-          priority
-          unoptimized
-          placeholder="blur"
-          blurDataURL={HERO_BLUR["/images/service-hero.webp"]}
-        />
+        <HeroImage src="/images/service-hero.webp" />
         <div className="hero-overlay" />
         <div className="hero-content">
           <p className="hero-en">BUSINESS</p>
@@ -134,6 +125,8 @@ export default function ServicePage() {
                 <img
                   src="/images/contact-box-logo.webp"
                   alt=""
+                  loading="lazy"
+                  decoding="async"
                   style={{ objectFit: "cover", objectPosition: "top center", width: "100%", height: "100%", position: "absolute", inset: 0 }}
                 />
               </div>
@@ -144,7 +137,7 @@ export default function ServicePage() {
                 </p>
                 <p className="sv-contact-note-box">対応枠が満枠の場合は、<br className="sv-contact-note-br" />ご返信できかねる場合がございます。</p>
                 <div className="sv-contact-sep" />
-                <Link href="/contact/" className="sv-contact-btn">
+                <Link href="/contact" className="sv-contact-btn">
                   <span>お問合せはこちら</span>
                   <span className="sv-contact-arrow">→</span>
                 </Link>
@@ -752,17 +745,17 @@ export default function ServicePage() {
 
       <div className="sv-banners">
         <FadeIn delay={0} direction="up" className="sv-banner-fadein">
-          <Link href="/philosophy/" className="sv-banner-link">
+          <Link href="/philosophy" className="sv-banner-link">
             <Image src="/images/philosophy-banner.webp" alt="理念・行動指針" width={1800} height={826} sizes="100vw" className="sv-banner-img" />
           </Link>
         </FadeIn>
         <FadeIn delay={150} direction="up" className="sv-banner-fadein">
-          <Link href="/overview/" className="sv-banner-link">
+          <Link href="/overview" className="sv-banner-link">
             <Image src="/images/overview-banner.webp" alt="概要・沿革" width={1800} height={826} sizes="100vw" className="sv-banner-img" />
           </Link>
         </FadeIn>
         <FadeIn delay={300} direction="up" className="sv-banner-fadein">
-          <Link href="/message-kuroki-yuta/" className="sv-banner-link">
+          <Link href="/message-kuroki-yuta" className="sv-banner-link">
             <Image src="/images/top-message-banner.webp" alt="代表挨拶" width={1800} height={826} sizes="100vw" className="sv-banner-img" />
           </Link>
         </FadeIn>

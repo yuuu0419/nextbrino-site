@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import SplitTitle from "./SplitTitle";
 
@@ -273,8 +274,8 @@ export default function NewsSection() {
                 background: "linear-gradient(90deg, rgba(21,38,59,0.09), transparent 80%)",
                 margin: "0 0 16px",
               }} />
-              <a
-                href="/news/"
+              <Link
+                href="/news"
                 onMouseEnter={() => setHovered(true)}
                 onMouseLeave={() => setHovered(false)}
                 style={{
@@ -304,7 +305,7 @@ export default function NewsSection() {
                   transition: "transform 0.3s ease",
                   display: "inline-block",
                 }}>→</span>
-              </a>
+              </Link>
               <div style={{
                 width: "100%", height: 1,
                 background: "linear-gradient(90deg, rgba(21,38,59,0.09), transparent 80%)",

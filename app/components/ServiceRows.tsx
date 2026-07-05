@@ -77,6 +77,8 @@ function ServiceRow({ s, i }: { s: Service; i: number }) {
           <img
             src={s.img}
             alt={s.ja}
+            loading="lazy"
+            decoding="async"
             style={{ objectFit: "cover", width: "100%", height: "100%", position: "absolute", inset: 0 }}
           />
           <div className="sv-row-img-overlay" />

@@ -78,7 +78,7 @@ function renderBlock(block: any, i: number): React.ReactNode {
       return <hr key={i} className="nd-hr" />;
     case "image": {
       const url = block.image?.file?.url ?? block.image?.external?.url;
-      return url ? <img key={i} src={url} alt="" className="nd-img" /> : null;
+      return url ? <img key={i} src={url} alt="" loading="lazy" decoding="async" className="nd-img" /> : null;
     }
     default:
       return null;
