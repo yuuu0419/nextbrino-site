@@ -7,6 +7,11 @@ import Ticker from "./components/Ticker";
 import SplitTitle from "./components/SplitTitle";
 
 
+// navy(#15263b)単色のSVGをblurDataURLとして使用し、初回スライド画像ロード前の黒フラッシュを防ぐ
+const NAVY_BLUR_URL = `data:image/svg+xml;base64,${Buffer.from(
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"><rect width="1" height="1" fill="#15263b"/></svg>'
+).toString("base64")}`;
+
 const SLIDES = [
   { src: "/images/top-hero-01.webp", alt: "NEXT BRINO — IT技術を駆使して日常をデザインする" },
   { src: "/images/top-hero-02.webp", alt: "NEXT BRINO — ITソリューション・Web制作・システム開発" },
@@ -360,7 +365,7 @@ export default function HomeClient() {
         {SLIDES.map(({ src, alt }, i) => (
           <div
             key={src}
-            className={`fv-slide${i === slide ? (tick % 2 === 0 ? " active-odd" : " active-even") : ""}`}
+            className={`fv-slide${i === slide ? (tick % 2 === 0 ? " active-odd" : " active-even") : ""}${i === 0 && tick === 0 ? " fv-slide-initial" : ""}`}
           >
             {loadedSlides.includes(i) && (
               <Image
@@ -371,6 +376,7 @@ export default function HomeClient() {
                 style={{ objectFit: "cover" }}
                 priority={i === 0}
                 quality={80}
+                {...(i === 0 ? { placeholder: "blur" as const, blurDataURL: NAVY_BLUR_URL } : {})}
               />
             )}
           </div>

@@ -85,6 +85,15 @@ body {
   10%  { opacity: 1;                         }
   100% { opacity: 1; transform: scale(1);    }
 }
+/* 初回表示のスライドはフェードインさせず即時表示（オーバーレイのみが見える黒い影を防ぐ） */
+@keyframes kenburns-odd-init {
+  0%   { opacity: 1; transform: scale(1);    }
+  100% { opacity: 1; transform: scale(1.12); }
+}
+@keyframes kenburns-even-init {
+  0%   { opacity: 1; transform: scale(1.12); }
+  100% { opacity: 1; transform: scale(1);    }
+}
 
 .fv-slide {
   position: absolute;
@@ -95,6 +104,8 @@ body {
 }
 .fv-slide.active-odd  { z-index: 1; animation: kenburns-odd  7s ease-in-out forwards; }
 .fv-slide.active-even { z-index: 1; animation: kenburns-even 7s ease-in-out forwards; }
+.fv-slide.active-odd.fv-slide-initial  { animation-name: kenburns-odd-init; }
+.fv-slide.active-even.fv-slide-initial { animation-name: kenburns-even-init; }
 
 /* ===================== Ticker (large, gradient) ===================== */
 @keyframes ticker-scroll {
