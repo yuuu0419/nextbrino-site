@@ -35,8 +35,6 @@ export default function HomeClient() {
   const [vh, setVh]                           = useState(800);
   const [slideshowActive, setSlideshowActive] = useState(true);
   const [atBottom, setAtBottom]               = useState(false);
-  const [hoveredService, setHoveredService]   = useState<number | null>(null);
-  const [selectedService, setSelectedService] = useState(0);
   const [philoVisible, setPhiloVisible]       = useState(false);
   const philoGridRef                          = useRef<HTMLDivElement>(null);
   const [philoMoreVisible, setPhiloMoreVisible] = useState(false);
@@ -313,7 +311,6 @@ export default function HomeClient() {
   const textMaxWidth   = lerp(44, 92, progress);
 
   const textShadow = lerp(0.55, 0, progress);
-  const subOpacity = lerp(1, 0, Math.min(progress * 1.8, 1));
 
   /* PHILOSOPHYに差し掛かったらスクロールと同期して上に流れる（i-ne.co.jp と同じ動き） */
   const fadeStart   = isMobile ? vh * 1.0 : vh * 1.8;       // 「経営理念」が画面下端に見え始める地点
@@ -348,8 +345,6 @@ export default function HomeClient() {
     { title: "教育学習支援事業",    en: "EDUCATION",         en1: "EDUCATION",   en2: undefined,     desc: "小中学生対象の学習支援\nPREP法による完全双方向で能動的な学習の確立" },
     { title: "健康増進事業",       en: "HEALTH PROMOTION",   en1: "HEALTH",      en2: "PROMOTION",   desc: "各スポーツにおける身体能力向上指導\nボディメイク(ピラティスを含む)、栄養指導" },
   ];
-  const svcBarWidths = ["74%", "61%", "82%", "67%", "54%", "72%"];
-
   return (
     <div style={{ fontFamily: "var(--font-main)", background: "#fff" }}>
       {/* ── 固定 FV 画像 ── */}
@@ -965,8 +960,6 @@ export default function HomeClient() {
               <div
                 key={s.en}
                 className="svc-brand-card"
-                onMouseEnter={() => setHoveredService(i)}
-                onMouseLeave={() => setHoveredService(null)}
                 style={{
                   transform: svcVisible ? "translateX(0)" : "translateX(-60px)",
                   opacity: svcVisible ? 1 : 0,

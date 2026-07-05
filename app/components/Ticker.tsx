@@ -7,7 +7,7 @@ interface TickerProps {
 
 export default function Ticker({ text, overlapBottom = 0 }: TickerProps) {
   const item = text + " ";
-  const half = Array(20).fill(item).join("");
+  const half = Array(10).fill(item).join("");
 
   return (
     <div
