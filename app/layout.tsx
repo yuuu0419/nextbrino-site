@@ -3,6 +3,7 @@ import { Noto_Sans_JP, Barlow_Condensed, Cormorant_Garamond } from "next/font/go
 import "./globals.css";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import ScrollTopOnSamePageLink from "./components/ScrollTopOnSamePageLink";
 import Script from "next/script";
 
 const GA_ID = "G-BR75W4WJWC";
@@ -107,6 +108,7 @@ export default function RootLayout({
             }),
           }}
         />
+        <ScrollTopOnSamePageLink />
         <Header />
         {children}
         <Footer />

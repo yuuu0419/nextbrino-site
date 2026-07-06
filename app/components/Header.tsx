@@ -684,8 +684,8 @@ export default function Header() {
           transition: "background 0.4s, border-color 0.4s",
         }}
       >
-        {/* ロゴ */}
-        <Link href="/" className="hd-logo-link" style={{ display: "flex", flexShrink: 0 }} onClick={(e) => { closeMenu(); if (window.location.pathname === "/") { e.preventDefault(); window.scrollTo({ top: 0 }); window.location.reload(); } }}>
+        {/* ロゴ(トップページ表示中のクリックは ScrollTopOnSamePageLink がトップへスクロールさせる。リロード不要) */}
+        <Link href="/" className="hd-logo-link" style={{ display: "flex", flexShrink: 0 }} onClick={() => closeMenu()}>
           <Image
             src="/images/header-logo.webp"
             alt="NEXT BRINO"
