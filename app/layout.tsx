@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import ScrollTopOnSamePageLink from "./components/ScrollTopOnSamePageLink";
 import Script from "next/script";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const GA_ID = "G-BR75W4WJWC";
 
@@ -114,6 +115,9 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
+        {/* 実ユーザーのCore Web Vitals計測（Vercel Speed Insights）。
+            本番のVercel上でのみ動作し、ローカルでは何もしない */}
+        <SpeedInsights />
       </body>
     </html>
   );
