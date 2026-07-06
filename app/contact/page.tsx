@@ -201,7 +201,7 @@ export default function ContactPage() {
           width: 260px;
           min-width: 260px;
           font-size: .9rem;
-          font-weight: 600;
+          font-weight: 700;
           color: rgba(21,38,59,0.9);
           letter-spacing: .03em;
           display: flex;
@@ -307,7 +307,7 @@ export default function ContactPage() {
           cursor: pointer;
         }
         .ct-checkbox { width: 18px; height: 18px; accent-color: #15263b; flex-shrink: 0; }
-        .ct-policy-link { color: #15263b; font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+        .ct-policy-link { color: #15263b; font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
         .ct-policy-link:hover { opacity: .65; }
 
         .ct-submit-wrap { text-align: center; margin-bottom: 8px; }

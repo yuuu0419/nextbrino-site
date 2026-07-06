@@ -185,7 +185,7 @@ export default function PhilosophyPage() {
           color: rgba(255,255,255,.6);
           text-transform: uppercase;
           margin: 0 0 18px;
-          font-weight: 600;
+          font-weight: 700;
         }
         .ph-tag--dark { color: #15263b; opacity: .65; }
 

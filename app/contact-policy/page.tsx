@@ -252,7 +252,7 @@ export default function ContactPolicyPage() {
         .cp-list--circle li::before { content: "\\2296"; color: rgba(255,255,255,.5); flex-shrink: 0; margin-top: 2px; }
         .cp-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: .9rem; }
         .cp-table th, .cp-table td { border: 1px solid rgba(21,38,59,.15); padding: 12px 16px; text-align: left; vertical-align: top; line-height: 1.8; }
-        .cp-table th { width: 200px; font-weight: 600; color: #9d8c56; background: rgba(21,38,59,.04); white-space: nowrap; }
+        .cp-table th { width: 200px; font-weight: 700; color: #9d8c56; background: rgba(21,38,59,.04); white-space: nowrap; }
         .cp-table td { color: #555; }
         .cp-link { color: #9d8c56; text-decoration: underline; }
         .cp-date { margin: 48px 0 0; font-size: .85rem; color: rgba(21,38,59,.5); display: flex; align-items: center; justify-content: flex-end; gap: 24px; }

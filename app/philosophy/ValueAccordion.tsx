@@ -167,7 +167,7 @@ export default function ValueAccordion() {
           white-space: nowrap;
         }
         .va-item-sep { color: rgba(255,255,255,.4); font-size: .85rem; white-space: nowrap; }
-        .va-item-title { font-size: .88rem; font-weight: 600; color: #fff; letter-spacing: .04em; }
+        .va-item-title { font-size: .88rem; font-weight: 700; color: #fff; letter-spacing: .04em; }
         .va-chevron {
           font-size: .9rem;
           color: rgba(255,255,255,.6);

@@ -175,7 +175,7 @@ export default function ServicePage() {
         .hero-en {
           font-family: var(--font-noto-sans-jp), sans-serif;
           font-size: clamp(54px, 7.8vw, 114px);
-          font-weight: 600;
+          font-weight: 700;
           letter-spacing: .08em;
           line-height: 1;
           color: #fff;

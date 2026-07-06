@@ -11,6 +11,8 @@ const GA_ID = "G-BR75W4WJWC";
 const notoSansJP = Noto_Sans_JP({
   variable: "--font-noto-sans-jp",
   subsets: ["latin"],
+  /* 注: 可変フォント(weight:"variable")は検証済みで転送量が静的と同一(668KB)のため不採用。
+     600等の未読込ウェイトは700に丸めて描画されるので、コード側も700で統一すること */
   weight: ["300", "400", "700", "900"],
   display: "swap",
 });

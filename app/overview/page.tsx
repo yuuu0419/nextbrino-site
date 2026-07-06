@@ -269,7 +269,7 @@ export default function OverviewPage() {
           width: 100%;
         }
         .ov-invoice-text strong {
-          font-weight: 600;
+          font-weight: 700;
         }
         .ov-invoice-br {
           display: none;
