@@ -73,12 +73,22 @@ body {
   /* トップページ FV テキストのボックス位置/幅は isMobile の state 反映(useEffect)を
      待たずに CSS で即確定させる。JS 側は state 未反映の間 PC 用の値
      （top:50%/left:55%/max-width:44vw）で描画するため、初回表示や再マウント時
-     （戻る操作等）に「右側に小さく表示→正しい位置へスナップ」して見えるのを防ぐ。 */
+     （戻る操作等）に「右側に小さく表示→正しい位置へスナップ」して見えるのを防ぐ。
+     position は fixed ではなく absolute: 親の .fv-sticky (position:sticky) に
+     固定・解放を任せる。fixed+JS追従は iOS の非同期スクロールで1フレーム遅れて
+     上下に揺れるため使わない。 */
   .fv-text-wrap {
+    position: absolute !important;
     top: 0 !important;
     left: 5% !important;
     right: 5% !important;
     max-width: none !important;
+  }
+
+  /* FV sticky コンテナ: 192vh スペーサー内で 92vh にすると解放点が y=100vh になり、
+     色・サイズアニメーション(applyMobileFv の prog)完了と同時にページと一体で上へ流れる */
+  .fv-sticky {
+    height: 92vh !important;
   }
 
   /* 初回スライドはケンバーンズ用アニメーション（0%で opacity:1）の開始を待たず

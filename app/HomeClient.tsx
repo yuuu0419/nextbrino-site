@@ -92,15 +92,16 @@ export default function HomeClient() {
       vhPxRef.current = vhProbeRef.current?.offsetHeight || window.innerHeight;
     }
     const viewH = vhPxRef.current;
-    /* prog は scrollPx が動き始める y=viewH でちょうど 1 に到達させる。
-       これで経営理念に差し掛かった時点で色・サイズ変化が完了しており、
-       以降テキストはページ本体と完全に 1:1 で上へ流れる */
-    const prog     = ease(Math.min(y / viewH, 1));
-    const scrollPx = Math.max(0, y - viewH);
-    const col      = lerpColor(prog);
-    const shadow   = lerp(0.55, 0, prog);
+    /* prog は sticky コンテナの解放点 y=viewH(=192vh-92vh) でちょうど 1 に到達させる。
+       これで経営理念に差し掛かった時点で色・サイズ変化が完了している。
+       上へ流す動き自体は JS では行わない: フレーム遅れで上下に揺れるため、
+       position:sticky（92vh・スペーサー192vh内）でブラウザネイティブに
+       固定→解放させ、ページ本体と完全同期させる */
+    const prog   = ease(Math.min(y / viewH, 1));
+    const col    = lerpColor(prog);
+    const shadow = lerp(0.55, 0, prog);
     fvTextDivRef.current?.style.setProperty(
-      "transform", `translateY(calc(${lerp(45, 65, prog)}vh - ${scrollPx}px - 50%))`
+      "transform", `translateY(calc(${lerp(45, 65, prog)}vh - 50%))`
     );
     if (fvMainPRef.current) {
       fvMainPRef.current.style.color      = col;
@@ -458,7 +459,13 @@ export default function HomeClient() {
         </div>
       )}
 
-      {/* ── FV テキスト（fixed）── スクロールで逃げずに残り、PHILOSOPHYへ接続 */}
+      {/* ── FV スクロールコンテナー ── スクロール長確保 + モバイルはFVテキストの sticky 固定 */}
+      <div style={{ height: isMobile ? "192vh" : "270vh", position: "relative", zIndex: 10 }}>
+        {/* モバイル: fixed+JS追従だと iOS の非同期スクロールで1フレーム遅れて上下に揺れるため、
+            sticky(92vh) でネイティブに固定し、解放後(y=192vh-92vh=100vh)はページと完全同期で上へ流す。
+            PC: テキストは position:fixed のままなので DOM 位置は挙動に影響しない */}
+        <div className="fv-sticky" style={{ position: "sticky", top: 0, height: "100vh", background: "transparent" }}>
+      {/* ── FV テキスト ── スクロールで逃げずに残り、PHILOSOPHYへ接続 */}
       <div
         ref={fvTextDivRef}
         className="fv-text-wrap"
@@ -525,10 +532,7 @@ export default function HomeClient() {
           )}
         </p>
       </div>
-
-      {/* ── FV スクロールコンテナー (270vh) ── スクロール長確保のみ */}
-      <div style={{ height: isMobile ? "192vh" : "270vh", position: "relative", zIndex: 10 }}>
-        <div style={{ position: "sticky", top: 0, height: "100vh", background: "transparent" }} />
+        </div>
       </div>
 
       {/* ── コンテンツ（全て透過。NEWS も透明） ── */}
