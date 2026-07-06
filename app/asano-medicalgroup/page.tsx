@@ -40,7 +40,7 @@ export default function AsanoMedicalPage() {
         {/* PC: iframe */}
         <div className="hidden md:block w-full border border-white/10 rounded overflow-hidden bg-white/5 mb-6">
           <iframe
-            src="/asano-medicalgroup.pdf"
+            src="/asano-medicalgroup.pdf#toolbar=0&navpanes=0&view=FitH"
             className="w-full"
             style={{ height: "80vh", minHeight: 600 }}
             title="NEXT BRINO 営業資料"
