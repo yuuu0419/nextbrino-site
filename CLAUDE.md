@@ -19,21 +19,18 @@ npm run start # 本番サーバー
 ## ディレクトリ構成
 ```
 app/
-  page.tsx              # メインページ（全セクション）← 編集の起点
+  page.tsx / HomeClient.tsx  # メインページ（全セクション）← 編集の起点
   layout.tsx            # フォント設定・メタデータ
   globals.css           # アニメーション・共通スタイル
   components/
-    CherryBlossoms.tsx  # 桜の花びらエフェクト（fixed overlay）
-    NewsSection.tsx     # お知らせセクション（WP REST API連動）
+    NewsSection.tsx     # トップのニュース枠（静的表示・/news へのリンク）
+    NewsListSection.tsx # ニュース一覧（Notion API直接取得・revalidate 60s）
     Ticker.tsx          # 横流れテキストバナー
   api/
-    news/route.ts       # WordPress APIプロキシ（nextbrino.com/wp-json）
+    notion-page/[id]/   # ニュース記事本文の取得（Notion）
+    contact/            # お問い合わせ送信（Resend + Notion + reCAPTCHA）
 public/
-  images/
-    header-logo.png
-    top-fv1.jpg / top-fv2.jpg / top-fv3.jpg
-    kuroki-yuta.jpg
-    contact.jpg
+  images/               # webp画像・OGP jpg
 ```
 
 ## ページ構成（上から順）
@@ -90,18 +87,19 @@ z:1000 ヘッダー
 - スクロールティッカー参考: https://www.sanwa-paint.jp
 - 本番サイト: https://nextbrino.com
 
-## WordPress連携
-- `app/api/news/route.ts` が `nextbrino.com/wp-json/wp/v2/posts` をプロキシ
-- CORS対策済み。取得記事数 `per_page=50`
+## ニュース連携（Notion）
+- ニュースはNotionデータベースから取得（旧WordPress連携は2026-07に完全廃止）
+- 一覧: `app/components/NewsListSection.tsx` がNotion APIを直接fetch（`revalidate: 60`）
+- 記事本文: `app/api/notion-page/[id]/route.ts`
+- 認証: `.env.local` の `NOTION_TOKEN` / `NOTION_DATABASE_ID`
 
 ## よくある修正箇所
 
 | やりたいこと | 変更ファイル |
 |---|---|
-| FVテキスト内容変更 | `app/page.tsx` の `<p>` タグ内 |
-| スクロールアニメーション調整 | `app/page.tsx` の lerp/ease 変数群 |
-| 各セクション内容変更 | `app/page.tsx` の各 `<section>` |
-| ティッカーテキスト変更 | `app/page.tsx` の `<Ticker text="..." />` |
-| ニュース取得件数変更 | `app/api/news/route.ts` の `per_page` |
+| FVテキスト内容変更 | `app/HomeClient.tsx` の `<p>` タグ内 |
+| スクロールアニメーション調整 | `app/HomeClient.tsx` の lerp/ease 変数群 |
+| 各セクション内容変更 | `app/HomeClient.tsx` の各 `<section>` |
+| ティッカーテキスト変更 | `app/HomeClient.tsx` の `<Ticker text="..." />` |
+| ニュース表示調整 | `app/components/NewsListSection.tsx` |
 | フォント追加 | `app/layout.tsx` + `app/globals.css` の `:root` |
-| 桜エフェクト調整 | `app/components/CherryBlossoms.tsx` |
