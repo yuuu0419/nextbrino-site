@@ -61,6 +61,8 @@ export default function HomeClient() {
   const whiteOverlayRef    = useRef<HTMLDivElement>(null);
   const scrollIndicatorRef = useRef<HTMLDivElement>(null);
   const docHeightRef       = useRef(0);
+  const vhProbeRef         = useRef<HTMLDivElement>(null);
+  const vhPxRef            = useRef(0);
 
   /* document.documentElement.scrollHeight の読み取りはレイアウトを強制するため、
      毎スクロールフレームでは呼ばず resize / コンテンツ変化時にのみ再計測してキャッシュする */
@@ -82,13 +84,23 @@ export default function HomeClient() {
 
   const applyMobileFv = useCallback((y: number) => {
     if (typeof window === "undefined" || window.innerWidth >= 768) return;
-    const viewH  = window.innerHeight;
-    const prog   = ease(Math.min(y / (viewH * 1.2), 1));
-    const scroll = Math.max(0, y - viewH) / viewH * 100;
-    const col    = lerpColor(prog);
-    const shadow = lerp(0.55, 0, prog);
+    /* viewH は window.innerHeight ではなく「CSS 100vh の実ピクセル値」を使う。
+       iOS Safari では URL バーの伸縮で innerHeight が変動する一方 CSS の vh は
+       固定のため、innerHeight 基準で計算すると後続セクションとスクロール速度が
+       ズレて FV テキストと経営理念の間隔がガタつく */
+    if (!vhPxRef.current) {
+      vhPxRef.current = vhProbeRef.current?.offsetHeight || window.innerHeight;
+    }
+    const viewH = vhPxRef.current;
+    /* prog は scrollPx が動き始める y=viewH でちょうど 1 に到達させる。
+       これで経営理念に差し掛かった時点で色・サイズ変化が完了しており、
+       以降テキストはページ本体と完全に 1:1 で上へ流れる */
+    const prog     = ease(Math.min(y / viewH, 1));
+    const scrollPx = Math.max(0, y - viewH);
+    const col      = lerpColor(prog);
+    const shadow   = lerp(0.55, 0, prog);
     fvTextDivRef.current?.style.setProperty(
-      "transform", `translateY(calc(${lerp(45, 65, prog) - scroll}vh - 50%))`
+      "transform", `translateY(calc(${lerp(45, 65, prog)}vh - ${scrollPx}px - 50%))`
     );
     if (fvMainPRef.current) {
       fvMainPRef.current.style.color      = col;
@@ -107,10 +119,10 @@ export default function HomeClient() {
     if (whiteOverlayRef.current) {
       whiteOverlayRef.current.style.background = `rgba(255,255,255,${lerp(0, 0.92, prog)})`;
     }
-    // スクロールインジケーター（最下部で非表示）
+    // スクロールインジケーター（最下部で非表示｜実際に見えている高さで判定）
     if (scrollIndicatorRef.current) {
       const docH = docHeightRef.current;
-      scrollIndicatorRef.current.style.opacity = (y + viewH >= docH - 200) ? "0" : "1";
+      scrollIndicatorRef.current.style.opacity = (y + window.innerHeight >= docH - 200) ? "0" : "1";
     }
   }, []);
 
@@ -177,6 +189,7 @@ export default function HomeClient() {
          PC は vh を使う計算があるため高さのみの変化でも従来通り更新する。 */
       if (mobile && w === lastWidth) return;
       lastWidth = w;
+      vhPxRef.current = 0; // 回転等で幅が変わったら CSS 100vh を再計測
       isMobileRef.current = mobile;
       setIsMobile(mobile);
       setVh(window.innerHeight);
@@ -357,6 +370,8 @@ export default function HomeClient() {
   ];
   return (
     <div style={{ fontFamily: "var(--font-main)", background: "#fff" }}>
+      {/* CSS 100vh の実ピクセル値計測用プローブ（applyMobileFv が参照） */}
+      <div ref={vhProbeRef} aria-hidden style={{ position: "absolute", top: 0, left: 0, width: 0, height: "100vh", visibility: "hidden", pointerEvents: "none" }} />
       {/* ── 固定 FV 画像 ── */}
       <div
         style={{
