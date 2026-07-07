@@ -8,6 +8,21 @@ export const metadata: Metadata = {
     index: false,
     follow: false,
   },
+  openGraph: {
+    title: "MINAMI様　限定のご案内｜NEXT BRINO",
+    description: "NEXT BRINOより、MINAMI様　限定のご案内です。",
+    url: "https://nextbrino.com/minami",
+    siteName: "NEXT BRINO",
+    images: [{ url: "https://nextbrino.com/images/minami-ogp.jpg", width: 1200, height: 630, alt: "MINAMI様　限定のご案内｜NEXT BRINO" }],
+    locale: "ja_JP",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "MINAMI様　限定のご案内｜NEXT BRINO",
+    description: "NEXT BRINOより、MINAMI様　限定のご案内です。",
+    images: ["https://nextbrino.com/images/minami-ogp.jpg"],
+  },
 };
 
 export default function MinamiPage() {
