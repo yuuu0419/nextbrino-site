@@ -222,24 +222,6 @@ export default function Header() {
             -webkit-backdrop-filter: none !important;
             background: rgba(60,70,90,0.18);
           }
-          /* ヘッダー本体(スクロール後・全ページ固定表示)とメニューオーバーレイの
-             backdrop-filterも同様にスクロール毎の背景サンプリングが重いため無効化。
-             LINE/Instagram等のアプリ内ブラウザはbackdrop-filterの合成が特に遅く、
-             スクロール・タップ操作のガタつきの主因になっていたため、
-             不透明度を上げた単色背景に置き換えて透過効果を代替する。 */
-          .hd-scrolled {
-            backdrop-filter: none !important;
-            -webkit-backdrop-filter: none !important;
-            background: rgba(255,255,255,0.86) !important;
-          }
-          .hd-on-dark.hd-scrolled {
-            background: rgba(13,26,44,0.86) !important;
-          }
-          .hd-overlay {
-            backdrop-filter: none !important;
-            -webkit-backdrop-filter: none !important;
-            background: rgba(13,28,48,0.94) !important;
-          }
         }
         .hd-burger-label {
           font-size: 0.77rem;

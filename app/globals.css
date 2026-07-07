@@ -83,6 +83,29 @@ body {
     left: 5% !important;
     right: 5% !important;
     max-width: none !important;
+    /* transform も JS(applyMobileFv)を待たず prog=0 の値で確定させる。
+       SSR HTML は PC 用の translateY(-50%) を含むため、hydration まで
+       そのまま描画されるとテキストが画面上部に張り付き、JS 起動時に
+       中央へスナップして「最初の文字のガタつき」になる */
+    transform: translateY(calc(45vh - 50%)) !important;
+  }
+
+  /* FV テキストの文字サイズ・行間・色も同様に prog=0 の値で先行確定させる。
+     SSR は PC 用インライン値(4.2vw/1.45vw・line-height 1.35 等)を持つため、
+     hydration 時に文字が急に大きくなるガタつきが出ていた。
+     スクロール中の変化は applyMobileFv が setProperty(…, "important") で上書きする */
+  .fv-main-p {
+    font-size: 8vw !important;
+    line-height: 1.55 !important;
+    color: #fff !important;
+    text-shadow: 0 2px 32px rgba(0,0,0,0.55) !important;
+  }
+  .fv-sub-p {
+    font-size: 3.8vw !important;
+    line-height: 2.3 !important;
+    margin: 2.4em 0 3em !important;
+    color: #fff !important;
+    text-shadow: 0 2px 32px rgba(0,0,0,0.55) !important;
   }
 
   /* FV sticky コンテナ: 192vh スペーサー内で 92vh にすると解放点が y=100vh になり、

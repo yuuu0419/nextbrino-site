@@ -100,18 +100,22 @@ export default function HomeClient() {
     const prog   = ease(Math.min(y / viewH, 1));
     const col    = lerpColor(prog);
     const shadow = lerp(0.55, 0, prog);
+    /* globals.css がモバイル初期値(prog=0)を !important で先行確定させているため、
+       スクロール中の JS 更新も "important" 指定で上書きする(無指定だと CSS に負ける) */
     fvTextDivRef.current?.style.setProperty(
-      "transform", `translateY(calc(${lerp(45, 65, prog)}vh - 50%))`
+      "transform", `translateY(calc(${lerp(45, 65, prog)}vh - 50%))`, "important"
     );
     if (fvMainPRef.current) {
-      fvMainPRef.current.style.color      = col;
-      fvMainPRef.current.style.textShadow = `0 2px 32px rgba(0,0,0,${shadow})`;
-      fvMainPRef.current.style.fontSize   = `${lerp(8, 10, prog)}vw`;
+      const s = fvMainPRef.current.style;
+      s.setProperty("color", col, "important");
+      s.setProperty("text-shadow", `0 2px 32px rgba(0,0,0,${shadow})`, "important");
+      s.setProperty("font-size", `${lerp(8, 10, prog)}vw`, "important");
     }
     if (fvSubPRef.current) {
-      fvSubPRef.current.style.color      = col;
-      fvSubPRef.current.style.textShadow = `0 2px 32px rgba(0,0,0,${shadow})`;
-      fvSubPRef.current.style.fontSize   = `${lerp(3.8, 4.5, prog)}vw`;
+      const s = fvSubPRef.current.style;
+      s.setProperty("color", col, "important");
+      s.setProperty("text-shadow", `0 2px 32px rgba(0,0,0,${shadow})`, "important");
+      s.setProperty("font-size", `${lerp(3.8, 4.5, prog)}vw`, "important");
     }
     // 暗→白オーバーレイ（background の alpha を直接書き換え。opacity ではない点に注意）
     if (darkOverlayRef.current) {
@@ -491,6 +495,7 @@ export default function HomeClient() {
       >
         <p
           ref={fvMainPRef}
+          className="fv-main-p"
           style={{
             fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif",
             fontWeight: 700,
@@ -512,6 +517,7 @@ export default function HomeClient() {
         </p>
         <p
           ref={fvSubPRef}
+          className="fv-sub-p"
           style={{
             fontWeight: 700,
             letterSpacing: "0.10em",
