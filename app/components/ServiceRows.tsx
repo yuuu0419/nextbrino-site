@@ -119,13 +119,7 @@ function ServiceRow({ s, i }: { s: Service; i: number }) {
         </ul>
 
         <div className="sv-row-btn-wrap" style={fadeUp(520 + s.items.length * 80)}>
-          {s.num === "04" ? (
-            <a href="https://n-bright.jp" target="_blank" rel="noopener noreferrer" className="btn-view-more">
-              VIEW MORE <span className="btn-arrow" />
-            </a>
-          ) : (
-            <Link href="/service" className="btn-view-more sv-btn-full">満枠対応中</Link>
-          )}
+          <Link href="/service" className="btn-view-more sv-btn-full">満枠対応中</Link>
         </div>
       </div>
     </div>

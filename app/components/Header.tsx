@@ -647,9 +647,6 @@ export default function Header() {
             <Link href="/contact" onClick={() => closeMenu()} style={{ display: "block", borderRadius: 10, overflow: "hidden" }}>
               <Image src="/images/contact.webp" alt="お問い合わせ" width={1500} height={500} style={{ width: "100%", height: "auto", display: "block" }} />
             </Link>
-            <a href="https://n-bright.jp" target="_blank" rel="noopener noreferrer" style={{ display: "block", borderRadius: 10, overflow: "hidden" }}>
-              <Image src="/images/n-bright.webp" alt="N-BRIGHT" width={1406} height={469} style={{ width: "100%", height: "auto", display: "block" }} />
-            </a>
           </div>
 
           <div className="hd-ol-footer">
