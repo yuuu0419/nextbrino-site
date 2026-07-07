@@ -37,18 +37,7 @@ export default function AsanoMedicalPage() {
         </h1>
         <p className="text-sm text-gray-400 mb-10 tracking-wider">限定のご案内</p>
 
-        {/* PC: iframe */}
-        <div className="hidden md:block w-full border border-white/10 rounded overflow-hidden bg-white/5 mb-6">
-          <iframe
-            src="/asano-medicalgroup.pdf#toolbar=0&navpanes=0&view=FitH"
-            className="w-full"
-            style={{ height: "80vh", minHeight: 600 }}
-            title="NEXT BRINO 営業資料"
-          />
-        </div>
-
-        {/* スマホ: react-pdf で全ページ表示 */}
-        <div className="md:hidden w-full border border-white/10 rounded overflow-hidden bg-white mb-6">
+        <div className="w-full border border-white/10 rounded overflow-hidden bg-white mb-6">
           <PdfViewerWrapper file="/asano-medicalgroup.pdf" />
         </div>
 
