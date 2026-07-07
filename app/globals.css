@@ -86,8 +86,15 @@ body {
     /* transform も JS(applyMobileFv)を待たず prog=0 の値で確定させる。
        SSR HTML は PC 用の translateY(-50%) を含むため、hydration まで
        そのまま描画されるとテキストが画面上部に張り付き、JS 起動時に
-       中央へスナップして「最初の文字のガタつき」になる */
-    transform: translateY(calc(45vh - 50%)) !important;
+       中央へスナップして「最初の文字のガタつき」になる。
+
+       単位は vh 直書きではなく --fvvh(JSが読み込み時の CSS 100vh 実寸の
+       1/100 を px でセット)を使う。LINE/Instagram 等のアプリ内ブラウザは
+       スクロールで上下ツールバーが収納されるとウェブビュー自体がリサイズされ
+       vh の実寸が変わるため、vh のままだと FV テキストがスクロール中に飛ぶ
+       (Safari は vh 固定なので起きない)。--fvvh 未セット(hydration前)は
+       1vh にフォールバックし、従来と同じ描画になる */
+    transform: translateY(calc(var(--fvvh, 1vh) * 45 - 50%)) !important;
   }
 
   /* FV テキストの文字サイズ・行間・色も同様に prog=0 の値で先行確定させる。
@@ -109,9 +116,11 @@ body {
   }
 
   /* FV sticky コンテナ: 192vh スペーサー内で 92vh にすると解放点が y=100vh になり、
-     色・サイズアニメーション(applyMobileFv の prog)完了と同時にページと一体で上へ流れる */
+     色・サイズアニメーション(applyMobileFv の prog)完了と同時にページと一体で上へ流れる。
+     単位はアプリ内ブラウザのツールバー伸縮に反応しないよう --fvvh で凍結
+     (スペーサー192・prog計算も同じ実寸を使うため解放点の整合は保たれる) */
   .fv-sticky {
-    height: 92vh !important;
+    height: calc(var(--fvvh, 1vh) * 92) !important;
   }
 
   /* 初回スライドはケンバーンズ用アニメーション（0%で opacity:1）の開始を待たず

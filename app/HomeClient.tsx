@@ -101,9 +101,11 @@ export default function HomeClient() {
     const col    = lerpColor(prog);
     const shadow = lerp(0.55, 0, prog);
     /* globals.css がモバイル初期値(prog=0)を !important で先行確定させているため、
-       スクロール中の JS 更新も "important" 指定で上書きする(無指定だと CSS に負ける) */
+       スクロール中の JS 更新も "important" 指定で上書きする(無指定だと CSS に負ける)。
+       単位は vh ではなく読み込み時実寸の px(viewH 基準)を使う: アプリ内ブラウザは
+       ツールバー収納で vh の実寸が変わるため、vh のままだとその瞬間テキストが飛ぶ */
     fvTextDivRef.current?.style.setProperty(
-      "transform", `translateY(calc(${lerp(45, 65, prog)}vh - 50%))`, "important"
+      "transform", `translateY(calc(${(lerp(45, 65, prog) * viewH) / 100}px - 50%))`, "important"
     );
     if (fvMainPRef.current) {
       const s = fvMainPRef.current.style;
@@ -194,7 +196,13 @@ export default function HomeClient() {
          PC は vh を使う計算があるため高さのみの変化でも従来通り更新する。 */
       if (mobile && w === lastWidth) return;
       lastWidth = w;
-      vhPxRef.current = 0; // 回転等で幅が変わったら CSS 100vh を再計測
+      /* 回転等で幅が変わったら CSS 100vh の実寸を再計測し、px で凍結して
+         CSS 変数 --fvvh(1vh相当のpx)としても共有する。FV のジオメトリ
+         (テキスト位置・sticky高さ・スペーサー)はこの凍結値を使うため、
+         アプリ内ブラウザのツールバー収納で vh の実寸が変わっても動かない */
+      const px = vhProbeRef.current?.offsetHeight || window.innerHeight;
+      vhPxRef.current = px;
+      document.documentElement.style.setProperty("--fvvh", `${px / 100}px`);
       isMobileRef.current = mobile;
       setIsMobile(mobile);
       setVh(window.innerHeight);
@@ -463,8 +471,9 @@ export default function HomeClient() {
         </div>
       )}
 
-      {/* ── FV スクロールコンテナー ── スクロール長確保 + モバイルはFVテキストの sticky 固定 */}
-      <div style={{ height: isMobile ? "192vh" : "270vh", position: "relative", zIndex: 10 }}>
+      {/* ── FV スクロールコンテナー ── スクロール長確保 + モバイルはFVテキストの sticky 固定
+          モバイルの高さはアプリ内ブラウザのツールバー伸縮で動かないよう --fvvh(px凍結)基準 */}
+      <div style={{ height: isMobile ? "calc(var(--fvvh, 1vh) * 192)" : "270vh", position: "relative", zIndex: 10 }}>
         {/* モバイル: fixed+JS追従だと iOS の非同期スクロールで1フレーム遅れて上下に揺れるため、
             sticky(92vh) でネイティブに固定し、解放後(y=192vh-92vh=100vh)はページと完全同期で上へ流す。
             PC: テキストは position:fixed のままなので DOM 位置は挙動に影響しない */}
