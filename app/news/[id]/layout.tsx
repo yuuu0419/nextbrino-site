@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-const NOTION_TOKEN = process.env.NOTION_TOKEN!;
+const NOTION_TOKEN = process.env.NOTION_NEWS_API_KEY!;
 const BASE_URL = "https://nextbrino.com";
 
 async function fetchPageTitle(id: string): Promise<string | null> {

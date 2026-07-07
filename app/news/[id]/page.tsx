@@ -22,13 +22,18 @@ async function fetchBlocks(blockId: string): Promise<any[]> {
 }
 
 async function fetchPage(id: string): Promise<{ title: string; date: string; blocks: any[] } | null> {
-  const pageRes = await fetch(`https://api.notion.com/v1/pages/${id}`, {
-    headers: {
-      Authorization: `Bearer ${NOTION_TOKEN}`,
-      "Notion-Version": "2022-06-28",
-    },
-    next: { revalidate: 3600 },
-  });
+  /* blocks の取得は page の内容に依存しないため、直列awaitせず並列fetchして
+     Notion APIへの往復レイテンシを1回分に抑える */
+  const [pageRes, blocks] = await Promise.all([
+    fetch(`https://api.notion.com/v1/pages/${id}`, {
+      headers: {
+        Authorization: `Bearer ${NOTION_TOKEN}`,
+        "Notion-Version": "2022-06-28",
+      },
+      next: { revalidate: 3600 },
+    }),
+    fetchBlocks(id),
+  ]);
   if (!pageRes.ok) return null;
   const page = await pageRes.json();
 
@@ -36,7 +41,6 @@ async function fetchPage(id: string): Promise<{ title: string; date: string; blo
   const titleProp = props["名前"] ?? props["タイトル"] ?? props["title"];
   const title = titleProp?.title?.map((t: any) => t.plain_text).join("") ?? "";
   const date = props["日付"]?.date?.start ?? page.created_time;
-  const blocks = await fetchBlocks(id);
 
   return { title, date, blocks };
 }
