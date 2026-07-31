@@ -2,28 +2,112 @@
 import { useState } from "react";
 import { SECTIONS, type Question } from "./questions";
 
-type Answers = Record<number, string>;
-type CheckedAnswers = Record<number, string[]>;
+type Answers = Record<string, string>;
+type CheckedAnswers = Record<string, string[]>;
+type SubAnswers = Record<string, string>;
+
+const WEEKDAYS = ["月", "火", "水", "木", "金", "土", "日"];
+
+function generateTimeOptions(): string[] {
+  const opts: string[] = [];
+  for (let h = 0; h < 24; h++) {
+    for (let m = 0; m < 60; m += 30) {
+      opts.push(`${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`);
+    }
+  }
+  opts.push("24:00");
+  return opts;
+}
+const TIME_OPTIONS = generateTimeOptions();
+
+type DayHours = { closed: boolean; start: string; end: string };
+
+function BusinessHoursField() {
+  const [hours, setHours] = useState<Record<string, DayHours>>(
+    Object.fromEntries(WEEKDAYS.map((d) => [d, { closed: false, start: "", end: "" }]))
+  );
+  const [holidayClosed, setHolidayClosed] = useState(false);
+  const [otherHolidays, setOtherHolidays] = useState("");
+
+  const updateDay = (day: string, patch: Partial<DayHours>) =>
+    setHours((prev) => ({ ...prev, [day]: { ...prev[day], ...patch } }));
+
+  return (
+    <div className="hf-hours">
+      {WEEKDAYS.map((day) => (
+        <div key={day} className="hf-hours-row">
+          <span className="hf-hours-day">{day}</span>
+          <label className="hf-choice-label hf-hours-closed">
+            <input
+              type="checkbox"
+              className="hf-checkbox"
+              checked={hours[day].closed}
+              onChange={() => updateDay(day, { closed: !hours[day].closed })}
+            />
+            <span>休み</span>
+          </label>
+          <div className="hf-hours-time">
+            <select
+              className="hf-input hf-hours-select"
+              disabled={hours[day].closed}
+              value={hours[day].start}
+              onChange={(e) => updateDay(day, { start: e.target.value })}
+            >
+              <option value="">--:--</option>
+              {TIME_OPTIONS.map((t) => <option key={t} value={t}>{t}</option>)}
+            </select>
+            <span className="hf-hours-tilde">〜</span>
+            <select
+              className="hf-input hf-hours-select"
+              disabled={hours[day].closed}
+              value={hours[day].end}
+              onChange={(e) => updateDay(day, { end: e.target.value })}
+            >
+              <option value="">--:--</option>
+              {TIME_OPTIONS.map((t) => <option key={t} value={t}>{t}</option>)}
+            </select>
+          </div>
+        </div>
+      ))}
+      <label className="hf-choice-label hf-hours-holiday">
+        <input
+          type="checkbox"
+          className="hf-checkbox"
+          checked={holidayClosed}
+          onChange={() => setHolidayClosed((v) => !v)}
+        />
+        <span>祝日休み</span>
+      </label>
+      <input
+        type="text"
+        className="hf-input hf-sub-input"
+        placeholder="その他休日 例）○/○〜○/○ 夏季休業"
+        value={otherHolidays}
+        onChange={(e) => setOtherHolidays(e.target.value)}
+      />
+    </div>
+  );
+}
 
 export default function HearingForm() {
   const [answers, setAnswers] = useState<Answers>({});
   const [checked, setChecked] = useState<CheckedAnswers>({});
-  const [otherText, setOtherText] = useState<Answers>({});
+  const [subAnswers, setSubAnswers] = useState<SubAnswers>({});
   const [status, setStatus] = useState<"idle" | "notice">("idle");
 
-  const setAnswer = (no: number) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-    setAnswers((prev) => ({ ...prev, [no]: e.target.value }));
+  const setAnswer = (id: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    setAnswers((prev) => ({ ...prev, [id]: e.target.value }));
 
-  const setOther = (no: number) => (e: React.ChangeEvent<HTMLInputElement>) =>
-    setOtherText((prev) => ({ ...prev, [no]: e.target.value }));
+  const setSub = (key: string) => (e: React.ChangeEvent<HTMLInputElement>) =>
+    setSubAnswers((prev) => ({ ...prev, [key]: e.target.value }));
 
-  const toggleCheckbox = (no: number, option: string) => {
+  const toggleCheckbox = (id: string, option: string) => {
     setChecked((prev) => {
-      const current = prev[no] ?? [];
+      const current = prev[id] ?? [];
       const next = current.includes(option)
         ? current.filter((v) => v !== option)
         : [...current, option];
-      return { ...prev, [no]: next };
+      return { ...prev, [id]: next };
     });
   };
 
@@ -32,57 +116,70 @@ export default function HearingForm() {
     setStatus("notice");
   };
 
-  const renderQuestion = (question: Question) => {
-    const { no, type, placeholder, options } = question;
-    const hasOther = options?.includes("その他");
+  const renderQuestion = (id: string, question: Question) => {
+    const { type, placeholder, options } = question;
 
-    if (type === "text" || type === "date") {
+    if (type === "text") {
       return (
         <input
-          type={type === "date" ? "text" : "text"}
+          type="text"
           className="hf-input"
           placeholder={placeholder}
-          value={answers[no] ?? ""}
-          onChange={setAnswer(no)}
+          value={answers[id] ?? ""}
+          onChange={setAnswer(id)}
         />
       );
     }
 
-    if (type === "textarea") {
+    if (type === "two-text") {
       return (
-        <textarea
-          className="hf-input hf-textarea"
-          placeholder={placeholder}
-          value={answers[no] ?? ""}
-          onChange={setAnswer(no)}
-        />
+        <div className="hf-two-text">
+          {question.subLabels?.map((subLabel, i) => (
+            <div key={subLabel} className="hf-two-text-item">
+              <span className="hf-two-text-label">{subLabel}</span>
+              <input
+                type="text"
+                className="hf-input"
+                placeholder={question.subPlaceholders?.[i]}
+                value={subAnswers[`${id}__${i}`] ?? ""}
+                onChange={setSub(`${id}__${i}`)}
+              />
+            </div>
+          ))}
+        </div>
       );
+    }
+
+    if (type === "business-hours") {
+      return <BusinessHoursField />;
     }
 
     if (type === "radio") {
       return (
         <div className="hf-choices">
           {options?.map((opt) => (
-            <label key={opt} className="hf-choice-label">
-              <input
-                type="radio"
-                name={`q${no}`}
-                className="hf-radio"
-                checked={answers[no] === opt}
-                onChange={() => setAnswers((prev) => ({ ...prev, [no]: opt }))}
-              />
-              <span>{opt}</span>
-            </label>
+            <div key={opt.label}>
+              <label className="hf-choice-label">
+                <input
+                  type="radio"
+                  name={id}
+                  className="hf-radio"
+                  checked={answers[id] === opt.label}
+                  onChange={() => setAnswers((prev) => ({ ...prev, [id]: opt.label }))}
+                />
+                <span>{opt.label}</span>
+              </label>
+              {opt.subPlaceholder && answers[id] === opt.label && (
+                <input
+                  type="text"
+                  className="hf-input hf-sub-input"
+                  placeholder={opt.subPlaceholder}
+                  value={subAnswers[`${id}__${opt.label}`] ?? ""}
+                  onChange={setSub(`${id}__${opt.label}`)}
+                />
+              )}
+            </div>
           ))}
-          {hasOther && (
-            <input
-              type="text"
-              className="hf-input hf-other-input"
-              placeholder="その他の内容があればご記入ください"
-              value={otherText[no] ?? ""}
-              onChange={setOther(no)}
-            />
-          )}
         </div>
       );
     }
@@ -90,26 +187,31 @@ export default function HearingForm() {
     if (type === "checkbox") {
       return (
         <div className="hf-choices">
-          {options?.map((opt) => (
-            <label key={opt} className="hf-choice-label">
-              <input
-                type="checkbox"
-                className="hf-checkbox"
-                checked={(checked[no] ?? []).includes(opt)}
-                onChange={() => toggleCheckbox(no, opt)}
-              />
-              <span>{opt}</span>
-            </label>
-          ))}
-          {hasOther && (
-            <input
-              type="text"
-              className="hf-input hf-other-input"
-              placeholder="その他の内容があればご記入ください"
-              value={otherText[no] ?? ""}
-              onChange={setOther(no)}
-            />
-          )}
+          {options?.map((opt) => {
+            const isChecked = (checked[id] ?? []).includes(opt.label);
+            return (
+              <div key={opt.label}>
+                <label className="hf-choice-label">
+                  <input
+                    type="checkbox"
+                    className="hf-checkbox"
+                    checked={isChecked}
+                    onChange={() => toggleCheckbox(id, opt.label)}
+                  />
+                  <span>{opt.label}</span>
+                </label>
+                {opt.subPlaceholder && isChecked && (
+                  <input
+                    type="text"
+                    className="hf-input hf-sub-input"
+                    placeholder={opt.subPlaceholder}
+                    value={subAnswers[`${id}__${opt.label}`] ?? ""}
+                    onChange={setSub(`${id}__${opt.label}`)}
+                  />
+                )}
+              </div>
+            );
+          })}
         </div>
       );
     }
@@ -119,19 +221,26 @@ export default function HearingForm() {
 
   return (
     <form className="hf-form" onSubmit={handleSubmit}>
-      {SECTIONS.map((section) => (
+      {SECTIONS.map((section, sIdx) => (
         <div key={section.title} className="hf-section">
           <p className="hf-section-title">{section.title}</p>
           <div className="hf-table">
-            {section.questions.map((question) => (
-              <div key={question.no} className="hf-row">
-                <div className="hf-label-cell">
-                  <span className="hf-no">Q{question.no}</span>
-                  <span>{question.q}</span>
+            {section.questions.map((question, qIdx) => {
+              const id = `s${sIdx}-q${qIdx}`;
+              return (
+                <div key={id} className="hf-row">
+                  <div className="hf-label-cell">
+                    <span>{question.label}</span>
+                    {question.required ? (
+                      <span className="hf-req">必須</span>
+                    ) : (
+                      <span className="hf-opt">任意</span>
+                    )}
+                  </div>
+                  <div className="hf-input-cell">{renderQuestion(id, question)}</div>
                 </div>
-                <div className="hf-input-cell">{renderQuestion(question)}</div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       ))}
@@ -178,16 +287,32 @@ export default function HearingForm() {
           letter-spacing: .02em;
           line-height: 1.7;
           display: flex;
+          align-items: flex-start;
+          flex-wrap: wrap;
           gap: 8px;
           padding-right: 24px;
           padding-top: 10px;
         }
-        .hf-no {
-          flex-shrink: 0;
+
+        .hf-req {
           font-size: .72rem;
+          background: #1565c0;
+          color: #fff;
+          padding: 2px 8px;
+          border-radius: 2px;
+          letter-spacing: .06em;
           font-weight: 700;
-          color: rgba(21,38,59,0.5);
-          padding-top: 1px;
+          flex-shrink: 0;
+        }
+        .hf-opt {
+          font-size: .72rem;
+          background: rgba(21,38,59,0.12);
+          color: rgba(21,38,59,0.7);
+          padding: 2px 8px;
+          border-radius: 2px;
+          letter-spacing: .06em;
+          font-weight: 700;
+          flex-shrink: 0;
         }
 
         .hf-input-cell {
@@ -211,7 +336,7 @@ export default function HearingForm() {
         }
         .hf-input::placeholder { color: rgba(21,38,59,0.35); }
         .hf-input:focus { border-color: rgba(21,38,59,0.5); background: rgba(255,255,255,0.8); }
-        .hf-textarea { min-height: 110px; resize: vertical; }
+        .hf-input:disabled { opacity: .4; }
 
         .hf-choices { display: flex; flex-direction: column; gap: 10px; padding-top: 6px; }
         .hf-choice-label {
@@ -223,7 +348,26 @@ export default function HearingForm() {
           cursor: pointer;
         }
         .hf-radio, .hf-checkbox { accent-color: #15263b; width: 16px; height: 16px; flex-shrink: 0; }
-        .hf-other-input { margin-top: 4px; max-width: 420px; }
+        .hf-sub-input { margin: 6px 0 4px; max-width: 420px; }
+
+        .hf-two-text { display: flex; flex-direction: column; gap: 14px; }
+        .hf-two-text-item { display: flex; flex-direction: column; gap: 6px; }
+        .hf-two-text-label { font-size: .78rem; color: rgba(21,38,59,0.55); font-weight: 700; }
+
+        .hf-hours { display: flex; flex-direction: column; gap: 10px; padding-top: 4px; }
+        .hf-hours-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+        .hf-hours-day {
+          width: 22px;
+          font-size: .88rem;
+          font-weight: 700;
+          color: rgba(21,38,59,0.85);
+          flex-shrink: 0;
+        }
+        .hf-hours-closed { flex-shrink: 0; }
+        .hf-hours-time { display: flex; align-items: center; gap: 8px; }
+        .hf-hours-select { width: auto; min-width: 100px; padding: 8px 10px; }
+        .hf-hours-tilde { color: rgba(21,38,59,0.5); }
+        .hf-hours-holiday { margin-top: 6px; }
 
         .hf-notice {
           text-align: center;
@@ -260,7 +404,9 @@ export default function HearingForm() {
           .hf-row { flex-direction: column; gap: 10px; padding: 18px 0; }
           .hf-label-cell { width: 100%; min-width: unset; padding-top: 0; padding-right: 0; }
           .hf-input-cell { width: 100%; }
-          .hf-other-input { max-width: 100%; }
+          .hf-sub-input { max-width: 100%; }
+          .hf-hours-row { gap: 10px; }
+          .hf-hours-select { min-width: 88px; }
           .hf-submit { max-width: 80%; padding: 12px 0; font-size: .82rem; }
         }
       `}</style>

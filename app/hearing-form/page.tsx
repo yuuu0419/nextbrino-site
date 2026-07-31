@@ -29,8 +29,8 @@ export default function HearingFormPage() {
         <div className="hf-body">
           <FadeIn delay={100}>
             <p className="hf-intro">
-              Webサイト制作にあたり、貴社について詳しくお伺いするためのシートです。<br />
-              <strong>すべての項目は任意</strong>ですので、分かる範囲・答えられる範囲でご記入ください。
+              Webサイト制作にあたり必要なヒアリングです。<br />
+              分かる範囲・答えられる範囲でご記入ください。
             </p>
           </FadeIn>
           <FadeIn delay={100} direction="up">
