@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   const user = process.env.HEARING_FORM_USER;
   const pass = process.env.HEARING_FORM_PASSWORD;
 
@@ -22,5 +22,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: "/hearing-form/:path*",
+  matcher: ["/hearing-form/:path*", "/api/hearing-form/:path*"],
 };

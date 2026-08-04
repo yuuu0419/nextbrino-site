@@ -21,16 +21,17 @@ function generateTimeOptions(): string[] {
 const TIME_OPTIONS = generateTimeOptions();
 
 type DayHours = { closed: boolean; start: string; end: string };
+type HoursState = { days: Record<string, DayHours>; holidayClosed: boolean; otherHolidays: string };
 
-function BusinessHoursField() {
-  const [hours, setHours] = useState<Record<string, DayHours>>(
-    Object.fromEntries(WEEKDAYS.map((d) => [d, { closed: false, start: "", end: "" }]))
-  );
-  const [holidayClosed, setHolidayClosed] = useState(false);
-  const [otherHolidays, setOtherHolidays] = useState("");
+const EMPTY_HOURS: HoursState = {
+  days: Object.fromEntries(WEEKDAYS.map((d) => [d, { closed: false, start: "", end: "" }])),
+  holidayClosed: false,
+  otherHolidays: "",
+};
 
+function BusinessHoursField({ value, onChange }: { value: HoursState; onChange: (v: HoursState) => void }) {
   const updateDay = (day: string, patch: Partial<DayHours>) =>
-    setHours((prev) => ({ ...prev, [day]: { ...prev[day], ...patch } }));
+    onChange({ ...value, days: { ...value.days, [day]: { ...value.days[day], ...patch } } });
 
   return (
     <div className="hf-hours">
@@ -41,16 +42,16 @@ function BusinessHoursField() {
             <input
               type="checkbox"
               className="hf-checkbox"
-              checked={hours[day].closed}
-              onChange={() => updateDay(day, { closed: !hours[day].closed })}
+              checked={value.days[day].closed}
+              onChange={() => updateDay(day, { closed: !value.days[day].closed })}
             />
             <span>休み</span>
           </label>
           <div className="hf-hours-time">
             <select
               className="hf-input hf-hours-select"
-              disabled={hours[day].closed}
-              value={hours[day].start}
+              disabled={value.days[day].closed}
+              value={value.days[day].start}
               onChange={(e) => updateDay(day, { start: e.target.value })}
             >
               <option value="">--:--</option>
@@ -59,8 +60,8 @@ function BusinessHoursField() {
             <span className="hf-hours-tilde">〜</span>
             <select
               className="hf-input hf-hours-select"
-              disabled={hours[day].closed}
-              value={hours[day].end}
+              disabled={value.days[day].closed}
+              value={value.days[day].end}
               onChange={(e) => updateDay(day, { end: e.target.value })}
             >
               <option value="">--:--</option>
@@ -73,8 +74,8 @@ function BusinessHoursField() {
         <input
           type="checkbox"
           className="hf-checkbox"
-          checked={holidayClosed}
-          onChange={() => setHolidayClosed((v) => !v)}
+          checked={value.holidayClosed}
+          onChange={() => onChange({ ...value, holidayClosed: !value.holidayClosed })}
         />
         <span>祝日休み</span>
       </label>
@@ -82,8 +83,8 @@ function BusinessHoursField() {
         type="text"
         className="hf-input hf-sub-input"
         placeholder="その他休日 例）○/○〜○/○ 夏季休業"
-        value={otherHolidays}
-        onChange={(e) => setOtherHolidays(e.target.value)}
+        value={value.otherHolidays}
+        onChange={(e) => onChange({ ...value, otherHolidays: e.target.value })}
       />
     </div>
   );
@@ -93,7 +94,8 @@ export default function HearingForm() {
   const [answers, setAnswers] = useState<Answers>({});
   const [checked, setChecked] = useState<CheckedAnswers>({});
   const [subAnswers, setSubAnswers] = useState<SubAnswers>({});
-  const [status, setStatus] = useState<"idle" | "notice">("idle");
+  const [businessHours, setBusinessHours] = useState<Record<string, HoursState>>({});
+  const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
 
   const setAnswer = (id: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setAnswers((prev) => ({ ...prev, [id]: e.target.value }));
@@ -111,9 +113,57 @@ export default function HearingForm() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const buildRows = (): { label: string; value: string }[] => {
+    const rows: { label: string; value: string }[] = [];
+    SECTIONS.forEach((section, sIdx) => {
+      section.questions.forEach((question, qIdx) => {
+        const id = `s${sIdx}-q${qIdx}`;
+        if (question.type === "text") {
+          rows.push({ label: question.label, value: answers[id] ?? "" });
+        } else if (question.type === "two-text") {
+          question.subLabels?.forEach((subLabel, i) => {
+            rows.push({ label: `${question.label}_${subLabel}`, value: subAnswers[`${id}__${i}`] ?? "" });
+          });
+        } else if (question.type === "business-hours") {
+          const hours = businessHours[id] ?? EMPTY_HOURS;
+          WEEKDAYS.forEach((day) => {
+            const d = hours.days[day];
+            const value = d.closed ? "休み" : d.start && d.end ? `${d.start}〜${d.end}` : "";
+            rows.push({ label: `営業時間_${day}`, value });
+          });
+          rows.push({ label: "祝日休み", value: hours.holidayClosed ? "はい" : "いいえ" });
+          rows.push({ label: "その他休日", value: hours.otherHolidays });
+        } else if (question.type === "radio") {
+          const selected = answers[id] ?? "";
+          const sub = selected ? subAnswers[`${id}__${selected}`] : "";
+          rows.push({ label: question.label, value: sub ? `${selected}（${sub}）` : selected });
+        } else if (question.type === "checkbox") {
+          const selectedOpts = checked[id] ?? [];
+          const formatted = selectedOpts.map((opt) => {
+            const sub = subAnswers[`${id}__${opt}`];
+            return sub ? `${opt}（${sub}）` : opt;
+          });
+          rows.push({ label: question.label, value: formatted.join("、") });
+        }
+      });
+    });
+    return rows;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setStatus("notice");
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/hearing-form", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ rows: buildRows() }),
+      });
+      if (!res.ok) throw new Error();
+      setStatus("done");
+    } catch {
+      setStatus("error");
+    }
   };
 
   const renderQuestion = (id: string, question: Question) => {
@@ -151,7 +201,12 @@ export default function HearingForm() {
     }
 
     if (type === "business-hours") {
-      return <BusinessHoursField />;
+      return (
+        <BusinessHoursField
+          value={businessHours[id] ?? EMPTY_HOURS}
+          onChange={(v) => setBusinessHours((prev) => ({ ...prev, [id]: v }))}
+        />
+      );
     }
 
     if (type === "radio") {
@@ -219,6 +274,20 @@ export default function HearingForm() {
     return null;
   };
 
+  if (status === "done") {
+    return (
+      <div className="hf-complete">
+        <p className="hf-complete-title">送信が完了しました</p>
+        <p className="hf-complete-text">ご協力いただきありがとうございます。<br />内容を確認のうえ、担当者よりご連絡いたします。</p>
+        <style>{`
+          .hf-complete { text-align: center; padding: 80px 0; }
+          .hf-complete-title { font-size: 1.4rem; font-weight: 700; color: #15263b; margin-bottom: 16px; }
+          .hf-complete-text { font-size: .95rem; line-height: 2; color: rgba(21,38,59,0.75); }
+        `}</style>
+      </div>
+    );
+  }
+
   return (
     <form className="hf-form" onSubmit={handleSubmit}>
       {SECTIONS.map((section, sIdx) => (
@@ -245,14 +314,14 @@ export default function HearingForm() {
         </div>
       ))}
 
-      {status === "notice" && (
-        <p className="hf-notice">
-          ご入力ありがとうございます。現在この送信機能は準備中です。スプレッドシート連携の設定が完了次第、送信できるようになります。
-        </p>
+      {status === "error" && (
+        <p className="hf-error">送信に失敗しました。時間をおいて再度お試しください。</p>
       )}
 
       <div className="hf-submit-wrap">
-        <button type="submit" className="hf-submit">送信する</button>
+        <button type="submit" className="hf-submit" disabled={status === "sending"}>
+          {status === "sending" ? "送信中..." : "送信する"}
+        </button>
       </div>
 
       <style>{`
@@ -369,19 +438,15 @@ export default function HearingForm() {
         .hf-hours-tilde { color: rgba(21,38,59,0.5); }
         .hf-hours-holiday { margin-top: 6px; }
 
-        .hf-notice {
+        .hf-error {
           text-align: center;
           font-size: .85rem;
-          color: rgba(21,38,59,0.75);
-          background: rgba(21,38,59,0.06);
-          border: 1px solid rgba(21,38,59,0.2);
-          border-radius: 4px;
-          padding: 16px 20px;
-          margin-bottom: 24px;
-          line-height: 1.8;
+          color: #c0392b;
+          margin-bottom: 16px;
         }
 
         .hf-submit-wrap { text-align: center; margin-bottom: 8px; }
+        .hf-submit:disabled { opacity: .45; cursor: not-allowed; }
         .hf-submit {
           display: inline-block;
           width: 100%;
