@@ -60,6 +60,11 @@ const profile: { label: string; value: string; extra?: React.ReactNode }[] = [
     value: "",
     extra: <>NEXT BRINO：<a href="https://nextbrino.com" className="ov-td-link" target="_blank" rel="noopener noreferrer">https://nextbrino.com</a><br />N-Bright：<a href="https://n-bright.jp" className="ov-td-link" target="_blank" rel="noopener noreferrer">https://n-bright.jp</a><br />その他、各サービスの公式サイトもございます。</>,
   },
+  {
+    label: "公式SNS",
+    value: "",
+    extra: <>Instagram：<a href="https://www.instagram.com/nextbrino/" className="ov-td-link" target="_blank" rel="noopener noreferrer">@nextbrino</a></>,
+  },
 ];
 
 
