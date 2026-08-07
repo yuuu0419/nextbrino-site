@@ -105,19 +105,22 @@ export default function Footer() {
               </div>
               <div className="ft-logo-line" aria-hidden />
             </div>
-            <a
-              href="https://www.instagram.com/nextbrino/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              className="ft-social-link"
-            >
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.6">
-                <rect x="2.5" y="2.5" width="19" height="19" rx="5" />
-                <circle cx="12" cy="12" r="4.6" />
-                <circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none" />
-              </svg>
-            </a>
+            <div className="ft-social-wrap">
+              <p className="ft-social-title">OFFICIAL SNS</p>
+              <a
+                href="https://www.instagram.com/nextbrino/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ft-social-link"
+              >
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8">
+                  <rect x="2.5" y="2.5" width="19" height="19" rx="5" />
+                  <circle cx="12" cy="12" r="4.6" />
+                  <circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none" />
+                </svg>
+                <span>Instagram</span>
+              </a>
+            </div>
             <div className="ft-copy">
               <p className="ft-copy-cr">©︎ 2026 NEXT BRINO｜ネクストブライノ</p>
               <p className="ft-copy-note">当サイトに掲載されている全ての著作物において、無断で使用することを禁じます。</p>
@@ -363,21 +366,36 @@ export default function Footer() {
         }
 
         /* ─── SNS ─── */
+        .ft-social-wrap {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin: 2px 0 22px;
+        }
+        .ft-social-title {
+          font-size: .58rem; letter-spacing: .25em;
+          color: rgba(196,171,110,.55);
+          font-family: 'Courier New', monospace;
+          margin: 0 0 12px;
+        }
         .ft-social-link {
           display: inline-flex;
           align-items: center;
-          justify-content: center;
-          width: 36px; height: 36px;
-          margin: 0 0 20px;
-          color: rgba(255,255,255,.5);
-          border: 1px solid rgba(196,171,110,.3);
-          border-radius: 50%;
-          transition: color .22s, border-color .22s, background .22s;
+          gap: 8px;
+          padding: 9px 20px;
+          color: rgba(255,255,255,.78);
+          text-decoration: none;
+          font-size: .76rem; letter-spacing: .06em;
+          border: 1px solid rgba(196,171,110,.35);
+          border-radius: 999px;
+          background: rgba(255,255,255,.02);
+          transition: color .25s, border-color .25s, background .35s;
         }
+        .ft-social-link svg { flex-shrink: 0; transition: color .25s; }
         .ft-social-link:hover {
-          color: #c4ab6e;
-          border-color: rgba(196,171,110,.7);
-          background: rgba(196,171,110,.08);
+          color: #fff;
+          border-color: transparent;
+          background: linear-gradient(45deg, #f9ce34, #ee2a7b 45%, #6228d7);
         }
 
         /* ─── コピーライト ─── */
