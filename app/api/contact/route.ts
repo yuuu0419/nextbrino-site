@@ -14,6 +14,15 @@ function isRateLimited(ip: string): boolean {
   return timestamps.length > RATE_LIMIT_MAX;
 }
 
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 const RECAPTCHA_SCORE_THRESHOLD = 0.5;
 
 async function verifyRecaptcha(token: string): Promise<boolean> {
@@ -97,7 +106,7 @@ export async function POST(req: NextRequest) {
 
     const adminOptionalRows = adminOptionalFields
       .filter((f) => f.value)
-      .map((f) => `<tr><th style="text-align:left;padding:8px 16px;white-space:nowrap;background:#f5f5f5;">${f.label}</th><td style="padding:8px 16px;">${f.value}</td></tr>`)
+      .map((f) => `<tr><th style="text-align:left;padding:8px 16px;white-space:nowrap;background:#f5f5f5;">${escapeHtml(f.label)}</th><td style="padding:8px 16px;">${escapeHtml(f.value)}</td></tr>`)
       .join("");
 
     await resend.emails.send({
@@ -106,11 +115,11 @@ export async function POST(req: NextRequest) {
       subject: "NEXT BRINO｜問合せ",
       html: `
         <table border="1" cellpadding="0" cellspacing="0" style="border-collapse:collapse;width:100%;max-width:600px;">
-          <tr><th style="text-align:left;padding:8px 16px;white-space:nowrap;background:#f5f5f5;">カテゴリー</th><td style="padding:8px 16px;">${category}</td></tr>
-          <tr><th style="text-align:left;padding:8px 16px;white-space:nowrap;background:#f5f5f5;">氏名</th><td style="padding:8px 16px;">${name}</td></tr>
-          <tr><th style="text-align:left;padding:8px 16px;white-space:nowrap;background:#f5f5f5;">メールアドレス</th><td style="padding:8px 16px;">${email}</td></tr>
+          <tr><th style="text-align:left;padding:8px 16px;white-space:nowrap;background:#f5f5f5;">カテゴリー</th><td style="padding:8px 16px;">${escapeHtml(category)}</td></tr>
+          <tr><th style="text-align:left;padding:8px 16px;white-space:nowrap;background:#f5f5f5;">氏名</th><td style="padding:8px 16px;">${escapeHtml(name)}</td></tr>
+          <tr><th style="text-align:left;padding:8px 16px;white-space:nowrap;background:#f5f5f5;">メールアドレス</th><td style="padding:8px 16px;">${escapeHtml(email)}</td></tr>
           ${adminOptionalRows}
-          <tr><th style="text-align:left;padding:8px 16px;white-space:nowrap;background:#f5f5f5;">お問い合わせ内容</th><td style="padding:8px 16px;white-space:pre-wrap;">${message}</td></tr>
+          <tr><th style="text-align:left;padding:8px 16px;white-space:nowrap;background:#f5f5f5;">お問い合わせ内容</th><td style="padding:8px 16px;white-space:pre-wrap;">${escapeHtml(message)}</td></tr>
         </table>
       `,
     });
@@ -129,7 +138,7 @@ export async function POST(req: NextRequest) {
 
     const optionalRows = optionalFields
       .filter((f) => f.value)
-      .map((f) => `<tr><th style="text-align:left;padding:8px 16px;white-space:nowrap;background:#f5f5f5;">${f.label}</th><td style="padding:8px 16px;">${f.value}</td></tr>`)
+      .map((f) => `<tr><th style="text-align:left;padding:8px 16px;white-space:nowrap;background:#f5f5f5;">${escapeHtml(f.label)}</th><td style="padding:8px 16px;">${escapeHtml(f.value)}</td></tr>`)
       .join("");
 
     await resend.emails.send({
@@ -137,7 +146,7 @@ export async function POST(req: NextRequest) {
       to: email,
       subject: "お問い合わせを受け付けました。",
       html: `
-        <p>${name} 様</p>
+        <p>${escapeHtml(name)} 様</p>
         <p>この度はNEXT BRINOにお問い合わせいただき、<br>誠にありがとうございます。</p>
         <p>以下の内容でお問い合わせを受け付けました。</p>
         <p>通常2〜5営業日以内に担当者よりご返信いたします。</p>
@@ -146,11 +155,11 @@ export async function POST(req: NextRequest) {
         <hr>
         <p><strong>お問い合わせ内容</strong></p>
         <table border="1" cellpadding="0" cellspacing="0" style="border-collapse:collapse;width:100%;max-width:600px;">
-          <tr><th style="text-align:left;padding:8px 16px;white-space:nowrap;background:#f5f5f5;">お問い合わせ種別</th><td style="padding:8px 16px;">${category}</td></tr>
-          <tr><th style="text-align:left;padding:8px 16px;white-space:nowrap;background:#f5f5f5;">氏名</th><td style="padding:8px 16px;">${name} 様</td></tr>
-          <tr><th style="text-align:left;padding:8px 16px;white-space:nowrap;background:#f5f5f5;">メールアドレス</th><td style="padding:8px 16px;">${email}</td></tr>
+          <tr><th style="text-align:left;padding:8px 16px;white-space:nowrap;background:#f5f5f5;">お問い合わせ種別</th><td style="padding:8px 16px;">${escapeHtml(category)}</td></tr>
+          <tr><th style="text-align:left;padding:8px 16px;white-space:nowrap;background:#f5f5f5;">氏名</th><td style="padding:8px 16px;">${escapeHtml(name)} 様</td></tr>
+          <tr><th style="text-align:left;padding:8px 16px;white-space:nowrap;background:#f5f5f5;">メールアドレス</th><td style="padding:8px 16px;">${escapeHtml(email)}</td></tr>
           ${optionalRows}
-          <tr><th style="text-align:left;padding:8px 16px;white-space:nowrap;background:#f5f5f5;">お問い合わせ内容</th><td style="padding:8px 16px;white-space:pre-wrap;">${message}</td></tr>
+          <tr><th style="text-align:left;padding:8px 16px;white-space:nowrap;background:#f5f5f5;">お問い合わせ内容</th><td style="padding:8px 16px;white-space:pre-wrap;">${escapeHtml(message)}</td></tr>
         </table>
         <hr>
         <p>上記の内容に誤りがございましたら、<br>お手数ですが改めてお問い合わせフォームよりご送信ください。</p>
