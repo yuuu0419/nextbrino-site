@@ -11,6 +11,7 @@ interface Service {
   desc: string;
   descSp?: string;
   items: string[];
+  ctaHref?: string;
 }
 
 function ServiceRow({ s, i }: { s: Service; i: number }) {
@@ -119,7 +120,11 @@ function ServiceRow({ s, i }: { s: Service; i: number }) {
         </ul>
 
         <div className="sv-row-btn-wrap" style={fadeUp(520 + s.items.length * 80)}>
-          <Link href="/service" className="btn-view-more sv-btn-full">満枠対応中</Link>
+          {s.ctaHref ? (
+            <Link href={s.ctaHref} className="btn-view-more sv-btn-full">VIEW MORE</Link>
+          ) : (
+            <Link href="/service" className="btn-view-more sv-btn-full">満枠対応中</Link>
+          )}
         </div>
       </div>
     </div>
