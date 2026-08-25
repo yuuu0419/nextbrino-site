@@ -223,7 +223,7 @@ export default function LpForm() {
           ].map((item, i) => (
             <label key={i} className="lpf-agree-row">
               <input type="checkbox" className="lpf-checkbox" checked={agrees[i]} onChange={() => toggleAgree(i)} />
-              <span><Link href={item.href} className="lpf-policy-link">{item.label}</Link>に同意する</span>
+              <span><Link href={item.href} target="_blank" rel="noopener noreferrer" className="lpf-policy-link">{item.label}</Link>に同意する</span>
             </label>
           ))}
         </div>
