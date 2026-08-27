@@ -70,6 +70,7 @@ const MAINTENANCE_PLANS = [
 const CAMPAIGNS = [
   { src: "/images/lp-campaign-cafe.png", alt: "カフェ応援キャンペーン｜通常30万円が半額15万円〜、2026年9月30日まで先着20店舗限定", w: 2172, h: 724 },
   { src: "/images/lp-campaign-soccer.png", alt: "サッカーチーム応援キャンペーン｜通常30万円が半額15万円〜、2026年9月30日まで先着20チーム限定", w: 2170, h: 725 },
+  { src: "/images/lp-campaign-card.jpg", alt: "Webサイト制作キャンペーン｜名刺・ショップカード・チームカードなどのデザイン無料、印刷100部5,000円（税込）、9月10日まで先着20名様", w: 2172, h: 724 },
 ];
 
 const STRENGTH_GROUPS = [
