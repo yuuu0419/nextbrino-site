@@ -17,7 +17,7 @@ export const metadata: Metadata = {
       "経営理念・顧客像・競合分析まで踏み込むヒアリングから、デザイン・開発・保守まで一貫対応。修正回数無制限、レスポンシブ標準装備、追加料金なしのホームページ制作サービスです。",
     url: "https://nextbrino.com/website-lp",
     siteName: "NEXT BRINO",
-    images: [{ url: "https://nextbrino.com/images/toppage-ogp.jpg", width: 1200, height: 630, alt: "ホームページ制作サービス｜NEXT BRINO" }],
+    images: [{ url: "https://nextbrino.com/images/website-lp-ogp.webp", width: 1200, height: 630, alt: "ホームページ制作サービス｜NEXT BRINO" }],
     locale: "ja_JP",
     type: "website",
   },
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     title: "ホームページ制作サービス｜NEXT BRINO",
     description:
       "経営理念・顧客像・競合分析まで踏み込むヒアリングから、デザイン・開発・保守まで一貫対応。修正回数無制限、レスポンシブ標準装備、追加料金なしのホームページ制作サービスです。",
-    images: ["https://nextbrino.com/images/toppage-ogp.jpg"],
+    images: ["https://nextbrino.com/images/website-lp-ogp.webp"],
   },
 };
 
