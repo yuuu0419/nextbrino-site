@@ -10,12 +10,12 @@ export const metadata: Metadata = {
   title: "ホームページ制作サービス｜NEXT BRINO",
   description:
     "経営理念・顧客像・競合分析まで踏み込むヒアリングから、デザイン・開発・保守まで一貫対応。修正回数無制限、レスポンシブ標準装備、追加料金なしのホームページ制作サービスです。",
-  alternates: { canonical: "https://nextbrino.com/lp" },
+  alternates: { canonical: "https://nextbrino.com/website-lp" },
   openGraph: {
     title: "ホームページ制作サービス｜NEXT BRINO",
     description:
       "経営理念・顧客像・競合分析まで踏み込むヒアリングから、デザイン・開発・保守まで一貫対応。修正回数無制限、レスポンシブ標準装備、追加料金なしのホームページ制作サービスです。",
-    url: "https://nextbrino.com/lp",
+    url: "https://nextbrino.com/website-lp",
     siteName: "NEXT BRINO",
     images: [{ url: "https://nextbrino.com/images/toppage-ogp.jpg", width: 1200, height: 630, alt: "ホームページ制作サービス｜NEXT BRINO" }],
     locale: "ja_JP",

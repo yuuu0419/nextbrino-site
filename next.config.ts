@@ -21,6 +21,11 @@ const nextConfig: NextConfig = {
         destination: "https://nextbrino.com/:path*",
         permanent: true,
       },
+      {
+        source: "/lp",
+        destination: "/website-lp",
+        permanent: true,
+      },
     ];
   },
 };

@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 };
 
 const services = [
-  { num:"01", en:"IT SOLUTION",        ja:"ITソリューション事業",  img:"/images/electronic-commerce-card.webp", desc:"業務効率化や課題解決など事業成長を支援するため、\nWeb制作・EC構築・アプリ開発・システム開発など、\n幅広いデジタルソリューションを提供しています。", items:["WEBサイト制作と運用保守","アプリ開発・システム開発","WEB決済システムの導入","販売管理等のトータルサポート"], ctaHref:"/lp" },
+  { num:"01", en:"IT SOLUTION",        ja:"ITソリューション事業",  img:"/images/electronic-commerce-card.webp", desc:"業務効率化や課題解決など事業成長を支援するため、\nWeb制作・EC構築・アプリ開発・システム開発など、\n幅広いデジタルソリューションを提供しています。", items:["WEBサイト制作と運用保守","アプリ開発・システム開発","WEB決済システムの導入","販売管理等のトータルサポート"], ctaHref:"/website-lp" },
   { num:"02", en:"WEB ADVERTISING",    ja:"WEB広告事業",          img:"/images/web-advertiding-card.webp",      desc:"美容・健康などの情報配信コンテンツの運営や、\nその他各種WEBメディアの運営管理、\n広告提供に付随するトータルサポートを提供しています。", descSp:"美容・健康などの情報配信コンテンツの運営や、\nその他各種WEBメディアの運営管理、\n広告に付随するトータルサポートを提供しています。", items:["各種情報配信コンテンツ運営","各種WEBメディア運営","広告出稿・メディア広告掲載","広告に付随するデザインサポート"] },
   { num:"03", en:"PLANNING SALES",     ja:"企画販売事業",          img:"/images/planning-sales-card.webp",       desc:"新規ブランド企画や商品製造、販売サイトの制作と運用保守、\n在庫分析などのトータルサポートの提供や、\nブランドフランチャイズを展開しています。", descSp:"ブランド企画や製造、販売サイトの制作と運用保守、\n在庫分析などのトータルサポートの提供や、\nブランドフランチャイズを展開しています。", items:["新規ブランド企画・商品製造","販売サイト制作・運用保守","在庫分析などのトータルサポート","新規・既存ブランドのFC展開"] },
   { num:"04", en:"IP MANAGEMENT",      ja:"IPマネジメント事業",    img:"/images/talent-management-card.webp",     desc:"IPの創出・育成・価値向上を目的として、\nマーケティングやブランディングのマネジメント、\n権利管理等を通じた持続的な事業成長を支援します。",         items:["クリエイティブタレントマネジメント","ブランディング・マーケティング","IP保護インフラの開発・運用保守","独立支援や関連事業サービスの提供"] },
