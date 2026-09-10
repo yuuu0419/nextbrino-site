@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import FadeIn from "../components/FadeIn";
 import LpForm from "./LpForm";
 import LpFaq from "./LpFaq";
@@ -65,12 +64,6 @@ const MAINTENANCE_PLANS = [
     excluded: [],
     featured: false,
   },
-];
-
-const CAMPAIGNS = [
-  { src: "/images/lp-campaign-cafe.png", alt: "カフェ応援キャンペーン｜通常30万円が半額15万円〜、2026年9月30日まで先着20店舗限定", w: 2172, h: 724 },
-  { src: "/images/lp-campaign-soccer.png", alt: "サッカーチーム応援キャンペーン｜通常30万円が半額15万円〜、2026年9月30日まで先着20チーム限定", w: 2170, h: 725 },
-  { src: "/images/lp-campaign-card.jpg", alt: "Webサイト制作キャンペーン｜名刺・ショップカード・チームカードなどのデザイン無料、印刷100部5,000円（税込）、9月10日まで先着20名様", w: 2172, h: 724 },
 ];
 
 const STRENGTH_GROUPS = [
@@ -323,24 +316,6 @@ export default function LpPage() {
         </div>
       </section>
 
-      {/* ── キャンペーン ── */}
-      <section className="lp-section lp-section--gray" id="lp-campaigns">
-        <div className="lp-section-header">
-          <FadeIn delay={0}><p className="lp-section-label">CAMPAIGN</p></FadeIn>
-          <FadeIn delay={100}><h2 className="lp-section-title">実施中のキャンペーン</h2></FadeIn>
-          <FadeIn delay={200}><div className="lp-section-divider" /></FadeIn>
-        </div>
-        <div className="lp-campaigns-wrap">
-          {CAMPAIGNS.map((c, i) => (
-            <FadeIn key={c.src} delay={i * 120} direction="up">
-              <a href="#lp-contact" className="lp-campaign-link" aria-label="無料相談・ご依頼はこちら">
-                <Image src={c.src} alt={c.alt} width={c.w} height={c.h} sizes="(max-width: 900px) 100vw, 900px" className="lp-campaign-img" />
-              </a>
-            </FadeIn>
-          ))}
-        </div>
-      </section>
-
       {/* ── FAQ ── */}
       <section className="lp-section" id="lp-faq">
         <div className="lp-section-header">
@@ -576,21 +551,6 @@ export default function LpPage() {
         .lp-plans-notes p { font-size: .74rem; line-height: 2; color: rgba(21,38,59,0.5); margin: 0; }
         .lp-plan-feature-excluded { color: rgba(21,38,59,0.35); }
         .lp-plan-check-excluded { color: rgba(21,38,59,0.3); }
-
-        /* ===== キャンペーン ===== */
-        .lp-campaigns-wrap {
-          width: 88%; max-width: 1000px; margin: 0 auto;
-          display: flex; flex-direction: column; gap: 24px;
-        }
-        .lp-campaign-link {
-          display: block;
-          border-radius: 10px;
-          overflow: hidden;
-          box-shadow: 0 10px 30px rgba(21,38,59,0.14);
-          transition: transform .3s ease, box-shadow .3s ease;
-        }
-        .lp-campaign-link:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(21,38,59,0.2); }
-        .lp-campaign-img { width: 100%; height: auto; display: block; }
 
         /* ===== FAQ ===== */
         .lp-faq-wrap { width: 88%; max-width: 820px; margin: 0 auto; }
